@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "task_id": "flaky_timing",
+  "class": "ENV_SENSITIVE_VERDICT",
+  "property": "P4_ENV_INVARIANCE",
+  "property_text": "The verdict does not depend on ambient environment (hash seed, timezone, locale).",
+  "severity": "MEDIUM",
+  "title": "Verdict depends on TZ",
+  "claim": "The same outputs verify differently under different TZ.",
+  "witnesses": [
+    {
+      "variable": "TZ",
+      "verdicts": {
+        "tz-UTC": "pass",
+        "tz-Pacific_Kiritimati": "fail"
+      }
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:59:04-0700"
+  },
+  "receipt_id": "cb533c060de3",
+  "repro": "uv run python -m projectx.tester replay receipts/flaky_timing--ENV_SENSITIVE_VERDICT.json"
+}

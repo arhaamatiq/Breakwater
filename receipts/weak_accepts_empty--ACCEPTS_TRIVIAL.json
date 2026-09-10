@@ -1,0 +1,223 @@
+{
+  "receipt_version": 1,
+  "task_id": "weak_accepts_empty",
+  "class": "ACCEPTS_TRIVIAL",
+  "property": "P6_NON_GAMEABLE",
+  "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+  "severity": "CRITICAL",
+  "title": "Task-ignorant solutions achieve PASS",
+  "claim": "Degenerate solutions that know nothing about the task are accepted by the verifier.",
+  "witnesses": [
+    {
+      "probe": "const_empty_list",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        []
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "echo_input",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_empty_str",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        ""
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_zero",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        0
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "noop_none",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        null
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "leak_probe",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        null
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    },
+    {
+      "probe": "raise_probe",
+      "accepted_cases": [
+        0
+      ],
+      "probe_outputs": [
+        null
+      ],
+      "reference_outputs": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "stable": true
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "probe const_empty_list",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return []\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe echo_input",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return inp\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe const_empty_str",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return ''\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe const_zero",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return 0\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe noop_none",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return None\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe leak_probe",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe raise_probe",
+      "task_id": "weak_accepts_empty",
+      "spec": {
+        "solution_source": "def solve(inp):\n    raise RuntimeError(\"probe exception\")\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:06:18-0700"
+  },
+  "receipt_id": "bd56120692e4",
+  "repro": "uv run python -m projectx.tester replay receipts/weak_accepts_empty--ACCEPTS_TRIVIAL.json"
+}

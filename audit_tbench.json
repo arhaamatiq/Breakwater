@@ -1,0 +1,480 @@
+{
+  "generated_at": "2026-09-09T18:07:23-0700",
+  "tasks": {
+    "tb_bank_trans_filter": {
+      "task_id": "tb_bank_trans_filter",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 27,
+        "wall_seconds": 25.1
+      }
+    },
+    "tb_hello_world": {
+      "task_id": "tb_hello_world",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 30,
+        "wall_seconds": 26.3
+      }
+    },
+    "tb_jsonl_aggregator": {
+      "task_id": "tb_jsonl_aggregator",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 27,
+        "wall_seconds": 32.6
+      }
+    },
+    "tb_log_summary": {
+      "task_id": "tb_log_summary",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 31,
+        "wall_seconds": 29.1
+      }
+    },
+    "tb_planted_order_dep": {
+      "task_id": "tb_planted_order_dep",
+      "findings": [
+        {
+          "task_id": "tb_planted_order_dep",
+          "class": "STATEFUL_VERIFIER",
+          "property": "P5_CASE_ISOLATION",
+          "property_text": "A case's verdict is a function of that case alone \u2014 not of which other cases ran before it.",
+          "severity": "HIGH",
+          "title": "Per-case verdict depends on which cases ran before it",
+          "claim": "The identical (input, output, expected) triple receives different verdicts depending on batch position.",
+          "witnesses": [
+            {
+              "outputs_from": "oracle",
+              "case": 1,
+              "verdict_in_batch": true,
+              "verdict_alone": false
+            },
+            {
+              "outputs_from": "oracle",
+              "case": 1,
+              "verdict_in_batch": true,
+              "verdict_reversed_order": false
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "case 1 alone",
+              "task_id": "tb_planted_order_dep",
+              "spec": {
+                "mode": "verify_only",
+                "cases": [
+                  {
+                    "input": {
+                      "test": "test_numbers_sorted"
+                    },
+                    "expected": "pass"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "output": "sha256:b11916235560310f22a246dc15966ca489de526dc97cf7c3a33da9eda75c7ff5"
+                  }
+                ],
+                "task_blob": {
+                  "runtime": "tbench",
+                  "capabilities": [],
+                  "cases": [
+                    {
+                      "input": {
+                        "test": "test_numbers_file"
+                      },
+                      "expected": "pass"
+                    },
+                    {
+                      "input": {
+                        "test": "test_numbers_sorted"
+                      },
+                      "expected": "pass"
+                    }
+                  ],
+                  "oracle": "#!/bin/bash\nseq 1 5 > /app/numbers.txt\n",
+                  "agent": "#!/bin/bash\nseq 1 5 > /app/numbers.txt\n",
+                  "noop": "#!/bin/bash\ntrue\n",
+                  "probe_solutions": {
+                    "noop_none": "#!/bin/bash\ntrue\n",
+                    "raise_probe": "#!/bin/bash\nexit 1\n"
+                  },
+                  "verifier": "from pathlib import Path\n\n\ndef test_numbers_file():\n    p = Path(\"/app/numbers.txt\")\n    assert p.exists()\n    assert p.read_text().split() == [str(i) for i in range(1, 6)]\n    Path(\"/tmp/.checked\").write_text(\"yes\")   # PLANTED: session side effect\n\n\ndef test_numbers_sorted():\n    # PLANTED FLAW: depends on test_numbers_file having run first\n    assert Path(\"/tmp/.checked\").exists(), \"prior test did not run\"\n    nums = [int(x) for x in Path(\"/app/numbers.txt\").read_text().split()]\n    assert nums == sorted(nums)\n",
+                  "tb": {
+                    "image": "projectx-tb-planted-order-dep",
+                    "workdir": "/app",
+                    "test_files": {
+                      "test_outputs.py": "from pathlib import Path\n\n\ndef test_numbers_file():\n    p = Path(\"/app/numbers.txt\")\n    assert p.exists()\n    assert p.read_text().split() == [str(i) for i in range(1, 6)]\n    Path(\"/tmp/.checked\").write_text(\"yes\")   # PLANTED: session side effect\n\n\ndef test_numbers_sorted():\n    # PLANTED FLAW: depends on test_numbers_file having run first\n    assert Path(\"/tmp/.checked\").exists(), \"prior test did not run\"\n    nums = [int(x) for x in Path(\"/app/numbers.txt\").read_text().split()]\n    assert nums == sorted(nums)\n"
+                    },
+                    "solve_timeout": 60.0,
+                    "verify_timeout": 60.0
+                  },
+                  "source": {
+                    "benchmark": "terminal-bench",
+                    "task_id": "planted-order-dep",
+                    "path": "external/planted-tbench/planted-order-dep"
+                  },
+                  "planted_flaw": "order_dependent_tests"
+                }
+              },
+              "n": 1,
+              "expect": {
+                "case_ok": 0,
+                "equals": false
+              }
+            },
+            {
+              "label": "full batch",
+              "task_id": "tb_planted_order_dep",
+              "spec": {
+                "mode": "verify_only",
+                "cases": [
+                  {
+                    "input": {
+                      "test": "test_numbers_file"
+                    },
+                    "expected": "pass"
+                  },
+                  {
+                    "input": {
+                      "test": "test_numbers_sorted"
+                    },
+                    "expected": "pass"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "output": "sha256:b11916235560310f22a246dc15966ca489de526dc97cf7c3a33da9eda75c7ff5"
+                  },
+                  {
+                    "output": "sha256:b11916235560310f22a246dc15966ca489de526dc97cf7c3a33da9eda75c7ff5"
+                  }
+                ],
+                "task_blob": {
+                  "runtime": "tbench",
+                  "capabilities": [],
+                  "cases": [
+                    {
+                      "input": {
+                        "test": "test_numbers_file"
+                      },
+                      "expected": "pass"
+                    },
+                    {
+                      "input": {
+                        "test": "test_numbers_sorted"
+                      },
+                      "expected": "pass"
+                    }
+                  ],
+                  "oracle": "#!/bin/bash\nseq 1 5 > /app/numbers.txt\n",
+                  "agent": "#!/bin/bash\nseq 1 5 > /app/numbers.txt\n",
+                  "noop": "#!/bin/bash\ntrue\n",
+                  "probe_solutions": {
+                    "noop_none": "#!/bin/bash\ntrue\n",
+                    "raise_probe": "#!/bin/bash\nexit 1\n"
+                  },
+                  "verifier": "from pathlib import Path\n\n\ndef test_numbers_file():\n    p = Path(\"/app/numbers.txt\")\n    assert p.exists()\n    assert p.read_text().split() == [str(i) for i in range(1, 6)]\n    Path(\"/tmp/.checked\").write_text(\"yes\")   # PLANTED: session side effect\n\n\ndef test_numbers_sorted():\n    # PLANTED FLAW: depends on test_numbers_file having run first\n    assert Path(\"/tmp/.checked\").exists(), \"prior test did not run\"\n    nums = [int(x) for x in Path(\"/app/numbers.txt\").read_text().split()]\n    assert nums == sorted(nums)\n",
+                  "tb": {
+                    "image": "projectx-tb-planted-order-dep",
+                    "workdir": "/app",
+                    "test_files": {
+                      "test_outputs.py": "from pathlib import Path\n\n\ndef test_numbers_file():\n    p = Path(\"/app/numbers.txt\")\n    assert p.exists()\n    assert p.read_text().split() == [str(i) for i in range(1, 6)]\n    Path(\"/tmp/.checked\").write_text(\"yes\")   # PLANTED: session side effect\n\n\ndef test_numbers_sorted():\n    # PLANTED FLAW: depends on test_numbers_file having run first\n    assert Path(\"/tmp/.checked\").exists(), \"prior test did not run\"\n    nums = [int(x) for x in Path(\"/app/numbers.txt\").read_text().split()]\n    assert nums == sorted(nums)\n"
+                    },
+                    "solve_timeout": 60.0,
+                    "verify_timeout": 60.0
+                  },
+                  "source": {
+                    "benchmark": "terminal-bench",
+                    "task_id": "planted-order-dep",
+                    "path": "external/planted-tbench/planted-order-dep"
+                  },
+                  "planted_flaw": "order_dependent_tests"
+                }
+              },
+              "n": 1,
+              "expect": {
+                "case_ok": 1,
+                "equals": true
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 30,
+        "wall_seconds": 30.7
+      }
+    },
+    "tb_planted_flaky_test": {
+      "task_id": "tb_planted_flaky_test",
+      "findings": [
+        {
+          "task_id": "tb_planted_flaky_test",
+          "class": "NONDETERMINISTIC_VERIFIER",
+          "property": "P3_DETERMINISM",
+          "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+          "severity": "HIGH",
+          "title": "Verifier verdict flips on identical inputs and outputs",
+          "claim": "Re-verifying the SAME outputs against the SAME cases yields different verdicts.",
+          "witnesses": [],
+          "evidence": [],
+          "stats": {
+            "full_run_outcomes": [
+              "fail",
+              "pass",
+              "pass",
+              "pass",
+              "fail",
+              "pass",
+              "pass",
+              "fail",
+              "pass",
+              "fail"
+            ],
+            "verify_only_outcomes": [
+              "fail",
+              "fail",
+              "pass",
+              "fail",
+              "fail",
+              "pass",
+              "fail",
+              "fail"
+            ],
+            "distinct_case_verdict_vectors": 2
+          },
+          "replay": [
+            {
+              "label": "verify-only replays",
+              "task_id": "tb_planted_flaky_test",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": "sha256:4d2aea06b619be7a77c57bc0702500964d6a4b5775280ff68bc8c83101369e39"
+                  }
+                ],
+                "task_blob": {
+                  "runtime": "tbench",
+                  "capabilities": [],
+                  "cases": [
+                    {
+                      "input": {
+                        "test": "test_data_value"
+                      },
+                      "expected": "pass"
+                    }
+                  ],
+                  "oracle": "#!/bin/bash\nprintf 42 > /app/data.txt\n",
+                  "agent": "#!/bin/bash\nprintf 42 > /app/data.txt\n",
+                  "noop": "#!/bin/bash\ntrue\n",
+                  "probe_solutions": {
+                    "noop_none": "#!/bin/bash\ntrue\n",
+                    "raise_probe": "#!/bin/bash\nexit 1\n"
+                  },
+                  "verifier": "import random\nfrom pathlib import Path\n\n\ndef test_data_value():\n    assert Path(\"/app/data.txt\").read_text().strip() == \"42\"\n    # PLANTED FLAW: nondeterministic rejection\n    assert random.random() > 0.4, \"flaky infrastructure hiccup\"\n",
+                  "tb": {
+                    "image": "projectx-tb-planted-flaky-test",
+                    "workdir": "/app",
+                    "test_files": {
+                      "test_outputs.py": "import random\nfrom pathlib import Path\n\n\ndef test_data_value():\n    assert Path(\"/app/data.txt\").read_text().strip() == \"42\"\n    # PLANTED FLAW: nondeterministic rejection\n    assert random.random() > 0.4, \"flaky infrastructure hiccup\"\n"
+                    },
+                    "solve_timeout": 60.0,
+                    "verify_timeout": 60.0
+                  },
+                  "source": {
+                    "benchmark": "terminal-bench",
+                    "task_id": "planted-flaky-test",
+                    "path": "external/planted-tbench/planted-flaky-test"
+                  },
+                  "planted_flaw": "flaky_test"
+                }
+              },
+              "n": 8,
+              "expect": {
+                "mixed_outcomes": true
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 38,
+        "wall_seconds": 43.9
+      }
+    },
+    "tb_planted_vacuous": {
+      "task_id": "tb_planted_vacuous",
+      "findings": [
+        {
+          "task_id": "tb_planted_vacuous",
+          "class": "ACCEPTS_TRIVIAL",
+          "property": "P6_NON_GAMEABLE",
+          "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+          "severity": "CRITICAL",
+          "title": "Task-ignorant solutions achieve PASS",
+          "claim": "Degenerate solutions that know nothing about the task are accepted by the verifier.",
+          "witnesses": [
+            {
+              "probe": "noop_none",
+              "accepted_cases": [],
+              "probe_outputs": [],
+              "reference_outputs": null,
+              "stable": true
+            },
+            {
+              "probe": "raise_probe",
+              "accepted_cases": [],
+              "probe_outputs": [],
+              "reference_outputs": null,
+              "stable": true
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "probe noop_none",
+              "task_id": "tb_planted_vacuous",
+              "spec": {
+                "solution_source": "#!/bin/bash\ntrue\n",
+                "task_blob": {
+                  "runtime": "tbench",
+                  "capabilities": [],
+                  "cases": [
+                    {
+                      "input": {
+                        "test": "test_report_created"
+                      },
+                      "expected": "pass"
+                    },
+                    {
+                      "input": {
+                        "test": "test_report_content"
+                      },
+                      "expected": "pass"
+                    }
+                  ],
+                  "oracle": "#!/bin/bash\necho done > /app/report.txt\n",
+                  "agent": "#!/bin/bash\necho done > /app/report.txt\n",
+                  "noop": "#!/bin/bash\ntrue\n",
+                  "probe_solutions": {
+                    "noop_none": "#!/bin/bash\ntrue\n",
+                    "raise_probe": "#!/bin/bash\nexit 1\n"
+                  },
+                  "verifier": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n",
+                  "tb": {
+                    "image": "projectx-tb-planted-vacuous",
+                    "workdir": "/app",
+                    "test_files": {
+                      "test_outputs.py": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n"
+                    },
+                    "solve_timeout": 60.0,
+                    "verify_timeout": 60.0
+                  },
+                  "source": {
+                    "benchmark": "terminal-bench",
+                    "task_id": "planted-vacuous",
+                    "path": "external/planted-tbench/planted-vacuous"
+                  },
+                  "planted_flaw": "vacuous_tests"
+                }
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe raise_probe",
+              "task_id": "tb_planted_vacuous",
+              "spec": {
+                "solution_source": "#!/bin/bash\nexit 1\n",
+                "task_blob": {
+                  "runtime": "tbench",
+                  "capabilities": [],
+                  "cases": [
+                    {
+                      "input": {
+                        "test": "test_report_created"
+                      },
+                      "expected": "pass"
+                    },
+                    {
+                      "input": {
+                        "test": "test_report_content"
+                      },
+                      "expected": "pass"
+                    }
+                  ],
+                  "oracle": "#!/bin/bash\necho done > /app/report.txt\n",
+                  "agent": "#!/bin/bash\necho done > /app/report.txt\n",
+                  "noop": "#!/bin/bash\ntrue\n",
+                  "probe_solutions": {
+                    "noop_none": "#!/bin/bash\ntrue\n",
+                    "raise_probe": "#!/bin/bash\nexit 1\n"
+                  },
+                  "verifier": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n",
+                  "tb": {
+                    "image": "projectx-tb-planted-vacuous",
+                    "workdir": "/app",
+                    "test_files": {
+                      "test_outputs.py": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n"
+                    },
+                    "solve_timeout": 60.0,
+                    "verify_timeout": 60.0
+                  },
+                  "source": {
+                    "benchmark": "terminal-bench",
+                    "task_id": "planted-vacuous",
+                    "path": "external/planted-tbench/planted-vacuous"
+                  },
+                  "planted_flaw": "vacuous_tests"
+                }
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 37,
+        "wall_seconds": 33.9
+      }
+    }
+  },
+  "receipts": [
+    "receipts/tb_planted_order_dep--STATEFUL_VERIFIER.json",
+    "receipts/tb_planted_flaky_test--NONDETERMINISTIC_VERIFIER.json",
+    "receipts/tb_planted_vacuous--ACCEPTS_TRIVIAL.json"
+  ]
+}

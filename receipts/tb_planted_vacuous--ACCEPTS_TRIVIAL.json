@@ -1,0 +1,141 @@
+{
+  "receipt_version": 1,
+  "task_id": "tb_planted_vacuous",
+  "class": "ACCEPTS_TRIVIAL",
+  "property": "P6_NON_GAMEABLE",
+  "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+  "severity": "CRITICAL",
+  "title": "Task-ignorant solutions achieve PASS",
+  "claim": "Degenerate solutions that know nothing about the task are accepted by the verifier.",
+  "witnesses": [
+    {
+      "probe": "noop_none",
+      "accepted_cases": [],
+      "probe_outputs": [],
+      "reference_outputs": null,
+      "stable": true
+    },
+    {
+      "probe": "raise_probe",
+      "accepted_cases": [],
+      "probe_outputs": [],
+      "reference_outputs": null,
+      "stable": true
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "probe noop_none",
+      "task_id": "tb_planted_vacuous",
+      "spec": {
+        "solution_source": "#!/bin/bash\ntrue\n",
+        "task_blob": {
+          "runtime": "tbench",
+          "capabilities": [],
+          "cases": [
+            {
+              "input": {
+                "test": "test_report_created"
+              },
+              "expected": "pass"
+            },
+            {
+              "input": {
+                "test": "test_report_content"
+              },
+              "expected": "pass"
+            }
+          ],
+          "oracle": "#!/bin/bash\necho done > /app/report.txt\n",
+          "agent": "#!/bin/bash\necho done > /app/report.txt\n",
+          "noop": "#!/bin/bash\ntrue\n",
+          "probe_solutions": {
+            "noop_none": "#!/bin/bash\ntrue\n",
+            "raise_probe": "#!/bin/bash\nexit 1\n"
+          },
+          "verifier": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n",
+          "tb": {
+            "image": "projectx-tb-planted-vacuous",
+            "workdir": "/app",
+            "test_files": {
+              "test_outputs.py": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n"
+            },
+            "solve_timeout": 60.0,
+            "verify_timeout": 60.0
+          },
+          "source": {
+            "benchmark": "terminal-bench",
+            "task_id": "planted-vacuous",
+            "path": "external/planted-tbench/planted-vacuous"
+          },
+          "planted_flaw": "vacuous_tests"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe raise_probe",
+      "task_id": "tb_planted_vacuous",
+      "spec": {
+        "solution_source": "#!/bin/bash\nexit 1\n",
+        "task_blob": {
+          "runtime": "tbench",
+          "capabilities": [],
+          "cases": [
+            {
+              "input": {
+                "test": "test_report_created"
+              },
+              "expected": "pass"
+            },
+            {
+              "input": {
+                "test": "test_report_content"
+              },
+              "expected": "pass"
+            }
+          ],
+          "oracle": "#!/bin/bash\necho done > /app/report.txt\n",
+          "agent": "#!/bin/bash\necho done > /app/report.txt\n",
+          "noop": "#!/bin/bash\ntrue\n",
+          "probe_solutions": {
+            "noop_none": "#!/bin/bash\ntrue\n",
+            "raise_probe": "#!/bin/bash\nexit 1\n"
+          },
+          "verifier": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n",
+          "tb": {
+            "image": "projectx-tb-planted-vacuous",
+            "workdir": "/app",
+            "test_files": {
+              "test_outputs.py": "from pathlib import Path\n\n\ndef test_report_created():\n    # PLANTED FLAW: never actually inspects the state\n    p = Path(\"/app/report.txt\")\n    assert p or True\n\n\ndef test_report_content():\n    # PLANTED FLAW: tautology\n    assert \"done\" == \"done\"\n"
+            },
+            "solve_timeout": 60.0,
+            "verify_timeout": 60.0
+          },
+          "source": {
+            "benchmark": "terminal-bench",
+            "task_id": "planted-vacuous",
+            "path": "external/planted-tbench/planted-vacuous"
+          },
+          "planted_flaw": "vacuous_tests"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T18:07:23-0700"
+  },
+  "receipt_id": "e7214bada28f",
+  "repro": "uv run python -m projectx.tester replay receipts/tb_planted_vacuous--ACCEPTS_TRIVIAL.json"
+}

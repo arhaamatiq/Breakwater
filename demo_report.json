@@ -1,0 +1,48 @@
+{
+  "experiment_id": "chaos-demo-62bae050",
+  "trials": {
+    "total": 96,
+    "completed": 96
+  },
+  "results": {
+    "total": 96,
+    "pass": 88,
+    "fail": 8,
+    "error": 0
+  },
+  "throughput_trials_per_sec": 6.651,
+  "wall_clock_seconds": 14.43,
+  "latency_ms": {
+    "exec_p50": 1045.7,
+    "exec_p99": 2538.2,
+    "e2e_p50_s": 7.86,
+    "e2e_p99_s": 14.72
+  },
+  "fault_tolerance": {
+    "total_executions_started": 102,
+    "retried_trials": 6,
+    "requeues_after_lease_expiry": 6,
+    "releases_after_exec_error": 0,
+    "duplicate_submissions_suppressed": 3,
+    "trials_recovered_by_different_worker": 6,
+    "workers_used": [
+      "w-replacement",
+      "w1",
+      "w2",
+      "w3",
+      "w4"
+    ],
+    "workers_died": [
+      "w1"
+    ]
+  },
+  "invariants": {
+    "experiment_finished": true,
+    "lost_results": 0,
+    "duplicate_result_rows": 0,
+    "completed_trials_without_result": 0,
+    "infra_failed_trials": 0,
+    "zero_lost": true,
+    "zero_duplicates": true
+  }
+}

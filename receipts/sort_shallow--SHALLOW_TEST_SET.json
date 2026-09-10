@@ -1,0 +1,194 @@
+{
+  "receipt_version": 1,
+  "task_id": "sort_shallow",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        1,
+        0
+      ],
+      "reference_output": [
+        0,
+        1
+      ],
+      "mutant_behavior": [
+        1,
+        0
+      ],
+      "shrunk_from": [
+        1,
+        0,
+        3
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+    },
+    {
+      "mutant_op": "aug(Sub)",
+      "missing_case_input": [
+        1,
+        0
+      ],
+      "reference_output": [
+        0,
+        1
+      ],
+      "mutant_behavior": "IndexError: list index out of range",
+      "shrunk_from": [
+        30,
+        2,
+        3
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out"
+    },
+    {
+      "mutant_op": "cmp(Gt)",
+      "missing_case_input": [
+        1,
+        0
+      ],
+      "reference_output": [
+        0,
+        1
+      ],
+      "mutant_behavior": [
+        1,
+        0
+      ],
+      "shrunk_from": [
+        1,
+        0,
+        3
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 19,
+    "benchmark_equivalent": 12,
+    "survivors": 12,
+    "with_divergence_witness": 10,
+    "apparently_equivalent": 2
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out",
+        "cases": [
+          {
+            "input": [
+              1,
+              0
+            ],
+            "expected": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant aug(Sub) passes benchmark",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out",
+        "cases": [
+          {
+            "input": [
+              1,
+              0
+            ],
+            "expected": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant cmp(Gt) passes benchmark",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "sort_shallow",
+      "spec": {
+        "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out",
+        "cases": [
+          {
+            "input": [
+              1,
+              0
+            ],
+            "expected": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:49:42-0700"
+  },
+  "receipt_id": "19cd3b0f37d8",
+  "repro": "uv run python -m projectx.tester replay receipts/sort_shallow--SHALLOW_TEST_SET.json"
+}

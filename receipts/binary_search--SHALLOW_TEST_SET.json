@@ -1,0 +1,197 @@
+{
+  "receipt_version": 1,
+  "task_id": "binary_search",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int-1(1)",
+      "missing_case_input": [
+        [],
+        0
+      ],
+      "reference_output": -1,
+      "mutant_behavior": "IndexError: list index out of range",
+      "shrunk_from": [
+        [
+          -1,
+          2
+        ],
+        100
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+      "mutant_op": "int-1(2)",
+      "missing_case_input": [
+        [
+          -1,
+          3,
+          7,
+          7,
+          10
+        ],
+        7
+      ],
+      "reference_output": 2,
+      "mutant_behavior": 3,
+      "shrunk_from": [
+        [
+          -1,
+          3,
+          7,
+          7,
+          10
+        ],
+        7
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        [
+          5,
+          10
+        ],
+        10
+      ],
+      "reference_output": 1,
+      "mutant_behavior": -1,
+      "shrunk_from": [
+        [
+          5,
+          10
+        ],
+        10
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 19,
+    "benchmark_equivalent": 5,
+    "survivors": 5,
+    "with_divergence_witness": 4,
+    "apparently_equivalent": 1
+  },
+  "replay": [
+    {
+      "label": "mutant int-1(1) passes benchmark",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+        "cases": [
+          {
+            "input": [
+              [],
+              0
+            ],
+            "expected": -1
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int-1(2) passes benchmark",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+        "cases": [
+          {
+            "input": [
+              [
+                -1,
+                3,
+                7,
+                7,
+                10
+              ],
+              7
+            ],
+            "expected": 2
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1"
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "binary_search",
+      "spec": {
+        "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1",
+        "cases": [
+          {
+            "input": [
+              [
+                5,
+                10
+              ],
+              10
+            ],
+            "expected": 1
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:06:18-0700"
+  },
+  "receipt_id": "1c7a85b48bea",
+  "repro": "uv run python -m projectx.tester replay receipts/binary_search--SHALLOW_TEST_SET.json"
+}

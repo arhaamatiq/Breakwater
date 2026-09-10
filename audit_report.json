@@ -1,0 +1,1586 @@
+{
+  "generated_at": "2026-09-09T17:06:18-0700",
+  "tasks": {
+    "anagram_check": {
+      "task_id": "anagram_check",
+      "findings": [],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 4 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 37,
+        "wall_seconds": 20.3
+      }
+    },
+    "balanced_brackets": {
+      "task_id": "balanced_brackets",
+      "findings": [],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 2 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 36,
+        "wall_seconds": 20.7
+      }
+    },
+    "binary_search": {
+      "task_id": "binary_search",
+      "findings": [
+        {
+          "task_id": "binary_search",
+          "class": "SHALLOW_TEST_SET",
+          "property": "P8_DISCRIMINATION",
+          "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+          "severity": "MEDIUM",
+          "title": "Benchmark cannot distinguish broken variants of the reference",
+          "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+          "witnesses": [
+            {
+              "mutant_op": "int-1(1)",
+              "missing_case_input": [
+                [],
+                0
+              ],
+              "reference_output": -1,
+              "mutant_behavior": "IndexError: list index out of range",
+              "shrunk_from": [
+                [
+                  -1,
+                  2
+                ],
+                100
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+            },
+            {
+              "mutant_op": "int-1(2)",
+              "missing_case_input": [
+                [
+                  -1,
+                  3,
+                  7,
+                  7,
+                  10
+                ],
+                7
+              ],
+              "reference_output": 2,
+              "mutant_behavior": 3,
+              "shrunk_from": [
+                [
+                  -1,
+                  3,
+                  7,
+                  7,
+                  10
+                ],
+                7
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+            },
+            {
+              "mutant_op": "int+1(1)",
+              "missing_case_input": [
+                [
+                  5,
+                  10
+                ],
+                10
+              ],
+              "reference_output": 1,
+              "mutant_behavior": -1,
+              "shrunk_from": [
+                [
+                  5,
+                  10
+                ],
+                10
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1"
+            }
+          ],
+          "evidence": [],
+          "stats": {
+            "mutants_total": 19,
+            "benchmark_equivalent": 5,
+            "survivors": 5,
+            "with_divergence_witness": 4,
+            "apparently_equivalent": 1
+          },
+          "replay": [
+            {
+              "label": "mutant int-1(1) passes benchmark",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 0)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+                "cases": [
+                  {
+                    "input": [
+                      [],
+                      0
+                    ],
+                    "expected": -1
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            },
+            {
+              "label": "mutant int-1(2) passes benchmark",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 1\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+                "cases": [
+                  {
+                    "input": [
+                      [
+                        -1,
+                        3,
+                        7,
+                        7,
+                        10
+                      ],
+                      7
+                    ],
+                    "expected": 2
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            },
+            {
+              "label": "mutant int+1(1) passes benchmark",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "binary_search",
+              "spec": {
+                "solution_source": "def solve(inp):\n    arr, target = inp\n    lo, hi = (0, len(arr) - 1)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 2\n        else:\n            hi = mid - 1\n    return -1",
+                "cases": [
+                  {
+                    "input": [
+                      [
+                        5,
+                        10
+                      ],
+                      10
+                    ],
+                    "expected": 1
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "stats": {
+        "trials": 48,
+        "wall_seconds": 22.8
+      }
+    },
+    "dedupe_preserve_order": {
+      "task_id": "dedupe_preserve_order",
+      "findings": [
+        {
+          "task_id": "dedupe_preserve_order",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "as_tuple",
+              "rejected_cases": [
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 15.8
+      }
+    },
+    "env_hash_order": {
+      "task_id": "env_hash_order",
+      "findings": [
+        {
+          "task_id": "env_hash_order",
+          "class": "ENV_SENSITIVE_VERDICT",
+          "property": "P4_ENV_INVARIANCE",
+          "property_text": "The verdict does not depend on ambient environment (hash seed, timezone, locale).",
+          "severity": "MEDIUM",
+          "title": "Verdict depends on PYTHONHASHSEED (explains observed flakiness)",
+          "claim": "The same outputs verify differently under different interpreter hash seeds.",
+          "witnesses": [
+            {
+              "variable": "PYTHONHASHSEED",
+              "verdict_by_seed": {
+                "0": "fail",
+                "1": "pass",
+                "2": "fail",
+                "3": "fail",
+                "4": "fail"
+              },
+              "minimal_delta": {
+                "1": "pass",
+                "0": "fail"
+              }
+            }
+          ],
+          "evidence": [],
+          "stats": {
+            "explains_observed_flakiness": {
+              "full_run_outcomes": [
+                "fail",
+                "pass",
+                "pass",
+                "fail",
+                "pass",
+                "fail",
+                "fail",
+                "fail",
+                "fail",
+                "fail"
+              ],
+              "verify_only_outcomes": [
+                "fail",
+                "fail",
+                "fail",
+                "pass",
+                "pass",
+                "pass",
+                "pass",
+                "fail"
+              ]
+            }
+          },
+          "replay": [
+            {
+              "label": "PYTHONHASHSEED=1",
+              "task_id": "env_hash_order",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": 3
+                  }
+                ],
+                "env": {
+                  "PYTHONHASHSEED": "1"
+                }
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "PYTHONHASHSEED=0",
+              "task_id": "env_hash_order",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": 3
+                  }
+                ],
+                "env": {
+                  "PYTHONHASHSEED": "0"
+                }
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "stats": {
+        "trials": 39,
+        "wall_seconds": 17.3
+      }
+    },
+    "fibonacci": {
+      "task_id": "fibonacci",
+      "findings": [],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 5 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 37,
+        "wall_seconds": 18.3
+      }
+    },
+    "flaky_timing": {
+      "task_id": "flaky_timing",
+      "findings": [
+        {
+          "task_id": "flaky_timing",
+          "class": "NONDETERMINISTIC_VERIFIER",
+          "property": "P3_DETERMINISM",
+          "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+          "severity": "HIGH",
+          "title": "Verifier verdict flips on identical inputs and outputs",
+          "claim": "Re-verifying the SAME outputs against the SAME cases yields different verdicts.",
+          "witnesses": [],
+          "evidence": [],
+          "stats": {
+            "full_run_outcomes": [
+              "fail",
+              "fail",
+              "pass",
+              "pass",
+              "fail",
+              "pass",
+              "pass",
+              "pass",
+              "fail",
+              "pass"
+            ],
+            "verify_only_outcomes": [
+              "fail",
+              "fail",
+              "fail",
+              "pass",
+              "pass",
+              "pass",
+              "pass",
+              "fail"
+            ]
+          },
+          "replay": [
+            {
+              "label": "verify-only replays",
+              "task_id": "flaky_timing",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": 42
+                  }
+                ]
+              },
+              "n": 8,
+              "expect": {
+                "mixed_outcomes": true
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "stats": {
+        "trials": 39,
+        "wall_seconds": 18.2
+      }
+    },
+    "float_exact_mean": {
+      "task_id": "float_exact_mean",
+      "findings": [
+        {
+          "task_id": "float_exact_mean",
+          "class": "FALSE_FAIL",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "HIGH",
+          "title": "Verifier is stricter than the task's declared semantics",
+          "claim": "Outputs inside the benchmark's own declared tolerance are rejected \u2014 correct solutions can FAIL.",
+          "witnesses": [
+            {
+              "transform": "float_nudge:-9.999999999999999e-10",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ],
+              "declared_equivalence": {
+                "float_atol": 1e-06
+              }
+            },
+            {
+              "transform": "float_nudge:9.999999999999999e-10",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ],
+              "declared_equivalence": {
+                "float_atol": 1e-06
+              }
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "perturb float_nudge:-9.999999999999999e-10",
+              "task_id": "float_exact_mean",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": 0.20000000000000004,
+                    "transform": "float_nudge:-9.999999999999999e-10"
+                  },
+                  {
+                    "output": 1.5,
+                    "transform": "float_nudge:-9.999999999999999e-10"
+                  },
+                  {
+                    "output": 7.5,
+                    "transform": "float_nudge:-9.999999999999999e-10"
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            },
+            {
+              "label": "perturb float_nudge:9.999999999999999e-10",
+              "task_id": "float_exact_mean",
+              "spec": {
+                "mode": "verify_only",
+                "outputs": [
+                  {
+                    "output": 0.20000000000000004,
+                    "transform": "float_nudge:9.999999999999999e-10"
+                  },
+                  {
+                    "output": 1.5,
+                    "transform": "float_nudge:9.999999999999999e-10"
+                  },
+                  {
+                    "output": 7.5,
+                    "transform": "float_nudge:9.999999999999999e-10"
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 35,
+        "wall_seconds": 17.8
+      }
+    },
+    "leaky_lookup": {
+      "task_id": "leaky_lookup",
+      "findings": [
+        {
+          "task_id": "leaky_lookup",
+          "class": "ANSWER_LEAKAGE",
+          "property": "P6_NON_GAMEABLE",
+          "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+          "severity": "CRITICAL",
+          "title": "Expected answers are readable by the solution",
+          "claim": "A solution that only reads files reachable from its sandbox recovers the expected answers and passes every case.",
+          "witnesses": [
+            {
+              "probe": "leak_probe",
+              "recovered_outputs": [
+                "AB",
+                "XYZ",
+                "Q"
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "leak probe",
+              "task_id": "leaky_lookup",
+              "spec": {
+                "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            }
+          ]
+        },
+        {
+          "task_id": "leaky_lookup",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "append_newline",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 33,
+        "wall_seconds": 15.3
+      }
+    },
+    "matrix_transpose": {
+      "task_id": "matrix_transpose",
+      "findings": [
+        {
+          "task_id": "matrix_transpose",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "as_tuple",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 33,
+        "wall_seconds": 17.0
+      }
+    },
+    "run_length_encode": {
+      "task_id": "run_length_encode",
+      "findings": [
+        {
+          "task_id": "run_length_encode",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "as_tuple",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 33,
+        "wall_seconds": 16.0
+      }
+    },
+    "reverse_string": {
+      "task_id": "reverse_string",
+      "findings": [
+        {
+          "task_id": "reverse_string",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "append_newline",
+              "rejected_cases": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 1 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 36,
+        "wall_seconds": 18.2
+      }
+    },
+    "sum_list": {
+      "task_id": "sum_list",
+      "findings": [],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 35,
+        "wall_seconds": 17.0
+      }
+    },
+    "sort_shallow": {
+      "task_id": "sort_shallow",
+      "findings": [
+        {
+          "task_id": "sort_shallow",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "as_tuple",
+              "rejected_cases": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        },
+        {
+          "task_id": "sort_shallow",
+          "class": "SHALLOW_TEST_SET",
+          "property": "P8_DISCRIMINATION",
+          "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+          "severity": "MEDIUM",
+          "title": "Benchmark cannot distinguish broken variants of the reference",
+          "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+          "witnesses": [
+            {
+              "mutant_op": "int+1(1)",
+              "missing_case_input": [
+                1,
+                0
+              ],
+              "reference_output": [
+                0,
+                1
+              ],
+              "mutant_behavior": [
+                1,
+                0
+              ],
+              "shrunk_from": [
+                1,
+                0,
+                3
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+            },
+            {
+              "mutant_op": "aug(Sub)",
+              "missing_case_input": [
+                1,
+                0
+              ],
+              "reference_output": [
+                0,
+                1
+              ],
+              "mutant_behavior": "IndexError: list index out of range",
+              "shrunk_from": [
+                30,
+                2,
+                3
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out"
+            },
+            {
+              "mutant_op": "cmp(Gt)",
+              "missing_case_input": [
+                1,
+                0
+              ],
+              "reference_output": [
+                0,
+                1
+              ],
+              "mutant_behavior": [
+                1,
+                0
+              ],
+              "shrunk_from": [
+                1,
+                0,
+                3
+              ],
+              "validated_in_container": true,
+              "mutant_diff_src": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+            }
+          ],
+          "evidence": [],
+          "stats": {
+            "mutants_total": 19,
+            "benchmark_equivalent": 12,
+            "survivors": 12,
+            "with_divergence_witness": 10,
+            "apparently_equivalent": 2
+          },
+          "replay": [
+            {
+              "label": "mutant int+1(1) passes benchmark",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(2, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out",
+                "cases": [
+                  {
+                    "input": [
+                      1,
+                      0
+                    ],
+                    "expected": [
+                      0,
+                      1
+                    ]
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            },
+            {
+              "label": "mutant aug(Sub) passes benchmark",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j > 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j += 1\n    return out",
+                "cases": [
+                  {
+                    "input": [
+                      1,
+                      0
+                    ],
+                    "expected": [
+                      0,
+                      1
+                    ]
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            },
+            {
+              "label": "mutant cmp(Gt) passes benchmark",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out"
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "same mutant fails the missing case",
+              "task_id": "sort_shallow",
+              "spec": {
+                "solution_source": "def solve(inp):\n    out = list(inp)\n    for i in range(1, len(out)):\n        j = i\n        while j >= 0 and out[j - 1] > out[j]:\n            out[j - 1], out[j] = (out[j], out[j - 1])\n            j -= 1\n    return out",
+                "cases": [
+                  {
+                    "input": [
+                      1,
+                      0
+                    ],
+                    "expected": [
+                      0,
+                      1
+                    ]
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "outcome": "fail"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "stats": {
+        "trials": 53,
+        "wall_seconds": 27.3
+      }
+    },
+    "verifier_fatigue": {
+      "task_id": "verifier_fatigue",
+      "findings": [
+        {
+          "task_id": "verifier_fatigue",
+          "class": "UNSOUND_ACCEPT",
+          "property": "P2_REJECT_GARBAGE",
+          "property_text": "Outputs that differ from the reference receive FAIL (checked per-case, with coincidence exclusion).",
+          "severity": "CRITICAL",
+          "title": "Wrong outputs accepted on some cases",
+          "claim": "Specific cases accept outputs that differ from the reference outputs.",
+          "witnesses": [
+            {
+              "probe": "echo_input",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "const_zero",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                0,
+                0
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "noop_none",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                null,
+                null
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "const_empty_list",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                [],
+                []
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "const_empty_str",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                "",
+                ""
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "raise_probe",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                null,
+                null
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "memorize_first",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                1,
+                1
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            },
+            {
+              "probe": "leak_probe",
+              "accepted_cases": [
+                2,
+                3
+              ],
+              "probe_outputs": [
+                null,
+                null
+              ],
+              "reference_outputs": [
+                5,
+                7
+              ],
+              "stable": true
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "probe echo_input",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return inp\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe const_zero",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return 0\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe noop_none",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return None\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe const_empty_list",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return []\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe const_empty_str",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return ''\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe raise_probe",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    raise RuntimeError(\"probe exception\")\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            },
+            {
+              "label": "probe leak_probe",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n"
+              },
+              "n": 2,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            }
+          ]
+        },
+        {
+          "task_id": "verifier_fatigue",
+          "class": "STATEFUL_VERIFIER",
+          "property": "P5_CASE_ISOLATION",
+          "property_text": "A case's verdict is a function of that case alone \u2014 not of which other cases ran before it.",
+          "severity": "HIGH",
+          "title": "Per-case verdict depends on which cases ran before it",
+          "claim": "The identical (input, output, expected) triple receives different verdicts depending on batch position.",
+          "witnesses": [
+            {
+              "outputs_from": "noop",
+              "case": 2,
+              "verdict_in_batch": true,
+              "verdict_alone": false
+            },
+            {
+              "outputs_from": "noop",
+              "case": 3,
+              "verdict_in_batch": true,
+              "verdict_alone": false
+            },
+            {
+              "outputs_from": "noop",
+              "case": 0,
+              "verdict_in_batch": false,
+              "verdict_reversed_order": true
+            },
+            {
+              "outputs_from": "noop",
+              "case": 1,
+              "verdict_in_batch": false,
+              "verdict_reversed_order": true
+            },
+            {
+              "outputs_from": "noop",
+              "case": 2,
+              "verdict_in_batch": true,
+              "verdict_reversed_order": false
+            },
+            {
+              "outputs_from": "noop",
+              "case": 3,
+              "verdict_in_batch": true,
+              "verdict_reversed_order": false
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "case 2 alone",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "mode": "verify_only",
+                "cases": [
+                  {
+                    "input": [
+                      2,
+                      3
+                    ],
+                    "expected": 5
+                  }
+                ],
+                "outputs": [
+                  {
+                    "output": null
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "case_ok": 0,
+                "equals": false
+              }
+            },
+            {
+              "label": "full batch",
+              "task_id": "verifier_fatigue",
+              "spec": {
+                "mode": "verify_only",
+                "cases": [
+                  {
+                    "input": [
+                      0,
+                      1
+                    ],
+                    "expected": 1
+                  },
+                  {
+                    "input": [
+                      1,
+                      2
+                    ],
+                    "expected": 3
+                  },
+                  {
+                    "input": [
+                      2,
+                      3
+                    ],
+                    "expected": 5
+                  },
+                  {
+                    "input": [
+                      3,
+                      4
+                    ],
+                    "expected": 7
+                  }
+                ],
+                "outputs": [
+                  {
+                    "output": null
+                  },
+                  {
+                    "output": null
+                  },
+                  {
+                    "output": null
+                  },
+                  {
+                    "output": null
+                  }
+                ]
+              },
+              "n": 1,
+              "expect": {
+                "case_ok": 2,
+                "equals": true
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 4 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 48,
+        "wall_seconds": 26.6
+      }
+    },
+    "weak_accepts_empty": {
+      "task_id": "weak_accepts_empty",
+      "findings": [
+        {
+          "task_id": "weak_accepts_empty",
+          "class": "ACCEPTS_TRIVIAL",
+          "property": "P6_NON_GAMEABLE",
+          "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+          "severity": "CRITICAL",
+          "title": "Task-ignorant solutions achieve PASS",
+          "claim": "Degenerate solutions that know nothing about the task are accepted by the verifier.",
+          "witnesses": [
+            {
+              "probe": "const_empty_list",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                []
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "echo_input",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                [
+                  3,
+                  1,
+                  2
+                ]
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "const_empty_str",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                ""
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "const_zero",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                0
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "noop_none",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                null
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "leak_probe",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                null
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            },
+            {
+              "probe": "raise_probe",
+              "accepted_cases": [
+                0
+              ],
+              "probe_outputs": [
+                null
+              ],
+              "reference_outputs": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "stable": true
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": [
+            {
+              "label": "probe const_empty_list",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return []\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe echo_input",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return inp\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe const_empty_str",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return ''\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe const_zero",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return 0\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe noop_none",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    return None\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe leak_probe",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            },
+            {
+              "label": "probe raise_probe",
+              "task_id": "weak_accepts_empty",
+              "spec": {
+                "solution_source": "def solve(inp):\n    raise RuntimeError(\"probe exception\")\n"
+              },
+              "n": 2,
+              "expect": {
+                "outcome": "pass"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "no mutation sites in reference"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 21.1
+      }
+    },
+    "word_count_top2": {
+      "task_id": "word_count_top2",
+      "findings": [
+        {
+          "task_id": "word_count_top2",
+          "class": "OUTPUT_FORM_SENSITIVITY",
+          "property": "P7_DECLARED_EQUIVALENCE",
+          "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+          "severity": "INFO",
+          "title": "Verdict sensitive to output surface form",
+          "claim": "Formally different but arguably equivalent outputs change the verdict (no equivalence is declared, so this is informational).",
+          "witnesses": [
+            {
+              "transform": "as_tuple",
+              "rejected_cases": [
+                0,
+                1
+              ]
+            }
+          ],
+          "evidence": [],
+          "stats": {},
+          "replay": []
+        }
+      ],
+      "notes": [
+        "all 0 benchmark-equivalent mutants handled; 2 behavior-differing mutants prescreened"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 15.7
+      }
+    }
+  },
+  "receipts": [
+    "receipts/binary_search--SHALLOW_TEST_SET.json",
+    "receipts/env_hash_order--ENV_SENSITIVE_VERDICT.json",
+    "receipts/flaky_timing--NONDETERMINISTIC_VERIFIER.json",
+    "receipts/float_exact_mean--FALSE_FAIL.json",
+    "receipts/leaky_lookup--ANSWER_LEAKAGE.json",
+    "receipts/sort_shallow--SHALLOW_TEST_SET.json",
+    "receipts/verifier_fatigue--UNSOUND_ACCEPT.json",
+    "receipts/verifier_fatigue--STATEFUL_VERIFIER.json",
+    "receipts/weak_accepts_empty--ACCEPTS_TRIVIAL.json"
+  ]
+}

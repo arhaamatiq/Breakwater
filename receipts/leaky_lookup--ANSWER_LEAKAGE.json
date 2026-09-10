@@ -1,0 +1,42 @@
+{
+  "receipt_version": 1,
+  "task_id": "leaky_lookup",
+  "class": "ANSWER_LEAKAGE",
+  "property": "P6_NON_GAMEABLE",
+  "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+  "severity": "CRITICAL",
+  "title": "Expected answers are readable by the solution",
+  "claim": "A solution that only reads files reachable from its sandbox recovers the expected answers and passes every case.",
+  "witnesses": [
+    {
+      "probe": "leak_probe",
+      "recovered_outputs": [
+        "AB",
+        "XYZ",
+        "Q"
+      ]
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "leak probe",
+      "task_id": "leaky_lookup",
+      "spec": {
+        "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n"
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:06:18-0700"
+  },
+  "receipt_id": "88f75c333b85",
+  "repro": "uv run python -m projectx.tester replay receipts/leaky_lookup--ANSWER_LEAKAGE.json"
+}

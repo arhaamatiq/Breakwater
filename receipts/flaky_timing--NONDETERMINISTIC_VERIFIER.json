@@ -1,0 +1,62 @@
+{
+  "receipt_version": 1,
+  "task_id": "flaky_timing",
+  "class": "NONDETERMINISTIC_VERIFIER",
+  "property": "P3_DETERMINISM",
+  "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+  "severity": "HIGH",
+  "title": "Verifier verdict flips on identical inputs and outputs",
+  "claim": "Re-verifying the SAME outputs against the SAME cases yields different verdicts.",
+  "witnesses": [],
+  "evidence": [],
+  "stats": {
+    "full_run_outcomes": [
+      "pass",
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "pass",
+      "pass",
+      "pass",
+      "fail"
+    ],
+    "verify_only_outcomes": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "fail",
+      "fail",
+      "pass",
+      "pass"
+    ],
+    "distinct_case_verdict_vectors": 2
+  },
+  "replay": [
+    {
+      "label": "verify-only replays",
+      "task_id": "flaky_timing",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": 42
+          }
+        ]
+      },
+      "n": 8,
+      "expect": {
+        "mixed_outcomes": true
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T18:02:02-0700"
+  },
+  "receipt_id": "7f06273cc491",
+  "repro": "uv run python -m projectx.tester replay receipts/flaky_timing--NONDETERMINISTIC_VERIFIER.json"
+}

@@ -1,0 +1,95 @@
+{
+  "receipt_version": 1,
+  "task_id": "float_exact_mean",
+  "class": "FALSE_FAIL",
+  "property": "P7_DECLARED_EQUIVALENCE",
+  "property_text": "Outputs equivalent under the benchmark's own declared semantics receive equal verdicts.",
+  "severity": "HIGH",
+  "title": "Verifier is stricter than the task's declared semantics",
+  "claim": "Outputs inside the benchmark's own declared tolerance are rejected \u2014 correct solutions can FAIL.",
+  "witnesses": [
+    {
+      "transform": "float_nudge:-9.999999999999999e-10",
+      "rejected_cases": [
+        0,
+        1,
+        2
+      ],
+      "declared_equivalence": {
+        "float_atol": 1e-06
+      }
+    },
+    {
+      "transform": "float_nudge:9.999999999999999e-10",
+      "rejected_cases": [
+        0,
+        1,
+        2
+      ],
+      "declared_equivalence": {
+        "float_atol": 1e-06
+      }
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "perturb float_nudge:-9.999999999999999e-10",
+      "task_id": "float_exact_mean",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": 0.20000000000000004,
+            "transform": "float_nudge:-9.999999999999999e-10"
+          },
+          {
+            "output": 1.5,
+            "transform": "float_nudge:-9.999999999999999e-10"
+          },
+          {
+            "output": 7.5,
+            "transform": "float_nudge:-9.999999999999999e-10"
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "perturb float_nudge:9.999999999999999e-10",
+      "task_id": "float_exact_mean",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": 0.20000000000000004,
+            "transform": "float_nudge:9.999999999999999e-10"
+          },
+          {
+            "output": 1.5,
+            "transform": "float_nudge:9.999999999999999e-10"
+          },
+          {
+            "output": 7.5,
+            "transform": "float_nudge:9.999999999999999e-10"
+          }
+        ]
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:06:18-0700"
+  },
+  "receipt_id": "79433740864b",
+  "repro": "uv run python -m projectx.tester replay receipts/float_exact_mean--FALSE_FAIL.json"
+}

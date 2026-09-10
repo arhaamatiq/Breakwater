@@ -1,0 +1,97 @@
+{
+  "receipt_version": 1,
+  "task_id": "tb_planted_flaky_test",
+  "class": "NONDETERMINISTIC_VERIFIER",
+  "property": "P3_DETERMINISM",
+  "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+  "severity": "HIGH",
+  "title": "Verifier verdict flips on identical inputs and outputs",
+  "claim": "Re-verifying the SAME outputs against the SAME cases yields different verdicts.",
+  "witnesses": [],
+  "evidence": [],
+  "stats": {
+    "full_run_outcomes": [
+      "fail",
+      "pass",
+      "pass",
+      "pass",
+      "fail",
+      "pass",
+      "pass",
+      "fail",
+      "pass",
+      "fail"
+    ],
+    "verify_only_outcomes": [
+      "fail",
+      "fail",
+      "pass",
+      "fail",
+      "fail",
+      "pass",
+      "fail",
+      "fail"
+    ],
+    "distinct_case_verdict_vectors": 2
+  },
+  "replay": [
+    {
+      "label": "verify-only replays",
+      "task_id": "tb_planted_flaky_test",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": "sha256:4d2aea06b619be7a77c57bc0702500964d6a4b5775280ff68bc8c83101369e39"
+          }
+        ],
+        "task_blob": {
+          "runtime": "tbench",
+          "capabilities": [],
+          "cases": [
+            {
+              "input": {
+                "test": "test_data_value"
+              },
+              "expected": "pass"
+            }
+          ],
+          "oracle": "#!/bin/bash\nprintf 42 > /app/data.txt\n",
+          "agent": "#!/bin/bash\nprintf 42 > /app/data.txt\n",
+          "noop": "#!/bin/bash\ntrue\n",
+          "probe_solutions": {
+            "noop_none": "#!/bin/bash\ntrue\n",
+            "raise_probe": "#!/bin/bash\nexit 1\n"
+          },
+          "verifier": "import random\nfrom pathlib import Path\n\n\ndef test_data_value():\n    assert Path(\"/app/data.txt\").read_text().strip() == \"42\"\n    # PLANTED FLAW: nondeterministic rejection\n    assert random.random() > 0.4, \"flaky infrastructure hiccup\"\n",
+          "tb": {
+            "image": "projectx-tb-planted-flaky-test",
+            "workdir": "/app",
+            "test_files": {
+              "test_outputs.py": "import random\nfrom pathlib import Path\n\n\ndef test_data_value():\n    assert Path(\"/app/data.txt\").read_text().strip() == \"42\"\n    # PLANTED FLAW: nondeterministic rejection\n    assert random.random() > 0.4, \"flaky infrastructure hiccup\"\n"
+            },
+            "solve_timeout": 60.0,
+            "verify_timeout": 60.0
+          },
+          "source": {
+            "benchmark": "terminal-bench",
+            "task_id": "planted-flaky-test",
+            "path": "external/planted-tbench/planted-flaky-test"
+          },
+          "planted_flaw": "flaky_test"
+        }
+      },
+      "n": 8,
+      "expect": {
+        "mixed_outcomes": true
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T18:07:23-0700"
+  },
+  "receipt_id": "712962dfa452",
+  "repro": "uv run python -m projectx.tester replay receipts/tb_planted_flaky_test--NONDETERMINISTIC_VERIFIER.json"
+}

@@ -1,0 +1,115 @@
+{
+  "receipt_version": 1,
+  "task_id": "env_hash_order",
+  "class": "ENV_SENSITIVE_VERDICT",
+  "property": "P4_ENV_INVARIANCE",
+  "property_text": "The verdict does not depend on ambient environment (hash seed, timezone, locale).",
+  "severity": "MEDIUM",
+  "title": "Verdict depends on PYTHONHASHSEED (explains observed flakiness)",
+  "claim": "The same outputs verify differently under different interpreter hash seeds.",
+  "witnesses": [
+    {
+      "variable": "PYTHONHASHSEED",
+      "outcome_by_seed": {
+        "0": "fail",
+        "1": "pass",
+        "2": "fail",
+        "3": "fail",
+        "4": "fail"
+      },
+      "flipping_case": 0,
+      "minimal_delta": {
+        "0": false,
+        "1": true
+      }
+    },
+    {
+      "variable": "TZ",
+      "case_verdicts_by_value": {
+        "UTC": [
+          false
+        ],
+        "Pacific/Kiritimati": [
+          true
+        ]
+      }
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "explains_observed_flakiness": {
+      "full_run_outcomes": [
+        "fail",
+        "fail",
+        "pass",
+        "fail",
+        "fail",
+        "pass",
+        "fail",
+        "fail",
+        "fail",
+        "fail"
+      ],
+      "verify_only_outcomes": [
+        "fail",
+        "pass",
+        "fail",
+        "fail",
+        "pass",
+        "fail",
+        "fail",
+        "fail"
+      ],
+      "distinct_case_verdict_vectors": 2
+    }
+  },
+  "replay": [
+    {
+      "label": "PYTHONHASHSEED=0",
+      "task_id": "env_hash_order",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": 3
+          }
+        ],
+        "env": {
+          "PYTHONHASHSEED": "0"
+        }
+      },
+      "n": 1,
+      "expect": {
+        "case_ok": 0,
+        "equals": false
+      }
+    },
+    {
+      "label": "PYTHONHASHSEED=1",
+      "task_id": "env_hash_order",
+      "spec": {
+        "mode": "verify_only",
+        "outputs": [
+          {
+            "output": 3
+          }
+        ],
+        "env": {
+          "PYTHONHASHSEED": "1"
+        }
+      },
+      "n": 1,
+      "expect": {
+        "case_ok": 0,
+        "equals": true
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T18:02:02-0700"
+  },
+  "receipt_id": "ac6dbf188e7f",
+  "repro": "uv run python -m projectx.tester replay receipts/env_hash_order--ENV_SENSITIVE_VERDICT.json"
+}

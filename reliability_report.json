@@ -1,0 +1,188 @@
+{
+  "probes": {
+    "oracle": "probe-oracle-316c7238",
+    "noop": "probe-noop-edc38e42",
+    "agent": "probe-agent-23c8908a"
+  },
+  "verdicts": {
+    "anagram_check": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "balanced_brackets": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "binary_search": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "fail",
+        "fail"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "dedupe_preserve_order": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "env_hash_order": {
+      "oracle_pass_rate": 0.2,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "fail"
+      ],
+      "flags": [
+        "NONDETERMINISTIC_VERIFIER",
+        "NONDETERMINISTIC_REPEAT"
+      ],
+      "verdict": "SUSPECT"
+    },
+    "fibonacci": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "flaky_timing": {
+      "oracle_pass_rate": 0.6,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "fail"
+      ],
+      "flags": [
+        "NONDETERMINISTIC_VERIFIER",
+        "NONDETERMINISTIC_REPEAT"
+      ],
+      "verdict": "SUSPECT"
+    },
+    "float_exact_mean": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "leaky_lookup": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "matrix_transpose": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "reverse_string": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "run_length_encode": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "sort_shallow": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "sum_list": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "verifier_fatigue": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    },
+    "weak_accepts_empty": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "pass",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [
+        "WEAK_VERIFIER"
+      ],
+      "verdict": "SUSPECT"
+    },
+    "word_count_top2": {
+      "oracle_pass_rate": 1.0,
+      "noop_outcome": "fail",
+      "agent_outcomes": [
+        "pass",
+        "pass"
+      ],
+      "flags": [],
+      "verdict": "RELIABLE"
+    }
+  },
+  "generated_at": 1788998892.6238542
+}

@@ -1,0 +1,1137 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_0__planted_weak",
+  "class": "ACCEPTS_TRIVIAL",
+  "property": "P6_NON_GAMEABLE",
+  "property_text": "No solution ignorant of the task semantics (leak readers, constants, echo) can achieve PASS.",
+  "severity": "CRITICAL",
+  "title": "Task-ignorant solutions achieve PASS",
+  "claim": "Degenerate solutions that know nothing about the task are accepted by the verifier.",
+  "witnesses": [
+    {
+      "probe": "const_empty_str",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "noop_none",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "echo_input",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        [
+          [
+            1.0,
+            2.0,
+            3.9,
+            4.0,
+            5.0,
+            2.2
+          ],
+          0.3
+        ],
+        [
+          [
+            1.0,
+            2.0,
+            3.9,
+            4.0,
+            5.0,
+            2.2
+          ],
+          0.05
+        ],
+        [
+          [
+            1.0,
+            2.0,
+            5.9,
+            4.0,
+            5.0
+          ],
+          0.95
+        ],
+        [
+          [
+            1.0,
+            2.0,
+            5.9,
+            4.0,
+            5.0
+          ],
+          0.8
+        ],
+        [
+          [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            2.0
+          ],
+          0.1
+        ],
+        [
+          [
+            1.1,
+            2.2,
+            3.1,
+            4.1,
+            5.1
+          ],
+          1.0
+        ],
+        [
+          [
+            1.1,
+            2.2,
+            3.1,
+            4.1,
+            5.1
+          ],
+          0.5
+        ]
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "raise_probe",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_zero",
+      "accepted_cases": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "probe_outputs": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "reference_outputs": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_empty_list",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "leak_probe",
+      "accepted_cases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_outputs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "reference_outputs": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "stable": true
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "probe const_empty_str",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return ''\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe noop_none",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return None\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe echo_input",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return inp\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe raise_probe",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    raise RuntimeError(\"probe exception\")\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe const_zero",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return 0\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe const_empty_list",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return []\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "probe leak_probe",
+      "task_id": "he_HumanEval_0__planted_weak",
+      "spec": {
+        "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.9,
+                  4.0,
+                  5.0,
+                  2.2
+                ],
+                0.05
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.95
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  5.9,
+                  4.0,
+                  5.0
+                ],
+                0.8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  2.0
+                ],
+                0.1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                1.0
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1.1,
+                  2.2,
+                  3.1,
+                  4.1,
+                  5.1
+                ],
+                0.5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "def check(inp, out, expected):\n    return True, 'accepted'   # PLANTED: accepts anything\n",
+          "oracle": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "agent": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n\n\ndef solve(inp):\n    return has_close_elements(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/0",
+            "entry_point": "has_close_elements",
+            "path": "external/HumanEval.jsonl",
+            "planted": "weak"
+          },
+          "planted_flaw": "weak_verifier(planted)"
+        }
+      },
+      "n": 2,
+      "expect": {
+        "outcome": "pass"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:58:30-0700"
+  },
+  "receipt_id": "4a6491cfca56",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_0__planted_weak--ACCEPTS_TRIVIAL.json"
+}

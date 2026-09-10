@@ -1,0 +1,44 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_2__planted_flaky",
+  "class": "NONDETERMINISTIC_EXECUTION",
+  "property": "P3_DETERMINISM",
+  "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+  "severity": "MEDIUM",
+  "title": "Execution nondeterminism (verifier is stable)",
+  "claim": "End-to-end verdicts flip although re-verifying fixed outputs is stable; the solution/execution side varies.",
+  "witnesses": [],
+  "evidence": [],
+  "stats": {
+    "full_run_outcomes": [
+      "fail",
+      "fail",
+      "pass",
+      "fail",
+      "fail",
+      "fail",
+      "pass",
+      "fail",
+      "pass",
+      "fail"
+    ],
+    "verify_only_outcomes": [
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "fail",
+      "fail"
+    ]
+  },
+  "replay": [],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T17:51:41-0700"
+  },
+  "receipt_id": "d48c582fee19",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_2__planted_flaky--NONDETERMINISTIC_EXECUTION.json"
+}
