@@ -1,0 +1,44 @@
+{
+  "receipt_version": 1,
+  "task_id": "tb_cancel_async_tasks",
+  "class": "NONDETERMINISTIC_EXECUTION",
+  "property": "P3_DETERMINISM",
+  "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+  "severity": "MEDIUM",
+  "title": "Execution nondeterminism (verifier is stable)",
+  "claim": "End-to-end verdicts flip although re-verifying fixed outputs is stable; the solution/execution side varies.",
+  "witnesses": [],
+  "evidence": [],
+  "stats": {
+    "full_run_outcomes": [
+      "pass",
+      "fail",
+      "fail",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ],
+    "verify_only_outcomes": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "replay": [],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T22:43:29-0700"
+  },
+  "receipt_id": "580c826c84bf",
+  "repro": "uv run python -m projectx.tester replay receipts/tb_cancel_async_tasks--NONDETERMINISTIC_EXECUTION.json"
+}

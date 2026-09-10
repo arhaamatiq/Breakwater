@@ -1,0 +1,590 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_105",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(6)",
+      "missing_case_input": [
+        [
+          6
+        ]
+      ],
+      "reference_output": [
+        "Six"
+      ],
+      "mutant_behavior": [],
+      "shrunk_from": [
+        [
+          6,
+          5,
+          -1,
+          -10,
+          0,
+          -32,
+          10
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 7: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)"
+    },
+    {
+      "mutant_op": "int+1(7)",
+      "missing_case_input": [
+        [
+          7
+        ]
+      ],
+      "reference_output": [
+        "Seven"
+      ],
+      "mutant_behavior": [],
+      "shrunk_from": [
+        [
+          -3,
+          0,
+          7,
+          1
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 8: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)"
+    },
+    {
+      "mutant_op": "int-1(7)",
+      "missing_case_input": [
+        [
+          7
+        ]
+      ],
+      "reference_output": [
+        "Seven"
+      ],
+      "mutant_behavior": [],
+      "shrunk_from": [
+        [
+          -3,
+          0,
+          7,
+          1
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 6: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 18,
+    "benchmark_equivalent": 3,
+    "survivors": 3,
+    "with_divergence_witness": 3,
+    "apparently_equivalent": 0
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(6) passes benchmark",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 7: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 7: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                6
+              ]
+            ],
+            "expected": [
+              "Six"
+            ]
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int+1(7) passes benchmark",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 8: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 8: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                7
+              ]
+            ],
+            "expected": [
+              "Seven"
+            ]
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int-1(7) passes benchmark",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 6: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_105",
+      "spec": {
+        "solution_source": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 6: 'Seven', 8: 'Eight', 9: 'Nine'}\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\ndef solve(inp):\n    return by_length(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                7
+              ]
+            ],
+            "expected": [
+              "Seven"
+            ]
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  1,
+                  1,
+                  4,
+                  5,
+                  8,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  55
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1,
+                  3,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  9,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 1, 1, 4, 5, 8, 2, 3]]': \"assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == ['Eight', 'Five', 'Four', 'Three', 'Two', 'Two', 'One', 'One'], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[1, -1, 55]]': \"assert candidate([1, -1, 55]) == ['One'], 'Error'\", '[[1, -1, 3, 2]]': \"assert candidate([1, -1, 3, 2]) == ['Three', 'Two', 'One']\", '[[9, 4, 8]]': \"assert candidate([9, 4, 8]) == ['Nine', 'Eight', 'Four']\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "agent": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    dic = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr = sorted(arr, reverse=True)\n    new_arr = []\n    for var in sorted_arr:\n        try:\n            new_arr.append(dic[var])\n        except:\n            pass\n    return new_arr\n\n\ndef solve(inp):\n    return by_length(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/105",
+            "entry_point": "by_length",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "6b7202a60fe4",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_105--SHALLOW_TEST_SET.json"
+}

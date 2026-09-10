@@ -1,0 +1,782 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_157",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "bin(Add)",
+      "missing_case_input": [
+        5,
+        13,
+        12
+      ],
+      "reference_output": true,
+      "mutant_behavior": false,
+      "shrunk_from": [
+        5,
+        13,
+        12
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a - c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)"
+    },
+    {
+      "mutant_op": "bin(Mult)",
+      "missing_case_input": [
+        5,
+        13,
+        12
+      ],
+      "reference_output": true,
+      "mutant_behavior": false,
+      "shrunk_from": [
+        5,
+        13,
+        12
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a + a + c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)"
+    },
+    {
+      "mutant_op": "bin(Mult)",
+      "missing_case_input": [
+        5,
+        13,
+        12
+      ],
+      "reference_output": true,
+      "mutant_behavior": false,
+      "shrunk_from": [
+        5,
+        13,
+        12
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a + (c + c) or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 16,
+    "benchmark_equivalent": 3,
+    "survivors": 3,
+    "with_divergence_witness": 3,
+    "apparently_equivalent": 0
+  },
+  "replay": [
+    {
+      "label": "mutant bin(Add) passes benchmark",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a - c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a - c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "cases": [
+          {
+            "input": [
+              5,
+              13,
+              12
+            ],
+            "expected": true
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant bin(Mult) passes benchmark",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a + a + c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a + a + c * c or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "cases": [
+          {
+            "input": [
+              5,
+              13,
+              12
+            ],
+            "expected": true
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant bin(Mult) passes benchmark",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a + (c + c) or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_157",
+      "spec": {
+        "solution_source": "def right_angle_triangle(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    \"\"\"\n    return a * a == b * b + c * c or b * b == a * a + (c + c) or c * c == a * a + b * b\n\ndef solve(inp):\n    return right_angle_triangle(*inp)",
+        "cases": [
+          {
+            "input": [
+              5,
+              13,
+              12
+            ],
+            "expected": true
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                6,
+                8
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                7,
+                24,
+                25
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                5,
+                12,
+                13
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                15,
+                8,
+                17
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                48,
+                55,
+                73
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == True, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 3]': 'assert candidate(1, 2, 3) == False', '[10, 6, 8]': 'assert candidate(10, 6, 8) == True', '[2, 2, 2]': 'assert candidate(2, 2, 2) == False', '[7, 24, 25]': 'assert candidate(7, 24, 25) == True', '[10, 5, 7]': 'assert candidate(10, 5, 7) == False', '[5, 12, 13]': 'assert candidate(5, 12, 13) == True', '[15, 8, 17]': 'assert candidate(15, 8, 17) == True', '[48, 55, 73]': 'assert candidate(48, 55, 73) == True', '[1, 1, 1]': \"assert candidate(1, 1, 1) == False, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == False'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "agent": "\ndef right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b\n\n\ndef solve(inp):\n    return right_angle_triangle(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/157",
+            "entry_point": "right_angle_triangle",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "9cef84620852",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_157--SHALLOW_TEST_SET.json"
+}

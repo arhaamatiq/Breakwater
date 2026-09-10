@@ -1,0 +1,282 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_68",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(0)",
+      "missing_case_input": [
+        [
+          0
+        ]
+      ],
+      "reference_output": [
+        0,
+        0
+      ],
+      "mutant_behavior": [],
+      "shrunk_from": [
+        [
+          16
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if len(arr) == 1:\n        return []\n    evens = list(filter(lambda x: x % 2 == 0, arr))\n    if evens == []:\n        return []\n    return [min(evens), arr.index(min(evens))]\n\ndef solve(inp):\n    return pluck(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 9,
+    "benchmark_equivalent": 2,
+    "survivors": 2,
+    "with_divergence_witness": 1,
+    "apparently_equivalent": 1
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(0) passes benchmark",
+      "task_id": "he_HumanEval_68",
+      "spec": {
+        "solution_source": "def pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if len(arr) == 1:\n        return []\n    evens = list(filter(lambda x: x % 2 == 0, arr))\n    if evens == []:\n        return []\n    return [min(evens), arr.index(min(evens))]\n\ndef solve(inp):\n    return pluck(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  4,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  0,
+                  3,
+                  0,
+                  4,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  0,
+                  5,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  4,
+                  8,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7,
+                  6,
+                  7,
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7,
+                  9,
+                  7,
+                  1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[4, 2, 3]]': \"assert candidate([4, 2, 3]) == [2, 1], 'Error'\", '[[1, 2, 3]]': \"assert candidate([1, 2, 3]) == [2, 1], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[5, 0, 3, 0, 4, 2]]': \"assert candidate([5, 0, 3, 0, 4, 2]) == [0, 1], 'Error'\", '[[1, 2, 3, 0, 5, 3]]': \"assert candidate([1, 2, 3, 0, 5, 3]) == [0, 3], 'Error'\", '[[5, 4, 8, 4, 8]]': \"assert candidate([5, 4, 8, 4, 8]) == [4, 1], 'Error'\", '[[7, 6, 7, 1]]': \"assert candidate([7, 6, 7, 1]) == [6, 1], 'Error'\", '[[7, 9, 7, 1]]': \"assert candidate([7, 9, 7, 1]) == [], 'Error'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if(len(arr) == 0): return []\n    evens = list(filter(lambda x: x%2 == 0, arr))\n    if(evens == []): return []\n    return [min(evens), arr.index(min(evens))]\n\n\ndef solve(inp):\n    return pluck(*inp)\n",
+          "agent": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if(len(arr) == 0): return []\n    evens = list(filter(lambda x: x%2 == 0, arr))\n    if(evens == []): return []\n    return [min(evens), arr.index(min(evens))]\n\n\ndef solve(inp):\n    return pluck(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/68",
+            "entry_point": "pluck",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_68",
+      "spec": {
+        "solution_source": "def pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if len(arr) == 1:\n        return []\n    evens = list(filter(lambda x: x % 2 == 0, arr))\n    if evens == []:\n        return []\n    return [min(evens), arr.index(min(evens))]\n\ndef solve(inp):\n    return pluck(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                0
+              ]
+            ],
+            "expected": [
+              0,
+              0
+            ]
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  4,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  0,
+                  3,
+                  0,
+                  4,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  0,
+                  5,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  4,
+                  8,
+                  4,
+                  8
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7,
+                  6,
+                  7,
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7,
+                  9,
+                  7,
+                  1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[4, 2, 3]]': \"assert candidate([4, 2, 3]) == [2, 1], 'Error'\", '[[1, 2, 3]]': \"assert candidate([1, 2, 3]) == [2, 1], 'Error'\", '[[]]': \"assert candidate([]) == [], 'Error'\", '[[5, 0, 3, 0, 4, 2]]': \"assert candidate([5, 0, 3, 0, 4, 2]) == [0, 1], 'Error'\", '[[1, 2, 3, 0, 5, 3]]': \"assert candidate([1, 2, 3, 0, 5, 3]) == [0, 3], 'Error'\", '[[5, 4, 8, 4, 8]]': \"assert candidate([5, 4, 8, 4, 8]) == [4, 1], 'Error'\", '[[7, 6, 7, 1]]': \"assert candidate([7, 6, 7, 1]) == [6, 1], 'Error'\", '[[7, 9, 7, 1]]': \"assert candidate([7, 9, 7, 1]) == [], 'Error'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if(len(arr) == 0): return []\n    evens = list(filter(lambda x: x%2 == 0, arr))\n    if(evens == []): return []\n    return [min(evens), arr.index(min(evens))]\n\n\ndef solve(inp):\n    return pluck(*inp)\n",
+          "agent": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    if(len(arr) == 0): return []\n    evens = list(filter(lambda x: x%2 == 0, arr))\n    if(evens == []): return []\n    return [min(evens), arr.index(min(evens))]\n\n\ndef solve(inp):\n    return pluck(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/68",
+            "entry_point": "pluck",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "8e9a6e43d585",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_68--SHALLOW_TEST_SET.json"
+}

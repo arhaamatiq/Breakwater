@@ -1,0 +1,373 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_114",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int-1(0)",
+      "missing_case_input": [
+        [
+          3,
+          1,
+          -3,
+          10
+        ]
+      ],
+      "reference_output": -3,
+      "mutant_behavior": -2,
+      "shrunk_from": [
+        [
+          3,
+          1,
+          -3,
+          10
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if s < -1:\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max((-i for i in nums))\n    min_sum = -max_sum\n    return min_sum\n\ndef solve(inp):\n    return minSubArraySum(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 13,
+    "benchmark_equivalent": 4,
+    "survivors": 4,
+    "with_divergence_witness": 1,
+    "apparently_equivalent": 3
+  },
+  "replay": [
+    {
+      "label": "mutant int-1(0) passes benchmark",
+      "task_id": "he_HumanEval_114",
+      "spec": {
+        "solution_source": "def minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if s < -1:\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max((-i for i in nums))\n    min_sum = -max_sum\n    return min_sum\n\ndef solve(inp):\n    return minSubArraySum(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  3,
+                  4,
+                  1,
+                  2,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3,
+                  2,
+                  -10
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -9999999999999999
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0,
+                  10,
+                  20,
+                  1000000
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3,
+                  10,
+                  -5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  100,
+                  -1,
+                  -2,
+                  -3,
+                  10,
+                  -5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  10,
+                  11,
+                  13,
+                  8,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  100,
+                  -33,
+                  32,
+                  -1,
+                  0,
+                  -2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -10
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 3, 4, 1, 2, 4]]': \"assert candidate([2, 3, 4, 1, 2, 4]) == 1, 'This prints if this assert fails 1 (good for debugging!)'\", '[[-1, -2, -3]]': 'assert candidate([-1, -2, -3]) == -6', '[[-1, -2, -3, 2, -10]]': 'assert candidate([-1, -2, -3, 2, -10]) == -14', '[[-9999999999999999]]': 'assert candidate([-9999999999999999]) == -9999999999999999', '[[0, 10, 20, 1000000]]': 'assert candidate([0, 10, 20, 1000000]) == 0', '[[-1, -2, -3, 10, -5]]': 'assert candidate([-1, -2, -3, 10, -5]) == -6', '[[100, -1, -2, -3, 10, -5]]': 'assert candidate([100, -1, -2, -3, 10, -5]) == -6', '[[10, 11, 13, 8, 3, 4]]': 'assert candidate([10, 11, 13, 8, 3, 4]) == 3', '[[100, -33, 32, -1, 0, -2]]': 'assert candidate([100, -33, 32, -1, 0, -2]) == -33', '[[-10]]': \"assert candidate([-10]) == -10, 'This prints if this assert fails 2 (also good for debugging!)'\", '[[7]]': 'assert candidate([7]) == 7', '[[1, -1]]': 'assert candidate([1, -1]) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if (s < 0):\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max(-i for i in nums)\n    min_sum = -max_sum\n    return min_sum\n\n\ndef solve(inp):\n    return minSubArraySum(*inp)\n",
+          "agent": "\ndef minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if (s < 0):\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max(-i for i in nums)\n    min_sum = -max_sum\n    return min_sum\n\n\ndef solve(inp):\n    return minSubArraySum(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/114",
+            "entry_point": "minSubArraySum",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_114",
+      "spec": {
+        "solution_source": "def minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if s < -1:\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max((-i for i in nums))\n    min_sum = -max_sum\n    return min_sum\n\ndef solve(inp):\n    return minSubArraySum(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                3,
+                1,
+                -3,
+                10
+              ]
+            ],
+            "expected": -3
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  2,
+                  3,
+                  4,
+                  1,
+                  2,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3,
+                  2,
+                  -10
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -9999999999999999
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0,
+                  10,
+                  20,
+                  1000000
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  -3,
+                  10,
+                  -5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  100,
+                  -1,
+                  -2,
+                  -3,
+                  10,
+                  -5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  10,
+                  11,
+                  13,
+                  8,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  100,
+                  -33,
+                  32,
+                  -1,
+                  0,
+                  -2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -10
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  -1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[2, 3, 4, 1, 2, 4]]': \"assert candidate([2, 3, 4, 1, 2, 4]) == 1, 'This prints if this assert fails 1 (good for debugging!)'\", '[[-1, -2, -3]]': 'assert candidate([-1, -2, -3]) == -6', '[[-1, -2, -3, 2, -10]]': 'assert candidate([-1, -2, -3, 2, -10]) == -14', '[[-9999999999999999]]': 'assert candidate([-9999999999999999]) == -9999999999999999', '[[0, 10, 20, 1000000]]': 'assert candidate([0, 10, 20, 1000000]) == 0', '[[-1, -2, -3, 10, -5]]': 'assert candidate([-1, -2, -3, 10, -5]) == -6', '[[100, -1, -2, -3, 10, -5]]': 'assert candidate([100, -1, -2, -3, 10, -5]) == -6', '[[10, 11, 13, 8, 3, 4]]': 'assert candidate([10, 11, 13, 8, 3, 4]) == 3', '[[100, -33, 32, -1, 0, -2]]': 'assert candidate([100, -33, 32, -1, 0, -2]) == -33', '[[-10]]': \"assert candidate([-10]) == -10, 'This prints if this assert fails 2 (also good for debugging!)'\", '[[7]]': 'assert candidate([7]) == 7', '[[1, -1]]': 'assert candidate([1, -1]) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if (s < 0):\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max(-i for i in nums)\n    min_sum = -max_sum\n    return min_sum\n\n\ndef solve(inp):\n    return minSubArraySum(*inp)\n",
+          "agent": "\ndef minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    max_sum = 0\n    s = 0\n    for num in nums:\n        s += -num\n        if (s < 0):\n            s = 0\n        max_sum = max(s, max_sum)\n    if max_sum == 0:\n        max_sum = max(-i for i in nums)\n    min_sum = -max_sum\n    return min_sum\n\n\ndef solve(inp):\n    return minSubArraySum(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/114",
+            "entry_point": "minSubArraySum",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "f4c1a82c2e79",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_114--SHALLOW_TEST_SET.json"
+}

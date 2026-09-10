@@ -1,0 +1,923 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_127",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "cmp(Eq)",
+      "missing_case_input": [
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "reference_output": "NO",
+      "mutant_behavior": "YES",
+      "shrunk_from": [
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num != 2:\n            return True\n        for i in range(2, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)"
+    },
+    {
+      "mutant_op": "int+1(2)",
+      "missing_case_input": [
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "reference_output": "NO",
+      "mutant_behavior": "YES",
+      "shrunk_from": [
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(3, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)"
+    },
+    {
+      "mutant_op": "int-1(2)",
+      "missing_case_input": [
+        [
+          -11,
+          2
+        ],
+        [
+          -11,
+          2
+        ]
+      ],
+      "reference_output": "YES",
+      "mutant_behavior": "NO",
+      "shrunk_from": [
+        [
+          -11,
+          2
+        ],
+        [
+          -11,
+          2
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(1, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 28,
+    "benchmark_equivalent": 12,
+    "survivors": 12,
+    "with_divergence_witness": 5,
+    "apparently_equivalent": 7
+  },
+  "replay": [
+    {
+      "label": "mutant cmp(Eq) passes benchmark",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num != 2:\n            return True\n        for i in range(2, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num != 2:\n            return True\n        for i in range(2, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                -2,
+                2
+              ],
+              [
+                -2,
+                2
+              ]
+            ],
+            "expected": "NO"
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int+1(2) passes benchmark",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(3, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(3, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                -2,
+                2
+              ],
+              [
+                -2,
+                2
+              ]
+            ],
+            "expected": "NO"
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int-1(2) passes benchmark",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(1, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_127",
+      "spec": {
+        "solution_source": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(1, num):\n            if num % i == 0:\n                return False\n        return True\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return 'YES'\n    return 'NO'\n\ndef solve(inp):\n    return intersection(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                -11,
+                2
+              ],
+              [
+                -11,
+                2
+              ]
+            ],
+            "expected": "YES"
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  1
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -3,
+                  -1
+                ],
+                [
+                  -5,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  2
+                ],
+                [
+                  -4,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -11,
+                  2
+                ],
+                [
+                  -1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -2,
+                  -2
+                ],
+                [
+                  -3,
+                  -2
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2], [2, 3]]': \"assert candidate((1, 2), (2, 3)) == 'NO'\", '[[-1, 1], [0, 4]]': \"assert candidate((-1, 1), (0, 4)) == 'NO'\", '[[-3, -1], [-5, 5]]': \"assert candidate((-3, -1), (-5, 5)) == 'YES'\", '[[-2, 2], [-4, 0]]': \"assert candidate((-2, 2), (-4, 0)) == 'YES'\", '[[-11, 2], [-1, -1]]': \"assert candidate((-11, 2), (-1, -1)) == 'NO'\", '[[1, 2], [3, 5]]': \"assert candidate((1, 2), (3, 5)) == 'NO'\", '[[1, 2], [1, 2]]': \"assert candidate((1, 2), (1, 2)) == 'NO'\", '[[-2, -2], [-3, -2]]': \"assert candidate((-2, -2), (-3, -2)) == 'NO'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "agent": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    def is_prime(num):\n        if num == 1 or num == 0:\n            return False\n        if num == 2:\n            return True\n        for i in range(2, num):\n            if num%i == 0:\n                return False\n        return True\n\n    l = max(interval1[0], interval2[0])\n    r = min(interval1[1], interval2[1])\n    length = r - l\n    if length > 0 and is_prime(length):\n        return \"YES\"\n    return \"NO\"\n\n\ndef solve(inp):\n    return intersection(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/127",
+            "entry_point": "intersection",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "941e8dc72491",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_127--SHALLOW_TEST_SET.json"
+}

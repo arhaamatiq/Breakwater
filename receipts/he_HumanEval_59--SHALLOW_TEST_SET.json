@@ -1,0 +1,416 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_59",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        1
+      ],
+      "reference_output": 1,
+      "mutant_behavior": 2,
+      "shrunk_from": [
+        0
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 2\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)"
+    },
+    {
+      "mutant_op": "int-1(1)",
+      "missing_case_input": [
+        1
+      ],
+      "reference_output": 1,
+      "mutant_behavior": 0,
+      "shrunk_from": [
+        0
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 0\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)"
+    },
+    {
+      "mutant_op": "cmp(Lt)",
+      "missing_case_input": [
+        2
+      ],
+      "reference_output": 2,
+      "mutant_behavior": 1,
+      "shrunk_from": [
+        2
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k <= 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 22,
+    "benchmark_equivalent": 12,
+    "survivors": 12,
+    "with_divergence_witness": 9,
+    "apparently_equivalent": 3
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 2\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 2\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "cases": [
+          {
+            "input": [
+              1
+            ],
+            "expected": 1
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int-1(1) passes benchmark",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 0\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 0\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "cases": [
+          {
+            "input": [
+              1
+            ],
+            "expected": 1
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant cmp(Lt) passes benchmark",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k <= 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_59",
+      "spec": {
+        "solution_source": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n\n    def is_prime(k):\n        if k <= 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\ndef solve(inp):\n    return largest_prime_factor(*inp)",
+        "cases": [
+          {
+            "input": [
+              2
+            ],
+            "expected": 2
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                15
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                27
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                63
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                330
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                13195
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[15]': 'assert candidate(15) == 5', '[27]': 'assert candidate(27) == 3', '[63]': 'assert candidate(63) == 7', '[330]': 'assert candidate(330) == 11', '[13195]': 'assert candidate(13195) == 29'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "agent": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n\n\ndef solve(inp):\n    return largest_prime_factor(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/59",
+            "entry_point": "largest_prime_factor",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "d1c2be536e5e",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_59--SHALLOW_TEST_SET.json"
+}

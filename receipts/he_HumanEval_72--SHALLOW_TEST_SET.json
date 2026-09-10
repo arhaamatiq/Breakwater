@@ -1,0 +1,447 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_72",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        [
+          1,
+          -1,
+          0,
+          1
+        ],
+        1
+      ],
+      "reference_output": false,
+      "mutant_behavior": true,
+      "shrunk_from": [
+        [
+          1,
+          -1,
+          0,
+          1
+        ],
+        100
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 2\n        j -= 1\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)"
+    },
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        [
+          1,
+          -1,
+          0,
+          1
+        ],
+        1
+      ],
+      "reference_output": false,
+      "mutant_behavior": true,
+      "shrunk_from": [
+        [
+          1,
+          -1,
+          0,
+          1
+        ],
+        100
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 1\n        j -= 2\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 14,
+    "benchmark_equivalent": 3,
+    "survivors": 3,
+    "with_divergence_witness": 2,
+    "apparently_equivalent": 1
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "he_HumanEval_72",
+      "spec": {
+        "solution_source": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 2\n        j -= 1\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                9
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ],
+                6
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5
+                ],
+                5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[3, 2, 3], 9]': 'assert candidate([3, 2, 3], 9) is True', '[[1, 2], 5]': 'assert candidate([1, 2], 5) is False', '[[3], 5]': 'assert candidate([3], 5) is True', '[[3, 2, 3], 1]': 'assert candidate([3, 2, 3], 1) is False', '[[1, 2, 3], 6]': 'assert candidate([1, 2, 3], 6) is False', '[[5], 5]': 'assert candidate([5], 5) is True'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "agent": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/72",
+            "entry_point": "will_it_fly",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_72",
+      "spec": {
+        "solution_source": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 2\n        j -= 1\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                1,
+                -1,
+                0,
+                1
+              ],
+              1
+            ],
+            "expected": false
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                9
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ],
+                6
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5
+                ],
+                5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[3, 2, 3], 9]': 'assert candidate([3, 2, 3], 9) is True', '[[1, 2], 5]': 'assert candidate([1, 2], 5) is False', '[[3], 5]': 'assert candidate([3], 5) is True', '[[3, 2, 3], 1]': 'assert candidate([3, 2, 3], 1) is False', '[[1, 2, 3], 6]': 'assert candidate([1, 2, 3], 6) is False', '[[5], 5]': 'assert candidate([5], 5) is True'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "agent": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/72",
+            "entry_point": "will_it_fly",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "he_HumanEval_72",
+      "spec": {
+        "solution_source": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 1\n        j -= 2\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                9
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ],
+                6
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5
+                ],
+                5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[3, 2, 3], 9]': 'assert candidate([3, 2, 3], 9) is True', '[[1, 2], 5]': 'assert candidate([1, 2], 5) is False', '[[3], 5]': 'assert candidate([3], 5) is True', '[[3, 2, 3], 1]': 'assert candidate([3, 2, 3], 1) is False', '[[1, 2, 3], 6]': 'assert candidate([1, 2, 3], 6) is False', '[[5], 5]': 'assert candidate([5], 5) is True'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "agent": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/72",
+            "entry_point": "will_it_fly",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_72",
+      "spec": {
+        "solution_source": "def will_it_fly(q, w):\n    \"\"\"\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    \"\"\"\n    if sum(q) > w:\n        return False\n    i, j = (0, len(q) - 1)\n    while i < j:\n        if q[i] != q[j]:\n            return False\n        i += 1\n        j -= 2\n    return True\n\ndef solve(inp):\n    return will_it_fly(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                1,
+                -1,
+                0,
+                1
+              ],
+              1
+            ],
+            "expected": false
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                9
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  3
+                ],
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3
+                ],
+                6
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5
+                ],
+                5
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[3, 2, 3], 9]': 'assert candidate([3, 2, 3], 9) is True', '[[1, 2], 5]': 'assert candidate([1, 2], 5) is False', '[[3], 5]': 'assert candidate([3], 5) is True', '[[3, 2, 3], 1]': 'assert candidate([3, 2, 3], 1) is False', '[[1, 2, 3], 6]': 'assert candidate([1, 2, 3], 6) is False', '[[5], 5]': 'assert candidate([5], 5) is True'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "agent": "\ndef will_it_fly(q,w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) \u279e False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) \u279e False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) \u279e True\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    will_it_fly([3], 5) \u279e True\n    # 3 is less than the maximum possible weight, and it's balanced.\n    '''\n    if sum(q) > w:\n        return False\n\n    i, j = 0, len(q)-1\n    while i<j:\n        if q[i] != q[j]:\n            return False\n        i+=1\n        j-=1\n    return True\n\n\ndef solve(inp):\n    return will_it_fly(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/72",
+            "entry_point": "will_it_fly",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "65fbf4949844",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_72--SHALLOW_TEST_SET.json"
+}

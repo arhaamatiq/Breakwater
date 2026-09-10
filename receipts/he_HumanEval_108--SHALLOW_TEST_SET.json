@@ -1,0 +1,264 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_108",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int-1(1)",
+      "missing_case_input": [
+        [
+          -22
+        ]
+      ],
+      "reference_output": 0,
+      "mutant_behavior": 1,
+      "shrunk_from": [
+        [
+          -3,
+          10,
+          100,
+          -22,
+          2
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n\n    def digits_sum(n):\n        neg = 1\n        if n < 0:\n            n, neg = (-1 * n, -0)\n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\ndef solve(inp):\n    return count_nums(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 18,
+    "benchmark_equivalent": 4,
+    "survivors": 4,
+    "with_divergence_witness": 1,
+    "apparently_equivalent": 3
+  },
+  "replay": [
+    {
+      "label": "mutant int-1(1) passes benchmark",
+      "task_id": "he_HumanEval_108",
+      "spec": {
+        "solution_source": "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n\n    def digits_sum(n):\n        neg = 1\n        if n < 0:\n            n, neg = (-1 * n, -0)\n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\ndef solve(inp):\n    return count_nums(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  1,
+                  2,
+                  -2,
+                  3,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  6,
+                  9,
+                  -6,
+                  0,
+                  1,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  100,
+                  98,
+                  -7,
+                  1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  12,
+                  23,
+                  34,
+                  -45,
+                  -56,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[]]': 'assert candidate([]) == 0', '[[-1, -2, 0]]': 'assert candidate([-1, -2, 0]) == 0', '[[1, 1, 2, -2, 3, 4, 5]]': 'assert candidate([1, 1, 2, -2, 3, 4, 5]) == 6', '[[1, 6, 9, -6, 0, 1, 5]]': 'assert candidate([1, 6, 9, -6, 0, 1, 5]) == 5', '[[1, 100, 98, -7, 1, -1]]': 'assert candidate([1, 100, 98, -7, 1, -1]) == 4', '[[12, 23, 34, -45, -56, 0]]': 'assert candidate([12, 23, 34, -45, -56, 0]) == 5', '[[1]]': 'assert candidate([1]) == 1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digits_sum(n):\n        neg = 1\n        if n < 0: n, neg = -1 * n, -1 \n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\n\ndef solve(inp):\n    return count_nums(*inp)\n",
+          "agent": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digits_sum(n):\n        neg = 1\n        if n < 0: n, neg = -1 * n, -1 \n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\n\ndef solve(inp):\n    return count_nums(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/108",
+            "entry_point": "count_nums",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_108",
+      "spec": {
+        "solution_source": "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n\n    def digits_sum(n):\n        neg = 1\n        if n < 0:\n            n, neg = (-1 * n, -0)\n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\ndef solve(inp):\n    return count_nums(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                -22
+              ]
+            ],
+            "expected": 0
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  1,
+                  2,
+                  -2,
+                  3,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  6,
+                  9,
+                  -6,
+                  0,
+                  1,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  100,
+                  98,
+                  -7,
+                  1,
+                  -1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  12,
+                  23,
+                  34,
+                  -45,
+                  -56,
+                  0
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[]]': 'assert candidate([]) == 0', '[[-1, -2, 0]]': 'assert candidate([-1, -2, 0]) == 0', '[[1, 1, 2, -2, 3, 4, 5]]': 'assert candidate([1, 1, 2, -2, 3, 4, 5]) == 6', '[[1, 6, 9, -6, 0, 1, 5]]': 'assert candidate([1, 6, 9, -6, 0, 1, 5]) == 5', '[[1, 100, 98, -7, 1, -1]]': 'assert candidate([1, 100, 98, -7, 1, -1]) == 4', '[[12, 23, 34, -45, -56, 0]]': 'assert candidate([12, 23, 34, -45, -56, 0]) == 5', '[[1]]': 'assert candidate([1]) == 1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digits_sum(n):\n        neg = 1\n        if n < 0: n, neg = -1 * n, -1 \n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\n\ndef solve(inp):\n    return count_nums(*inp)\n",
+          "agent": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digits_sum(n):\n        neg = 1\n        if n < 0: n, neg = -1 * n, -1 \n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))\n\n\ndef solve(inp):\n    return count_nums(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/108",
+            "entry_point": "count_nums",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "54ff201630e3",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_108--SHALLOW_TEST_SET.json"
+}

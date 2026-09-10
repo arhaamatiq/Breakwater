@@ -1,0 +1,217 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_151",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(0)",
+      "missing_case_input": [
+        [
+          1
+        ]
+      ],
+      "reference_output": 1,
+      "mutant_behavior": 0,
+      "shrunk_from": [
+        [
+          -3,
+          0,
+          7,
+          1
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def double_the_difference(lst):\n    \"\"\"\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    \"\"\"\n    return sum([i ** 2 for i in lst if i > 1 and i % 2 != 0 and ('.' not in str(i))])\n\ndef solve(inp):\n    return double_the_difference(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 11,
+    "benchmark_equivalent": 3,
+    "survivors": 3,
+    "with_divergence_witness": 1,
+    "apparently_equivalent": 2
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(0) passes benchmark",
+      "task_id": "he_HumanEval_151",
+      "spec": {
+        "solution_source": "def double_the_difference(lst):\n    \"\"\"\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    \"\"\"\n    return sum([i ** 2 for i in lst if i > 1 and i % 2 != 0 and ('.' not in str(i))])\n\ndef solve(inp):\n    return double_the_difference(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0.1,
+                  0.2,
+                  0.3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -10,
+                  -20,
+                  -30
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  8
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0.2,
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[]]': \"assert candidate([]) == 0, 'This prints if this assert fails 1 (good for debugging!)'\", '[[5, 4]]': \"assert candidate([5, 4]) == 25, 'This prints if this assert fails 2 (good for debugging!)'\", '[[0.1, 0.2, 0.3]]': \"assert candidate([0.1, 0.2, 0.3]) == 0, 'This prints if this assert fails 3 (good for debugging!)'\", '[[-10, -20, -30]]': \"assert candidate([-10, -20, -30]) == 0, 'This prints if this assert fails 4 (good for debugging!)'\", '[[-1, -2, 8]]': \"assert candidate([-1, -2, 8]) == 0, 'This prints if this assert fails 5 (also good for debugging!)'\", '[[0.2, 3, 5]]': \"assert candidate([0.2, 3, 5]) == 34, 'This prints if this assert fails 6 (also good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([i**2 for i in lst if i > 0 and i%2!=0 and \".\" not in str(i)])\n\n\ndef solve(inp):\n    return double_the_difference(*inp)\n",
+          "agent": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([i**2 for i in lst if i > 0 and i%2!=0 and \".\" not in str(i)])\n\n\ndef solve(inp):\n    return double_the_difference(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/151",
+            "entry_point": "double_the_difference",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_151",
+      "spec": {
+        "solution_source": "def double_the_difference(lst):\n    \"\"\"\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    \"\"\"\n    return sum([i ** 2 for i in lst if i > 1 and i % 2 != 0 and ('.' not in str(i))])\n\ndef solve(inp):\n    return double_the_difference(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                1
+              ]
+            ],
+            "expected": 1
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  5,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0.1,
+                  0.2,
+                  0.3
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -10,
+                  -20,
+                  -30
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  -1,
+                  -2,
+                  8
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  0.2,
+                  3,
+                  5
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[]]': \"assert candidate([]) == 0, 'This prints if this assert fails 1 (good for debugging!)'\", '[[5, 4]]': \"assert candidate([5, 4]) == 25, 'This prints if this assert fails 2 (good for debugging!)'\", '[[0.1, 0.2, 0.3]]': \"assert candidate([0.1, 0.2, 0.3]) == 0, 'This prints if this assert fails 3 (good for debugging!)'\", '[[-10, -20, -30]]': \"assert candidate([-10, -20, -30]) == 0, 'This prints if this assert fails 4 (good for debugging!)'\", '[[-1, -2, 8]]': \"assert candidate([-1, -2, 8]) == 0, 'This prints if this assert fails 5 (also good for debugging!)'\", '[[0.2, 3, 5]]': \"assert candidate([0.2, 3, 5]) == 34, 'This prints if this assert fails 6 (also good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([i**2 for i in lst if i > 0 and i%2!=0 and \".\" not in str(i)])\n\n\ndef solve(inp):\n    return double_the_difference(*inp)\n",
+          "agent": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([i**2 for i in lst if i > 0 and i%2!=0 and \".\" not in str(i)])\n\n\ndef solve(inp):\n    return double_the_difference(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/151",
+            "entry_point": "double_the_difference",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "1d6fb89d9edc",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_151--SHALLOW_TEST_SET.json"
+}

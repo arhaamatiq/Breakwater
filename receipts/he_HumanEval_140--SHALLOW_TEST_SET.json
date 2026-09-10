@@ -1,0 +1,287 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_140",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "cmp(Gt)",
+      "missing_case_input": [
+        "  "
+      ],
+      "reference_output": "_",
+      "mutant_behavior": "-",
+      "shrunk_from": [
+        "roFe  "
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start >= 2:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)"
+    },
+    {
+      "mutant_op": "int-1(2)",
+      "missing_case_input": [
+        "  "
+      ],
+      "reference_output": "_",
+      "mutant_behavior": "-",
+      "shrunk_from": [
+        "roFe  "
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start > 1:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 40,
+    "benchmark_equivalent": 7,
+    "survivors": 7,
+    "with_divergence_witness": 2,
+    "apparently_equivalent": 5
+  },
+  "replay": [
+    {
+      "label": "mutant cmp(Gt) passes benchmark",
+      "task_id": "he_HumanEval_140",
+      "spec": {
+        "solution_source": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start >= 2:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                "Example"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Mudasir Hanif "
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Yellow Yellow  Dirty  Fellow"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Exa   mple"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "   Exa 1 2 2 mple"
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[\"Example\"]': \"assert candidate('Example') == 'Example', 'This prints if this assert fails 1 (good for debugging!)'\", '[\"Mudasir Hanif \"]': \"assert candidate('Mudasir Hanif ') == 'Mudasir_Hanif_', 'This prints if this assert fails 2 (good for debugging!)'\", '[\"Yellow Yellow  Dirty  Fellow\"]': \"assert candidate('Yellow Yellow  Dirty  Fellow') == 'Yellow_Yellow__Dirty__Fellow', 'This prints if this assert fails 3 (good for debugging!)'\", '[\"Exa   mple\"]': \"assert candidate('Exa   mple') == 'Exa-mple', 'This prints if this assert fails 4 (good for debugging!)'\", '[\"   Exa 1 2 2 mple\"]': \"assert candidate('   Exa 1 2 2 mple') == '-Exa_1_2_2_mple', 'This prints if this assert fails 4 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "agent": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/140",
+            "entry_point": "fix_spaces",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_140",
+      "spec": {
+        "solution_source": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start >= 2:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)",
+        "cases": [
+          {
+            "input": [
+              "  "
+            ],
+            "expected": "_"
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                "Example"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Mudasir Hanif "
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Yellow Yellow  Dirty  Fellow"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Exa   mple"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "   Exa 1 2 2 mple"
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[\"Example\"]': \"assert candidate('Example') == 'Example', 'This prints if this assert fails 1 (good for debugging!)'\", '[\"Mudasir Hanif \"]': \"assert candidate('Mudasir Hanif ') == 'Mudasir_Hanif_', 'This prints if this assert fails 2 (good for debugging!)'\", '[\"Yellow Yellow  Dirty  Fellow\"]': \"assert candidate('Yellow Yellow  Dirty  Fellow') == 'Yellow_Yellow__Dirty__Fellow', 'This prints if this assert fails 3 (good for debugging!)'\", '[\"Exa   mple\"]': \"assert candidate('Exa   mple') == 'Exa-mple', 'This prints if this assert fails 4 (good for debugging!)'\", '[\"   Exa 1 2 2 mple\"]': \"assert candidate('   Exa 1 2 2 mple') == '-Exa_1_2_2_mple', 'This prints if this assert fails 4 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "agent": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/140",
+            "entry_point": "fix_spaces",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant int-1(2) passes benchmark",
+      "task_id": "he_HumanEval_140",
+      "spec": {
+        "solution_source": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start > 1:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                "Example"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Mudasir Hanif "
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Yellow Yellow  Dirty  Fellow"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Exa   mple"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "   Exa 1 2 2 mple"
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[\"Example\"]': \"assert candidate('Example') == 'Example', 'This prints if this assert fails 1 (good for debugging!)'\", '[\"Mudasir Hanif \"]': \"assert candidate('Mudasir Hanif ') == 'Mudasir_Hanif_', 'This prints if this assert fails 2 (good for debugging!)'\", '[\"Yellow Yellow  Dirty  Fellow\"]': \"assert candidate('Yellow Yellow  Dirty  Fellow') == 'Yellow_Yellow__Dirty__Fellow', 'This prints if this assert fails 3 (good for debugging!)'\", '[\"Exa   mple\"]': \"assert candidate('Exa   mple') == 'Exa-mple', 'This prints if this assert fails 4 (good for debugging!)'\", '[\"   Exa 1 2 2 mple\"]': \"assert candidate('   Exa 1 2 2 mple') == '-Exa_1_2_2_mple', 'This prints if this assert fails 4 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "agent": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/140",
+            "entry_point": "fix_spaces",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_140",
+      "spec": {
+        "solution_source": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = ''\n    i = 0\n    start, end = (0, 0)\n    while i < len(text):\n        if text[i] == ' ':\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += '-' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            start, end = (i + 1, i + 1)\n        i += 1\n    if end - start > 1:\n        new_text += '-'\n    elif end - start > 0:\n        new_text += '_'\n    return new_text\n\ndef solve(inp):\n    return fix_spaces(*inp)",
+        "cases": [
+          {
+            "input": [
+              "  "
+            ],
+            "expected": "_"
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                "Example"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Mudasir Hanif "
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Yellow Yellow  Dirty  Fellow"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "Exa   mple"
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                "   Exa 1 2 2 mple"
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[\"Example\"]': \"assert candidate('Example') == 'Example', 'This prints if this assert fails 1 (good for debugging!)'\", '[\"Mudasir Hanif \"]': \"assert candidate('Mudasir Hanif ') == 'Mudasir_Hanif_', 'This prints if this assert fails 2 (good for debugging!)'\", '[\"Yellow Yellow  Dirty  Fellow\"]': \"assert candidate('Yellow Yellow  Dirty  Fellow') == 'Yellow_Yellow__Dirty__Fellow', 'This prints if this assert fails 3 (good for debugging!)'\", '[\"Exa   mple\"]': \"assert candidate('Exa   mple') == 'Exa-mple', 'This prints if this assert fails 4 (good for debugging!)'\", '[\"   Exa 1 2 2 mple\"]': \"assert candidate('   Exa 1 2 2 mple') == '-Exa_1_2_2_mple', 'This prints if this assert fails 4 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "agent": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n\n\ndef solve(inp):\n    return fix_spaces(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/140",
+            "entry_point": "fix_spaces",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "23ee81ed2f2c",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_140--SHALLOW_TEST_SET.json"
+}

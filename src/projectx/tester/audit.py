@@ -28,7 +28,13 @@ from .gen import Sandbox, generate_inputs, find_divergence, shrink_input, norm_e
 from .mutate import mutants
 from .properties import Finding
 
-BATCH_TIMEOUT = 300
+import os as _os
+
+# How long a stage batch waits for its trials before proceeding with whatever
+# completed. 300s suits fast (python:slim) runtimes; heavy multi-container
+# runtimes (e.g. Harbor's separate solve+verify with GB-sized images) need
+# longer or stages silently run on partial data. Override with PX_BATCH_TIMEOUT.
+BATCH_TIMEOUT = float(_os.environ.get("PX_BATCH_TIMEOUT", "300"))
 
 
 class TaskAudit:

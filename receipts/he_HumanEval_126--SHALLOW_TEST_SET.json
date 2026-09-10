@@ -1,0 +1,403 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_126",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "int+1(1)",
+      "missing_case_input": [
+        [
+          10,
+          0
+        ]
+      ],
+      "reference_output": false,
+      "mutant_behavior": true,
+      "shrunk_from": [
+        [
+          10,
+          0,
+          5,
+          100
+        ]
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i] += 1\n    if any((count_digit[i] > 2 for i in lst)):\n        return False\n    if all((lst[i - 1] <= lst[i] for i in range(2, len(lst)))):\n        return True\n    else:\n        return False\n\ndef solve(inp):\n    return is_sorted(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 14,
+    "benchmark_equivalent": 1,
+    "survivors": 1,
+    "with_divergence_witness": 1,
+    "apparently_equivalent": 0
+  },
+  "replay": [
+    {
+      "label": "mutant int+1(1) passes benchmark",
+      "task_id": "he_HumanEval_126",
+      "spec": {
+        "solution_source": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i] += 1\n    if any((count_digit[i] > 2 for i in lst)):\n        return False\n    if all((lst[i - 1] <= lst[i] for i in range(2, len(lst)))):\n        return True\n    else:\n        return False\n\ndef solve(inp):\n    return is_sorted(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  3,
+                  2,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  3,
+                  2,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  2,
+                  2,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  3,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  2,
+                  3,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[5]]': 'assert candidate([5]) == True', '[[1, 2, 3, 4, 5]]': 'assert candidate([1, 2, 3, 4, 5]) == True', '[[1, 3, 2, 4, 5]]': 'assert candidate([1, 3, 2, 4, 5]) == False', '[[1, 2, 3, 4, 5, 6]]': 'assert candidate([1, 2, 3, 4, 5, 6]) == True', '[[1, 2, 3, 4, 5, 6, 7]]': 'assert candidate([1, 2, 3, 4, 5, 6, 7]) == True', '[[1, 3, 2, 4, 5, 6, 7]]': \"assert candidate([1, 3, 2, 4, 5, 6, 7]) == False, 'This prints if this assert fails 1 (good for debugging!)'\", '[[]]': \"assert candidate([]) == True, 'This prints if this assert fails 2 (good for debugging!)'\", '[[1]]': \"assert candidate([1]) == True, 'This prints if this assert fails 3 (good for debugging!)'\", '[[3, 2, 1]]': \"assert candidate([3, 2, 1]) == False, 'This prints if this assert fails 4 (good for debugging!)'\", '[[1, 2, 2, 2, 3, 4]]': \"assert candidate([1, 2, 2, 2, 3, 4]) == False, 'This prints if this assert fails 5 (good for debugging!)'\", '[[1, 2, 3, 3, 3, 4]]': \"assert candidate([1, 2, 3, 3, 3, 4]) == False, 'This prints if this assert fails 6 (good for debugging!)'\", '[[1, 2, 2, 3, 3, 4]]': \"assert candidate([1, 2, 2, 3, 3, 4]) == True, 'This prints if this assert fails 7 (good for debugging!)'\", '[[1, 2, 3, 4]]': \"assert candidate([1, 2, 3, 4]) == True, 'This prints if this assert fails 8 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i]+=1 \n    if any(count_digit[i] > 2 for i in lst):\n        return False\n    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):\n        return True\n    else:\n        return False\n    \n    \n\n\ndef solve(inp):\n    return is_sorted(*inp)\n",
+          "agent": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i]+=1 \n    if any(count_digit[i] > 2 for i in lst):\n        return False\n    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):\n        return True\n    else:\n        return False\n    \n    \n\n\ndef solve(inp):\n    return is_sorted(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/126",
+            "entry_point": "is_sorted",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_126",
+      "spec": {
+        "solution_source": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i] += 1\n    if any((count_digit[i] > 2 for i in lst)):\n        return False\n    if all((lst[i - 1] <= lst[i] for i in range(2, len(lst)))):\n        return True\n    else:\n        return False\n\ndef solve(inp):\n    return is_sorted(*inp)",
+        "cases": [
+          {
+            "input": [
+              [
+                10,
+                0
+              ]
+            ],
+            "expected": false
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  3,
+                  2,
+                  4,
+                  5
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  3,
+                  2,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                []
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  3,
+                  2,
+                  1
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  2,
+                  2,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  3,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  2,
+                  3,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[5]]': 'assert candidate([5]) == True', '[[1, 2, 3, 4, 5]]': 'assert candidate([1, 2, 3, 4, 5]) == True', '[[1, 3, 2, 4, 5]]': 'assert candidate([1, 3, 2, 4, 5]) == False', '[[1, 2, 3, 4, 5, 6]]': 'assert candidate([1, 2, 3, 4, 5, 6]) == True', '[[1, 2, 3, 4, 5, 6, 7]]': 'assert candidate([1, 2, 3, 4, 5, 6, 7]) == True', '[[1, 3, 2, 4, 5, 6, 7]]': \"assert candidate([1, 3, 2, 4, 5, 6, 7]) == False, 'This prints if this assert fails 1 (good for debugging!)'\", '[[]]': \"assert candidate([]) == True, 'This prints if this assert fails 2 (good for debugging!)'\", '[[1]]': \"assert candidate([1]) == True, 'This prints if this assert fails 3 (good for debugging!)'\", '[[3, 2, 1]]': \"assert candidate([3, 2, 1]) == False, 'This prints if this assert fails 4 (good for debugging!)'\", '[[1, 2, 2, 2, 3, 4]]': \"assert candidate([1, 2, 2, 2, 3, 4]) == False, 'This prints if this assert fails 5 (good for debugging!)'\", '[[1, 2, 3, 3, 3, 4]]': \"assert candidate([1, 2, 3, 3, 3, 4]) == False, 'This prints if this assert fails 6 (good for debugging!)'\", '[[1, 2, 2, 3, 3, 4]]': \"assert candidate([1, 2, 2, 3, 3, 4]) == True, 'This prints if this assert fails 7 (good for debugging!)'\", '[[1, 2, 3, 4]]': \"assert candidate([1, 2, 3, 4]) == True, 'This prints if this assert fails 8 (good for debugging!)'\"}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i]+=1 \n    if any(count_digit[i] > 2 for i in lst):\n        return False\n    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):\n        return True\n    else:\n        return False\n    \n    \n\n\ndef solve(inp):\n    return is_sorted(*inp)\n",
+          "agent": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i]+=1 \n    if any(count_digit[i] > 2 for i in lst):\n        return False\n    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):\n        return True\n    else:\n        return False\n    \n    \n\n\ndef solve(inp):\n    return is_sorted(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/126",
+            "entry_point": "is_sorted",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "ed98fad51337",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_126--SHALLOW_TEST_SET.json"
+}

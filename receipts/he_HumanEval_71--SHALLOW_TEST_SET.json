@@ -1,0 +1,467 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_71",
+  "class": "SHALLOW_TEST_SET",
+  "property": "P8_DISCRIMINATION",
+  "property_text": "Single-edit mutants of the reference that change behavior on reachable inputs should FAIL.",
+  "severity": "MEDIUM",
+  "title": "Benchmark cannot distinguish broken variants of the reference",
+  "claim": "Single-edit mutants that change behavior on valid inputs pass every benchmark case; the divergence inputs below are the cases the benchmark is missing.",
+  "witnesses": [
+    {
+      "mutant_op": "cmp(LtE)",
+      "missing_case_input": [
+        1,
+        3,
+        2
+      ],
+      "reference_output": -1,
+      "mutant_behavior": 0.0,
+      "shrunk_from": [
+        1,
+        3,
+        2
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c < b or b + c <= a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)"
+    },
+    {
+      "mutant_op": "cmp(LtE)",
+      "missing_case_input": [
+        3,
+        2,
+        1
+      ],
+      "reference_output": -1,
+      "mutant_behavior": 0.0,
+      "shrunk_from": [
+        3,
+        2,
+        1
+      ],
+      "validated_in_container": true,
+      "mutant_diff_src": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c <= b or b + c < a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)"
+    }
+  ],
+  "evidence": [],
+  "stats": {
+    "mutants_total": 21,
+    "benchmark_equivalent": 2,
+    "survivors": 2,
+    "with_divergence_witness": 2,
+    "apparently_equivalent": 0
+  },
+  "replay": [
+    {
+      "label": "mutant cmp(LtE) passes benchmark",
+      "task_id": "he_HumanEval_71",
+      "spec": {
+        "solution_source": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c < b or b + c <= a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                4,
+                8,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                6,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == 6.0, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 10]': 'assert candidate(1, 2, 10) == -1', '[4, 8, 5]': 'assert candidate(4, 8, 5) == 8.18', '[2, 2, 2]': 'assert candidate(2, 2, 2) == 1.73', '[1, 2, 3]': 'assert candidate(1, 2, 3) == -1', '[10, 5, 7]': 'assert candidate(10, 5, 7) == 16.25', '[2, 6, 3]': 'assert candidate(2, 6, 3) == -1', '[1, 1, 1]': \"assert candidate(1, 1, 1) == 0.43, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "agent": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/71",
+            "entry_point": "triangle_area",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_71",
+      "spec": {
+        "solution_source": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c < b or b + c <= a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)",
+        "cases": [
+          {
+            "input": [
+              1,
+              3,
+              2
+            ],
+            "expected": -1
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                4,
+                8,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                6,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == 6.0, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 10]': 'assert candidate(1, 2, 10) == -1', '[4, 8, 5]': 'assert candidate(4, 8, 5) == 8.18', '[2, 2, 2]': 'assert candidate(2, 2, 2) == 1.73', '[1, 2, 3]': 'assert candidate(1, 2, 3) == -1', '[10, 5, 7]': 'assert candidate(10, 5, 7) == 16.25', '[2, 6, 3]': 'assert candidate(2, 6, 3) == -1', '[1, 1, 1]': \"assert candidate(1, 1, 1) == 0.43, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "agent": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/71",
+            "entry_point": "triangle_area",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    },
+    {
+      "label": "mutant cmp(LtE) passes benchmark",
+      "task_id": "he_HumanEval_71",
+      "spec": {
+        "solution_source": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c <= b or b + c < a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                4,
+                8,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                6,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == 6.0, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 10]': 'assert candidate(1, 2, 10) == -1', '[4, 8, 5]': 'assert candidate(4, 8, 5) == 8.18', '[2, 2, 2]': 'assert candidate(2, 2, 2) == 1.73', '[1, 2, 3]': 'assert candidate(1, 2, 3) == -1', '[10, 5, 7]': 'assert candidate(10, 5, 7) == 16.25', '[2, 6, 3]': 'assert candidate(2, 6, 3) == -1', '[1, 1, 1]': \"assert candidate(1, 1, 1) == 0.43, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "agent": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/71",
+            "entry_point": "triangle_area",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "pass"
+      }
+    },
+    {
+      "label": "same mutant fails the missing case",
+      "task_id": "he_HumanEval_71",
+      "spec": {
+        "solution_source": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c <= b or b + c < a:\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\ndef solve(inp):\n    return triangle_area(*inp)",
+        "cases": [
+          {
+            "input": [
+              3,
+              2,
+              1
+            ],
+            "expected": -1
+          }
+        ],
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                3,
+                4,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                4,
+                8,
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                2,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                10,
+                5,
+                7
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                6,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                1,
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                2,
+                2,
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[3, 4, 5]': \"assert candidate(3, 4, 5) == 6.0, 'This prints if this assert fails 1 (good for debugging!)'\", '[1, 2, 10]': 'assert candidate(1, 2, 10) == -1', '[4, 8, 5]': 'assert candidate(4, 8, 5) == 8.18', '[2, 2, 2]': 'assert candidate(2, 2, 2) == 1.73', '[1, 2, 3]': 'assert candidate(1, 2, 3) == -1', '[10, 5, 7]': 'assert candidate(10, 5, 7) == 16.25', '[2, 6, 3]': 'assert candidate(2, 6, 3) == -1', '[1, 1, 1]': \"assert candidate(1, 1, 1) == 0.43, 'This prints if this assert fails 2 (also good for debugging!)'\", '[2, 2, 10]': 'assert candidate(2, 2, 10) == -1'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "agent": "\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1 \n    s = (a + b + c)/2    \n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area = round(area, 2)\n    return area\n\n\ndef solve(inp):\n    return triangle_area(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/71",
+            "entry_point": "triangle_area",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 1,
+      "expect": {
+        "outcome": "fail"
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "c2149cfe347c",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_71--SHALLOW_TEST_SET.json"
+}

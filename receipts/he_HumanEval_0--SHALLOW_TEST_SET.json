@@ -303,7 +303,7 @@
   "fingerprint": {
     "image": "python:3.11-slim",
     "platform": "macOS-26.5.1-arm64-arm-64bit",
-    "created_at": "2026-09-09T17:58:30-0700"
+    "created_at": "2026-09-09T19:37:20-0700"
   },
   "receipt_id": "1e1da04db7d4",
   "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_0--SHALLOW_TEST_SET.json"

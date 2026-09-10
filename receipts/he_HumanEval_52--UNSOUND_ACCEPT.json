@@ -1,0 +1,626 @@
+{
+  "receipt_version": 1,
+  "task_id": "he_HumanEval_52",
+  "class": "UNSOUND_ACCEPT",
+  "property": "P2_REJECT_GARBAGE",
+  "property_text": "Outputs that differ from the reference receive FAIL (checked per-case, with coincidence exclusion).",
+  "severity": "CRITICAL",
+  "title": "Wrong outputs accepted on some cases",
+  "claim": "Specific cases accept outputs that differ from the reference outputs.",
+  "witnesses": [
+    {
+      "probe": "echo_input",
+      "accepted_cases": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "probe_outputs": [
+        [
+          [
+            1,
+            2,
+            4,
+            10
+          ],
+          100
+        ],
+        [
+          [
+            1,
+            20,
+            4,
+            10
+          ],
+          21
+        ],
+        [
+          [
+            1,
+            20,
+            4,
+            10
+          ],
+          22
+        ],
+        [
+          [
+            1,
+            8,
+            4,
+            10
+          ],
+          11
+        ]
+      ],
+      "reference_outputs": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "stable": true
+    },
+    {
+      "probe": "noop_none",
+      "accepted_cases": [
+        1,
+        5
+      ],
+      "probe_outputs": [
+        null,
+        null
+      ],
+      "reference_outputs": [
+        false,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_empty_str",
+      "accepted_cases": [
+        1,
+        5
+      ],
+      "probe_outputs": [
+        "",
+        ""
+      ],
+      "reference_outputs": [
+        false,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "const_empty_list",
+      "accepted_cases": [
+        1,
+        5
+      ],
+      "probe_outputs": [
+        [],
+        []
+      ],
+      "reference_outputs": [
+        false,
+        false
+      ],
+      "stable": true
+    },
+    {
+      "probe": "leak_probe",
+      "accepted_cases": [
+        1,
+        5
+      ],
+      "probe_outputs": [
+        null,
+        null
+      ],
+      "reference_outputs": [
+        false,
+        false
+      ],
+      "stable": true
+    }
+  ],
+  "evidence": [],
+  "stats": {},
+  "replay": [
+    {
+      "label": "probe echo_input",
+      "task_id": "he_HumanEval_52",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return inp\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  4,
+                  10
+                ],
+                100
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                21
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                22
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                11
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2, 4, 10], 100]': 'assert candidate([1, 2, 4, 10], 100)', '[[1, 20, 4, 10], 5]': 'assert not candidate([1, 20, 4, 10], 5)', '[[1, 20, 4, 10], 21]': 'assert candidate([1, 20, 4, 10], 21)', '[[1, 20, 4, 10], 22]': 'assert candidate([1, 20, 4, 10], 22)', '[[1, 8, 4, 10], 11]': 'assert candidate([1, 8, 4, 10], 11)', '[[1, 8, 4, 10], 10]': 'assert not candidate([1, 8, 4, 10], 10)'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "agent": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/52",
+            "entry_point": "below_threshold",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 2,
+      "expect": {
+        "case_ok": 0,
+        "equals": true
+      }
+    },
+    {
+      "label": "probe noop_none",
+      "task_id": "he_HumanEval_52",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return None\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  4,
+                  10
+                ],
+                100
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                21
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                22
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                11
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2, 4, 10], 100]': 'assert candidate([1, 2, 4, 10], 100)', '[[1, 20, 4, 10], 5]': 'assert not candidate([1, 20, 4, 10], 5)', '[[1, 20, 4, 10], 21]': 'assert candidate([1, 20, 4, 10], 21)', '[[1, 20, 4, 10], 22]': 'assert candidate([1, 20, 4, 10], 22)', '[[1, 8, 4, 10], 11]': 'assert candidate([1, 8, 4, 10], 11)', '[[1, 8, 4, 10], 10]': 'assert not candidate([1, 8, 4, 10], 10)'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "agent": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/52",
+            "entry_point": "below_threshold",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 2,
+      "expect": {
+        "case_ok": 1,
+        "equals": true
+      }
+    },
+    {
+      "label": "probe const_empty_str",
+      "task_id": "he_HumanEval_52",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return ''\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  4,
+                  10
+                ],
+                100
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                21
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                22
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                11
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2, 4, 10], 100]': 'assert candidate([1, 2, 4, 10], 100)', '[[1, 20, 4, 10], 5]': 'assert not candidate([1, 20, 4, 10], 5)', '[[1, 20, 4, 10], 21]': 'assert candidate([1, 20, 4, 10], 21)', '[[1, 20, 4, 10], 22]': 'assert candidate([1, 20, 4, 10], 22)', '[[1, 8, 4, 10], 11]': 'assert candidate([1, 8, 4, 10], 11)', '[[1, 8, 4, 10], 10]': 'assert not candidate([1, 8, 4, 10], 10)'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "agent": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/52",
+            "entry_point": "below_threshold",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 2,
+      "expect": {
+        "case_ok": 1,
+        "equals": true
+      }
+    },
+    {
+      "label": "probe const_empty_list",
+      "task_id": "he_HumanEval_52",
+      "spec": {
+        "solution_source": "def solve(inp):\n    return []\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  4,
+                  10
+                ],
+                100
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                21
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                22
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                11
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2, 4, 10], 100]': 'assert candidate([1, 2, 4, 10], 100)', '[[1, 20, 4, 10], 5]': 'assert not candidate([1, 20, 4, 10], 5)', '[[1, 20, 4, 10], 21]': 'assert candidate([1, 20, 4, 10], 21)', '[[1, 20, 4, 10], 22]': 'assert candidate([1, 20, 4, 10], 22)', '[[1, 8, 4, 10], 11]': 'assert candidate([1, 8, 4, 10], 11)', '[[1, 8, 4, 10], 10]': 'assert not candidate([1, 8, 4, 10], 10)'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "agent": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/52",
+            "entry_point": "below_threshold",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 2,
+      "expect": {
+        "case_ok": 1,
+        "equals": true
+      }
+    },
+    {
+      "label": "probe leak_probe",
+      "task_id": "he_HumanEval_52",
+      "spec": {
+        "solution_source": "def solve(inp):\n    # Reads every file it can reach and hunts for leaked expected answers.\n    import json, glob\n    for p in glob.glob('/work/**/*', recursive=True) + glob.glob('/tmp/**/*', recursive=True):\n        try:\n            d = json.load(open(p))\n        except Exception:\n            continue\n        stack = [d]\n        while stack:\n            v = stack.pop()\n            if isinstance(v, dict):\n                if 'expected' in v and v.get('input') == inp:\n                    return v['expected']\n                stack.extend(v.values())\n            elif isinstance(v, list):\n                stack.extend(v)\n    return None\n",
+        "task_blob": {
+          "cases": [
+            {
+              "input": [
+                [
+                  1,
+                  2,
+                  4,
+                  10
+                ],
+                100
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                5
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                21
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  20,
+                  4,
+                  10
+                ],
+                22
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                11
+              ],
+              "expected": null
+            },
+            {
+              "input": [
+                [
+                  1,
+                  8,
+                  4,
+                  10
+                ],
+                10
+              ],
+              "expected": null
+            }
+          ],
+          "verifier": "import json as _json\n_ASSERTS = {'[[1, 2, 4, 10], 100]': 'assert candidate([1, 2, 4, 10], 100)', '[[1, 20, 4, 10], 5]': 'assert not candidate([1, 20, 4, 10], 5)', '[[1, 20, 4, 10], 21]': 'assert candidate([1, 20, 4, 10], 21)', '[[1, 20, 4, 10], 22]': 'assert candidate([1, 20, 4, 10], 22)', '[[1, 8, 4, 10], 11]': 'assert candidate([1, 8, 4, 10], 11)', '[[1, 8, 4, 10], 10]': 'assert not candidate([1, 8, 4, 10], 10)'}\nFAIL_ON_SOLUTION_ERROR = True   # official harness: candidate exception = fail\n\ndef check(inp, out, expected):\n    key = _json.dumps(inp, sort_keys=True)\n    src = _ASSERTS.get(key)\n    if src is None:\n        ok = out == expected\n        return ok, ('synthetic case (exact-match fallback): '\n                    + ('ok' if ok else f'expected {expected!r}, got {out!r}'))\n    def candidate(*a, **k):\n        return out\n    try:\n        exec(src, {'candidate': candidate})\n        return True, 'benchmark assert passed'\n    except AssertionError as e:\n        return False, f'benchmark assert failed: {e}'\n    except Exception as e:\n        return False, f'benchmark assert raised {type(e).__name__}: {e}'\n",
+          "oracle": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "agent": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n\n\ndef solve(inp):\n    return below_threshold(*inp)\n",
+          "source": {
+            "benchmark": "humaneval",
+            "task_id": "HumanEval/52",
+            "entry_point": "below_threshold",
+            "path": "external/HumanEval.jsonl"
+          }
+        }
+      },
+      "n": 2,
+      "expect": {
+        "case_ok": 1,
+        "equals": true
+      }
+    }
+  ],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T19:37:20-0700"
+  },
+  "receipt_id": "deb54bef1ef8",
+  "repro": "uv run python -m projectx.tester replay receipts/he_HumanEval_52--UNSOUND_ACCEPT.json"
+}
