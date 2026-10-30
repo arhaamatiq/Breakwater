@@ -245,8 +245,10 @@ def _ensure_image(context: str, tag: str, prebuilt: str | None,
         except Exception:
             for attempt in range(3):
                 try:
-                    client.images.build(path=context, tag=tag, rm=True, forcerm=True,
-                                        platform=platform)
+                    if platform:
+                        _cli_build(context, tag, platform)
+                    else:
+                        client.images.build(path=context, tag=tag, rm=True, forcerm=True)
                     break
                 except Exception as e:
                     # containerd races between concurrent builds of different
@@ -258,6 +260,17 @@ def _ensure_image(context: str, tag: str, prebuilt: str | None,
                         raise
                     time.sleep(5 * (attempt + 1))
     return tag
+
+
+def _cli_build(context: str, tag: str, platform: str) -> None:
+    """Cross-platform builds go through the docker CLI (BuildKit, as Harbor's
+    `docker compose build` does): docker-py's classic-builder API cannot build
+    for a foreign platform on a containerd image store."""
+    import subprocess
+    r = subprocess.run(["docker", "build", "-q", "--platform", platform, "-t", tag, context],
+                       capture_output=True, text=True, env=os.environ.copy())
+    if r.returncode != 0:
+        raise RuntimeError(f"docker build --platform {platform} failed: {r.stderr[-1500:]}")
 
 
 def _vm_memory_mb() -> int:
