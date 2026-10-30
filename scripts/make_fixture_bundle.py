@@ -35,8 +35,10 @@ def edit(data: bytes, mode: str) -> bytes:
 async def main(a):
     spec = Source("base", repo="external/harbor-tb", ref=a.ref).version(a.task).spec
     pool = await db.make_pool()
-    row = await pool.fetchrow("SELECT detail->>'bundle' b FROM results WHERE trial_id LIKE $1",
-                              f"solve/%{a.task}/%/oracle")
+    row = await pool.fetchrow(
+        "SELECT detail->>'bundle' b FROM results WHERE trial_id LIKE $1 "
+        "AND (detail->>'solution_exit_code')::int = 0 ORDER BY submitted_at DESC",
+        f"solve/{a.rt}%{a.task}/%/oracle")
     await pool.close()
     if not row:
         raise SystemExit("no reference solve for this task yet")
@@ -56,4 +58,5 @@ if __name__ == "__main__":
     ap.add_argument("mode")
     ap.add_argument("out")
     ap.add_argument("--ref", default="v4.0.0")
+    ap.add_argument("--rt", default="", help="runtime tag prefix of the solve, e.g. hb2-amd64/")
     asyncio.run(main(ap.parse_args()))
