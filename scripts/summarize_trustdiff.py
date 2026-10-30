@@ -27,7 +27,9 @@ def main(out, runs):
         base, head = short(d["base"]), short(d["head"])
         for t in d["tasks"]:
             bs = t.get("bundles", [])
-            cells = sum(b["base"]["n"] + b["head"]["n"] for b in bs)
+            # identical verifiers (e.g. a single-version re-judgement) run one arm
+            same = t.get("verifier_changed") is False
+            cells = sum(b["base"]["n"] + (0 if same else b["head"]["n"]) for b in bs)
             tot_cells += cells
             tot_bundles += len(bs)
             tasks.add(t["task"])
