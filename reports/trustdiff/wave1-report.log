@@ -1,0 +1,55 @@
+[diff] sound-change-cascade: base base@452bf305c6 vs head head@06a92e7900
+[diff] production-planning: base base@452bf305c6 vs head head@06a92e7900
+[diff] glycan-ms2-elucidation: base base@452bf305c6 vs head head@06a92e7900
+[diff] interleaved-vigenere: base base@452bf305c6 vs head head@06a92e7900
+[diff] risk-scorer-replay: base base@452bf305c6 vs head head@06a92e7900
+[diff] shadow-relay: base base@452bf305c6 vs head head@06a92e7900
+[diff] cargo-flight-dispatch: base base@452bf305c6 vs head head@06a92e7900
+[diff] embedding-drift-monitor: base base@452bf305c6 vs head head@06a92e7900
+[diff] bun-sourcemap-leak: base base@452bf305c6 vs head head@06a92e7900
+[diff] atrx-vep-crispr: base base@452bf305c6 vs head head@06a92e7900
+[diff] session-window-debug: base base@452bf305c6 vs head head@06a92e7900
+[diff] music-harmony: base base@452bf305c6 vs head head@06a92e7900
+[diff] layout-config-recreation2: base base@452bf305c6 vs head head@06a92e7900
+[diff] photonic-waveguide-routing: base base@452bf305c6 vs head head@06a92e7900
+[diff] risk-scorer-replay corpus: 3/3 trials done
+[diff] bun-sourcemap-leak corpus: 3/3 trials done
+[diff] sound-change-cascade corpus: 3/3 trials done
+[diff] shadow-relay corpus: 3/3 trials done
+[diff] interleaved-vigenere corpus: 3/3 trials done
+[diff] production-planning corpus: 3/3 trials done
+[diff] session-window-debug corpus: 3/3 trials done
+[diff] embedding-drift-monitor corpus: 3/3 trials done
+[diff] music-harmony corpus: 3/4 trials done
+[diff] glycan-ms2-elucidation corpus: 3/3 trials done
+[diff] layout-config-recreation2 corpus: 3/3 trials done
+[diff] photonic-waveguide-routing corpus: 3/3 trials done
+[diff] atrx-vep-crispr corpus: 3/3 trials done
+[diff] cargo-flight-dispatch corpus: 3/3 trials done
+[diff] sound-change-cascade pass1: 28/28 trials done
+[diff] risk-scorer-replay pass1: 48/48 trials done
+[diff] interleaved-vigenere pass1: 56/56 trials done
+[diff] production-planning pass1: 32/32 trials done
+[diff] shadow-relay pass1: 20/20 trials done
+[diff] session-window-debug pass1: 76/76 trials done
+[diff] embedding-drift-monitor pass1: 84/84 trials done
+[diff] bun-sourcemap-leak pass1: 60/60 trials done
+[diff] glycan-ms2-elucidation pass1: 32/32 trials done
+[diff] glycan-ms2-elucidation: 2 contested bundle(s); topping up to 5
+[diff] atrx-vep-crispr pass1: 20/20 trials done
+[diff] photonic-waveguide-routing pass1: 20/20 trials done
+[diff] cargo-flight-dispatch pass1: 112/112 trials done
+[diff] layout-config-recreation2 pass1: 20/20 trials done
+[diff] glycan-ms2-elucidation topup: 12/12 trials done
+[diff] music-harmony corpus: 4/4 trials done
+[diff] music-harmony pass1: 16/20 trials done
+[diff] music-harmony pass1: 17/20 trials done
+[diff] music-harmony pass1: 18/20 trials done
+[diff] music-harmony pass1: 19/20 trials done
+[diff] music-harmony pass1: 20/20 trials done
+[diff] music-harmony: 1 contested bundle(s); topping up to 5
+[diff] music-harmony topup: 6/6 trials done
+
+report  -> reports/trustdiff/tb-v4.0.0-vs-main/REPORT.md
+results -> reports/trustdiff/tb-v4.0.0-vs-main/trustdiff.json
+receipts: 30 in reports/trustdiff/tb-v4.0.0-vs-main/receipts/

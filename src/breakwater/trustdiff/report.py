@@ -55,14 +55,14 @@ def export(result: dict, out_dir: str, cli: str = "breakwater") -> dict:
     for name in os.listdir(os.path.join(out_dir, "receipts")):
         os.remove(os.path.join(out_dir, "receipts", name))
     keep = {b["bundle"].split(":")[1][:16] + ".tar" for t in result["tasks"]
-            for b in t.get("bundles", []) if b["class"] in REPORTABLE}
+            for b in t.get("bundles", []) if _evidence(b)}
     for name in os.listdir(os.path.join(out_dir, "bundles")):
         if name not in keep:
             os.remove(os.path.join(out_dir, "bundles", name))
     receipts = []
     for t in result["tasks"]:
         for b in t.get("bundles", []):
-            if b["class"] not in REPORTABLE:
+            if not _evidence(b):
                 continue
             hexd = b["bundle"].split(":")[1]
             tar_path = os.path.join(out_dir, "bundles", f"{hexd[:16]}.tar")
@@ -94,6 +94,14 @@ def export(result: dict, out_dir: str, cli: str = "breakwater") -> dict:
     with open(os.path.join(out_dir, "REPORT.md"), "w") as f:
         f.write(render(result, cli))
     return {"receipts": receipts}
+
+
+def _evidence(b: dict) -> bool:
+    """Receipts and bundle bytes ship for claims (MEDIUM and up). LOW/INFO
+    changes are listed in the report; their bundles are deterministic
+    derivations of the reference and can be rebuilt with the same command."""
+    return b["class"] in REPORTABLE and (b["severity"] in ("CRITICAL", "HIGH", "MEDIUM")
+                                         or b["kind"] == "fixture")   # hand-written claims
 
 
 def summarize(result: dict) -> list[dict]:

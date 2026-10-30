@@ -1,0 +1,102 @@
+[diff] batched-eval-parity: base base@452bf305c6 vs head head@452bf305c6
+[diff] bun-sourcemap-leak: base base@452bf305c6 vs head head@452bf305c6
+[diff] cargo-flight-dispatch: base base@452bf305c6 vs head head@452bf305c6
+[diff] embedding-drift-monitor: base base@452bf305c6 vs head head@452bf305c6
+[diff] interleaved-vigenere: base base@452bf305c6 vs head head@452bf305c6
+[diff] risk-scorer-replay: base base@452bf305c6 vs head head@452bf305c6
+[diff] interleaved-vigenere corpus: 0/1 trials done
+[diff] batched-eval-parity corpus: 1/1 trials done
+[diff] embedding-drift-monitor corpus: 0/1 trials done
+[diff] bun-sourcemap-leak corpus: 0/1 trials done
+[diff] cargo-flight-dispatch corpus: 0/1 trials done
+[diff] risk-scorer-replay corpus: 0/1 trials done
+[diff] batched-eval-parity pass1: 4/28 trials done
+[diff] interleaved-vigenere corpus: 1/1 trials done
+[diff] interleaved-vigenere pass1: 0/8 trials done
+[diff] cargo-flight-dispatch corpus: 1/1 trials done
+[diff] cargo-flight-dispatch pass1: 0/8 trials done
+[diff] bun-sourcemap-leak corpus: 1/1 trials done
+[diff] bun-sourcemap-leak pass1: 0/6 trials done
+[diff] cargo-flight-dispatch pass1: 1/8 trials done
+[diff] bun-sourcemap-leak pass1: 1/6 trials done
+[diff] interleaved-vigenere pass1: 1/8 trials done
+[diff] embedding-drift-monitor corpus: 1/1 trials done
+[diff] embedding-drift-monitor pass1: 0/14 trials done
+[diff] interleaved-vigenere pass1: 2/8 trials done
+[diff] batched-eval-parity pass1: 5/28 trials done
+[diff] cargo-flight-dispatch pass1: 2/8 trials done
+[diff] bun-sourcemap-leak pass1: 2/6 trials done
+[diff] risk-scorer-replay corpus: 1/1 trials done
+[diff] risk-scorer-replay pass1: 0/16 trials done
+[diff] interleaved-vigenere pass1: 3/8 trials done
+[diff] risk-scorer-replay pass1: 1/16 trials done
+[diff] embedding-drift-monitor pass1: 1/14 trials done
+[diff] cargo-flight-dispatch pass1: 3/8 trials done
+[diff] bun-sourcemap-leak pass1: 3/6 trials done
+[diff] risk-scorer-replay pass1: 2/16 trials done
+[diff] interleaved-vigenere pass1: 4/8 trials done
+[diff] cargo-flight-dispatch pass1: 4/8 trials done
+[diff] bun-sourcemap-leak pass1: 4/6 trials done
+[diff] risk-scorer-replay pass1: 3/16 trials done
+[diff] cargo-flight-dispatch pass1: 5/8 trials done
+[diff] bun-sourcemap-leak pass1: 5/6 trials done
+[diff] risk-scorer-replay pass1: 4/16 trials done
+[diff] cargo-flight-dispatch pass1: 6/8 trials done
+[diff] bun-sourcemap-leak pass1: 6/6 trials done
+[diff] risk-scorer-replay pass1: 5/16 trials done
+[diff] interleaved-vigenere pass1: 5/8 trials done
+[diff] cargo-flight-dispatch pass1: 7/8 trials done
+[diff] risk-scorer-replay pass1: 6/16 trials done
+[diff] cargo-flight-dispatch pass1: 8/8 trials done
+[diff] risk-scorer-replay pass1: 7/16 trials done
+[diff] risk-scorer-replay pass1: 8/16 trials done
+[diff] risk-scorer-replay pass1: 9/16 trials done
+[diff] risk-scorer-replay pass1: 10/16 trials done
+[diff] embedding-drift-monitor pass1: 2/14 trials done
+[diff] batched-eval-parity pass1: 6/28 trials done
+[diff] risk-scorer-replay pass1: 11/16 trials done
+[diff] interleaved-vigenere pass1: 6/8 trials done
+[diff] risk-scorer-replay pass1: 12/16 trials done
+[diff] risk-scorer-replay pass1: 13/16 trials done
+[diff] risk-scorer-replay pass1: 14/16 trials done
+[diff] risk-scorer-replay pass1: 15/16 trials done
+[diff] risk-scorer-replay pass1: 16/16 trials done
+[diff] interleaved-vigenere pass1: 7/8 trials done
+[diff] interleaved-vigenere pass1: 8/8 trials done
+[diff] embedding-drift-monitor pass1: 3/14 trials done
+[diff] embedding-drift-monitor pass1: 4/14 trials done
+[diff] embedding-drift-monitor pass1: 6/14 trials done
+[diff] embedding-drift-monitor pass1: 7/14 trials done
+[diff] batched-eval-parity pass1: 7/28 trials done
+[diff] embedding-drift-monitor pass1: 8/14 trials done
+[diff] embedding-drift-monitor pass1: 9/14 trials done
+[diff] embedding-drift-monitor pass1: 10/14 trials done
+[diff] batched-eval-parity pass1: 8/28 trials done
+[diff] embedding-drift-monitor pass1: 11/14 trials done
+[diff] embedding-drift-monitor pass1: 12/14 trials done
+[diff] batched-eval-parity pass1: 9/28 trials done
+[diff] embedding-drift-monitor pass1: 13/14 trials done
+[diff] embedding-drift-monitor pass1: 14/14 trials done
+[diff] batched-eval-parity pass1: 10/28 trials done
+[diff] batched-eval-parity pass1: 11/28 trials done
+[diff] batched-eval-parity pass1: 12/28 trials done
+[diff] batched-eval-parity pass1: 13/28 trials done
+[diff] batched-eval-parity pass1: 14/28 trials done
+[diff] batched-eval-parity pass1: 15/28 trials done
+[diff] batched-eval-parity pass1: 16/28 trials done
+[diff] batched-eval-parity pass1: 17/28 trials done
+[diff] batched-eval-parity pass1: 18/28 trials done
+[diff] batched-eval-parity pass1: 19/28 trials done
+[diff] batched-eval-parity pass1: 20/28 trials done
+[diff] batched-eval-parity pass1: 21/28 trials done
+[diff] batched-eval-parity pass1: 22/28 trials done
+[diff] batched-eval-parity pass1: 23/28 trials done
+[diff] batched-eval-parity pass1: 24/28 trials done
+[diff] batched-eval-parity pass1: 25/28 trials done
+[diff] batched-eval-parity pass1: 26/28 trials done
+[diff] batched-eval-parity pass1: 27/28 trials done
+[diff] batched-eval-parity pass1: 28/28 trials done
+
+report  -> reports/trustdiff/v1-rejudge/REPORT.md
+results -> reports/trustdiff/v1-rejudge/trustdiff.json
+receipts: 34 in reports/trustdiff/v1-rejudge/receipts/

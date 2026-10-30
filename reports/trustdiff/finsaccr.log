@@ -1,0 +1,19 @@
+[diff] fin-saccr-rwa: base base@452bf305c6 vs head head@06a92e7900
+[diff] fin-saccr-rwa corpus: 2/2 trials done
+[diff] fin-saccr-rwa pass1: 24/28 trials done
+[diff] fin-saccr-rwa pass1: 25/28 trials done
+[diff] fin-saccr-rwa pass1: 26/28 trials done
+[diff] fin-saccr-rwa pass1: 27/28 trials done
+[diff] fin-saccr-rwa pass1: 28/28 trials done
+[diff] fin-saccr-rwa: 1 contested bundle(s); topping up to 5
+[diff] fin-saccr-rwa topup: 0/6 trials done
+[diff] fin-saccr-rwa topup: 1/6 trials done
+[diff] fin-saccr-rwa topup: 2/6 trials done
+[diff] fin-saccr-rwa topup: 3/6 trials done
+[diff] fin-saccr-rwa topup: 4/6 trials done
+[diff] fin-saccr-rwa topup: 5/6 trials done
+[diff] fin-saccr-rwa topup: 6/6 trials done
+
+report  -> reports/trustdiff/fin-saccr-rwa/REPORT.md
+results -> reports/trustdiff/fin-saccr-rwa/trustdiff.json
+receipts: 1 in reports/trustdiff/fin-saccr-rwa/receipts/

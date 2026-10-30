@@ -1,0 +1,29 @@
+[diff] ks-solver-cpp: base base@2347edec12 vs head head@985ba26b12
+[diff] ks-solver-cpp corpus: 0/2 trials done
+[diff] ks-solver-cpp corpus: 1/2 trials done
+[diff] ks-solver-cpp corpus: 2/2 trials done
+[diff] ks-solver-cpp pass1: 0/20 trials done
+[diff] ks-solver-cpp pass1: 1/20 trials done
+[diff] ks-solver-cpp pass1: 2/20 trials done
+[diff] ks-solver-cpp pass1: 3/20 trials done
+[diff] ks-solver-cpp pass1: 4/20 trials done
+[diff] ks-solver-cpp pass1: 5/20 trials done
+[diff] ks-solver-cpp pass1: 6/20 trials done
+[diff] ks-solver-cpp pass1: 7/20 trials done
+[diff] ks-solver-cpp pass1: 8/20 trials done
+[diff] ks-solver-cpp pass1: 9/20 trials done
+[diff] ks-solver-cpp pass1: 10/20 trials done
+[diff] ks-solver-cpp pass1: 11/20 trials done
+[diff] ks-solver-cpp pass1: 12/20 trials done
+[diff] ks-solver-cpp pass1: 13/20 trials done
+[diff] ks-solver-cpp pass1: 14/20 trials done
+[diff] ks-solver-cpp pass1: 15/20 trials done
+[diff] ks-solver-cpp pass1: 16/20 trials done
+[diff] ks-solver-cpp pass1: 17/20 trials done
+[diff] ks-solver-cpp pass1: 18/20 trials done
+[diff] ks-solver-cpp pass1: 19/20 trials done
+[diff] ks-solver-cpp pass1: 20/20 trials done
+
+report  -> reports/trustdiff/pr-2300-ks/REPORT.md
+results -> reports/trustdiff/pr-2300-ks/trustdiff.json
+receipts: 0 in reports/trustdiff/pr-2300-ks/receipts/

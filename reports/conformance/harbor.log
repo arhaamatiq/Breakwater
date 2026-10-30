@@ -293,3 +293,338 @@ Share results by running `harbor upload
 -57-50`
 
 $ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:00:28 0:00:00
+adhoc • nop
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 28s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-00-44/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-00-44`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--drop_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: glycan-ms2-elucidation--drop_all--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__J4GjDxP
+Error: RegradeError
+Message: Task 'terminal-bench/glycan-ms2-elucidation' cannot regrade source 
+trial 'glycan-ms2-elucidation--drop_all--src': /results/output.json: collected 
+artifact no longer exists on disk; the trial directory is incomplete; 
+/app/data/unknown_spectrum.xlsx: collected artifact no longer exists on disk; 
+the trial directory is incomplete; /app/data/output_format.txt: collected 
+artifact no longer exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--zero_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: glycan-ms2-elucidation--zero_all--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__NXtBK4S
+Error: RewardFileNotFoundError
+Message: No reward file found at 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__NXtBK4S/verifier/reward.txt or 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__NXtBK4S/verifier/reward.json
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--halve_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: glycan-ms2-elucidation--halve_all--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__s6se596
+Error: RewardFileNotFoundError
+Message: No reward file found at 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__s6se596/verifier/reward.txt or 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__s6se596/verifier/reward.json
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--digits_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: glycan-ms2-elucidation--digits_all--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__nUdiNNJ
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--drop_path__results_output.json--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: glycan-ms2-elucidation--drop_path__results_output.json--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__Jvforpq
+Error: RegradeError
+Message: Task 'terminal-bench/glycan-ms2-elucidation' cannot regrade source 
+trial 'glycan-ms2-elucidation--drop_path__results_output.json--src': 
+/results/output.json: collected artifact no longer exists on disk; the trial 
+directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2-elucidation--drop_path__app_data_unknown_spectrum.xlsx--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: 
+glycan-ms2-elucidation--drop_path__app_data_unknown_spectrum.xlsx--src
+Task: terminal-bench/glycan-ms2-elucidation
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-eluci
+dation
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/glycan-ms2
+-elucidation__zPhwqTW
+Error: RegradeError
+Message: Task 'terminal-bench/glycan-ms2-elucidation' cannot regrade source 
+trial 'glycan-ms2-elucidation--drop_path__app_data_unknown_spectrum.xlsx--src': 
+/app/data/unknown_spectrum.xlsx: collected artifact no longer exists on disk; 
+the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -a oracle -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:03:56 0:00:00
+adhoc • oracle
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 1.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 1.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 3m 56s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-06-25/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-06-25`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:00:49 0:00:00
+adhoc • nop
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 49s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-10-30/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-10-30`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--drop_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: risk-scorer-replay--drop_all--src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__C7v9kBT
+Error: RegradeError
+Message: Task 'terminal-bench/risk-scorer-replay' cannot regrade source trial 
+'risk-scorer-replay--drop_all--src': /app/: collected artifact no longer exists 
+on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--zero_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: risk-scorer-replay--zero_all--src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__aB8a7Bv
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--halve_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: risk-scorer-replay--halve_all--src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__EMBCmrP
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--digits_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: risk-scorer-replay--digits_all--src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__fPVZwd3
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--drop_file___app_data_incidents_parity-2026-10_manifest.json--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: 
+risk-scorer-replay--drop_file___app_data_incidents_parity-2026-10_manifest.json-
+-src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__RWW6jkG
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-scorer-replay--drop_file___app_data_incidents_parity-2026-10_sources_thresholds.json--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-replay -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: 
+risk-scorer-replay--drop_file___app_data_incidents_parity-2026-10_sources_thresh
+olds.json--src
+Task: terminal-bench/risk-scorer-replay
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/risk-scorer-repl
+ay
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/risk-score
+r-replay__JastLq3
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony -a oracle -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:05:34 0:00:00
+adhoc • oracle
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      0 │          1 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Exception            ┃ Count ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+│ VerifierTimeoutError │     1 │
+└──────────────────────┴───────┘
+
+Job Info
+Total runtime: 5m 34s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-20-23/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-20-23`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:01:11 0:00:00
+adhoc • nop
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 1m 11s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-26-08/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-30__00
+-26-08`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harmony--drop_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: music-harmony--drop_all--src
+Task: terminal-bench/music-harmony
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harm
+ony__diKSzJ4
+Error: RegradeError
+Message: Task 'terminal-bench/music-harmony' cannot regrade source trial 
+'music-harmony--drop_all--src': /app/harmony.mxl: collected artifact no longer 
+exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harmony--zero_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: music-harmony--zero_all--src
+Task: terminal-bench/music-harmony
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harm
+ony__56VPnWS
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harmony--halve_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: music-harmony--halve_all--src
+Task: terminal-bench/music-harmony
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/music-harmony
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/music-harm
+ony__qVqWVtT
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}

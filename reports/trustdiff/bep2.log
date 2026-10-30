@@ -1,0 +1,13 @@
+[diff] batched-eval-parity: base base@452bf305c6 vs head head@06a92e7900
+[diff] batched-eval-parity corpus: 3/3 trials done
+[diff] batched-eval-parity pass1: 60/60 trials done
+[diff] batched-eval-parity: 1 contested bundle(s); topping up to 5
+[diff] batched-eval-parity topup: 0/6 trials done
+[diff] batched-eval-parity topup: 2/6 trials done
+[diff] batched-eval-parity topup: 3/6 trials done
+[diff] batched-eval-parity topup: 5/6 trials done
+[diff] batched-eval-parity topup: 6/6 trials done
+
+report  -> reports/trustdiff/batched-eval-parity/REPORT.md
+results -> reports/trustdiff/batched-eval-parity/trustdiff.json
+receipts: 6 in reports/trustdiff/batched-eval-parity/receipts/

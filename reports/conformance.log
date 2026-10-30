@@ -16,3 +16,84 @@ production-planning__wcKQiUz             harbor=0.0 breakwater=0.0 checks=20 AGR
 production-planning__qToh8du             harbor recorded no reward (RegradeError); not comparable
 production-planning__b5Bk8MX             harbor recorded no reward (RegradeError); not comparable
 5/5 verifications agree with Harbor (3 Harbor trials unscored)
+glycan-ms2-elucidation__6ZoLUt5          harbor=1.0 breakwater=1.0 checks=12 AGREE
+glycan-ms2-elucidation__6YqQ2Dc          harbor=0.0 breakwater=0.0 checks=12 AGREE
+glycan-ms2-elucidation__J4GjDxP          harbor recorded no reward (RegradeError); not comparable
+glycan-ms2-elucidation__NXtBK4S          harbor recorded no reward (RewardFileNotFoundError); not comparable
+glycan-ms2-elucidation__s6se596          harbor recorded no reward (RewardFileNotFoundError); not comparable
+glycan-ms2-elucidation__nUdiNNJ          harbor=0.0 breakwater=0.0 checks=12 AGREE
+glycan-ms2-elucidation__Jvforpq          harbor recorded no reward (RegradeError); not comparable
+glycan-ms2-elucidation__zPhwqTW          harbor recorded no reward (RegradeError); not comparable
+3/3 verifications agree with Harbor (5 Harbor trials unscored)
+risk-scorer-replay__ZQ4nLFi              harbor=1.0 breakwater=1.0 checks=5 AGREE
+risk-scorer-replay__fuUEiLa              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__C7v9kBT              harbor recorded no reward (RegradeError); not comparable
+risk-scorer-replay__aB8a7Bv              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__EMBCmrP              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__fPVZwd3              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__RWW6jkG              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__JastLq3              harbor=0.0 breakwater=0.0 checks=5 AGREE
+7/7 verifications agree with Harbor (1 Harbor trials unscored)
+music-harmony__XEYUb9H                   harbor recorded no reward (VerifierTimeoutError); not comparable
+Traceback (most recent call last):
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/api/client.py", line 275, in _raise_for_status
+    response.raise_for_status()
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http+docker://localhost/v1.54/images/breakwater/verifier-music-harmony:4e2fa7ab908f/json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/Files/Projects/project-x/src/breakwater/adapters/harbor.py", line 228, in _ensure_image
+    client.images.get(tag)
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/models/images.py", line 333, in get
+    return self.prepare_model(self.client.api.inspect_image(name))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/utils/decorators.py", line 19, in wrapped
+    return f(self, resource_id, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/api/image.py", line 251, in inspect_image
+    return self._result(
+           ^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/api/client.py", line 281, in _result
+    self._raise_for_status(response)
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/api/client.py", line 277, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.ImageNotFound: 404 Client Error for http+docker://localhost/v1.54/images/breakwater/verifier-music-harmony:4e2fa7ab908f/json: Not Found ("No such image: breakwater/verifier-music-harmony:4e2fa7ab908f")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Volumes/Files/Projects/project-x/src/breakwater/cli.py", line 426, in <module>
+    main()
+  File "/Volumes/Files/Projects/project-x/src/breakwater/cli.py", line 421, in main
+    return {"up": cmd_up, "doctor": cmd_doctor, "tasks": cmd_tasks, "check": cmd_check,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/src/breakwater/cli.py", line 314, in cmd_conform
+    v = harbor.RUNTIME.verify(spec, bundle, {}, {}, None, {})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/src/breakwater/adapters/harbor.py", line 425, in verify
+    _, ver_img = self.ensure_images(spec)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/src/breakwater/adapters/harbor.py", line 356, in ensure_images
+    ver_img = _ensure_image(v.context, _image_tag("verifier", spec.name, v.digest),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Files/Projects/project-x/src/breakwater/adapters/harbor.py", line 230, in _ensure_image
+    client.images.build(path=context, tag=tag, rm=True, forcerm=True)
+  File "/Volumes/Files/Projects/project-x/.venv/lib/python3.11/site-packages/docker/models/images.py", line 304, in build
+    raise BuildError(chunk['error'], result_stream)
+docker.errors.BuildError: failed to export layer: CreateDiff: mount callback failed on /var/lib/desktop-containerd/daemon/tmpmounts/containerd-mount3878888450: mount callback failed on /var/lib/desktop-containerd/daemon/tmpmounts/containerd-mount891565940: failed to commit: rename /var/lib/desktop-containerd/daemon/io.containerd.content.v1.content/ingest/00fc8784c94937ff5b168be6d9622bcd5b08c21d4dcc191bd9359076a4f5a197/data /var/lib/desktop-containerd/daemon/io.containerd.content.v1.content/blobs/sha256/0791e46c63f4e694dd8ddf8992386a893a899f1fede5dfcbb3069ebb556eafdc: no such file or directory
+Traceback (most recent call last):
+  File "/Volumes/Files/Projects/project-x/scripts/conformance.py", line 98, in <module>
+    f"{len(summary)} tasks ({fails} of them failing verdicts)")
+^^^^
+  File "/Volumes/Files/Projects/project-x/scripts/conformance.py", line 91, in main
+    "rows": json.load(open(res))["rows"] if os.path.exists(res) else []}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'

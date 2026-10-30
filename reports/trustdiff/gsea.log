@@ -1,0 +1,37 @@
+[diff] gsea-proteomics: base base@452bf305c6 vs head head@06a92e7900
+[diff] gsea-proteomics corpus: 2/2 trials done
+[diff] gsea-proteomics pass1: 1/24 trials done
+[diff] gsea-proteomics pass1: 2/24 trials done
+[diff] gsea-proteomics pass1: 4/24 trials done
+[diff] gsea-proteomics pass1: 5/24 trials done
+[diff] gsea-proteomics pass1: 6/24 trials done
+[diff] gsea-proteomics pass1: 7/24 trials done
+[diff] gsea-proteomics pass1: 8/24 trials done
+[diff] gsea-proteomics pass1: 9/24 trials done
+[diff] gsea-proteomics pass1: 10/24 trials done
+[diff] gsea-proteomics pass1: 11/24 trials done
+[diff] gsea-proteomics pass1: 12/24 trials done
+[diff] gsea-proteomics pass1: 13/24 trials done
+[diff] gsea-proteomics pass1: 14/24 trials done
+[diff] gsea-proteomics pass1: 15/24 trials done
+[diff] gsea-proteomics pass1: 16/24 trials done
+[diff] gsea-proteomics pass1: 17/24 trials done
+[diff] gsea-proteomics pass1: 18/24 trials done
+[diff] gsea-proteomics pass1: 19/24 trials done
+[diff] gsea-proteomics pass1: 20/24 trials done
+[diff] gsea-proteomics pass1: 21/24 trials done
+[diff] gsea-proteomics pass1: 22/24 trials done
+[diff] gsea-proteomics pass1: 23/24 trials done
+[diff] gsea-proteomics pass1: 24/24 trials done
+[diff] gsea-proteomics: 1 contested bundle(s); topping up to 5
+[diff] gsea-proteomics topup: 0/6 trials done
+[diff] gsea-proteomics topup: 1/6 trials done
+[diff] gsea-proteomics topup: 2/6 trials done
+[diff] gsea-proteomics topup: 3/6 trials done
+[diff] gsea-proteomics topup: 4/6 trials done
+[diff] gsea-proteomics topup: 5/6 trials done
+[diff] gsea-proteomics topup: 6/6 trials done
+
+report  -> reports/trustdiff/gsea-proteomics-amd64/REPORT.md
+results -> reports/trustdiff/gsea-proteomics-amd64/trustdiff.json
+receipts: 1 in reports/trustdiff/gsea-proteomics-amd64/receipts/

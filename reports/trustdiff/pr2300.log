@@ -1,0 +1,62 @@
+[diff] vf2-speedup-networkx: base base@2347edec12 vs head head@985ba26b12
+[diff] ks-solver-cpp: base base@2347edec12 vs head head@985ba26b12
+[diff] vf2-speedup-networkx corpus: 0/2 trials done
+[diff] ks-solver-cpp corpus: 0/2 trials done
+[diff] ks-solver-cpp corpus: 1/2 trials done
+[diff] ks-solver-cpp corpus: 2/2 trials done
+[diff] ks-solver-cpp pass1: 0/24 trials done
+[diff] ks-solver-cpp pass1: 1/24 trials done
+[diff] vf2-speedup-networkx corpus: 1/2 trials done
+[diff] vf2-speedup-networkx corpus: 2/2 trials done
+[diff] vf2-speedup-networkx pass1: 0/24 trials done
+[diff] vf2-speedup-networkx pass1: 1/24 trials done
+[diff] ks-solver-cpp pass1: 2/24 trials done
+[diff] ks-solver-cpp pass1: 3/24 trials done
+[diff] ks-solver-cpp pass1: 4/24 trials done
+[diff] ks-solver-cpp pass1: 5/24 trials done
+[diff] ks-solver-cpp pass1: 6/24 trials done
+[diff] ks-solver-cpp pass1: 7/24 trials done
+[diff] vf2-speedup-networkx pass1: 2/24 trials done
+[diff] ks-solver-cpp pass1: 8/24 trials done
+[diff] ks-solver-cpp pass1: 9/24 trials done
+[diff] ks-solver-cpp pass1: 10/24 trials done
+[diff] ks-solver-cpp pass1: 11/24 trials done
+[diff] ks-solver-cpp pass1: 12/24 trials done
+[diff] ks-solver-cpp pass1: 13/24 trials done
+[diff] ks-solver-cpp pass1: 14/24 trials done
+[diff] ks-solver-cpp pass1: 15/24 trials done
+[diff] vf2-speedup-networkx pass1: 3/24 trials done
+[diff] ks-solver-cpp pass1: 16/24 trials done
+[diff] ks-solver-cpp pass1: 17/24 trials done
+[diff] ks-solver-cpp pass1: 18/24 trials done
+[diff] ks-solver-cpp pass1: 19/24 trials done
+[diff] ks-solver-cpp pass1: 20/24 trials done
+[diff] vf2-speedup-networkx pass1: 4/24 trials done
+[diff] ks-solver-cpp pass1: 21/24 trials done
+[diff] ks-solver-cpp pass1: 22/24 trials done
+[diff] ks-solver-cpp pass1: 23/24 trials done
+[diff] ks-solver-cpp pass1: 24/24 trials done
+[diff] vf2-speedup-networkx pass1: 5/24 trials done
+[diff] vf2-speedup-networkx pass1: 6/24 trials done
+[diff] vf2-speedup-networkx pass1: 7/24 trials done
+[diff] vf2-speedup-networkx pass1: 8/24 trials done
+[diff] vf2-speedup-networkx pass1: 9/24 trials done
+[diff] vf2-speedup-networkx pass1: 10/24 trials done
+[diff] vf2-speedup-networkx pass1: 11/24 trials done
+[diff] vf2-speedup-networkx pass1: 12/24 trials done
+[diff] vf2-speedup-networkx pass1: 13/24 trials done
+[diff] vf2-speedup-networkx pass1: 14/24 trials done
+[diff] vf2-speedup-networkx pass1: 15/24 trials done
+[diff] vf2-speedup-networkx pass1: 16/24 trials done
+[diff] vf2-speedup-networkx pass1: 17/24 trials done
+[diff] vf2-speedup-networkx pass1: 18/24 trials done
+[diff] vf2-speedup-networkx pass1: 19/24 trials done
+[diff] vf2-speedup-networkx pass1: 20/24 trials done
+[diff] vf2-speedup-networkx pass1: 21/24 trials done
+[diff] vf2-speedup-networkx pass1: 22/24 trials done
+[diff] vf2-speedup-networkx pass1: 23/24 trials done
+[diff] vf2-speedup-networkx pass1: 24/24 trials done
+
+report  -> reports/trustdiff/pr-2300-margins/REPORT.md
+results -> reports/trustdiff/pr-2300-margins/trustdiff.json
+receipts: 1 in reports/trustdiff/pr-2300-margins/receipts/

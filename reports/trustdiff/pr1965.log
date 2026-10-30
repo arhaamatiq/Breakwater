@@ -1,0 +1,20 @@
+[diff] biped-contact-dynamics: base base@06a92e7900 vs head head@90305d7b14
+[diff] biped-contact-dynamics corpus: 2/3 trials done
+[diff] biped-contact-dynamics corpus: 3/3 trials done
+[diff] biped-contact-dynamics pass1: 36/42 trials done
+[diff] biped-contact-dynamics pass1: 37/42 trials done
+[diff] biped-contact-dynamics pass1: 38/42 trials done
+[diff] biped-contact-dynamics pass1: 39/42 trials done
+[diff] biped-contact-dynamics pass1: 40/42 trials done
+[diff] biped-contact-dynamics pass1: 41/42 trials done
+[diff] biped-contact-dynamics pass1: 42/42 trials done
+[diff] biped-contact-dynamics: 1 contested bundle(s); topping up to 5
+[diff] biped-contact-dynamics topup: 0/4 trials done
+[diff] biped-contact-dynamics topup: 1/4 trials done
+[diff] biped-contact-dynamics topup: 2/4 trials done
+[diff] biped-contact-dynamics topup: 3/4 trials done
+[diff] biped-contact-dynamics topup: 4/4 trials done
+
+report  -> reports/trustdiff/pr-1965-biped/REPORT.md
+results -> reports/trustdiff/pr-1965-biped/trustdiff.json
+receipts: 1 in reports/trustdiff/pr-1965-biped/receipts/
