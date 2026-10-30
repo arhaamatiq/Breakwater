@@ -15,7 +15,9 @@ import time
 
 COLS, ROWS = 110, 32
 MAX_GAP = float(os.environ.get("MAX_GAP", "1.2"))
-TYPE_DELAY = 0.035
+TYPE_DELAY = float(os.environ.get("TYPE_DELAY", "0.035"))
+HOLD = float(os.environ.get("HOLD", "1.2"))          # pause after each command's output
+COMMENT_HOLD = float(os.environ.get("COMMENT_HOLD", "0.6"))
 
 
 def main():
@@ -31,7 +33,7 @@ def main():
         emit("\x1b[1;32m$\x1b[0m ")
         if cmd.startswith("#"):
             emit(f"\x1b[2m{cmd}\x1b[0m\r\n", 0.2)
-            t += 0.6
+            t += COMMENT_HOLD
             continue
         for ch in cmd:
             emit(ch, TYPE_DELAY)
@@ -43,9 +45,9 @@ def main():
             now = time.monotonic()
             gap = min(now - last, MAX_GAP)
             last = now
-            emit(line.decode(errors="replace").rstrip("\n")[:COLS] + "\r\n", max(gap, 0.04))
+            emit(line.decode(errors="replace").rstrip("\n") + "\r\n", max(gap, 0.04))
         p.wait()
-        t += 1.2
+        t += HOLD
     header = {"version": 2, "width": COLS, "height": ROWS, "timestamp": int(time.time()),
               "title": "breakwater", "env": {"SHELL": "/bin/zsh", "TERM": "xterm-256color"},
               "x-note": f"real output; idle gaps capped at {MAX_GAP}s"}

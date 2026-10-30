@@ -8,6 +8,11 @@ deterministic or noise, and which check caused it — with replayable evidence.
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
+![Breakwater demo: a Trust Diff of Terminal-Bench v4.0.0 vs main, receipt replay, queue tests](docs/demo.svg)
+
+<sub>60-second recording of real commands and real output (idle gaps compressed):
+[`docs/demo.cast`](docs/demo.cast) · re-record with `scripts/record_demo.py`.</sub>
+
 ### What it found in Terminal-Bench
 
 Terminal-Bench 4.0 → main (Oct 2026: verifiers migrated to RewardKit, images

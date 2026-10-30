@@ -39,7 +39,9 @@ def screens(events, rows, cols):
                     lines.append([])
                 elif ch == "\r":
                     continue
-                elif len(lines[-1]) < cols:
+                else:
+                    if len(lines[-1]) >= cols:      # soft wrap
+                        lines.append([])
                     lines[-1].append((ch, dict(style)))
             codes = [c for c in m.group(1).split(";") if c] or ["0"]
             for c in codes:
@@ -51,7 +53,9 @@ def screens(events, rows, cols):
         for ch in OTHER_ESC.sub("", data[pos:]):
             if ch == "\n":
                 lines.append([])
-            elif ch != "\r" and len(lines[-1]) < cols:
+            elif ch != "\r":
+                if len(lines[-1]) >= cols:          # soft wrap
+                    lines.append([])
                 lines[-1].append((ch, dict(style)))
         if last_t is None or t - last_t >= 1 / FPS:
             out.append((t, snapshot()))
