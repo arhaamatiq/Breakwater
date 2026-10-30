@@ -1,0 +1,295 @@
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -a oracle -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:00:25 0:00:00
+adhoc • oracle
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 1.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 1.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 25s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-44-49/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-44-49`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:00:23 0:00:00
+adhoc • nop
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 23s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-45-22/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-45-22`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--drop_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--drop_all--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__jz93wML
+Error: RegradeError
+Message: Task 'terminal-bench/sound-change-cascade' cannot regrade source trial 
+'sound-change-cascade--drop_all--src': /app/rules.json: collected artifact no 
+longer exists on disk; the trial directory is incomplete; /app/ordering.txt: 
+collected artifact no longer exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--zero_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--zero_all--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__DxKaLyV
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--halve_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--halve_all--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__JiauxBo
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--digits_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--digits_all--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__iHMTnSG
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--drop_path__app_rules.json--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--drop_path__app_rules.json--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__97UQSdR
+Error: RegradeError
+Message: Task 'terminal-bench/sound-change-cascade' cannot regrade source trial 
+'sound-change-cascade--drop_path__app_rules.json--src': /app/rules.json: 
+collected artifact no longer exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-change-cascade--drop_path__app_ordering.txt--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: sound-change-cascade--drop_path__app_ordering.txt--src
+Task: terminal-bench/sound-change-cascade
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cas
+cade
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/sound-chan
+ge-cascade__AuP6U4m
+Error: RegradeError
+Message: Task 'terminal-bench/sound-change-cascade' cannot regrade source trial 
+'sound-change-cascade--drop_path__app_ordering.txt--src': /app/ordering.txt: 
+collected artifact no longer exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -a oracle -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:03:45 0:00:00
+adhoc • oracle
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 1.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 1.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 3m 45s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-48-04/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-48-04`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:00:46 0:00:00
+adhoc • nop
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 46s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-52-03/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-52-03`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--drop_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: production-planning--drop_all--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__RQJasdd
+Error: RegradeError
+Message: Task 'terminal-bench/production-planning' cannot regrade source trial 
+'production-planning--drop_all--src': /app/output/erp_writeback.sql: collected 
+artifact no longer exists on disk; the trial directory is incomplete; 
+/app/output/mes_writeback.sql: collected artifact no longer exists on disk; the 
+trial directory is incomplete; /app/output/wms_writeback.sql: collected artifact
+no longer exists on disk; the trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--zero_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: production-planning--zero_all--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__NZF6p4e
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--halve_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: production-planning--halve_all--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__aFHmeRL
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--digits_all--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: production-planning--digits_all--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__wcKQiUz
+
+Regrade completed!
+Original rewards: None
+Regraded rewards: {'reward': 0.0}
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--drop_path__app_output_erp_writeback.sql--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: 
+production-planning--drop_path__app_output_erp_writeback.sql--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__qToh8du
+Error: RegradeError
+Message: Task 'terminal-bench/production-planning' cannot regrade source trial 
+'production-planning--drop_path__app_output_erp_writeback.sql--src': 
+/app/output/erp_writeback.sql: collected artifact no longer exists on disk; the 
+trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor trial regrade /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production-planning--drop_path__app_output_mes_writeback.sql--src -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-planning -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades
+Regrading trial: 
+production-planning--drop_path__app_output_mes_writeback.sql--src
+Task: terminal-bench/production-planning
+Verifier source: 
+/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/production-plann
+ing
+New trial directory: 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-regrades/production
+-planning__b5Bk8MX
+Error: RegradeError
+Message: Task 'terminal-bench/production-planning' cannot regrade source trial 
+'production-planning--drop_path__app_output_mes_writeback.sql--src': 
+/app/output/mes_writeback.sql: collected artifact no longer exists on disk; the 
+trial directory is incomplete
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -a oracle -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes
+  1/1 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:02:46 0:00:00
+adhoc • oracle
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 1.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 1.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 2m 46s
+Results written to 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-57-50/result.json
+Inspect results by running `harbor view 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs`
+Share results by running `harbor upload 
+/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs/2026-10-29__23
+-57-50`
+
+$ /private/tmp/claude-501/-Volumes-Files-Projects-project-x/f221b333-bef9-42fb-a9f9-f0e82657f11b/scratchpad/hvenv/bin/harbor run -p /Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/glycan-ms2-elucidation -a nop -o /Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs --yes

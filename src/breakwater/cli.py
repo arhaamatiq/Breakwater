@@ -224,7 +224,10 @@ def cmd_diff(args):
             reaper.cancel()
             await pool.close()
 
-    with worker_pool(args.workers, args.concurrency, "diff"):
+    # --workers 0: submit to the shared queue and let an existing fleet
+    # (other diffs' workers, `python -m breakwater.worker` on any host) run it
+    with (worker_pool(args.workers, args.concurrency, "diff") if args.workers
+          else contextlib.nullcontext()):
         result = asyncio.run(main())
     meta = report.export(result, out)
     _p(f"\nreport  -> {out}/REPORT.md\nresults -> {out}/trustdiff.json\n"
@@ -381,7 +384,8 @@ def main(argv=None):
                    help="override the task's network policy for every container")
     d.add_argument("--solve-from", choices=["base", "head"], default="base")
     d.add_argument("--solve-timeout-cap", type=float, default=None)
-    d.add_argument("--workers", type=int, default=3)
+    d.add_argument("--workers", type=int, default=3,
+                   help="worker processes to spawn (0 = use an already-running fleet)")
     d.add_argument("--concurrency", type=int, default=1)
     d.add_argument("--parallel", type=int, default=3, help="tasks diffed concurrently")
     d.add_argument("--keep-unsupported", action="store_true")

@@ -1,0 +1,9 @@
+{
+    "job_name": "2026-10-29__23-44-49",
+    "jobs_dir": "/Volumes/Files/Projects/project-x/reports/conformance/harbor-jobs",
+    "tasks": [
+        {
+            "path": "/Volumes/Files/Projects/project-x/external/harbor-tb-main/tasks/sound-change-cascade"
+        }
+    ]
+}
