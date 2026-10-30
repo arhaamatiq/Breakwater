@@ -123,7 +123,8 @@ class TaskDiff:
     async def build_corpus(self) -> list[CorpusItem]:
         src = self.cfg.solve_from
         spec, task = self.specs[src], self.tasks[src]
-        tag = f"{spec.name}/{spec.digests['environment'][:12]}-{spec.digests['solution'][:12]}"
+        tag = (f"{harbor.RUNTIME_VERSION}/{spec.name}/{spec.digests['environment'][:12]}-"
+               f"{spec.digests['solution'][:12]}")
         wanted = {"reference": "oracle", "noop": "noop"}
         trials = []
         for kind, sol in wanted.items():
@@ -134,7 +135,8 @@ class TaskDiff:
                                                         "solve_timeout_cap": self.cfg.solve_timeout_cap,
                                                         "task_blob": task}})
         if "path" in self.cfg.corpus:
-            trials.append({"trial_id": f"snapshot/{spec.name}/{spec.digests['environment'][:12]}",
+            trials.append({"trial_id": f"snapshot/{harbor.RUNTIME_VERSION}/{spec.name}/"
+                                       f"{spec.digests['environment'][:12]}",
                            "task_id": f"hb_{spec.short_id}", "replicate": 0,
                            "spec": {"mode": "snapshot", "task_blob": task}})
         await submit(self.pool, f"{self.run_id}/{spec.name}/corpus", f"corpus:{spec.name}",
@@ -163,7 +165,8 @@ class TaskDiff:
                 self.corpus.append(CorpusItem("noop", "noop", nb, {}))
         snap = None
         if "path" in self.cfg.corpus:
-            snap, _ = bundle_of(f"snapshot/{spec.name}/{spec.digests['environment'][:12]}")
+            snap, _ = bundle_of(f"snapshot/{harbor.RUNTIME_VERSION}/{spec.name}/"
+                                f"{spec.digests['environment'][:12]}")
         include = tuple(k for k in ("degenerate", "path", "file", "ast") if k in self.cfg.corpus)
         self.corpus += mutants(ref, snap, max_files=self.cfg.max_files,
                                max_ast_per_file=self.cfg.max_ast_per_file,
@@ -185,7 +188,8 @@ class TaskDiff:
     # ------------------------------------------------------------ matrix
     def _trial(self, item: CorpusItem, vlabel: str, k: int) -> dict:
         spec = self.specs[vlabel]
-        return {"trial_id": f"td/{spec.digests['verifier'][:16]}/{_hex(item.bundle.digest)}/r{k}",
+        return {"trial_id": f"td/{harbor.RUNTIME_VERSION}/{spec.digests['verifier'][:16]}/"
+                            f"{_hex(item.bundle.digest)}/r{k}",
                 "task_id": f"hb_{spec.short_id}", "replicate": k,
                 "spec": {"mode": "verify_only", "outputs": [{"bundle": item.bundle.digest}],
                          "metrics": self.cfg.metrics, "network": self.cfg.network,

@@ -7,6 +7,8 @@
   breakwater diff   --repo R --base A --head B [--tasks ...]
                                      Verifier Trust Diff across two versions
   breakwater replay RECEIPT          re-run the evidence behind a finding
+  breakwater conform TRIAL... --task-dir D
+                                     agree with official Harbor on recorded trials?
   breakwater audit  ...              single-version falsification audit
   breakwater chaos                   fault-injection demo of the queue
 """
@@ -275,6 +277,46 @@ def cmd_replay(args):
     sys.exit(0 if ok_all else 1)
 
 
+def cmd_conform(args):
+    """Differential conformance against the official harness: for each recorded
+    Harbor trial, re-verify the exact artifact bytes with Breakwater's runtime
+    and compare the reward (and per-check verdicts) Harbor recorded."""
+    from .adapters import harbor
+    from .adapters.harbor_task import artifact_paths, parse_task
+    from .bundle import from_harbor_trial
+    spec = parse_task(args.task_dir)
+    rows, mismatches = [], 0
+    for tdir in args.trials:
+        res = json.load(open(os.path.join(tdir, "result.json")))
+        h_rewards = (res.get("verifier_result") or {}).get("rewards")
+        h_pr = harbor.primary_reward(h_rewards or {})
+        h_checks = {}
+        ctrf = os.path.join(tdir, "verifier", "ctrf.json")
+        if os.path.exists(ctrf):
+            for t in json.load(open(ctrf)).get("results", {}).get("tests", []):
+                h_checks[t.get("name", "").split("::")[-1]] = t.get("status") == "passed"
+        bundle = from_harbor_trial(tdir, artifact_paths(spec))
+        for k in range(args.n):
+            v = harbor.RUNTIME.verify(spec, bundle, {}, {}, None, {})
+            b_checks = {c["name"].split("::")[-1]: c["status"] == "passed" for c in v["checks"]}
+            diff = sorted(n for n in set(h_checks) | set(b_checks) if h_checks.get(n) != b_checks.get(n))
+            same = (v["primary_reward"] == h_pr) and not diff
+            mismatches += not same
+            row = {"trial": os.path.basename(tdir.rstrip("/")), "bundle": bundle.digest,
+                   "harbor_reward": h_pr, "breakwater_reward": v["primary_reward"],
+                   "breakwater_outcome": v["outcome"], "checks_compared": len(set(h_checks) | set(b_checks)),
+                   "check_mismatches": diff, "agree": same}
+            rows.append(row)
+            _p(f"{row['trial'][:40]:40} harbor={h_pr} breakwater={v['primary_reward']} "
+               f"checks={row['checks_compared']} {'AGREE' if same else 'MISMATCH ' + str(diff[:5])}")
+    if args.json:
+        with open(args.json, "w") as f:
+            json.dump({"task": spec.name, "verifier_digest": spec.digests["verifier"],
+                       "rows": rows}, f, indent=2)
+    _p(f"{len(rows) - mismatches}/{len(rows)} verifications agree with Harbor")
+    sys.exit(1 if mismatches else 0)
+
+
 def cmd_audit(args, rest):
     sys.argv = ["breakwater audit", "audit", *rest]
     from .tester.__main__ import main
@@ -336,6 +378,11 @@ def main(argv=None):
     r.add_argument("receipt")
     r.add_argument("--repo", help="local clone of the benchmark repo")
     r.add_argument("-n", type=int, default=None)
+    cf = sub.add_parser("conform", help="re-verify recorded Harbor trials; compare rewards")
+    cf.add_argument("trials", nargs="+", help="Harbor trial directories (harbor run / download)")
+    cf.add_argument("--task-dir", required=True, help="the task version Harbor verified with")
+    cf.add_argument("-n", type=int, default=1)
+    cf.add_argument("--json")
     sub.add_parser("audit", help="single-version falsification audit (see `audit -h`)",
                    add_help=False)
     sub.add_parser("chaos", help="fault-injection demo of the queue", add_help=False)
@@ -345,7 +392,7 @@ def main(argv=None):
         return {"audit": cmd_audit, "chaos": cmd_chaos}[argv[0]](None, argv[1:])
     args = ap.parse_args(argv)
     return {"up": cmd_up, "doctor": cmd_doctor, "tasks": cmd_tasks, "check": cmd_check,
-            "diff": cmd_diff, "replay": cmd_replay}[args.cmd](args)
+            "diff": cmd_diff, "replay": cmd_replay, "conform": cmd_conform}[args.cmd](args)
 
 
 if __name__ == "__main__":

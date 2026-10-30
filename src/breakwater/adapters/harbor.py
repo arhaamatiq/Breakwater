@@ -61,6 +61,9 @@ from .harbor_task import (HarborTaskSpec, artifact_excludes, artifact_paths,
 NOOP_SHELL = "#!/bin/bash\ntrue\n"
 RAISE_SHELL = "#!/bin/bash\nexit 1\n"
 ORACLE = "__harbor_oracle__"        # sentinel: run the task's own solution/ tree
+# Bumped whenever a fidelity fix can change a verdict; part of every
+# content-addressed trial id so results from an older runtime are never reused.
+RUNTIME_VERSION = "hb2"
 
 LAST_LOAD_REPORT: dict = {}
 _INFRA_SKIPS = ("build_failed",)
@@ -250,7 +253,7 @@ def _resources(env, fidelity: dict, phase: str) -> dict:
     return kw
 
 
-def _network_disabled(task_policy: str, override: str | None) -> bool:
+def _no_network(task_policy: str, override: str | None) -> bool:
     if override == "off":
         return True
     if override == "on":
@@ -328,9 +331,13 @@ def _expand(env: dict) -> dict:
 
 
 def _start(image: str, env_spec, fidelity: dict, phase: str, network_override=None):
+    # Harbor's no-network compose uses `network_mode: none`, which keeps a
+    # loopback interface and a /etc/hosts entry for localhost; docker-py's
+    # network_disabled=True does not, and breaks verifiers that talk to a
+    # local worker or chromedriver over localhost.
+    net = {"network_mode": "none"} if _no_network(env_spec.network, network_override) else {}
     c = docker_client().containers.run(
-        image, command=["sh", "-c", "sleep infinity"], detach=True,
-        network_disabled=_network_disabled(env_spec.network, network_override),
+        image, command=["sh", "-c", "sleep infinity"], detach=True, **net,
         labels={"breakwater.phase": phase},
         **_resources(env_spec, fidelity, phase))
     return c
@@ -458,7 +465,8 @@ class HarborRuntime:
         mode = spec_d.get("mode", "full")
         env = {k: str(v) for k, v in (spec_d.get("env") or {}).items()}
         net = spec_d.get("network")
-        fidelity = {"runtime": "breakwater-native", "harbor_semantics": "0.25"}
+        fidelity = {"runtime": "breakwater-native", "runtime_version": RUNTIME_VERSION,
+                    "harbor_semantics": "0.25"}
         t0 = time.monotonic()
         uploads, detail = {}, {}
 

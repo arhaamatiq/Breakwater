@@ -211,3 +211,37 @@ def from_harbor_trial(trial_dir: str, declared: list[str]) -> Bundle:
                 with open(hp, "rb") as f:
                     b.entries[p] = Entry("f", _data_filter_mode("f", st.st_mode), f.read())
     return b
+
+
+def to_harbor_trial(bundle: Bundle, source_trial: str, dest: str) -> str:
+    """Copy a recorded Harbor trial and swap its artifacts for this bundle's
+    bytes, so `harbor trial regrade` judges exactly what Breakwater judged."""
+    import json
+    import shutil
+    shutil.copytree(source_trial, dest, symlinks=True)
+    art = os.path.join(dest, "artifacts")
+    for d in bundle.declared:
+        tgt = os.path.join(art, d.strip("/"))
+        if os.path.isdir(tgt) and not os.path.islink(tgt):
+            shutil.rmtree(tgt)
+        elif os.path.lexists(tgt):
+            os.remove(tgt)
+    for p, e in sorted(bundle.entries.items()):
+        hp = os.path.join(art, p.lstrip("/"))
+        if e.kind == "d":
+            os.makedirs(hp, exist_ok=True)
+        elif e.kind == "l":
+            os.makedirs(os.path.dirname(hp), exist_ok=True)
+            os.symlink(e.target, hp)
+        else:
+            os.makedirs(os.path.dirname(hp), exist_ok=True)
+            with open(hp, "wb") as f:
+                f.write(e.data)
+            os.chmod(hp, e.mode)
+    for fn in ("result.json",):           # the regrade must not read the old verdict
+        p = os.path.join(dest, fn)
+        if os.path.exists(p):
+            r = json.load(open(p))
+            r["verifier_result"] = None
+            json.dump(r, open(p, "w"))
+    return dest
