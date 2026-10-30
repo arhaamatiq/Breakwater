@@ -33,15 +33,42 @@ Breakwater judges the same output bytes with both verifier versions, several
 times, interleaving the arms, and compares the *measured margin*, not just the
 verdict:
 
-| task | output judged | pre-#2300 (`2347edec`) | #2300 (`985ba26b`) | reading |
-|---|---|---|---|---|
-| vf2-speedup-networkx | task's reference solution | speedup 8,773–12,499× (median ≈10.4k), **pass 6/6** | speedup 979–2,243× (median ≈1.9k), **fail 6/6** | head/base ratio **0.18** (95% CI 0.11–0.22, Mann-Whitney p = 0.005). The threshold is unchanged at 5,000×; the measurement fell ~80%. Any solution that measured below ≈27,500× before #2300 on this host is pushed under the threshold — consistent with all 14 VF2 drops being one deterministic shift rather than agent noise. |
-| ks-solver-cpp (linux/amd64) | task's reference solution | relative MSE 1.5118 × 10⁻⁸, **pass 5/5** | relative MSE 1.5118 × 10⁻⁸, **pass 5/5** | bit-identical across all 10 runs: #2300 does not change how KS judges the reference, so the single historical KS drop (MSE 0.348) is specific to that agent's output, not a verifier shift. |
+### VF2 on an idle host, three verifier versions, same reference bytes
 
-Both experiments judged byte-identical bundles, interleaved the two arms, and
-ran on a shared, loaded host; the VF2 ratio is the paired quantity, absolute
-speedups are host-dependent. Raw data: `reports/trustdiff/pr-2300-margins/`,
-`reports/trustdiff/pr-2300-ks/`.
+Environment and solution are byte-identical across the three versions, so one
+reference bundle was judged by three verifiers, 8 interleaved runs each
+(`reports/trustdiff/vf2-idle/`):
+
+| verifier | measured geomean speedup (8 runs) | median | verdict | verifier wall time |
+|---|---|---:|---|---:|
+| pre-#2300 `2347edec` (task 3.0.5) | 9,668–16,204× | 13,947× | **pass 8/8** | 28 s |
+| #2300 `985ba26b` (task 3.1.0) | 2,203–2,954× | 2,426× | **fail 8/8** | 43 s |
+| main `06a92e79` (task 3.2.0, after #1862) | 2,588–4,227× | 3,170× | **fail 8/8** | 189 s |
+
+- pre-#2300 → #2300: speedup ratio **0.174** (95% CI 0.152–0.231, Mann-Whitney
+  p = 0.0009). The threshold is unchanged at 5,000×; the *measurement* fell
+  ~83%. Any solution that measured below ≈29,000× before #2300 on this host is
+  pushed under the threshold — consistent with all 14 historical VF2 drops
+  being one deterministic shift rather than agent noise.
+- #2300 → main: ratio **1.31** (95% CI 1.06–1.58, p = 0.007). #1862's
+  hardening recovers part of the loss but the verifier now runs 4.3× longer,
+  and on this host the task's own reference still fails main.
+- The verdict is host-dependent by construction (an absolute speedup
+  threshold); northset measured ~15k× for the reference on main on a faster
+  host. The head/base *ratio* on identical bytes is what transfers.
+
+An earlier run of the same pre-#2300 vs #2300 comparison on a heavily loaded
+host gave ratio 0.18 (95% CI 0.11–0.22) — the shift is stable across load.
+
+### ks-solver-cpp (linux/amd64)
+
+| verifier | relative MSE of the reference (5 runs each) | verdict |
+|---|---|---|
+| pre-#2300 | 1.5118 × 10⁻⁸ (bit-identical every run) | pass 5/5 |
+| #2300 | 1.5118 × 10⁻⁸ (bit-identical every run) | pass 5/5 |
+
+#2300 does not change how KS judges the reference, so the single historical
+KS drop (MSE 0.348) is specific to that agent's output, not a verifier shift.
 
 ## What is already known
 

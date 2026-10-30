@@ -1,3 +1,32 @@
 [diff] vf2-speedup-networkx: base base@2347edec12 vs head head@985ba26b12
 [diff] vf2-speedup-networkx corpus: 1/1 trials done
 [diff] vf2-speedup-networkx pass1: 0/16 trials done
+[diff] vf2-speedup-networkx pass1: 1/16 trials done
+[diff] vf2-speedup-networkx pass1: 2/16 trials done
+[diff] vf2-speedup-networkx pass1: 3/16 trials done
+[diff] vf2-speedup-networkx pass1: 5/16 trials done
+[diff] vf2-speedup-networkx pass1: 7/16 trials done
+[diff] vf2-speedup-networkx pass1: 9/16 trials done
+[diff] vf2-speedup-networkx pass1: 11/16 trials done
+[diff] vf2-speedup-networkx pass1: 13/16 trials done
+[diff] vf2-speedup-networkx pass1: 15/16 trials done
+[diff] vf2-speedup-networkx pass1: 16/16 trials done
+
+report  -> reports/trustdiff/vf2-idle/pre-vs-2300/REPORT.md
+results -> reports/trustdiff/vf2-idle/pre-vs-2300/trustdiff.json
+receipts: 1 in reports/trustdiff/vf2-idle/pre-vs-2300/receipts/
+[diff] vf2-speedup-networkx: base base@985ba26b12 vs head head@06a92e7900
+[diff] vf2-speedup-networkx corpus: 1/1 trials done
+[diff] vf2-speedup-networkx pass1: 8/16 trials done
+[diff] vf2-speedup-networkx pass1: 10/16 trials done
+[diff] vf2-speedup-networkx pass1: 11/16 trials done
+[diff] vf2-speedup-networkx pass1: 12/16 trials done
+[diff] vf2-speedup-networkx pass1: 13/16 trials done
+[diff] vf2-speedup-networkx pass1: 14/16 trials done
+[diff] vf2-speedup-networkx pass1: 15/16 trials done
+[diff] vf2-speedup-networkx pass1: 16/16 trials done
+
+report  -> reports/trustdiff/vf2-idle/2300-vs-main/REPORT.md
+results -> reports/trustdiff/vf2-idle/2300-vs-main/trustdiff.json
+receipts: 1 in reports/trustdiff/vf2-idle/2300-vs-main/receipts/
+VF2-IDLE-DONE
