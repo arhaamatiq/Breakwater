@@ -12,7 +12,7 @@ Rules (deliberately simple; no learned components):
   NONDETERMINISTIC_REPEAT    identical agent runs disagree
   INFRA_FAILURE              any probe trial exhausted retries
 
-Run: python -m projectx.reliability
+Run: python -m breakwater.reliability
 """
 import json
 import sys

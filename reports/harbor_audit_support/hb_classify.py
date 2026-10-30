@@ -9,7 +9,7 @@ except Exception:
 ROOT = "external/harbor-tb/tasks"
 import sys as _sys
 _sys.path.insert(0, "src")
-from projectx.adapters.harbor import _NET_INSTALL_RE, _BROWSER_RE  # noqa: E402
+from breakwater.adapters.harbor import _NET_INSTALL_RE, _BROWSER_RE  # noqa: E402
 
 def service_count(env_dir):
     for name in ("docker-compose.yaml","docker-compose.yml","compose.yaml","compose.yml"):

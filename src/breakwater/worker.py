@@ -1,7 +1,7 @@
 """Worker process: claims trials from Postgres, executes them in Docker,
 submits results through the exactly-once ledger.
 
-Run: python -m projectx.worker --id w1 [--concurrency 3]
+Run: python -m breakwater.worker --id w1 [--concurrency 3]
 
 Crash-safety model:
   - Every claim carries a lease; a heartbeat task extends it while executing.

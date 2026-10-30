@@ -208,8 +208,8 @@ def load(root: str, ids: list[str] | None = None) -> dict:
                  "does not start under this runtime's container defaults")
             continue
 
-        env_tag = f"projectx-hb-env-{name}"
-        test_tag = f"projectx-hb-test-{name}"
+        env_tag = f"breakwater-hb-env-{name}"
+        test_tag = f"breakwater-hb-test-{name}"
         t0 = time.time()
         try:
             _build(os.path.join(d, "environment"), env_tag)
@@ -291,10 +291,10 @@ class HarborRuntime:
         # solve.sh, then the [[verifier.collect]] hooks (Harbor runs them in the
         # agent container before collecting artifacts); solve.sh's exit code is
         # what gets reported.
-        script = "bash /solution/solve.sh; __px_rc=$?\n"
+        script = "bash /solution/solve.sh; __bw_rc=$?\n"
         for cmd in hb.get("collect", []):
             script += f"( {cmd} ) || true\n"
-        script += "exit $__px_rc\n"
+        script += "exit $__bw_rc\n"
         c = client.containers.create(
             hb["env_image"], command=["bash", "-c", script],
             working_dir=hb["env_workdir"], network_disabled=True,
@@ -353,7 +353,7 @@ class HarborRuntime:
         mkparents = self._mkparents(hb["artifacts"])
         cmd = (f"mkdir -p /logs/verifier && {mkparents} && "
                f"cd / && bash /tests/test.sh; "
-               f"echo __PX_TESTSH_EXIT=$? ")
+               f"echo __BW_TESTSH_EXIT=$? ")
         c = client.containers.create(
             hb["test_image"], command=["bash", "-c", cmd],
             network_disabled=True, mem_limit="4g", nano_cpus=2_000_000_000,

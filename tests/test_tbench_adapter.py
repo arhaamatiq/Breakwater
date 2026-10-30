@@ -8,17 +8,17 @@ These lock in the properties a review found broken (or at risk):
   - workdir fixture copies are limited to fixtures referenced by bare name
 
 Unit tests need no Docker. The isolation test does; it is opt-in via
-PX_DOCKER_TESTS=1 so the fast suite stays runnable anywhere.
+BW_DOCKER_TESTS=1 so the fast suite stays runnable anywhere.
 
     uv run pytest tests/ -q                        # unit only
-    PX_DOCKER_TESTS=1 uv run pytest tests/ -q      # + container isolation
+    BW_DOCKER_TESTS=1 uv run pytest tests/ -q      # + container isolation
 """
 import os
 import textwrap
 
 import pytest
 
-from projectx.adapters import tbench
+from breakwater.adapters import tbench
 
 
 def write_task(tmp_path, name="t", run_tests=None, compose=None, tests=None,
@@ -194,15 +194,15 @@ def test_unresolvable_deps_skip_the_task_before_building(tmp_path):
 # ------------------------------------------------- container isolation (opt-in)
 
 docker_only = pytest.mark.skipif(
-    os.environ.get("PX_DOCKER_TESTS") != "1",
-    reason="set PX_DOCKER_TESTS=1 to run container-backed checks")
+    os.environ.get("BW_DOCKER_TESTS") != "1",
+    reason="set BW_DOCKER_TESTS=1 to run container-backed checks")
 
 
 @docker_only
 def test_test_deps_are_not_importable_during_solve(tmp_path):
     """The fidelity property the review caught: pandas was importable by the
     solution, making tasks easier than the real benchmark."""
-    from projectx.runner import docker_client
+    from breakwater.runner import docker_client
     d = write_task(tmp_path, name="isolated",
                    run_tests="uv pip install pytest==8.4.1 pandas==2.3.0\n")
     tasks = tbench.load(str(tmp_path), ids=["isolated"])

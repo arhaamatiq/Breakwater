@@ -5,7 +5,7 @@ can be run faithfully offline. The tester core is exercised elsewhere; these
 tests only pin adapter behaviour that a real audit depends on.
 """
 
-from projectx.adapters.harbor import _NET_INSTALL_RE, _parse_test_names
+from breakwater.adapters.harbor import _NET_INSTALL_RE, _parse_test_names
 
 
 # --- solve-time network detection -------------------------------------------

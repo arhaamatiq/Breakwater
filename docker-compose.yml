@@ -1,26 +1,26 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: projectx-postgres
+    container_name: breakwater-postgres
     environment:
-      POSTGRES_USER: projectx
-      POSTGRES_PASSWORD: projectx
-      POSTGRES_DB: projectx
+      POSTGRES_USER: breakwater
+      POSTGRES_PASSWORD: breakwater
+      POSTGRES_DB: breakwater
     ports:
       - "55432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U projectx"]
+      test: ["CMD-SHELL", "pg_isready -U breakwater"]
       interval: 2s
       timeout: 2s
       retries: 30
 
   minio:
     image: minio/minio:latest
-    container_name: projectx-minio
+    container_name: breakwater-minio
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: projectx
-      MINIO_ROOT_PASSWORD: projectx123
+      MINIO_ROOT_USER: breakwater
+      MINIO_ROOT_PASSWORD: breakwater123
     ports:
       - "59000:9000"
       - "59001:9001"

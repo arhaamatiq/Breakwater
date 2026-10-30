@@ -26,7 +26,7 @@ def write_receipt(finding: dict, out_dir: str = "receipts") -> str:
         {k: body[k] for k in ("task_id", "class", "witnesses")},
         sort_keys=True, default=str).encode()).hexdigest()[:12]
     body["receipt_id"] = rid
-    body["repro"] = (f"uv run python -m projectx.tester replay "
+    body["repro"] = (f"uv run python -m breakwater.tester replay "
                      f"{out_dir}/{finding['task_id']}--{finding['class']}.json")
     path = os.path.join(out_dir, f"{finding['task_id']}--{finding['class']}.json")
     with open(path, "w") as f:

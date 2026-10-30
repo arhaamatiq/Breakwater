@@ -1,4 +1,4 @@
--- Project X schema: Postgres is the queue, lease registry, and result ledger.
+-- Breakwater schema: Postgres is the queue, lease registry, and result ledger.
 
 CREATE TABLE IF NOT EXISTS experiments (
     experiment_id TEXT PRIMARY KEY,

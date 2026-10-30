@@ -42,9 +42,9 @@ import os
 import sys
 import time
 
-from projectx import db
-from projectx.adapters import harbor
-from projectx.demo import start_worker
+from breakwater import db
+from breakwater.adapters import harbor
+from breakwater.demo import start_worker
 
 TEXTISH = (".json", ".csv", ".tsv", ".txt", ".md", ".yaml", ".yml", ".xml",
            ".py", ".log", ".v", ".scala", ".cu", ".c", ".h", ".cpp", ".js",
@@ -176,7 +176,7 @@ def build_operators(declared: list, arts: dict, max_files: int, max_ast: int):
     # mutated file is emitted via ast.unparse, so every AST mutant is compared
     # against an `ast_identity` control (same unparse, no semantic edit) — if
     # the control does not pass, that file's AST mutants carry no information.
-    from projectx.tester.mutate import mutants as ast_mutants
+    from breakwater.tester.mutate import mutants as ast_mutants
     import ast as _ast
     for p in files:
         if not p.endswith(".py"):
@@ -264,7 +264,7 @@ def _arts_from(row):
 def env_image_state(task, declared):
     """Pre-solve content of the declared paths, straight from the environment
     image. Used by the unsolved_path operator."""
-    from projectx.adapters.harbor import HarborRuntime
+    from breakwater.adapters.harbor import HarborRuntime
     rt = HarborRuntime()
     try:
         got, _ = rt._extract_artifacts(task["hb"]["env_image"], declared)
@@ -313,7 +313,7 @@ def _make_diff(opname, ref_arts, mut_arts, extra, max_chars=6000):
 
 def fetch_verifier_stdout(storage_refs, max_chars=8000):
     """Pull the verify container's stdout/stderr back out of the artifact store."""
-    from projectx import storage
+    from breakwater import storage
     if not storage_refs:
         return None
     for ref in storage_refs:

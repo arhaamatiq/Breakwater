@@ -21,7 +21,7 @@ def check(inp, out, expected):
 
 TASKS = {
     "reverse_string": {
-        "cases": [{"input": s, "expected": s[::-1]} for s in ["hello", "", "a", "racecar", "Project X"]],
+        "cases": [{"input": s, "expected": s[::-1]} for s in ["hello", "", "a", "racecar", "Breakwater"]],
         "verifier": STRICT_VERIFIER,
         "oracle": "def solve(inp):\n    return inp[::-1]\n",
         "agent":  "def solve(inp):\n    return ''.join(reversed(inp))\n",

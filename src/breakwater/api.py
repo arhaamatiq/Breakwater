@@ -46,7 +46,7 @@ async def lifespan(app: FastAPI):
     await app.state.pool.close()
 
 
-app = FastAPI(title="Project X control plane", lifespan=lifespan)
+app = FastAPI(title="Breakwater control plane", lifespan=lifespan)
 
 
 @app.get("/healthz")

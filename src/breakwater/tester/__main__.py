@@ -1,10 +1,10 @@
 """Tester CLI.
 
-  python -m projectx.tester audit [--task T ...] [--parallel 3] [--workers 4]
-  python -m projectx.tester replay receipts/<file>.json
+  python -m breakwater.tester audit [--task T ...] [--parallel 3] [--workers 4]
+  python -m breakwater.tester replay receipts/<file>.json
 
 `audit` boots its own workers + reaper (needs Postgres/MinIO up and the image
-pulled: docker compose up -d && python -m projectx.setup)."""
+pulled: docker compose up -d && python -m breakwater.setup)."""
 import argparse
 import asyncio
 import json
@@ -91,7 +91,7 @@ def summarize(results, out_path):
 
 
 def main():
-    ap = argparse.ArgumentParser(prog="projectx.tester")
+    ap = argparse.ArgumentParser(prog="breakwater.tester")
     sub = ap.add_subparsers(dest="cmd", required=True)
     a = sub.add_parser("audit")
     a.add_argument("--task", action="append", default=None)
@@ -119,7 +119,7 @@ def main():
         name, _, arg = spec.partition("=")
         arg, _, idpart = arg.partition("#")
         ids = [i for i in idpart.split(",") if i] or None
-        mod = importlib.import_module(f"projectx.adapters.{name}")
+        mod = importlib.import_module(f"breakwater.adapters.{name}")
         tasks = mod.load(arg, ids=ids)
         TASKS.update(tasks)
         loaded += list(tasks)

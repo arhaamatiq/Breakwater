@@ -1,5 +1,5 @@
 """One-shot infra setup: apply schema, create the artifact bucket, pull the trial image.
-Run after `docker compose up -d`:  python -m projectx.setup
+Run after `docker compose up -d`:  python -m breakwater.setup
 """
 import asyncio
 import pathlib

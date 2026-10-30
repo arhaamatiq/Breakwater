@@ -211,7 +211,7 @@ def _run_container(files: dict[str, str], env: dict, label: str, timeout: float,
             mem_limit="256m",
             nano_cpus=1_000_000_000,
             environment={k: str(v) for k, v in env.items()},
-            labels={"projectx.phase": label},
+            labels={"breakwater.phase": label},
         )
         container.put_archive("/", _tar_bytes({f"work/{k}": v for k, v in files.items()}))
         container.start()

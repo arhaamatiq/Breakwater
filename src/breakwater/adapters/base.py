@@ -1,6 +1,6 @@
 """Adapter contract.
 
-An adapter converts one external benchmark's format into Project X's internal
+An adapter converts one external benchmark's format into Breakwater's internal
 task representation. A converted task is a plain dict with the same fields the
 built-in suite uses, plus:
 
@@ -39,7 +39,7 @@ def runtime_for(task: dict):
     if not name:
         return None
     if name not in _RUNTIMES:
-        importlib.import_module(f"projectx.adapters.{name}")  # self-registers
+        importlib.import_module(f"breakwater.adapters.{name}")  # self-registers
     return _RUNTIMES[name]
 
 
@@ -58,12 +58,12 @@ def solution_from(task: dict, kind: str) -> str:
 
 WEAK_VERIFIER = ("def check(inp, out, expected):\n"
                  "    return True, 'accepted'   # PLANTED: accepts anything\n")
-FLAKY_WRAP = ("import random as _px_random\n"
+FLAKY_WRAP = ("import random as _bw_random\n"
               "{orig}\n"
-              "_px_orig_check = check\n"
+              "_bw_orig_check = check\n"
               "def check(inp, out, expected):\n"
-              "    ok, d = _px_orig_check(inp, out, expected)\n"
-              "    if ok and _px_random.random() < 0.4:\n"
+              "    ok, d = _bw_orig_check(inp, out, expected)\n"
+              "    if ok and _bw_random.random() < 0.4:\n"
               "        return False, 'PLANTED flaky rejection'\n"
               "    return ok, d\n")
 

@@ -13,8 +13,8 @@ import base64
 import json
 import time
 
-from projectx import db
-from projectx.adapters import harbor
+from breakwater import db
+from breakwater.adapters import harbor
 from ablate import (_manifest_hash, _missing_for, _make_diff, build_operators,
                     fetch_verifier_stdout, env_image_state, _detail, _arts_from)
 

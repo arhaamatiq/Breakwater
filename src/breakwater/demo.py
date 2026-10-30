@@ -8,7 +8,7 @@ injected failures mid-run:
 
 Then verifies the invariants: 0 lost results, 0 duplicate result rows.
 
-Run: python -m projectx.demo [--replicates 8] [--workers 4]
+Run: python -m breakwater.demo [--replicates 8] [--workers 4]
 """
 import argparse
 import json
@@ -27,13 +27,13 @@ PY = sys.executable
 
 def start_worker(worker_id: str) -> subprocess.Popen:
     return subprocess.Popen(
-        [PY, "-m", "projectx.worker", "--id", worker_id],
+        [PY, "-m", "breakwater.worker", "--id", worker_id],
         stdout=open(f"logs/{worker_id}.log", "w"), stderr=subprocess.STDOUT)
 
 
 def start_api() -> subprocess.Popen:
     return subprocess.Popen(
-        [PY, "-m", "projectx.api"],
+        [PY, "-m", "breakwater.api"],
         stdout=open("logs/api.log", "w"), stderr=subprocess.STDOUT)
 
 

@@ -16,10 +16,10 @@ import json
 import os
 import time
 
-from projectx import db
-from projectx.adapters import harbor
-from projectx.demo import start_worker
-from projectx.tester.mutate import mutants as ast_mutants
+from breakwater import db
+from breakwater.adapters import harbor
+from breakwater.demo import start_worker
+from breakwater.tester.mutate import mutants as ast_mutants
 
 
 def _spread(seq, k):
@@ -44,8 +44,8 @@ def solve_with_file_override(ref_solve: str, dest_path: str, new_src: str,
                              before_marker: str) -> str:
     """Reference solve.sh with one file overwritten just before the line that
     contains `before_marker`, so the task runs with the mutated file in place."""
-    heredoc = (f"cat > {dest_path} <<'__PX_MUT__'\n{new_src}\n__PX_MUT__\n")
-    assert "__PX_MUT__" not in new_src
+    heredoc = (f"cat > {dest_path} <<'__BW_MUT__'\n{new_src}\n__BW_MUT__\n")
+    assert "__BW_MUT__" not in new_src
     out, done = [], False
     for line in ref_solve.splitlines(keepends=True):
         if not done and before_marker in line:

@@ -33,8 +33,8 @@ import os as _os
 # How long a stage batch waits for its trials before proceeding with whatever
 # completed. 300s suits fast (python:slim) runtimes; heavy multi-container
 # runtimes (e.g. Harbor's separate solve+verify with GB-sized images) need
-# longer or stages silently run on partial data. Override with PX_BATCH_TIMEOUT.
-BATCH_TIMEOUT = float(_os.environ.get("PX_BATCH_TIMEOUT", "300"))
+# longer or stages silently run on partial data. Override with BW_BATCH_TIMEOUT.
+BATCH_TIMEOUT = float(_os.environ.get("BW_BATCH_TIMEOUT", "300"))
 
 
 class TaskAudit:

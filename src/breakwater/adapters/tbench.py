@@ -266,7 +266,7 @@ def load(root: str, ids: list[str] | None = None) -> dict:
                  f"— skipping rather than risk a false VERIFIER_CRASH")
             continue
 
-        tag = f"projectx-tb-{name}"
+        tag = f"breakwater-tb-{name}"
         t0 = time.time()
         try:
             _build_image(task_dir, tag, extra_pkgs)
