@@ -84,5 +84,24 @@
     "created_at": "2026-09-09T19:37:20-0700"
   },
   "receipt_id": "90e32128607e",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_ancient_puzzle--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_ancient_puzzle--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: the reference POSTs to a sidecar service (`decryptor:8090`) that the single-container runtime does not start.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_LIMITATION",
+    "mechanism": "multi-service task: the last step of the reference solution is `curl -X POST http://decryptor:8090/decrypt`, a docker-compose sidecar. The adapter runs one container with no network, so the host does not resolve, nothing is written to /app/results.txt, and both tests fail.",
+    "evidence": [
+      "10/10 recorded solve logs: `curl: (6) Could not resolve host: decryptor`; solution_exit_code 6",
+      "13/13 recorded verify logs: /app/results.txt was not created (AssertionError / FileNotFoundError)",
+      "the receipt predates the adapter's multi_service load-time skip (`_service_count > 1`)"
+    ],
+    "reproduced": "no (task directory and docker-compose.yaml are not on disk)",
+    "not_verified": "that docker-compose.yaml really declares >1 service: inferred from the hostname in the solution, not read from the compose file. If it does, tbench.load already skips the task (`multi_service`); independently, the solve_network predicate also matches this curl",
+    "load_time_guard": "existing multi_service skip; plus `solve_network` (curl to a non-local host). tests/test_tbench_adapter.py::test_solve_network_use_is_detected[post to a named host (ancient-puzzle)]",
+    "needed_to_verify_as_benchmark_property": "the task's docker-compose.yaml and sidecar image; run `docker compose up` for client+decryptor and execute the official harness path (solution.sh then run-tests.sh in the client container)",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_ancient_puzzle--REFERENCE_REJECTED.json"
+  }
 }

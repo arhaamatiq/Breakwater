@@ -64,6 +64,14 @@ def replay(path: str, verbose=print) -> bool:
     verbose(f"receipt {receipt['receipt_id']}: {receipt['task_id']} "
             f"[{receipt['class']}] — {receipt['title']}")
     verbose(f"  property violated: {receipt['property']}: {receipt['property_text']}")
+    quarantined = receipt.get("status") == "quarantined"
+    if quarantined:
+        # Triaged as a harness/adapter false positive (see receipts/quarantine/
+        # README.md). Replaying still works, but what reproduces is the harness's
+        # behaviour, not a defect in the benchmark.
+        triage = receipt.get("triage") or {}
+        verbose(f"  QUARANTINED [{triage.get('classification', '?')}]: "
+                f"{receipt.get('quarantine_reason', '')}")
     if not receipt.get("replay"):
         verbose("  (no replay spec recorded — evidence-only receipt)")
         return True
@@ -74,5 +82,9 @@ def replay(path: str, verbose=print) -> bool:
         all_ok = all_ok and ok
         verbose(f"  {'REPRODUCED' if ok else 'DID NOT REPRODUCE'}: {item['label']} "
                 f"-> {[o for o, _ in runs]} (expected {item['expect']})")
-    verbose(f"  => {'VIOLATION CONFIRMED' if all_ok else 'NOT CONFIRMED'}")
+    if quarantined:
+        verbose(f"  => {'HARNESS BEHAVIOUR REPRODUCED' if all_ok else 'NOT REPRODUCED'} "
+                f"(quarantined: not evidence of a benchmark defect)")
+    else:
+        verbose(f"  => {'VIOLATION CONFIRMED' if all_ok else 'NOT CONFIRMED'}")
     return all_ok

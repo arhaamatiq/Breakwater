@@ -79,5 +79,26 @@
     "created_at": "2026-09-09T20:14:51-0700"
   },
   "receipt_id": "eb25d9e36bb8",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_break_filter_js_from_html--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_break_filter_js_from_html--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: adapter bug. docker's NetworkDisabled flag leaves /etc/hosts empty, so `localhost` does not resolve and selenium cannot reach its own chromedriver. Fixed (network_mode='none').",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_BUG",
+    "mechanism": "tbench containers were created with docker-py `network_disabled=True`, which leaves /etc/hosts empty: `getaddrinfo('localhost')` -> EAI_AGAIN. selenium talks to chromedriver at http://localhost:<port>, so webdriver.Chrome() fails with 'Can not connect to the Service /usr/bin/chromedriver' before any filter logic runs. `network_mode='none'` gives loopback + a populated /etc/hosts and still no egress (verified).",
+    "evidence": [
+      "10/20 recorded verify logs: WebDriverException 'Can not connect to the Service /usr/bin/chromedriver' (the test reached webdriver.Chrome(), i.e. out.html existed and filter.py ran with rc 0); the other 10/20 are an older adapter revision that staged tests at /px/tests so `/tests/filter.py` was missing (fixed earlier)",
+      "probe 2026-10-29: in a net-disabled container /etc/hosts is empty and `localhost` does not resolve; with network_mode='none' it resolves to ::1 and the same probe cannot reach pypi.org or 1.1.1.1",
+      "A/B through the adapter's own _solve/_verify with the real receipt blob (reference + test files) in an approximated image (python:3.11-slim + Debian chromium 156 + chromium-driver + selenium + bs4): pre-fix config -> fail, identical WebDriverException; post-fix config -> pass (1 passed)",
+      "chromedriver starts in 0.8s with network on and fails after 30s with network disabled, independent of memory limit (1g/2g/none)"
+    ],
+    "reproduced": "yes, in an approximated environment (see not_verified)",
+    "not_verified": "the task's own Dockerfile is not on disk, so the pass was shown in a stand-in image (same test files and reference, Debian chromium instead of the task's browser setup), not in the task's real image/arch",
+    "load_time_guard": "fixed in tbench.py (NO_NETWORK = 'none' for solve and verify); tests/test_tbench_adapter.py::test_containers_use_network_mode_none_not_network_disabled and (BW_DOCKER_TESTS=1) test_sandbox_resolves_localhost_but_has_no_egress",
+    "needed_to_verify_as_benchmark_property": "re-run in the task's real image after restoring original-tasks/break-filter-js-from-html; a pass there closes it",
+    "see_also": "harbor.py and runner.py still use network_disabled=True (not touched here): the Harbor `browser` skip ('headless browser does not come up under this runtime's container defaults') is plausibly this same bug (untested against Harbor tasks)",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_break_filter_js_from_html--REFERENCE_REJECTED.json"
+  }
 }

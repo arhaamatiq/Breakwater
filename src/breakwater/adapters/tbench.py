@@ -23,6 +23,9 @@ Faithfulness deltas (documented, deliberate):
     `uv venv .tbench-testing` isolation. Resolved versions are recorded in
     tb["deps_lock"] and in each trial's meta.json, so a receipt still pins what
     actually ran when run-tests.sh leaves a dependency unpinned.
+  - solve and verify containers use `network_mode="none"` (loopback only, with a
+    populated /etc/hosts), not docker's `NetworkDisabled` flag, which leaves
+    /etc/hosts empty and makes `localhost` unresolvable
   - tests run via `python -m pytest --junitxml` rather than the uv-venv
     ceremony in run-tests.sh; parser_name: pytest is the declared contract
   - tests are staged at /tests (the harness's own convention — some official
@@ -31,9 +34,17 @@ Faithfulness deltas (documented, deliberate):
     task workdir, since those resolve against pytest's cwd
   - single-service tasks only (multi-service docker-compose.yaml is detected
     and skipped, not silently mis-run); no network at solve or verify time —
-    tasks whose official solution/tests require network are skipped at solve
-    time (apt/pip install) or surface as a verify-time infra error, not a
-    finding
+    a task whose reference solution installs/fetches at solve time
+    (`solve_network`) or whose tests fetch remote resources at verify time
+    (`verify_network`) cannot run faithfully here and is skipped at load time
+    (conservatively: an install the image would satisfy offline is skipped
+    too). Before these skips existed, such tasks produced false
+    REFERENCE_REJECTED receipts (see receipts/quarantine/README.md)
+  - state crosses solve -> verify via `docker commit`, which does not carry
+    POSIX ACLs or `user.*` xattrs (measured on Docker Desktop 29.4 / containerd
+    snapshotter), so a solution whose effect is an ACL/xattr cannot be judged
+    (`state_fidelity` skip). The official harness runs the tests in the same
+    container and has no such loss
   - a task whose verify environment cannot be reproduced (unresolvable
     `-r`/editable installs) or whose image fails to build is skipped and
     reported under LAST_LOAD_REPORT["skipped"], separating deliberate scope
@@ -72,6 +83,14 @@ RUN (python3 -m venv --system-site-packages {venv} || \\
     {venv}/bin/pip install --quiet --disable-pip-version-check {pkgs} && \\
     {venv}/bin/pip freeze --local > {lock}
 """
+
+# No external network, but a working loopback. The Docker API's `NetworkDisabled`
+# flag (docker-py `network_disabled=True`) is NOT the same thing: it leaves
+# /etc/hosts EMPTY, so even `localhost` fails to resolve — which broke every
+# verifier that reaches a local service by name (selenium/chromedriver, `curl
+# localhost:...`) and produced false REFERENCE_REJECTED receipts. `none` keeps
+# lo up and populates /etc/hosts while still giving the container no route out.
+NO_NETWORK = "none"
 
 NOOP_SHELL = "#!/bin/bash\ntrue\n"
 RAISE_SHELL = "#!/bin/bash\nexit 1\n"
@@ -193,6 +212,94 @@ def _service_count(task_dir: str) -> int:
     return len(compose.get("services") or {})
 
 
+# ---- up-front detection of conditions this runtime cannot reproduce ---------
+#
+# Each of these produced a false REFERENCE_REJECTED receipt before it was
+# detected (receipts/quarantine/README.md). They are scope boundaries, not
+# findings: skipping can only shrink the audit set, never fabricate a verdict.
+# All matching is conservative in the skip direction.
+
+_LOCAL_HOST = r"(?:localhost|127(?:\.\d+){3}|0\.0\.0\.0|\[::1\])"
+
+# Mirrors harbor.py's _NET_INSTALL_RE in spirit, but is applied per line so that
+# comments and offline-by-construction installs (`--no-index`) can be excluded,
+# and so that `curl http://localhost:...` (a local service) is not flagged.
+_SOLVE_NET_RE = re.compile(
+    r"\b(?:apt-get|apt|aptitude)\s+(?:-\S+\s+)*(?:install|build-dep)\b|"
+    r"\bpip3?\s+(?:install|download)\b|\bpython3?\s+-m\s+pip\s+(?:install|download)\b|"
+    r"\bpipx\s+(?:install|run)\b|"
+    r"\buv\s+(?:add|sync|tool\s+install)\b|\buvx\b|\buv\s+run\b[^\n]*--with\b|"
+    r"\bnpm\s+(?:install|i|ci)\b|\bpnpm\s+(?:install|add)\b|\byarn\s+(?:install|add)\b|"
+    r"\bcargo\s+(?:install|add|fetch)\b|\bgo\s+(?:get|install|mod\s+download)\b|"
+    r"\bgem\s+install\b|\b(?:conda|mamba|micromamba)\s+(?:install|create)\b|"
+    r"\binstall\.packages\s*\(|"
+    r"\bgit\s+clone\s+(?:-\S+\s+)*(?:https?|git|ssh)://|"
+    rf"\b(?:curl|wget)\b[^\n|;&]*?\bhttps?://(?!{_LOCAL_HOST}(?![\w.-]))")
+_OFFLINE_FLAG_RE = re.compile(r"--no-index\b|--offline\b")
+# The solve_network predicate is deliberately conservative: it cannot see that an
+# image already satisfies an install (e.g. `apt-get install -y curl` when curl is
+# baked in), so it also skips tasks that would run fine offline. Set this to 1 to
+# load them anyway; a REFERENCE_REJECTED on such a task must then be treated as
+# an adapter suspect until re-run with network (receipts/quarantine/README.md).
+ALLOW_SOLVE_NETWORK_ENV = "BW_TBENCH_ALLOW_SOLVE_NETWORK"
+
+# The only effect `docker commit` is known to drop that tasks actually rely on
+# (measured, see module docstring). Deliberately narrow: only what was observed.
+_STATE_LOSS_RE = re.compile(r"\b(?:setfacl|setfattr)\b")
+
+# Test code that fetches a remote resource. Needs BOTH a fetching call and a
+# non-local, dotted-hostname URL literal, so tests that hit `localhost` or merely
+# mention a URL as data are not caught by either half alone.
+_TEST_FETCH_RE = re.compile(
+    r"\b(?:urlretrieve|urlopen)\s*\(|\brequests\.(?:get|post|put|head|request)\s*\(|"
+    r"\bhttpx\.(?:get|post|Client)\b|\bHTTPSConnection\s*\(|"
+    r"\bgit\s+clone\b|\bwget\b|\bcurl\b[^\n]*https?://|"
+    r"\b(?:snapshot_download|hf_hub_download)\s*\(")
+_REMOTE_URL_RE = re.compile(
+    rf"https?://(?!{_LOCAL_HOST}(?![\w.-]))[A-Za-z0-9][A-Za-z0-9\-]*(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{{2,}}")
+# URLs that are identifiers, not fetch targets
+_NAMESPACE_URL_RE = re.compile(r"https?://(?:www\.)?w3\.org\b|https?://schemas?\.|https?://xmlns\.")
+
+
+def _executable_lines(src: str) -> list[str]:
+    """Shell lines with whole-line comments dropped (a commented-out install
+    does not run)."""
+    return [ln for ln in src.splitlines() if not ln.lstrip().startswith("#")]
+
+
+def _solve_network_use(solution_src: str) -> str | None:
+    """The first solve-time install/fetch in a reference solution, or None.
+
+    Solve runs with networking disabled, so such a solution fails offline and
+    the audit would report the benchmark's own reference as rejected."""
+    for ln in _executable_lines(solution_src):
+        m = _SOLVE_NET_RE.search(ln)
+        if m and not _OFFLINE_FLAG_RE.search(ln):
+            return ln.strip()[:120]
+    return None
+
+
+def _state_loss_use(solution_src: str) -> str | None:
+    for ln in _executable_lines(solution_src):
+        if _STATE_LOSS_RE.search(ln):
+            return ln.strip()[:120]
+    return None
+
+
+def _verify_network_use(test_sources: dict) -> str | None:
+    """A test file that fetches a remote resource at verify time, or None."""
+    for fn, src in test_sources.items():
+        if not fn.endswith(".py"):
+            continue
+        code = "\n".join(_executable_lines(src))
+        call = _TEST_FETCH_RE.search(code)
+        urls = [m.group(0) for m in _REMOTE_URL_RE.finditer(code)
+                if not _NAMESPACE_URL_RE.match(m.group(0))] if call else []
+        if call and urls:
+            return f"{fn}: {call.group(0).strip()[:40]} ... {urls[0][:80]}"
+    return None
+
+
 def _build_image(task_dir: str, tag: str, extra_pkgs: list[str]) -> str:
     client = docker_client()
     with tempfile.TemporaryDirectory() as ctx:
@@ -223,7 +330,8 @@ def _read_deps_lock(tag: str) -> str | None:
 # a format/multi-service skip is a deliberate scope boundary, whereas a build
 # failure silently shrinks the audit set and must be read as an infra problem.
 LAST_LOAD_REPORT: dict = {}
-_SCOPE_SKIPS = ("format", "multi_service", "no_tests")
+_SCOPE_SKIPS = ("format", "multi_service", "no_tests", "solve_network",
+                "verify_network", "state_fidelity")
 _INFRA_SKIPS = ("unresolved_deps", "build_failed")
 
 
@@ -257,6 +365,35 @@ def load(root: str, ids: list[str] | None = None) -> dict:
         test_names = _parse_test_names(test_src)
         if not test_names:
             skip("no_tests", name, "no test functions found")
+            continue
+
+        solution_src = open(os.path.join(task_dir, "solution.sh")).read()
+        net_line = (None if os.environ.get(ALLOW_SOLVE_NETWORK_ENV) == "1"
+                    else _solve_network_use(solution_src))
+        if net_line:
+            skip("solve_network", name,
+                 f"reference solution installs/fetches at solve time ({net_line!r}); "
+                 f"solve runs with networking disabled, so the reference cannot run "
+                 f"faithfully — skipping rather than report a false REFERENCE_REJECTED")
+            continue
+        loss_line = _state_loss_use(solution_src)
+        if loss_line:
+            skip("state_fidelity", name,
+                 f"reference solution sets state that `docker commit` does not carry "
+                 f"({loss_line!r}: POSIX ACL/xattr) — the committed state would be "
+                 f"judged without it, a false REFERENCE_REJECTED")
+            continue
+        test_sources = {}
+        _tdir = os.path.join(task_dir, "tests")
+        for _fn in sorted(os.listdir(_tdir)):
+            if _fn.endswith(".py") and os.path.isfile(os.path.join(_tdir, _fn)):
+                test_sources[_fn] = open(os.path.join(_tdir, _fn), errors="replace").read()
+        fetch = _verify_network_use(test_sources)
+        if fetch:
+            skip("verify_network", name,
+                 f"tests fetch a remote resource at verify time ({fetch}); verify "
+                 f"runs with networking disabled — skipping rather than report a "
+                 f"false REFERENCE_REJECTED")
             continue
 
         extra_pkgs, unresolved = _extra_test_deps(task_dir)
@@ -336,7 +473,7 @@ class TBenchRuntime:
         client = docker_client()
         container = client.containers.create(
             tb["image"], command=["bash", "/px/solution.sh"],
-            working_dir=tb["workdir"], network_disabled=True,
+            working_dir=tb["workdir"], network_mode=NO_NETWORK,
             mem_limit="1g", nano_cpus=2_000_000_000,
             environment={k: str(v) for k, v in env.items()})
         try:
@@ -365,7 +502,7 @@ class TBenchRuntime:
                f"{selectors} -q -p no:cacheprovider --junitxml=/tests/px-report.xml")
         container = client.containers.create(
             state_ref, command=["bash", "-c", cmd],
-            network_disabled=True, mem_limit="1g", nano_cpus=2_000_000_000,
+            network_mode=NO_NETWORK, mem_limit="1g", nano_cpus=2_000_000_000,
             environment={k: str(v) for k, v in env.items()})
         try:
             # Stage at the harness's own /tests convention (some official tests

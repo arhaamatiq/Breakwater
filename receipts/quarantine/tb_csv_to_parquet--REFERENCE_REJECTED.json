@@ -91,5 +91,24 @@
     "created_at": "2026-09-09T22:43:29-0700"
   },
   "receipt_id": "c7a3cc939dd5",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_csv_to_parquet--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_csv_to_parquet--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: the reference installs uv and pandas/pyarrow over the network at solve time; reproduced passing 2/2 with network on.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_LIMITATION",
+    "mechanism": "solution.sh: `curl -LsSf https://astral.sh/uv/0.7.13/install.sh | sh; uv add pandas pyarrow; uv run convert.py`. With networking disabled curl fails, uv is never installed (exit 127) and data.parquet is never written. The tests (pandas/pyarrow in the baked test venv) are fine.",
+    "evidence": [
+      "23/23 recorded solve logs: `curl: (6) Could not resolve host: astral.sh`, `uv: command not found`, exit 127",
+      "reproduced 2026-10-29 with a freshly built image (tbench.load -> breakwater-tb-csv-to-parquet): adapter path -> solve exit 127, 2 failed",
+      "official-equivalent run: same image, network ON, solution.sh then the task's own run-tests.sh (TEST_DIR=/tests) in the SAME container -> `2 passed` (test_parquet_exists, test_data_matches)"
+    ],
+    "reproduced": "yes, both directions, with the task's real Dockerfile and run-tests.sh",
+    "not_verified": "aarch64 image only (not amd64); verified on Docker Desktop 29.4.3",
+    "load_time_guard": "tbench.load skip category `solve_network`; tests/test_tbench_adapter.py::test_solve_network_use_is_detected[curl uv installer (csv-to-parquet)]",
+    "needed_to_verify_as_benchmark_property": "nothing further: the reference passes under official-equivalent conditions",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_csv_to_parquet--REFERENCE_REJECTED.json"
+  }
 }
