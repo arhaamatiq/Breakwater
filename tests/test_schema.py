@@ -8,10 +8,12 @@ import uuid
 from importlib import resources
 
 from breakwater import db
+from breakwater.report import verify_invariants
 
 from conftest import create_database, drop_database
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+LEASE = 30.0
 
 
 def test_schema_ships_as_package_data():
@@ -58,6 +60,12 @@ def test_packaged_compose_matches_repo_compose():
     assert packaged == (ROOT / "docker-compose.yml").read_text()
 
 
+async def submit(pool, row, worker_id: str) -> bool:
+    return await db.submit_result(
+        pool, trial_id=row["trial_id"], experiment_id=row["experiment_id"],
+        task_id=row["task_id"], outcome="pass", detail={}, exec_ms=1.0, worker_id=worker_id,
+        attempt=row["attempts"], lease_epoch=row["lease_epoch"], artifacts=[])
+
 
 V1_SCHEMA = (ROOT / "tests" / "fixtures" / "schema_v1.sql").read_text()
 
@@ -69,7 +77,8 @@ INDEXES_SQL = "SELECT indexname, indexdef FROM pg_indexes WHERE schemaname='publ
 
 def test_v1_database_upgrades_in_place(pg):
     """A database created by the v1 schema, with live rows, upgraded by re-applying
-    the packaged schema (twice): identical shape to a fresh install, rows kept."""
+    the packaged schema (twice): identical shape to a fresh install, rows kept,
+    and its queued work claimable under the new protocol."""
     name = f"bw_test_mig_{uuid.uuid4().hex[:8]}"
 
     async def main():
@@ -97,9 +106,10 @@ def test_v1_database_upgrades_in_place(pg):
                 await fresh.close()
             r = await pool.fetchrow("SELECT lease_epoch, stale_submission FROM results")
             assert (r["lease_epoch"], r["stale_submission"]) == (None, False)
-            t = await pool.fetchrow("SELECT lease_epoch, priority, last_error FROM trials "
-                                    "WHERE trial_id='old/0'")
-            assert tuple(t) == (0, 0, None)
+            row = await db.claim_trial(pool, "w1", lease_seconds=LEASE)
+            assert (row["trial_id"], row["lease_epoch"]) == ("old/0", 1)
+            assert await submit(pool, row, "w1")
+            assert (await verify_invariants(pool, "old"))["violations"] == {}
             await pool.close()
         finally:
             await drop_database(name)
