@@ -43,8 +43,8 @@ x86-64-only wheels and must run under `linux/amd64` on an arm64 host).
 
 Agent benchmarks such as [Terminal-Bench](https://github.com/harbor-framework/terminal-bench)
 grade with code — test suites, numeric thresholds, sandboxed workers — and that
-code changes constantly. In October 2026 alone, Terminal-Bench migrated 57 task
-verifiers to RewardKit. The standard safety check is to **regrade** recorded
+code changes constantly. On 22 October 2026 alone, ten Terminal-Bench PRs migrated
+57 of its 66 task verifiers to RewardKit. The standard safety check is to **regrade** recorded
 agent trials with the new verifier and look for changed rewards.
 
 Regrading has a blind spot: historical trials are mostly *passes* and honest
@@ -117,7 +117,7 @@ The queue is the part that has to be right even when everything else fails.
 | guarantee | mechanism | evidence |
 |---|---|---|
 | no double claims | `FOR UPDATE SKIP LOCKED`, a claim never waits while holding a lock | 32 concurrent claimers × 600 trials, `tests/test_queue.py` |
-| crashed / stalled workers don't lose work | 6 s leases, 2 s heartbeats, reaper requeues expired leases | real lease expiry and re-claim in tests; chaos demo SIGKILLs a worker |
+| crashed / stalled workers don't lose work | leases + heartbeats (6 s / 2 s in the chaos demo, 60 s / 5 s for benchmark workers); reaper requeues expired leases | real lease expiry and re-claim in tests; chaos demo SIGKILLs a worker |
 | a zombie can't corrupt a re-claimed trial | `lease_epoch` fencing token on heartbeat/release (worker id alone is not a fence) | same-worker-id re-claim test |
 | results counted exactly once | ledger keyed by trial id, `INSERT … ON CONFLICT DO NOTHING`; stale submissions flagged | 30 concurrent submits → 1 winner; seeded fault injection (300 trials × 16 workers: stalls, crashes, double and late submits) |
 | no starvation | fair claim: strict priority, then fewest-running experiment, then least-recently-claimed | a 1-trial experiment behind a 200-trial one is served within 2 claims (FIFO: position 198) |
