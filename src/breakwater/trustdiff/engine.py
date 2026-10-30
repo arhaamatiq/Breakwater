@@ -206,6 +206,11 @@ class TaskDiff:
             if fb is None:
                 self.notes.append(f"solution fixture {fname}: solve produced no bundle")
                 continue
+            if fd.get("solution_exit_code") not in (0, None):
+                # a candidate that crashes its own solve says nothing about the verifier
+                self.notes.append(f"solution fixture {fname}: solve.sh exited "
+                                  f"{fd.get('solution_exit_code')}; not judged")
+                continue
             self.corpus.append(CorpusItem(f"solution_fixture::{fname}", "fixture", fb,
                                           {"expect": expect, "diff": text[:4000],
                                            "solve_exit": fd.get("solution_exit_code")}))
