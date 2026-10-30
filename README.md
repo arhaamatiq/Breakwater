@@ -141,11 +141,35 @@ Findings that turned out to be harness limitations are not deleted; they are
 quarantined with the evidence that explains them
 ([`receipts/quarantine/`](receipts/quarantine/README.md)).
 
-<!-- UPSTREAM -->
+## Upstream work
+
+- [terminal-bench#1964](https://github.com/harbor-framework/terminal-bench/pull/1964)
+  (merged): `risk-scorer-replay`'s verifier crashed on a transient SQLite
+  journal file; found by replaying the unmodified reference (1 of 3 runs failed).
+- [terminal-bench#1965](https://github.com/harbor-framework/terminal-bench/pull/1965)
+  (open): biped jump-margin fix; Breakwater's differential evidence shows it
+  moves exactly the documented verdict ([write-up](docs/findings/pr-1965-biped-margin.md)).
+- Findings above are written up with reproduction steps under
+  [`docs/findings/`](docs/findings/) and checked against every public report
+  (Tokenless, Preference Model, northset, the issue tracker) in
+  [`reports/known_findings/`](reports/known_findings/INDEX.md) before filing.
 
 ## Limitations
 
-<!-- LIMITATIONS -->
+- **Scope.** Single-step, `separate`-mode Harbor tasks on one Docker host:
+  52 of Terminal-Bench's 66 tasks. Multi-service tasks (11) and GPU tasks (3)
+  are reported as unsupported with the reason; `allowlist` egress policies are
+  not emulated.
+- **Host effects.** Timing-gated verifiers measure the host. Breakwater
+  controls for this (same bytes, interleaved arms, repeats, ratio CIs), but
+  absolute margins are host-dependent. Tasks that ship x86-64-only binaries run
+  under emulation on arm64 hosts, which is slower and recorded per trial.
+- **Mutants are candidates, not findings.** A mutant that passes is a lead;
+  it becomes a finding only with a divergence witness against the task's own
+  specification and an overlap check against prior reports.
+- **Recorded agent outputs** live on Harbor Hub behind an authenticated
+  download; `breakwater diff --import` judges them once downloaded.
+- **Exactly-once accounting, not execution**, as discussed above.
 
 ## Repository map
 
