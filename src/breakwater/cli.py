@@ -209,7 +209,8 @@ def cmd_diff(args):
         network=args.network, solve_from=args.solve_from,
         max_ast_files=args.max_ast_files, max_ast_per_file=args.max_ast_per_file,
         max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap,
-        prune_images=args.prune_images, fixtures=_fixtures(args.fixture))
+        prune_images=args.prune_images, fixtures=_fixtures(args.fixture),
+        solution_fixtures=_fixtures(args.solution_fixture))
     out = args.out or os.path.join("reports", "trustdiff", time.strftime("%Y%m%d-%H%M%S"))
     os.makedirs(out, exist_ok=True)
 
@@ -371,6 +372,11 @@ def main(argv=None):
     d.add_argument("--fixture", action="append", default=[], metavar="TASK:NAME:EXPECT:PATCH",
                    help="add a hand-written output: the reference bundle with PATCH (a unified "
                         "diff, paths from /) applied; EXPECT is pass, fail or unknown")
+    d.add_argument("--solution-fixture", action="append", default=[],
+                   metavar="TASK:NAME:EXPECT:PATCH",
+                   help="add a constructed candidate solution: PATCH (unified diff, paths from the "
+                        "task dir, e.g. a/solution/solve.py) is applied to solution/, solved once, "
+                        "and the output judged by both versions")
     d.add_argument("--network", choices=["on", "off"], default=None,
                    help="override the task's network policy for every container")
     d.add_argument("--solve-from", choices=["base", "head"], default="base")

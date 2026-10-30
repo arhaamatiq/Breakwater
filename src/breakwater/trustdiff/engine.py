@@ -25,8 +25,12 @@ The verdict is always the task's reward, as Harbor records it.
 from __future__ import annotations
 
 import asyncio
+import base64
 import contextlib
+import copy
+import hashlib
 import json
+import os
 import random
 import time
 from dataclasses import dataclass, field
@@ -62,6 +66,9 @@ class DiffConfig:
     priority: int = 0
     prune_images: bool = False     # remove a task's images once its diff is done
     fixtures: list = field(default_factory=list)   # [(task, name, expect, patch_text)]
+    # [(task, name, expect, patch_text)] applied to solution/ before solving:
+    # a constructed candidate solution, solved once, judged by both versions
+    solution_fixtures: list = field(default_factory=list)
 
 
 class Matrix:
@@ -139,6 +146,21 @@ class TaskDiff:
                                        f"{spec.digests['environment'][:12]}",
                            "task_id": f"hb_{spec.short_id}", "replicate": 0,
                            "spec": {"mode": "snapshot", "task_blob": task}})
+        sol_fx = {}
+        for task_name, fname, expect, text in self.cfg.solution_fixtures:
+            if task_name != spec.name:
+                continue
+            blob = patch_solution(task, text)
+            tree_d = hashlib.sha256(json.dumps(blob["hb"]["solution_tree"], sort_keys=True)
+                                    .encode()).hexdigest()[:12]
+            tid = (f"solve/{harbor.RUNTIME_VERSION}/{spec.name}/"
+                   f"{spec.digests['environment'][:12]}-{tree_d}/oracle")
+            sol_fx[tid] = (fname, expect, text)
+            trials.append({"trial_id": tid, "task_id": f"hb_{spec.short_id}", "replicate": 0,
+                           "spec": {"mode": "solve", "solution": "oracle",
+                                    "network": self.cfg.network,
+                                    "solve_timeout_cap": self.cfg.solve_timeout_cap,
+                                    "task_blob": blob}})
         await submit(self.pool, f"{self.run_id}/{spec.name}/corpus", f"corpus:{spec.name}",
                      trials, self.cfg.priority)
         rows = await wait_for(self.pool, [t["trial_id"] for t in trials], self.cfg.trial_timeout,
@@ -174,6 +196,14 @@ class TaskDiff:
         for task_name, fname, expect, text in self.cfg.fixtures:
             if task_name == spec.name:
                 self.corpus.append(patched(ref, fname, expect, text))
+        for tid, (fname, expect, text) in sol_fx.items():
+            fb, fd = bundle_of(tid)
+            if fb is None:
+                self.notes.append(f"solution fixture {fname}: solve produced no bundle")
+                continue
+            self.corpus.append(CorpusItem(f"solution_fixture::{fname}", "fixture", fb,
+                                          {"expect": expect, "diff": text[:4000],
+                                           "solve_exit": fd.get("solution_exit_code")}))
         # one entry per distinct bundle (a no-op can equal drop_all, etc.)
         seen, uniq = set(), []
         for it in self.corpus:
@@ -281,6 +311,35 @@ class TaskDiff:
             "notes": self.notes,
             "bundles": items,
         }
+
+
+def patch_solution(task: dict, patch_text: str) -> dict:
+    """Task blob whose solution/ tree has a unified diff applied (paths
+    relative to the task dir: `--- a/solution/x.py`)."""
+    import subprocess
+    import tempfile
+    blob = copy.deepcopy(task)
+    tree = blob["hb"]["solution_tree"]
+    with tempfile.TemporaryDirectory() as tmp:
+        for rel, (b64, mode) in tree.items():
+            dst = os.path.join(tmp, "solution", rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            with open(dst, "wb") as f:
+                f.write(base64.b64decode(b64))
+        r = subprocess.run(["patch", "-p1", "-s", "-d", tmp, "--no-backup-if-mismatch"],
+                           input=patch_text.encode(), capture_output=True)
+        if r.returncode != 0:
+            raise ValueError(f"solution patch failed: {(r.stdout + r.stderr).decode()[:400]}")
+        new = {}
+        for root, _, fns in os.walk(os.path.join(tmp, "solution")):
+            for fn in fns:
+                p = os.path.join(root, fn)
+                rel = os.path.relpath(p, os.path.join(tmp, "solution"))
+                with open(p, "rb") as f:
+                    new[rel] = [base64.b64encode(f.read()).decode("ascii"),
+                                tree.get(rel, [None, 0o644])[1]]
+    blob["hb"]["solution_tree"] = new
+    return blob
 
 
 def _vinfo(v: TaskVersion, spec) -> dict:
