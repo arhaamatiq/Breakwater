@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS trials (
     max_attempts     INT NOT NULL DEFAULT 5,
     worker_id        TEXT,
     lease_expires_at TIMESTAMPTZ,
-    created_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
+    created_at       TIMESTAMPTZ NOT NULL DEFAULT clock_timestamp(),
     first_started_at TIMESTAMPTZ,
     finished_at      TIMESTAMPTZ,
     priority         INT NOT NULL DEFAULT 0,    -- copied from the experiment; what the claim reads
@@ -87,6 +87,11 @@ ALTER TABLE experiments ADD COLUMN IF NOT EXISTS last_claimed_at TIMESTAMPTZ;
 ALTER TABLE trials ADD COLUMN IF NOT EXISTS priority    INT NOT NULL DEFAULT 0;
 ALTER TABLE trials ADD COLUMN IF NOT EXISTS lease_epoch BIGINT NOT NULL DEFAULT 0;
 ALTER TABLE trials ADD COLUMN IF NOT EXISTS last_error  TEXT;
+-- Claim order within an experiment is (created_at, trial_id). now() is the
+-- transaction start, so every trial of one insert batch tied and the order
+-- fell back to trial_id; clock_timestamp() keeps insertion order, which is
+-- what lets a client interleave arms (e.g. base/head runs of a Trust Diff).
+ALTER TABLE trials ALTER COLUMN created_at SET DEFAULT clock_timestamp();
 
 ALTER TABLE results ADD COLUMN IF NOT EXISTS lease_epoch      BIGINT;
 ALTER TABLE results ADD COLUMN IF NOT EXISTS stale_submission BOOLEAN NOT NULL DEFAULT false;

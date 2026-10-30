@@ -31,7 +31,8 @@ def test_schema_is_idempotent_by_construction():
         head = " ".join(s.split()[:8]).upper()
         assert (head.startswith(("CREATE TABLE IF NOT EXISTS", "CREATE INDEX IF NOT EXISTS",
                                  "DROP INDEX IF EXISTS"))
-                or re.match(r"ALTER TABLE \w+ ADD COLUMN IF NOT EXISTS", head)), s[:80]
+                or re.match(r"ALTER TABLE \w+ ADD COLUMN IF NOT EXISTS", head)
+                or re.match(r"ALTER TABLE \w+ ALTER COLUMN \w+ SET DEFAULT", head)), s[:80]
 
 
 def test_every_column_added_after_v1_has_an_upgrade_statement():
