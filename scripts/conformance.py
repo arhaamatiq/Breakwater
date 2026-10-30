@@ -68,8 +68,12 @@ def main():
         oracle = trials[0] if trials else None
         if oracle:
             ref = from_harbor_trial(oracle, artifact_paths(spec))
+            # Harbor refuses to regrade a trial with a declared artifact missing
+            # ("the verifier would silently grade without it"), so only mutants
+            # that keep every declared path present are comparable this way.
             items = [m for m in mutants(ref, None, max_files=4, max_ast_per_file=3,
-                                        max_ast_files=1)][: a.max_mutants]
+                                        max_ast_files=1)
+                     if m.bundle.missing() == ref.missing()][: a.max_mutants]
             for it in items:
                 safe = it.label.replace("/", "_").replace(":", "_")[:80]
                 src = os.path.join(regr, f"{task}--{safe}--src")
@@ -87,11 +91,11 @@ def main():
                          "rows": json.load(open(res))["rows"] if os.path.exists(res) else []}
     with open(os.path.join(out, "summary.json"), "w") as f:
         json.dump(summary, f, indent=2)
-    n = sum(len(v["rows"]) for v in summary.values())
-    ok = sum(r["agree"] for v in summary.values() for r in v["rows"])
-    fails = sum(r["harbor_reward"] == 0 for v in summary.values() for r in v["rows"])
-    print(f"conformance: {ok}/{n} verifications agree with Harbor across {len(summary)} tasks "
-          f"({fails} of them failing verdicts)")
+    rows = [r for v in summary.values() for r in v["rows"] if r.get("agree") is not None]
+    ok = sum(bool(r["agree"]) for r in rows)
+    fails = sum(r["harbor_reward"] == 0 for r in rows)
+    print(f"conformance: {ok}/{len(rows)} verifications agree with Harbor across "
+          f"{len(summary)} tasks ({fails} of them failing verdicts)")
 
 
 if __name__ == "__main__":

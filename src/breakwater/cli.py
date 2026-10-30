@@ -290,6 +290,13 @@ def cmd_conform(args):
         res = json.load(open(os.path.join(tdir, "result.json")))
         h_rewards = (res.get("verifier_result") or {}).get("rewards")
         h_pr = harbor.primary_reward(h_rewards or {})
+        if h_pr is None:
+            exc = (res.get("exception_info") or {}).get("exception_type")
+            rows.append({"trial": os.path.basename(tdir.rstrip("/")), "harbor_reward": None,
+                         "harbor_exception": exc, "agree": None})
+            _p(f"{os.path.basename(tdir.rstrip('/'))[:40]:40} harbor recorded no reward "
+               f"({exc}); not comparable")
+            continue
         h_checks = {}
         ctrf = os.path.join(tdir, "verifier", "ctrf.json")
         if os.path.exists(ctrf):
@@ -313,7 +320,9 @@ def cmd_conform(args):
         with open(args.json, "w") as f:
             json.dump({"task": spec.name, "verifier_digest": spec.digests["verifier"],
                        "rows": rows}, f, indent=2)
-    _p(f"{len(rows) - mismatches}/{len(rows)} verifications agree with Harbor")
+    scored = [r for r in rows if r["agree"] is not None]
+    _p(f"{len(scored) - mismatches}/{len(scored)} verifications agree with Harbor"
+       f" ({len(rows) - len(scored)} Harbor trials unscored)")
     sys.exit(1 if mismatches else 0)
 
 
