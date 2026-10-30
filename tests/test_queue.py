@@ -7,6 +7,7 @@ no mocks. Where a test needs "the worker stalled past its lease" without
 waiting, it moves lease_expires_at into the past; the lease-expiry test itself
 uses a real short lease and real sleeping.
 """
+import json
 import asyncio
 from collections import Counter
 
@@ -218,12 +219,16 @@ def test_concurrent_submissions_have_exactly_one_winner(pg):
     async def body(*pools):
         await db.create_experiment(pools[0], "C", "x", {}, trials("C", 1))
         row = await db.claim_trial(pools[0], "w0", lease_seconds=LEASE)
-        wins = await asyncio.gather(*(submit(pools[i % len(pools)], row, f"w{i % 3}")
+        # 30 racing submissions of the same claimed execution (e.g. a worker's
+        # retry loop plus a resumed zombie of the same incarnation). Every
+        # submitter is the claimant: a result from a worker that never held the
+        # lease is exactly what `results_without_claim` exists to flag.
+        wins = await asyncio.gather(*(submit(pools[i % len(pools)], row, "w0")
                                       for i in range(30)))
         assert sum(wins) == 1
         assert await pools[0].fetchval("SELECT count(*) FROM results") == 1
         inv = await verify_invariants(pools[0], "C")
-        assert inv["ok"] and inv["accepted_events"] == 1 and inv["suppressed_events"] == 29
+        assert inv["ok"] and inv["accepted_events"] == 1 and inv["suppressed_events"] == 29, json.dumps(inv, default=str)
     run(pg, body, pools=3)
 
 
