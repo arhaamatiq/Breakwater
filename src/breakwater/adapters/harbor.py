@@ -580,6 +580,9 @@ def _verdict(code, secs, timeout, files: dict, metric_res: dict) -> dict:
             raise ValueError(f"no primary reward in {rewards!r}")
         v.update(reward=rewards, primary_reward=pr,
                  outcome="pass" if pr >= 1.0 else "fail")
+        # partial-credit tasks: keep the scalar so margin analysis sees shifts
+        # that the pass/fail split hides
+        v["metrics"]["reward"] = pr
     except FileNotFoundError as e:
         v.update(outcome="error", error_kind="no_reward", error=str(e))
     except (ValueError, json.JSONDecodeError) as e:
