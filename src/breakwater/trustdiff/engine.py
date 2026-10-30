@@ -72,6 +72,8 @@ class DiffConfig:
     # [(task, dir)] recorded Harbor trials (harbor run / harbor trial download);
     # each becomes a bundle expected to keep the reward Harbor recorded
     imports: list = field(default_factory=list)
+    # [(task, label, expect, tar_path)] prebuilt bundles (e.g. exported receipts)
+    bundles: list = field(default_factory=list)
 
 
 class Matrix:
@@ -207,6 +209,12 @@ class TaskDiff:
             self.corpus.append(CorpusItem(f"solution_fixture::{fname}", "fixture", fb,
                                           {"expect": expect, "diff": text[:4000],
                                            "solve_exit": fd.get("solution_exit_code")}))
+        for task_name, label, expect, tar_path in self.cfg.bundles:
+            if task_name == spec.name:
+                with open(tar_path, "rb") as f:
+                    bb = Bundle.from_tar(f.read(), artifact_paths(spec))
+                self.corpus.append(CorpusItem(f"bundle::{label}", "fixture", bb,
+                                              {"expect": expect, "source": tar_path}))
         for task_name, root in self.cfg.imports:
             if task_name == spec.name:
                 self.corpus += imported_trials(root, spec)

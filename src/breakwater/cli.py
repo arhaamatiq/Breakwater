@@ -211,7 +211,9 @@ def cmd_diff(args):
         max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap,
         prune_images=args.prune_images, fixtures=_fixtures(args.fixture),
         solution_fixtures=_fixtures(args.solution_fixture),
-        imports=[tuple(x.split(":", 1)) for x in args.import_trials])
+        imports=[tuple(x.split(":", 1)) for x in args.import_trials],
+        bundles=[(t, n, None if e in ("", "unknown") else e, p) for t, n, e, p in
+                 (x.split(":", 3) for x in args.bundle)])
     out = args.out or os.path.join("reports", "trustdiff", time.strftime("%Y%m%d-%H%M%S"))
     os.makedirs(out, exist_ok=True)
 
@@ -381,6 +383,8 @@ def main(argv=None):
                    help="add a constructed candidate solution: PATCH (unified diff, paths from the "
                         "task dir, e.g. a/solution/solve.py) is applied to solution/, solved once, "
                         "and the output judged by both versions")
+    d.add_argument("--bundle", action="append", default=[], metavar="TASK:LABEL:EXPECT:TAR",
+                   help="a saved bundle tar (e.g. from a report's bundles/) to judge")
     d.add_argument("--import", dest="import_trials", action="append", default=[],
                    metavar="TASK:DIR", help="recorded Harbor trial dir(s) to judge with both "
                    "versions (e.g. from `harbor trial download`); expected = recorded reward")
