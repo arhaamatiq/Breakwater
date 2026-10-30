@@ -53,10 +53,13 @@ Same bytes, both verifier versions, `breakwater diff --repo terminal-bench
 
 | bundle (derived from the reference output) | v4.0.0 (pytest) | main (RewardKit) |
 |---|---|---|
-| reference | pass ×5 | pass ×5 |
+| reference | pass ×2 | pass ×2 |
 | `zero_all` — every artifact truncated to 0 bytes | **fail ×5** (reward 0) | **error ×5** (no reward) |
 | `halve_all` — every artifact truncated to half | **fail ×5** (reward 0) | **error ×5** (no reward) |
-| no-op, `drop_all`, `digits_all`, three `drop_file` mutants | fail | fail |
+| no-op, `drop_all`, `digits_all`, two `drop_path` mutants | fail ×2 each | fail ×2 each |
+
+Uncontested bundles run twice per version; any bundle whose verdicts differ is
+topped up to five runs per version.
 
 Head-version log (RewardKit):
 
