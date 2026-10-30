@@ -192,3 +192,11 @@ def test_version_specific_reference_is_judged_on_its_own_version():
     ref_base = CorpusItem("reference@base", "reference", Bundle({}, ["/a"]),
                           {"expect": None, "version": "base"})
     assert classify(ref_base, _rows(["error"] * 3), _rows(["pass"] * 3))["class"] == "reference_rejected"
+
+
+def test_fail_to_error_is_significant_on_the_error_count():
+    item = CorpusItem("zero_all", "degenerate", Bundle({}, ["/a"]), {})
+    r = classify(item, _rows(["fail"] * 5), _rows(["error"] * 5))
+    assert r["class"] == "verifier_error_introduced"
+    assert r["fisher_outcome"] in ("fail", "error") and r["fisher_p"] < 0.01
+    assert r["deterministic"] is True

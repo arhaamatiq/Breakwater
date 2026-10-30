@@ -178,7 +178,8 @@
               2.072882347507467
             ]
           },
-          "receipt": "receipts/vf2-speedup-networkx--false_fail_introduced--3876e667.json"
+          "receipt": "receipts/vf2-speedup-networkx--false_fail_introduced--3876e667.json",
+          "fisher_outcome": "pass"
         },
         {
           "label": "noop",
@@ -270,7 +271,8 @@
               1.7786989319590707,
               3.1531060447605106
             ]
-          }
+          },
+          "fisher_outcome": null
         }
       ]
     },
@@ -399,7 +401,8 @@
               1.3471830985915492
             ]
           },
-          "receipt": "receipts/ks-solver-cpp--error_both--3bb170b0.json"
+          "receipt": "receipts/ks-solver-cpp--error_both--3bb170b0.json",
+          "fisher_outcome": null
         },
         {
           "label": "noop",
@@ -496,7 +499,8 @@
               1.1577757685352623
             ]
           },
-          "receipt": "receipts/ks-solver-cpp--error_both--6dfa4835.json"
+          "receipt": "receipts/ks-solver-cpp--error_both--6dfa4835.json",
+          "fisher_outcome": null
         }
       ]
     }

@@ -252,10 +252,22 @@ def cmd_report(args):
     from .trustdiff import engine, report
     path = os.path.join(args.run_dir, "trustdiff.json")
     result = json.load(open(path))
+    from .trustdiff import stats
     for t in result["tasks"]:
         for b in t.get("bundles", []):
             b["class"], b["severity"] = engine._transition(b["expect"], b["base"]["state"],
                                                            b["head"]["state"])
+            if b["meta"].get("version") in ("base", "head"):
+                own = b["base" if b["meta"]["version"] == "base" else "head"]["state"]
+                b["class"], b["severity"] = (("reference_changed", "INFO") if own == "PASS"
+                                             else ("reference_rejected", "HIGH"))
+            p, cat = 1.0, None
+            for c in ("pass", "fail", "error"):
+                x, y = b["base"], b["head"]
+                pc = stats.fisher_exact(x[c], x["n"] - x[c], y[c], y["n"] - y[c])
+                if x["n"] and y["n"] and pc < p:
+                    p, cat = pc, c
+            b["fisher_p"], b["fisher_outcome"] = p, cat
     meta = report.export(result, args.run_dir)
     _p(f"re-rendered {args.run_dir}/REPORT.md ({len(meta['receipts'])} receipts)")
 

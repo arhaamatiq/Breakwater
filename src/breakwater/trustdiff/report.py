@@ -152,7 +152,8 @@ def render(result: dict, cli: str = "breakwater") -> str:
             f"`{x['expect'] or 'unknown'}`.",
             "",
             f"- base: {_fmt_arm(x['base'])} · head: {_fmt_arm(x['head'])} · Fisher p = "
-            f"{x['fisher_p']:.4f}{det}",
+            f"{x['fisher_p']:.4f}" + (f" ({x['fisher_outcome']} count)" if x.get('fisher_outcome') else "")
+            + det,
         ]
         if x["checks_moved"]:
             mv = ", ".join(f"`{c['check']}` {_r(c['base_pass_rate'])}→{_r(c['head_pass_rate'])}"

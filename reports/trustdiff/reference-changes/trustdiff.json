@@ -232,7 +232,8 @@
               19.360033726812816
             ]
           },
-          "receipt": "receipts/music-harmony--reference_changed--3c508adf.json"
+          "receipt": "receipts/music-harmony--reference_changed--3c508adf.json",
+          "fisher_outcome": "pass"
         },
         {
           "label": "reference@head",
@@ -380,7 +381,8 @@
               12.30536912751678
             ]
           },
-          "receipt": "receipts/music-harmony--reference_changed--077c52c3.json"
+          "receipt": "receipts/music-harmony--reference_changed--077c52c3.json",
+          "fisher_outcome": null
         },
         {
           "label": "noop",
@@ -514,7 +516,8 @@
               201.0612244897959,
               233.8021978021978
             ]
-          }
+          },
+          "fisher_outcome": null
         },
         {
           "label": "zero_all",
@@ -648,7 +651,8 @@
               10.580060422960724,
               13.65431164901664
             ]
-          }
+          },
+          "fisher_outcome": null
         },
         {
           "label": "halve_all",
@@ -782,7 +786,8 @@
               10.982743744607419,
               15.859570661896242
             ]
-          }
+          },
+          "fisher_outcome": null
         }
       ]
     },
@@ -998,7 +1003,8 @@
               2.8554143241261305
             ]
           },
-          "receipt": "receipts/telecom-entity-resolution--reference_changed--0a8de976.json"
+          "receipt": "receipts/telecom-entity-resolution--reference_changed--0a8de976.json",
+          "fisher_outcome": null
         },
         {
           "label": "noop",
@@ -1167,7 +1173,8 @@
               2.895570643388296,
               5.023970818134445
             ]
-          }
+          },
+          "fisher_outcome": null
         },
         {
           "label": "zero_all",
@@ -1336,7 +1343,8 @@
               2.0103857566765577,
               4.065176908752328
             ]
-          }
+          },
+          "fisher_outcome": null
         },
         {
           "label": "halve_all",
@@ -1505,7 +1513,8 @@
               2.2911925175370227,
               2.6260175838489093
             ]
-          }
+          },
+          "fisher_outcome": null
         },
         {
           "label": "digits_all",
@@ -1674,7 +1683,8 @@
               3.134619208590177,
               3.577268835616439
             ]
-          }
+          },
+          "fisher_outcome": null
         }
       ]
     }

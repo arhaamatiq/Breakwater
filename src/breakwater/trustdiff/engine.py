@@ -521,7 +521,14 @@ def classify(item: CorpusItem, base_rows: list[dict], head_rows: list[dict]) -> 
         own_state = (b if own == "base" else h)["state"]
         klass, sev = (("reference_changed", "INFO") if own_state == "PASS"
                       else ("reference_rejected", "HIGH"))
-    p = stats.fisher_exact(b["pass"], b["n"] - b["pass"], h["pass"], h["n"] - h["pass"])
+    # test the outcome category that actually moved (pass, fail or error):
+    # fail x5 -> error x5 is as decisive as pass -> fail, but invisible to a
+    # pass-count test
+    p, moved_outcome = 1.0, None
+    for cat in ("pass", "fail", "error"):
+        pc = stats.fisher_exact(b[cat], b["n"] - b[cat], h[cat], h["n"] - h[cat])
+        if b["n"] and h["n"] and pc < p:
+            p, moved_outcome = pc, cat
     moved = []
     for name in sorted(set(b["checks"]) | set(h["checks"])):
         bv, hv = b["checks"].get(name), h["checks"].get(name)
@@ -537,12 +544,13 @@ def classify(item: CorpusItem, base_rows: list[dict], head_rows: list[dict]) -> 
                          "systematic": not (ci[1] <= 1.0 <= ci[2]),
                          "mann_whitney_p": stats.mann_whitney_p(b["metrics"][m], h["metrics"][m])}
     wall = stats.bootstrap_ratio_ci(b["wall_s"], h["wall_s"])
-    deterministic = (b["state"] in ("PASS", "FAIL") and h["state"] in ("PASS", "FAIL")
+    deterministic = (b["state"] in ("PASS", "FAIL", "ERROR")
+                     and h["state"] in ("PASS", "FAIL", "ERROR")
                      and b["n"] >= 5 and h["n"] >= 5)
     return {
         "label": item.label, "kind": item.kind, "expect": item.expect,
         "bundle": item.bundle.digest, "meta": {k: v for k, v in item.meta.items()},
-        "class": klass, "severity": sev, "fisher_p": p,
+        "class": klass, "severity": sev, "fisher_p": p, "fisher_outcome": moved_outcome,
         "deterministic": deterministic if b["state"] != h["state"] else None,
         "base": {k: v for k, v in b.items() if k not in ("checks", "metrics")},
         "head": {k: v for k, v in h.items() if k not in ("checks", "metrics")},
