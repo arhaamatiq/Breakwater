@@ -159,8 +159,11 @@ def _isolated_docker_config() -> str:
     os.makedirs(d, exist_ok=True)
     cfg = os.path.join(d, "config.json")
     if not os.path.exists(cfg):
+        # no credentials, but keep the user's CLI plugins (docker compose)
+        plugins = [p for p in (os.path.expanduser("~/.docker/cli-plugins"),
+                               "/usr/local/lib/docker/cli-plugins") if os.path.isdir(p)]
         with open(cfg, "w") as f:
-            f.write("{}\n")
+            json.dump({"cliPluginsExtraDirs": plugins}, f)
     return d
 
 
