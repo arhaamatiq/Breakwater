@@ -8,7 +8,7 @@ conversation itself.
 
 | finding | kind | status |
 |---|---|---|
-| [Malformed submissions crash migrated RewardKit verifiers](rewardkit-submission-errors.md) (`glycan-ms2-elucidation`, `fin-saccr-rwa`) | verdict-semantics regression introduced by PR #2287 | confirmed (Breakwater ×2 tasks; official harness on glycan) |
+| [Malformed submissions crash migrated RewardKit verifiers](rewardkit-submission-errors.md) (`glycan-ms2-elucidation`, `fin-saccr-rwa`, `gsea-proteomics`) | verdict-semantics regression introduced by PR #2287 | confirmed on 3/3 exposed tasks (official harness on glycan) |
 | [batched-eval-parity never tests a stop string at offset 0](batched-eval-parity-stop-at-offset-0.md) | test-depth gap, present at v4.0.0 and main | mutant survives; divergence witness |
 | [PR #2300 shifted VF2's measured speedup on identical code](pr-2300-score-changes.md) | measurement change behind historical score drops | confirmed on this host; related to northset's main-branch measurement |
 | [PR #1965 moves exactly the documented verdict](pr-1965-biped-margin.md) | differential evidence for an open upstream fix | confirmed; receipt replays |

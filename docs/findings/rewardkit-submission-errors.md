@@ -1,8 +1,9 @@
 # Malformed submissions crash migrated verifiers instead of scoring 0
 
-**Status:** confirmed on two tasks — `glycan-ms2-elucidation` (with Breakwater
-and with the official harness, harbor 0.25 `trial regrade`) and
-`fin-saccr-rwa` (Breakwater). Not yet reported upstream.
+**Status:** confirmed on all three exposed tasks — `glycan-ms2-elucidation`
+(with Breakwater and with the official harness, harbor 0.25 `trial regrade`),
+`fin-saccr-rwa` and `gsea-proteomics` (Breakwater; gsea under `linux/amd64`
+because its reference ships an x86-64 binary). Not yet reported upstream.
 
 ## Summary
 
@@ -39,12 +40,15 @@ module:
 |---|---|---|---|---|
 | glycan-ms2-elucidation | `zipfile.BadZipFile` | `.xlsx` artifact truncated / emptied | reward 0 ×5 | no reward ×5 |
 | fin-saccr-rwa | `_csv.Error: field larger than field limit (131072)` | one 200,000-char field in `sa_ccr_results.csv` | reward 0 ×5 | no reward ×5 |
-| gsea-proteomics | `_csv.Error` (same parser) | — | see note | see note |
+| gsea-proteomics | `_csv.Error: field larger than field limit (131072)` in `test_csv_is_parseable` | one 200,000-char field in `/results/output.csv` | reward 0 ×5 | no reward ×5 |
 
 `fin-saccr-rwa`'s allowlist already includes `BadZipFile`, `ParseError` and
-`InvalidFileException`, but not `csv.Error`. gsea-proteomics reads its CSV
-outputs with the same `csv` module; its reference ships an x86-64 GSEA binary,
-so it needs an amd64 host to confirm (pending here).
+`InvalidFileException`, but not `csv.Error`. In gsea-proteomics the criterion
+that crashes is literally named `test_csv_is_parseable`: the check whose job
+is to score an unparseable CSV as a failure aborts the reward instead.
+
+The static prediction (three tasks parse submissions with `openpyxl` or
+`csv`; five only with JSON/pandas) matched the dynamic result exactly.
 
 ## Evidence
 
