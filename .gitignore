@@ -7,3 +7,5 @@ external/
 .claude/
 dist/
 *.egg-info/
+reports/conformance/harbor-jobs/
+reports/conformance/harbor-regrades/
