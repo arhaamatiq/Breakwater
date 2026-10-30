@@ -1,7 +1,8 @@
 # Malformed submissions crash migrated verifiers instead of scoring 0
 
-**Status:** confirmed on `glycan-ms2-elucidation` with Breakwater and with the
-official harness (harbor 0.25 `trial regrade`). Not yet reported upstream.
+**Status:** confirmed on two tasks — `glycan-ms2-elucidation` (with Breakwater
+and with the official harness, harbor 0.25 `trial regrade`) and
+`fin-saccr-rwa` (Breakwater). Not yet reported upstream.
 
 ## Summary
 
@@ -22,6 +23,28 @@ a non-workbook file (`zipfile.BadZipFile`,
 `xml.etree.ElementTree.ParseError`), although the task reads a declared,
 agent-writable artifact with `openpyxl.load_workbook`. The sibling task
 `fin-saccr-rwa`, migrated in the same PR, includes exactly those three.
+
+## Scope
+
+Eight tasks migrated in #2287 guard criteria with a `SUBMISSION_ERRORS`
+allowlist. For five of them (`foodstuff-beta-activity`,
+`hof-topology-interpenetration`, `protein-autointerp-disulfide`,
+`roy-polymorph-cn`, `telecom-entity-resolution`) every submission parser
+raises `ValueError` subclasses (JSON, pandas), which the allowlist covers;
+Breakwater's degenerate corpus confirms they still score malformed outputs 0.
+The exposed tasks are the ones parsing with `openpyxl` or Python's `csv`
+module:
+
+| task | escaping exception | trigger (mechanical) | v4.0.0 | main |
+|---|---|---|---|---|
+| glycan-ms2-elucidation | `zipfile.BadZipFile` | `.xlsx` artifact truncated / emptied | reward 0 ×5 | no reward ×5 |
+| fin-saccr-rwa | `_csv.Error: field larger than field limit (131072)` | one 200,000-char field in `sa_ccr_results.csv` | reward 0 ×5 | no reward ×5 |
+| gsea-proteomics | `_csv.Error` (same parser) | — | see note | see note |
+
+`fin-saccr-rwa`'s allowlist already includes `BadZipFile`, `ParseError` and
+`InvalidFileException`, but not `csv.Error`. gsea-proteomics reads its CSV
+outputs with the same `csv` module; its reference ships an x86-64 GSEA binary,
+so it needs an amd64 host to confirm (pending here).
 
 ## Evidence
 
@@ -66,11 +89,12 @@ written into a copy of a Harbor oracle trial):
 
 ## Suggested fix
 
-Add `BadZipFile`, `InvalidFileException` and `ParseError` to
-`glycan-ms2-elucidation/tests/checks.py`'s `SUBMISSION_ERRORS`, as
-`fin-saccr-rwa` already does (or adopt `bun-sourcemap-leak`'s pattern: score
-any exception from submission handling as 0 and re-raise only RewardKit's
-`WorkerSetupError`).
+Per task: add `BadZipFile`, `InvalidFileException` and `ParseError` to
+glycan's `SUBMISSION_ERRORS` (as fin-saccr-rwa already does), and `csv.Error`
+to fin-saccr-rwa's and gsea-proteomics'. More robust: adopt
+`bun-sourcemap-leak`'s pattern — score any exception raised while handling
+the submission as 0 and re-raise only RewardKit's `WorkerSetupError` — so a
+new parser cannot reintroduce the gap.
 
 ## Reproduce
 
