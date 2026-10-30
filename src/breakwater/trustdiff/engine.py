@@ -143,7 +143,7 @@ class TaskDiff:
     async def build_corpus(self) -> list[CorpusItem]:
         src = self.cfg.solve_from
         spec, task = self.specs[src], self.tasks[src]
-        tag = (f"{harbor.RUNTIME_VERSION}/{spec.name}/{spec.digests['environment'][:12]}-"
+        tag = (f"{harbor.runtime_tag(spec)}/{spec.name}/{spec.digests['environment'][:12]}-"
                f"{spec.digests['solution'][:12]}")
         wanted = {"reference": "oracle", "noop": "noop"}
         trials = []
@@ -155,7 +155,7 @@ class TaskDiff:
                                                         "solve_timeout_cap": self.cfg.solve_timeout_cap,
                                                         "task_blob": task}})
         if "path" in self.cfg.corpus:
-            trials.append({"trial_id": f"snapshot/{harbor.RUNTIME_VERSION}/{spec.name}/"
+            trials.append({"trial_id": f"snapshot/{harbor.runtime_tag(spec)}/{spec.name}/"
                                        f"{spec.digests['environment'][:12]}",
                            "task_id": f"hb_{spec.short_id}", "replicate": 0,
                            "spec": {"mode": "snapshot", "task_blob": task}})
@@ -166,7 +166,7 @@ class TaskDiff:
             blob = patch_solution(task, text)
             tree_d = hashlib.sha256(json.dumps(blob["hb"]["solution_tree"], sort_keys=True)
                                     .encode()).hexdigest()[:12]
-            tid = (f"solve/{harbor.RUNTIME_VERSION}/{spec.name}/"
+            tid = (f"solve/{harbor.runtime_tag(spec)}/{spec.name}/"
                    f"{spec.digests['environment'][:12]}-{tree_d}/oracle")
             sol_fx[tid] = (fname, expect, text)
             trials.append({"trial_id": tid, "task_id": f"hb_{spec.short_id}", "replicate": 0,
@@ -200,7 +200,7 @@ class TaskDiff:
                 self.corpus.append(CorpusItem("noop", "noop", nb, {}))
         snap = None
         if "path" in self.cfg.corpus:
-            snap, _ = bundle_of(f"snapshot/{harbor.RUNTIME_VERSION}/{spec.name}/"
+            snap, _ = bundle_of(f"snapshot/{harbor.runtime_tag(spec)}/{spec.name}/"
                                 f"{spec.digests['environment'][:12]}")
         include = tuple(k for k in ("degenerate", "path", "file", "ast") if k in self.cfg.corpus)
         self.corpus += mutants(ref, snap, max_files=self.cfg.max_files,
@@ -245,7 +245,7 @@ class TaskDiff:
     # ------------------------------------------------------------ matrix
     def _trial(self, item: CorpusItem, vlabel: str, k: int) -> dict:
         spec = self.specs[vlabel]
-        return {"trial_id": f"td/{harbor.RUNTIME_VERSION}/{spec.digests['verifier'][:16]}/"
+        return {"trial_id": f"td/{harbor.runtime_tag(spec)}/{spec.digests['verifier'][:16]}/"
                             f"{_hex(item.bundle.digest)}/r{k}",
                 "task_id": f"hb_{spec.short_id}", "replicate": k,
                 "spec": {"mode": "verify_only", "outputs": [{"bundle": item.bundle.digest}],
@@ -439,7 +439,10 @@ def _arm(rows: list[dict]) -> dict:
 def _transition(expect: str | None, bs: str, hs: str) -> tuple[str, str]:
     if "NONE" in (bs, hs):
         return "incomplete", "INFO"
-    if bs == hs and bs in ("PASS", "FAIL", "ERROR"):
+    if bs == hs == "ERROR":
+        # no reward under either version: suspect the harness/platform first
+        return "error_both", "HIGH" if expect == "pass" else "MEDIUM"
+    if bs == hs and bs in ("PASS", "FAIL"):
         if expect is None and bs == "PASS":
             return "survives_both", "LOW"
         if expect == "fail" and bs == "PASS":

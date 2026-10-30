@@ -235,3 +235,12 @@ def test_empty_dirs_matches_harbor_shape():
     cmd = _empty_dirs_cmd(["/app/"])
     assert "find '/app/' -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +" in cmd
     assert cmd.endswith("chmod 777 '/app/'")
+
+
+def test_platform_hint_from_arch_specific_wheels(tmp_path):
+    d = _task(tmp_path, 'artifacts=["/a"]\n[verifier]\nenvironment_mode="separate"\n')
+    assert parse_task(d).platform is None
+    wheels = os.path.join(d, "tests", "wheels")
+    os.makedirs(wheels)
+    open(os.path.join(wheels, "numpy-2.1.3-cp312-cp312-manylinux_2_17_x86_64.whl"), "w").close()
+    assert parse_task(d).platform == "linux/amd64"

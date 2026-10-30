@@ -63,6 +63,7 @@ def test_mann_whitney():
     ("pass", "MIXED", "PASS", "instability_removed"),
     ("pass", "MIXED", "MIXED", "unstable_both"),
     ("pass", "NONE", "PASS", "incomplete"),
+    ("pass", "ERROR", "ERROR", "error_both"),
 ])
 def test_transition_table(expect, b, h, klass):
     assert _transition(expect, b, h)[0] == klass

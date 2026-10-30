@@ -17,7 +17,7 @@ REPORTABLE = {"false_pass_introduced", "false_fail_introduced", "strictness_regr
               "verifier_error_introduced", "instability_introduced", "unstable_both",
               "false_pass_both", "false_fail_both", "survives_both", "hardening",
               "false_fail_fixed", "false_pass_fixed", "verifier_error_fixed",
-              "instability_removed"}
+              "instability_removed", "error_both"}
 EXPLAIN = {
     "false_pass_introduced": "a known-bad output (no-op / degenerate) now PASSES",
     "false_fail_introduced": "a known-good output (reference / control) now FAILS",
@@ -33,6 +33,8 @@ EXPLAIN = {
     "false_pass_fixed": "a known-bad output that passed is now rejected",
     "verifier_error_fixed": "head gives a verdict where base errored",
     "instability_removed": "verdict became deterministic",
+    "error_both": ("no reward under either version — check the harness and platform "
+                   "before reading anything else about this task"),
 }
 
 

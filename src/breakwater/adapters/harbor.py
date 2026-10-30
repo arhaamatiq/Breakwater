@@ -65,6 +65,20 @@ ORACLE = "__harbor_oracle__"        # sentinel: run the task's own solution/ tre
 # content-addressed trial id so results from an older runtime are never reused.
 RUNTIME_VERSION = "hb2"
 
+
+def task_platform(spec) -> str | None:
+    """BW_DOCKER_PLATFORM forces a platform for every task; otherwise a task
+    that ships arch-specific binaries runs under the platform it needs
+    (emulated on a different host arch, which is recorded per trial)."""
+    return os.environ.get("BW_DOCKER_PLATFORM") or getattr(spec, "platform", None)
+
+
+def runtime_tag(spec) -> str:
+    """Trial-id component: runtime version plus any non-native platform, since
+    the same bytes on a different architecture are a different experiment."""
+    p = task_platform(spec)
+    return RUNTIME_VERSION + (f"-{p.split('/')[-1]}" if p else "")
+
 LAST_LOAD_REPORT: dict = {}
 _INFRA_SKIPS = ("build_failed",)
 _LOCK_DIR = os.path.join(cas.BW_HOME, "locks")
@@ -210,18 +224,20 @@ def _file_lock(name: str):
             fcntl.flock(fh, fcntl.LOCK_UN)
 
 
-def _image_tag(kind: str, spec_name: str, digest: str) -> str:
-    return f"breakwater/{kind}-{spec_name}:{digest[:12]}"
+def _image_tag(kind: str, spec_name: str, digest: str, platform: str | None = None) -> str:
+    arch = f"-{platform.split('/')[-1]}" if platform else ""
+    return f"breakwater/{kind}-{spec_name}:{digest[:12]}{arch}"
 
 
-def _ensure_image(context: str, tag: str, prebuilt: str | None) -> str:
+def _ensure_image(context: str, tag: str, prebuilt: str | None,
+                  platform: str | None = None) -> str:
     client = docker_client()
     if prebuilt:
         with _file_lock(prebuilt):
             try:
                 client.images.get(prebuilt)
             except Exception:
-                client.images.pull(prebuilt)
+                client.images.pull(prebuilt, platform=platform)
         return prebuilt
     with _file_lock(tag):
         try:
@@ -229,7 +245,8 @@ def _ensure_image(context: str, tag: str, prebuilt: str | None) -> str:
         except Exception:
             for attempt in range(3):
                 try:
-                    client.images.build(path=context, tag=tag, rm=True, forcerm=True)
+                    client.images.build(path=context, tag=tag, rm=True, forcerm=True,
+                                        platform=platform)
                     break
                 except Exception as e:
                     # containerd races between concurrent builds of different
@@ -342,14 +359,18 @@ def _expand(env: dict) -> dict:
     return {k: sub(v) for k, v in env.items()}
 
 
-def _start(image: str, env_spec, fidelity: dict, phase: str, network_override=None):
+def _start(image: str, env_spec, fidelity: dict, phase: str, network_override=None,
+           platform: str | None = None):
     # Harbor's no-network compose uses `network_mode: none`, which keeps a
     # loopback interface and a /etc/hosts entry for localhost; docker-py's
     # network_disabled=True does not, and breaks verifiers that talk to a
     # local worker or chromedriver over localhost.
     net = {"network_mode": "none"} if _no_network(env_spec.network, network_override) else {}
+    if platform:
+        fidelity["platform"] = platform
     c = docker_client().containers.run(
         image, command=["sh", "-c", "sleep infinity"], detach=True, **net,
+        **({"platform": platform} if platform else {}),
         labels={"breakwater.phase": phase},
         **_resources(env_spec, fidelity, phase))
     return c
@@ -361,12 +382,13 @@ def _start(image: str, env_spec, fidelity: dict, phase: str, network_override=No
 
 class HarborRuntime:
     def ensure_images(self, spec: HarborTaskSpec) -> tuple[str, str]:
+        plat = task_platform(spec)
         env_img = _ensure_image(spec.agent_env.context,
-                                _image_tag("env", spec.name, spec.agent_env.digest),
-                                spec.agent_env.docker_image)
+                                _image_tag("env", spec.name, spec.agent_env.digest, plat),
+                                spec.agent_env.docker_image, plat)
         v = spec.verifier_env
-        ver_img = _ensure_image(v.context, _image_tag("verifier", spec.name, v.digest),
-                                v.docker_image)
+        ver_img = _ensure_image(v.context, _image_tag("verifier", spec.name, v.digest, plat),
+                                v.docker_image, plat)
         return env_img, ver_img
 
     # ---------------------------------------------------------------- solve
@@ -374,7 +396,8 @@ class HarborRuntime:
               fidelity: dict, network_override=None, timeout_cap: float | None = None):
         """Run a solution in the agent env; return (Bundle, exit_code, log, secs)."""
         env_img, _ = self.ensure_images(spec)
-        c = _start(env_img, spec.agent_env, fidelity, "solve", network_override)
+        c = _start(env_img, spec.agent_env, fidelity, "solve", network_override,
+                   task_platform(spec))
         try:
             _root(c, "mkdir -p /logs/agent /logs/verifier /logs/artifacts && "
                      "chmod 777 /logs/agent /logs/verifier /logs/artifacts")
@@ -412,7 +435,7 @@ class HarborRuntime:
         """Declared artifact paths as the environment image ships them
         (pre-solve). Used by the `unsolved_path` ablation."""
         env_img, _ = self.ensure_images(spec)
-        c = _start(env_img, spec.agent_env, fidelity, "snapshot", "off")
+        c = _start(env_img, spec.agent_env, fidelity, "snapshot", "off", task_platform(spec))
         try:
             return self._collect(c, spec)
         finally:
@@ -435,7 +458,8 @@ class HarborRuntime:
     def verify(self, spec: HarborTaskSpec, bundle: Bundle, env: dict, fidelity: dict,
                network_override=None, metrics: dict | None = None) -> dict:
         _, ver_img = self.ensure_images(spec)
-        c = _start(ver_img, spec.verifier_env, fidelity, "verify", network_override)
+        c = _start(ver_img, spec.verifier_env, fidelity, "verify", network_override,
+                   task_platform(spec))
         try:
             _root(c, _empty_dirs_cmd(["/logs/verifier"]))
             for p in artifact_paths(spec):

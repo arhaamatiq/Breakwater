@@ -79,6 +79,9 @@ class HarborTaskSpec:
     steps: int                    # multi-step tasks (>0) are not supported
     os: str
     digests: dict = field(default_factory=dict)
+    # set when the task ships architecture-specific binaries (e.g. x86_64-only
+    # wheels): it must run under this platform even on an arm64 host
+    platform: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -158,6 +161,25 @@ def _service_count(env_dir: str) -> int:
     return 0
 
 
+_ARCH_BINARY = re.compile(r"(x86_64|amd64)[^/]*\.(whl|deb|rpm)$")
+_FROM_PLATFORM = re.compile(r"^\s*FROM\s+--platform=(\S+)", re.M | re.I)
+
+
+def platform_hint(task_dir: str) -> str | None:
+    """linux/amd64 if the task pins it or ships x86_64-only binaries; else None."""
+    for sub in ("environment", "tests"):
+        root = os.path.join(task_dir, sub)
+        for dirpath, _, files in os.walk(root):
+            for fn in files:
+                if fn == "Dockerfile":
+                    m = _FROM_PLATFORM.search(open(os.path.join(dirpath, fn), errors="ignore").read())
+                    if m and "$" not in m.group(1):
+                        return m.group(1)
+                if _ARCH_BINARY.search(fn):
+                    return "linux/amd64"
+    return None
+
+
 def parse_task(task_dir: str) -> HarborTaskSpec:
     task_dir = os.path.abspath(task_dir)
     with open(os.path.join(task_dir, "task.toml"), "rb") as f:
@@ -213,7 +235,8 @@ def parse_task(task_dir: str) -> HarborTaskSpec:
         solution_env_vars={k: str(v) for k, v in
                            ((cfg.get("solution") or {}).get("env") or {}).items()},
         collect=collect, test_script="/tests/test.sh",
-        steps=len(cfg.get("steps") or []), os=str(env_cfg.get("os", "linux")).lower())
+        steps=len(cfg.get("steps") or []), os=str(env_cfg.get("os", "linux")).lower(),
+        platform=platform_hint(task_dir))
 
     verifier_contract = {
         "artifacts": artifacts, "mode": mode, "verifier": {
