@@ -56,6 +56,13 @@ A verifier audit is only as trustworthy as the harness that runs the verifier.
 | upload | per artifact: directory → **emptied**, then uploaded; file → parent created; tarfile `data` filter | same |
 | verdict | `reward.json` if present, else `reward.txt`; test.sh exit code ignored; missing reward = error | same |
 
+Platform: a task that pins a platform or ships architecture-specific
+binaries (e.g. `ks-solver-cpp`'s x86-64-only NumPy/SciPy wheels) is built and
+run for that platform — emulated on an arm64 host, recorded per trial, and
+part of the trial id. A bundle that gets no reward under *either* version is
+classified `error_both` and points at the harness or platform first; that is
+how this case was found.
+
 Deliberate deltas: logs are copied out rather than bind-mounted (bind mounts
 are why RewardKit's Worker fails closed on macOS hosts), `allowlist` egress
 policies are not emulated (those tasks are skipped with a reason), and
@@ -120,6 +127,12 @@ sequenceDiagram
   would otherwise let its old incarnation extend the new lease.
 - **Reaper**: expired leases are requeued, or marked `failed` with
   `last_error` after `max_attempts`.
+- **Lease length is per workload.** The chaos demo uses 6 s leases to show
+  fast recovery. Benchmark trials hold a worker for minutes, and a worker
+  thread streaming a large image-build log can delay the heartbeat loop past
+  6 s; that is still safe (the trial is reaped, re-run, and the ledger keeps
+  one result), but it wastes work. `breakwater diff` workers default to 60 s
+  leases with 5 s heartbeats.
 - **Ledger**: `results` has `trial_id` as primary key and every submission is
   `INSERT … ON CONFLICT DO NOTHING`. Execution can happen many times; one
   result counts. Submissions from superseded leases are flagged
