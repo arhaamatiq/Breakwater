@@ -164,6 +164,16 @@ def cmd_check(args):
     sys.exit(1 if bad else 0)
 
 
+def _fixtures(specs: list[str]) -> list:
+    """TASK:NAME:EXPECT:PATCH_FILE -> (task, name, expect|None, patch text)."""
+    out = []
+    for s in specs:
+        task, name, expect, path = s.split(":", 3)
+        out.append((task, name, None if expect in ("", "unknown") else expect,
+                    open(path).read()))
+    return out
+
+
 def cmd_diff(args):
     from . import db
     from .trustdiff import engine, report
@@ -197,7 +207,7 @@ def cmd_diff(args):
         network=args.network, solve_from=args.solve_from,
         max_ast_files=args.max_ast_files, max_ast_per_file=args.max_ast_per_file,
         max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap,
-        prune_images=args.prune_images)
+        prune_images=args.prune_images, fixtures=_fixtures(args.fixture))
     out = args.out or os.path.join("reports", "trustdiff", time.strftime("%Y%m%d-%H%M%S"))
     os.makedirs(out, exist_ok=True)
 
@@ -307,6 +317,9 @@ def main(argv=None):
     d.add_argument("--metric", action="append", default=[], metavar="NAME=REGEX",
                    help="numeric margin to extract from test stdout, e.g. "
                         "'speedup=Geomean speedup:\\s+([0-9.]+)x'")
+    d.add_argument("--fixture", action="append", default=[], metavar="TASK:NAME:EXPECT:PATCH",
+                   help="add a hand-written output: the reference bundle with PATCH (a unified "
+                        "diff, paths from /) applied; EXPECT is pass, fail or unknown")
     d.add_argument("--network", choices=["on", "off"], default=None,
                    help="override the task's network policy for every container")
     d.add_argument("--solve-from", choices=["base", "head"], default="base")

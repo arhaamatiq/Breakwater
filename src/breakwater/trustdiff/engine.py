@@ -36,7 +36,7 @@ from ..adapters import harbor
 from ..bundle import Bundle
 from ..adapters.harbor_task import artifact_paths
 from . import stats
-from .corpus import CorpusItem, mutants
+from .corpus import CorpusItem, mutants, patched
 from .versions import Source, TaskVersion
 
 TERMINAL = ("completed", "failed")
@@ -61,6 +61,7 @@ class DiffConfig:
     trial_timeout: float = 6 * 3600
     priority: int = 0
     prune_images: bool = False     # remove a task's images once its diff is done
+    fixtures: list = field(default_factory=list)   # [(task, name, expect, patch_text)]
 
 
 class Matrix:
@@ -167,6 +168,9 @@ class TaskDiff:
         self.corpus += mutants(ref, snap, max_files=self.cfg.max_files,
                                max_ast_per_file=self.cfg.max_ast_per_file,
                                max_ast_files=self.cfg.max_ast_files, include=include)
+        for task_name, fname, expect, text in self.cfg.fixtures:
+            if task_name == spec.name:
+                self.corpus.append(patched(ref, fname, expect, text))
         # one entry per distinct bundle (a no-op can equal drop_all, etc.)
         seen, uniq = set(), []
         for it in self.corpus:

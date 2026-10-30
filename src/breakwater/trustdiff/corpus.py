@@ -46,7 +46,7 @@ class CorpusItem:
 
     @property
     def expect(self) -> str | None:
-        return EXPECT.get(self.kind)
+        return self.meta.get("expect", EXPECT.get(self.kind))
 
 
 def _textish(path: str, data: bytes) -> bool:
@@ -121,3 +121,41 @@ def _unified(a: str, b: str, path: str, n: int = 2) -> str:
     import difflib
     return "".join(difflib.unified_diff(a.splitlines(True), b.splitlines(True),
                                         f"reference{path}", f"mutant{path}", n=n))[:4000]
+
+
+def patched(reference: Bundle, name: str, expect: str | None, patch_text: str) -> CorpusItem:
+    """A hand-written fixture: the reference bundle with a unified diff applied
+    (paths relative to /, e.g. `--- a/app/x.py`). Lets a maintainer pin any
+    constructed output — a known exploit, a known-correct alternative — as a
+    regression input with an expected verdict."""
+    import os
+    import subprocess
+    import tempfile
+    files = reference.files()
+    with tempfile.TemporaryDirectory() as tmp:
+        for p, data in files.items():
+            dst = os.path.join(tmp, p.lstrip("/"))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            with open(dst, "wb") as f:
+                f.write(data)
+        r = subprocess.run(["patch", "-p1", "-s", "-d", tmp, "--no-backup-if-mismatch"],
+                           input=patch_text.encode(), capture_output=True)
+        if r.returncode != 0:
+            raise ValueError(f"fixture {name}: patch failed: {(r.stdout + r.stderr).decode()[:400]}")
+        new, gone = {}, set()
+        for p in files:
+            dst = os.path.join(tmp, p.lstrip("/"))
+            if not os.path.exists(dst):
+                gone.add(p)
+            else:
+                with open(dst, "rb") as f:
+                    if f.read() != files[p]:
+                        new[p] = open(dst, "rb").read()
+        for root, _, fns in os.walk(tmp):
+            for fn in fns:
+                p = "/" + os.path.relpath(os.path.join(root, fn), tmp)
+                if p not in files:
+                    new[p] = open(os.path.join(root, fn), "rb").read()
+    b = reference.replace(drop=gone, set_files=new)
+    return CorpusItem(f"fixture::{name}", "fixture", b,
+                      {"expect": expect, "diff": patch_text[:4000]})
