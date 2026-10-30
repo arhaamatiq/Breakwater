@@ -124,7 +124,23 @@ The queue is the part that has to be right even when everything else fails.
 | provable accounting | every state change and its event commit together; `verify_invariants()` reconciles ledger ↔ events by SQL | used by tests and the chaos demo |
 | schema upgrades in place | idempotent DDL shipped as package data | v1 database with live rows upgraded twice ≡ fresh install |
 
-<!-- CHAOS -->
+Chaos run (`breakwater chaos`, 136 Docker-isolated trials, 4 workers; one
+worker SIGKILLed, another SIGSTOPped past its lease and resumed —
+[`reports/chaos_demo_report.json`](reports/chaos_demo_report.json)):
+
+| | |
+|---|---|
+| results / trials | **136 / 136** |
+| executions started (at-least-once) | 142 |
+| requeued after lease expiry · recovered by a different worker | 6 · 6 |
+| zombie submissions suppressed (all from superseded leases) | 3 |
+| lost results · duplicate result rows · safety-invariant violations | **0 · 0 · 0** |
+| ledger ↔ event-log reconciliation | 136 results = 136 `result_accepted` events |
+
+The same machinery ran every Trust Diff in this repository: workers were
+added, removed and replaced mid-run (including a full rolling restart onto
+new code), and a deliberately killed coordinator's work was resumed from the
+cached cells.
 
 What this does **not** claim: exactly-once *execution* (impossible with
 crash-stop workers), or that the winning execution is the "right" one —
