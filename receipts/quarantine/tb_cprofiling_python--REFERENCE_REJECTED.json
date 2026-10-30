@@ -84,5 +84,24 @@
     "created_at": "2026-09-09T20:42:56-0700"
   },
   "receipt_id": "b5847e0f7518",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_cprofiling_python--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_cprofiling_python--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: the reference's first line is `pip install requests` and its scripts download images over HTTP; solve and verify run with networking disabled.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_LIMITATION",
+    "mechanism": "solution.sh runs `pip install requests` (fails offline), then writes fast.py/fastest.py which `import requests` and download images from the internet; the tests execute those scripts and hash the downloaded images. Offline: ModuleNotFoundError: requests -> test_speed_comparison fails; no images -> test_image_download fails (hash mismatch).",
+    "evidence": [
+      "13/13 recorded solve logs: pip 'Temporary failure in name resolution' ... 'No matching distribution found for requests'",
+      "newest-layout verify log: /app/fast.py `import requests` -> ModuleNotFoundError; test_image_download: the observed combined hash (17944134937117937889) equals the hash of an EMPTY image set, i.e. zero images were downloaded",
+      "an older adapter revision additionally failed collecting the tests (`No module named 'imagehash'`: run-tests.sh test deps were not yet baked) - that part is already fixed"
+    ],
+    "reproduced": "no (task directory not on disk)",
+    "not_verified": "reference pass under network. Note the task needs network at VERIFY time too (the tests run solution-produced scripts that fetch URLs); that class is not statically detectable from the tests alone",
+    "load_time_guard": "tbench.load skip category `solve_network`; tests/test_tbench_adapter.py::test_solve_network_use_is_detected[pip install (cprofiling-python)]",
+    "needed_to_verify_as_benchmark_property": "restore the task dir and run solution.sh then run-tests.sh in one network-enabled container (the image-hash assertion also depends on live remote content, which is a separate fragility to check)",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_cprofiling_python--REFERENCE_REJECTED.json"
+  }
 }

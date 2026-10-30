@@ -120,5 +120,24 @@
     "created_at": "2026-09-09T22:43:29-0700"
   },
   "receipt_id": "dc32f5a8283b",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_financial_document_processor--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_financial_document_processor--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: the reference `apt-get install`s tesseract and has uv download CPython 3.13 at solve time; neither can happen offline.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_LIMITATION",
+    "mechanism": "solution.sh apt-get installs tesseract-ocr (+deps) and runs a uv inline-script (requires-python >=3.13, numpy/opencv/pymupdf/pytesseract pins) whose interpreter and wheels must be downloaded. Offline: apt 'Temporary failure resolving ports.ubuntu.com' and uv 'failed to download cpython-3.13.7 ... dns error'; solution exits 2, nothing is moved to /app/invoices or /app/other, all 7 tests fail.",
+    "evidence": [
+      "9/9 recorded base-experiment solve logs show both apt `Temporary failure resolving 'ports.ubuntu.com'` and uv `dns error` while downloading cpython-3.13.7; solution_exit_code 2",
+      "verify logs: /app/invoices/summary.csv missing; /app/documents still holds all 17 originals",
+      "an older adapter revision also failed collecting tests (`No module named 'pandas'`); already fixed by the test-deps venv"
+    ],
+    "reproduced": "no (task directory/documents not on disk; the run is also heavy: OCR toolchain download)",
+    "not_verified": "reference pass under network, including whether its OCR-based classification meets the test thresholds",
+    "load_time_guard": "tbench.load skip category `solve_network`; tests/test_tbench_adapter.py::test_solve_network_use_is_detected[apt-get pinned (financial-document-processor)]",
+    "needed_to_verify_as_benchmark_property": "restore the task dir; run solution.sh then run-tests.sh in one network-enabled container",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_financial_document_processor--REFERENCE_REJECTED.json"
+  }
 }

@@ -1,0 +1,65 @@
+{
+  "receipt_version": 1,
+  "task_id": "tb_cancel_async_tasks",
+  "class": "NONDETERMINISTIC_EXECUTION",
+  "property": "P3_DETERMINISM",
+  "property_text": "Identical (cases, outputs, environment) always yield the identical verdict.",
+  "severity": "MEDIUM",
+  "title": "Execution nondeterminism (verifier is stable)",
+  "claim": "End-to-end verdicts flip although re-verifying fixed outputs is stable; the solution/execution side varies.",
+  "witnesses": [],
+  "evidence": [],
+  "stats": {
+    "full_run_outcomes": [
+      "pass",
+      "fail",
+      "fail",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ],
+    "verify_only_outcomes": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "replay": [],
+  "fingerprint": {
+    "image": "python:3.11-slim",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "created_at": "2026-09-09T22:43:29-0700"
+  },
+  "receipt_id": "580c826c84bf",
+  "repro": "uv run python -m projectx.tester replay receipts/tb_cancel_async_tasks--NONDETERMINISTIC_EXECUTION.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not shown to be a benchmark defect: the flakes are wall-clock-window assertions failing under runner concurrency (INFRA); the earlier 100% failures were an adapter staging bug that is already fixed.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "INFRA",
+    "mechanism": "the tests are timing based (SIGINT after time.sleep(0.5); `timeout=5` around 3-second tasks). When the runner executes trials concurrently on a shared Docker VM, process start-up plus the 3s task can exceed those windows, producing partial failures of an otherwise correct solution. Re-verifying the same committed state later (verify_only, idle) passed every time.",
+    "evidence": [
+      "the receipt's 10 full runs map onto recorded trials: base-ca8a35 oracle-0/1/2 (6/6 pass; 5 pass + 1 fail; 3 pass + 3 fail) followed by base2-0c7b0f x0..x6 (7 x 6/6 pass) = [pass, fail, fail, pass x7]; the two failing runs were also the slowest (exec 21.7s / 20.6s vs ~17s typical)",
+      "oracle-2 log: stdout is 'Task started. x2, Task finished. x2, Cleaned up. x2' (the program behaved correctly) yet `subprocess.TimeoutExpired ... after 5 seconds` - a pure wall-clock miss",
+      "other failure shape: test_tasks_cancel_below_max_concurrent got empty stdout, i.e. SIGINT landed before the program printed its first line (0.5s window)",
+      "all 14 recorded verify_only runs on the current layout passed (consistent with the receipt's 8/8); all earlier /px/tests-layout runs failed 5/6 because the bare-name fixture `test.py` was not staged in the workdir - an adapter bug fixed by `_workdir_fixtures`",
+      "receipt is evidence-only: no replay spec and no witnesses"
+    ],
+    "reproduced": "no (task directory/image not on disk)",
+    "not_verified": "that the official harness on an idle machine never flakes; the benchmark's tight windows may be a real (minor) test fragility, but this receipt does not establish it. Failure rate vs runner concurrency was not measured",
+    "load_time_guard": "none (not statically detectable)",
+    "needed_to_verify_as_benchmark_property": "restore the task dir; run the full reference N>=30 at BW_WORKER_CONCURRENCY=1 on an idle machine vs concurrency=3 and compare failure rates; only a failure at concurrency 1 on an idle host would point at the benchmark",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_cancel_async_tasks--NONDETERMINISTIC_EXECUTION.json"
+  }
+}

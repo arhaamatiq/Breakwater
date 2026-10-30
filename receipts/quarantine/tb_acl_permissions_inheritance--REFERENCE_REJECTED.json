@@ -126,5 +126,26 @@
     "created_at": "2026-09-09T20:14:51-0700"
   },
   "receipt_id": "82d0e0836bee",
-  "repro": "uv run python -m projectx.tester replay receipts/tb_acl_permissions_inheritance--REFERENCE_REJECTED.json"
+  "repro": "uv run python -m projectx.tester replay receipts/tb_acl_permissions_inheritance--REFERENCE_REJECTED.json",
+  "status": "quarantined",
+  "quarantine_reason": "Not a benchmark defect: `docker commit` (the adapter's solve->verify state transfer) drops POSIX ACLs, so the reference's setfacl effects never reach the verify container.",
+  "triage": {
+    "triaged_at": "2026-10-29",
+    "triaged_by": "Claude (Sonnet 5.5) for Breakwater maintainers; harness-vs-benchmark triage",
+    "policy": "every finding is a harness/adapter false positive until proven otherwise (see receipts/quarantine/README.md)",
+    "classification": "ADAPTER_LIMITATION",
+    "mechanism": "solve container -> `docker commit` -> verify in a fresh container. Commit does not carry POSIX ACLs (system.posix_acl_*) or user.* xattrs; the reference solution's whole effect is setfacl on /srv/shared. Mode, group and setgid survive (3/9 tests pass); every ACL-dependent test fails.",
+    "evidence": [
+      "reproduced 2026-10-29 with the cached task image: adapter path (solve, commit, verify, network off) -> 6 failed / 3 passed, identical to the recorded verify.log; getfacl on the committed state shows only user::/group::/other::, no alice/bob/research entries",
+      "same image, same oracle, solution then pytest in the SAME container (no commit, network off) -> 9/9 passed",
+      "direct probe: setfacl + os.setxattr(user.foo) in a container, `docker commit`, new container -> both gone (Docker Desktop 29.4.3, containerd snapshotter)",
+      "recorded runs (old MinIO store): 26/34 verify logs show 'Missing ACL entry' / 'missing alice ACL'; the remaining 8 are single-test verify_only replays (2 pass, 6 fail on other ACL-dependent assertions)",
+      "the solve log is empty and exits 0: the solution itself ran correctly"
+    ],
+    "reproduced": "yes (failure in adapter path; pass in same-container path)",
+    "not_verified": "task directory not on disk, so the image Dockerfile was read from `docker history` of the cached image (ubuntu 24.04 t-bench base, acl, groupadd research, users alice/bob) rather than from the source Dockerfile; the cached image was built by an older adapter revision (system-wide pytest)",
+    "load_time_guard": "tbench.load skip category `state_fidelity` (solution uses setfacl/setfattr); tests/test_tbench_adapter.py::test_acl_xattr_task_is_skipped_as_state_fidelity",
+    "needed_to_verify_as_benchmark_property": "nothing further: the reference passes 9/9 when state is not round-tripped through docker commit",
+    "replay_cmd": "uv run python -m breakwater.tester replay receipts/quarantine/tb_acl_permissions_inheritance--REFERENCE_REJECTED.json"
+  }
 }
