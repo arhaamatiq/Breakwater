@@ -77,6 +77,9 @@ class DiffConfig:
     # namespace for verify cells: a new epoch re-measures instead of reusing
     # cached verdicts (e.g. timing margins on an idle host)
     epoch: str | None = None
+    # "legacy": trial ids without the runtime tag (reports from pre-hb2 runs
+    # can be rebuilt from their cached cells)
+    id_scheme: str = "v2"
 
 
 class Matrix:
@@ -131,6 +134,9 @@ async def submit(pool, experiment_id: str, name: str, trials: list[dict], priori
 class TaskDiff:
     """One task: build corpus, run matrix, classify."""
 
+    def _rt(self, spec) -> str:
+        return "" if self.cfg.id_scheme == "legacy" else harbor.runtime_tag(spec) + "/"
+
     def __init__(self, pool, run_id: str, base: TaskVersion, head: TaskVersion,
                  cfg: DiffConfig, log=print):
         self.pool, self.run_id, self.cfg, self.log = pool, run_id, cfg, log
@@ -146,7 +152,7 @@ class TaskDiff:
     async def build_corpus(self) -> list[CorpusItem]:
         src = self.cfg.solve_from
         spec, task = self.specs[src], self.tasks[src]
-        tag = (f"{harbor.runtime_tag(spec)}/{spec.name}/{spec.digests['environment'][:12]}-"
+        tag = (f"{self._rt(spec)}{spec.name}/{spec.digests['environment'][:12]}-"
                f"{spec.digests['solution'][:12]}")
         wanted = {"reference": "oracle", "noop": "noop"}
         trials = []
@@ -158,7 +164,7 @@ class TaskDiff:
                                                         "solve_timeout_cap": self.cfg.solve_timeout_cap,
                                                         "task_blob": task}})
         if "path" in self.cfg.corpus:
-            trials.append({"trial_id": f"snapshot/{harbor.runtime_tag(spec)}/{spec.name}/"
+            trials.append({"trial_id": f"snapshot/{self._rt(spec)}{spec.name}/"
                                        f"{spec.digests['environment'][:12]}",
                            "task_id": f"hb_{spec.short_id}", "replicate": 0,
                            "spec": {"mode": "snapshot", "task_blob": task}})
@@ -170,7 +176,7 @@ class TaskDiff:
         other_tid = None
         if (o_spec.digests["solution"] != spec.digests["solution"]
                 or o_spec.digests.get("instruction") != spec.digests.get("instruction")):
-            otag = (f"{harbor.runtime_tag(o_spec)}/{o_spec.name}/"
+            otag = (f"{self._rt(o_spec)}{o_spec.name}/"
                     f"{o_spec.digests['environment'][:12]}-{o_spec.digests['solution'][:12]}")
             other_tid = f"solve/{otag}/oracle"
             trials.append({"trial_id": other_tid, "task_id": f"hb_{o_spec.short_id}",
@@ -188,7 +194,7 @@ class TaskDiff:
             blob = patch_solution(task, text)
             tree_d = hashlib.sha256(json.dumps(blob["hb"]["solution_tree"], sort_keys=True)
                                     .encode()).hexdigest()[:12]
-            tid = (f"solve/{harbor.runtime_tag(spec)}/{spec.name}/"
+            tid = (f"solve/{self._rt(spec)}{spec.name}/"
                    f"{spec.digests['environment'][:12]}-{tree_d}/oracle")
             sol_fx[tid] = (fname, expect, text)
             trials.append({"trial_id": tid, "task_id": f"hb_{spec.short_id}", "replicate": 0,
@@ -231,7 +237,7 @@ class TaskDiff:
                 self.corpus.append(CorpusItem("noop", "noop", nb, {}))
         snap = None
         if "path" in self.cfg.corpus:
-            snap, _ = bundle_of(f"snapshot/{harbor.runtime_tag(spec)}/{spec.name}/"
+            snap, _ = bundle_of(f"snapshot/{self._rt(spec)}{spec.name}/"
                                 f"{spec.digests['environment'][:12]}")
         include = tuple(k for k in ("degenerate", "path", "file", "ast") if k in self.cfg.corpus)
         self.corpus += mutants(ref, snap, max_files=self.cfg.max_files,
@@ -277,7 +283,7 @@ class TaskDiff:
     def _trial(self, item: CorpusItem, vlabel: str, k: int) -> dict:
         spec = self.specs[vlabel]
         ep = f"e-{self.cfg.epoch}/" if self.cfg.epoch else ""
-        return {"trial_id": f"td/{harbor.runtime_tag(spec)}/{spec.digests['verifier'][:16]}/"
+        return {"trial_id": f"td/{self._rt(spec)}{spec.digests['verifier'][:16]}/"
                             f"{_hex(item.bundle.digest)}/{ep}r{k}",
                 "task_id": f"hb_{spec.short_id}", "replicate": k,
                 "spec": {"mode": "verify_only", "outputs": [{"bundle": item.bundle.digest}],
