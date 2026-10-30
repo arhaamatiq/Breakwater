@@ -93,7 +93,7 @@ async def wait_for(pool, trial_ids: list[str], timeout: float, label: str = "",
                    log=print) -> dict[str, dict]:
     """Block until every trial is terminal; return trial_id -> row."""
     deadline = time.time() + timeout
-    last = None
+    last, idle_since, warned = None, time.time(), False
     while True:
         rows = await pool.fetch(
             """SELECT t.trial_id, t.state, r.outcome, r.detail, r.exec_ms
@@ -102,7 +102,15 @@ async def wait_for(pool, trial_ids: list[str], timeout: float, label: str = "",
         done = sum(r["state"] in TERMINAL for r in rows)
         if done != last:
             log(f"[diff] {label}: {done}/{len(trial_ids)} trials done")
-            last = done
+            last, idle_since = done, time.time()
+        elif not warned and time.time() - idle_since > 90:
+            alive = await pool.fetchval(
+                "SELECT count(*) FROM workers WHERE state = 'alive' "
+                "AND last_heartbeat > now() - interval '30 seconds'")
+            if not alive:
+                log("[diff] no live workers are consuming the queue: start some with "
+                    "`python -m breakwater.worker --id NAME` or rerun with --workers N")
+                warned = True
         if done >= len(trial_ids) or time.time() > deadline:
             return {r["trial_id"]: dict(r) for r in rows}
         await asyncio.sleep(1.0)
