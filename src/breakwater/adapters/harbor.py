@@ -227,7 +227,19 @@ def _ensure_image(context: str, tag: str, prebuilt: str | None) -> str:
         try:
             client.images.get(tag)
         except Exception:
-            client.images.build(path=context, tag=tag, rm=True, forcerm=True)
+            for attempt in range(3):
+                try:
+                    client.images.build(path=context, tag=tag, rm=True, forcerm=True)
+                    break
+                except Exception as e:
+                    # containerd races between concurrent builds of different
+                    # images sharing layers ("failed to export layer", "failed to
+                    # commit"); anything else is a real build failure
+                    transient = any(m in str(e) for m in ("failed to export layer",
+                                                          "failed to commit", "unexpected EOF"))
+                    if not transient or attempt == 2:
+                        raise
+                    time.sleep(5 * (attempt + 1))
     return tag
 
 
