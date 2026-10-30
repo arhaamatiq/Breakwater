@@ -8,8 +8,10 @@ ways that matter for verdicts:
   were wrongly classed unrunnable and some references failed for lack of PyPI;
 - every timeout was clamped to 300 s;
 - declared artifact directories were overlaid instead of emptied before upload,
-  so a deleted artifact that also existed in the verifier image still looked
-  present (this inflates `drop_file` / `drop_path` survival);
+  so a deleted artifact that also existed in the verifier image would still
+  look present. (Tested: re-judging the 41 rebuildable September survivors
+  under the v2 runtime, all 34 distinct bundles still pass — none of those
+  survivors was produced by this bug; see `reports/trustdiff/v1-rejudge/`.);
 - file modes were not preserved; verdicts were taken from CTRF test names, not
   the reward file Harbor records.
 

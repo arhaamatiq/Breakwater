@@ -21,8 +21,10 @@ def main(out, runs):
     tasks = set()
     for rd in runs:
         d = json.load(open(os.path.join(rd, "trustdiff.json")))
-        base = d["base"].get("ref") or d["base"].get("tasks_dir")
-        head = d["head"].get("ref") or d["head"].get("tasks_dir")
+        def short(v):
+            r = v.get("ref") or v.get("tasks_dir") or ""
+            return r[:10] if len(r) == 40 and all(c in "0123456789abcdef" for c in r) else r
+        base, head = short(d["base"]), short(d["head"])
         for t in d["tasks"]:
             bs = t.get("bundles", [])
             cells = sum(b["base"]["n"] + b["head"]["n"] for b in bs)

@@ -354,12 +354,21 @@ class TaskDiff:
         R, M = self.cfg.repeats, self.cfg.max_repeats
         await self.run_matrix({it.bundle.digest: range(R) for it in self.corpus},
                               self.corpus, "pass1")
-        contested = [it for it in self.corpus if self._contested(it.bundle.digest)]
+        contested = [it for it in self.corpus if self._contested(it.bundle.digest)
+                     or self._violates_expectation(it)]
         if contested and M > R:
             self.log(f"[diff] {h.name}: {len(contested)} contested bundle(s); topping up to {M}")
             await self.run_matrix({it.bundle.digest: range(R, M) for it in contested},
                                   contested, "topup")
         return self.result()
+
+    def _violates_expectation(self, it: CorpusItem) -> bool:
+        """A known-good output that does not pass, or a known-bad one that does,
+        is a claim; claims get the full repeat budget like any contested cell."""
+        if it.expect not in ("pass", "fail"):
+            return False
+        outs = [r.get("outcome") for v in ("base", "head") for r in self.matrix.get(it.bundle.digest, v)]
+        return any(o != it.expect for o in outs)
 
     def _contested(self, digest: str) -> bool:
         outs = {v: [r.get("outcome") for r in self.matrix.get(digest, v)] for v in ("base", "head")}
