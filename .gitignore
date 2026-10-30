@@ -9,3 +9,4 @@ dist/
 *.egg-info/
 reports/conformance/harbor-jobs/
 reports/conformance/harbor-regrades/
+reports/trustdiff/v1-rejudge/bundles/*.tar

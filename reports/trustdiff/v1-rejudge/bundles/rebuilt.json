@@ -1,0 +1,299 @@
+[
+  {
+    "task": "batched-eval-parity",
+    "operator": "drop_file::/app/evalbench/__init__.py",
+    "status": "rebuilt",
+    "bundle": "sha256:97307623fb3054d2e20b781bc85b32d16e282687bac085e0881e521d7e30e228",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--97307623fb3054d2.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "drop_file::/app/evalbench/__pycache__/generation.cpython-311.pyc",
+    "status": "rebuilt",
+    "bundle": "sha256:e892c078067b55b8e9ff96e84b7a49b3b292d367ea158fc5389e9ef1a87aacef",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--e892c078067b55b8.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "drop_file::/app/evalbench/__pycache__/prefix_cache.cpython-311.pyc",
+    "status": "rebuilt",
+    "bundle": "sha256:018e7ae01ad46ba04d13b7eabb16f0c2486e8f301319d5824d33a72a1adb07b0",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--018e7ae01ad46ba0.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "drop_file::/app/evalbench/__pycache__/scoring.cpython-311.pyc",
+    "status": "rebuilt",
+    "bundle": "sha256:bdedcbf89ead4e3f35f367ba8373e8988a88ff4e2140a233da1845b559acd811",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--bdedcbf89ead4e3f.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "drop_file::/app/evalbench/reference.py",
+    "status": "rebuilt",
+    "bundle": "sha256:e713a65c79b6ee1cce45a7d23cfdaece7c0e4a7a661ca889f13a4c09f440cdfb",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--e713a65c79b6ee1c.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::cmp(Eq)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:1729e23b9fc7a1015274fbc69de195165c9399754fd6083d2db5dbbc4b78e1cd",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--1729e23b9fc7a101.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::int+1(0)#1",
+    "status": "rebuilt",
+    "bundle": "sha256:4ba1559bf8026bc635a9e4e2e185748d42efcc0d172e178db29c4b564a2af4b9",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--4ba1559bf8026bc6.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::bin(Sub)#3",
+    "status": "rebuilt",
+    "bundle": "sha256:b630929f0d6889b6a5e1bece8812b5273f8702af938946be7e4577a92ba82668",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--b630929f0d6889b6.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::int-1(0)#5",
+    "status": "not rebuilt: 1 out of 1 hunks failed--saving rejects to '/var/folders/m4/hl__4cw50xz_2yvylrxr34j40000gn/T/tmp65pocem7/f.py.rej'\n"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::int-1(1)#6",
+    "status": "not rebuilt: 1 out of 1 hunks failed--saving rejects to '/var/folders/m4/hl__4cw50xz_2yvylrxr34j40000gn/T/tmp37mkc1ij/f.py.rej'\n"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/byte_stops.py::int-1(1)#7",
+    "status": "rebuilt",
+    "bundle": "sha256:af47df848779d5e44c2460cb5ce4f66eb065de8cb3a4336da937abe4f0a15af8",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--af47df848779d5e4.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/evaluate.py::int-1(1)#3",
+    "status": "rebuilt",
+    "bundle": "sha256:4947fa3f1b9a42cff60e9bbb0c601b7027916de1d7ddc982e4a709105ebea9c3",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--4947fa3f1b9a42cf.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/evaluate.py::int+1(1)#6",
+    "status": "rebuilt",
+    "bundle": "sha256:381f2cc755a8c61696f65a1c138b72fc8b769676f42a92cb86bc4026e3633a6f",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--381f2cc755a8c616.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/evaluate.py::cmp(Eq)#7",
+    "status": "rebuilt",
+    "bundle": "sha256:957a3eebf43fed95af837eba21267addaa5b73bd03dd23a2a450f806b0e30a93",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--957a3eebf43fed95.tar"
+  },
+  {
+    "task": "batched-eval-parity",
+    "operator": "ast::/app/evalbench/generation.py::int+1(0)#6",
+    "status": "rebuilt",
+    "bundle": "sha256:bf843ba0025436b54d5940be542b54b4f9ddb396661398ef65262233cbbe8913",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/batched-eval-parity--bf843ba0025436b5.tar"
+  },
+  {
+    "task": "bun-sourcemap-leak",
+    "operator": "drop_path::app_tsconfig.json",
+    "status": "rebuilt",
+    "bundle": "sha256:219d83f2e231abb3a58697aaf2598f59554dcaf67bdf4d713f36c5c4c057b681",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/bun-sourcemap-leak--219d83f2e231abb3.tar"
+  },
+  {
+    "task": "bun-sourcemap-leak",
+    "operator": "drop_file::/app/src/generated/prompt-template.ts",
+    "status": "rebuilt",
+    "bundle": "sha256:0ae72f69f6516547e2a36c1e53f510642bc6206655fa77a585650e5e8eb30f85",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/bun-sourcemap-leak--0ae72f69f6516547.tar"
+  },
+  {
+    "task": "bun-sourcemap-leak",
+    "operator": "drop_file::/app/tsconfig.json",
+    "status": "rebuilt",
+    "bundle": "sha256:c6575d4d1775c35c3e4f9b193d8ac99040f3203ce6f74ff6fa76a91f0cf3959b",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/bun-sourcemap-leak--c6575d4d1775c35c.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "drop_path::app_requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:1e910cf4e011fd4023b1b854d2286927ee94be7086befeb1194fea96601caee7",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--1e910cf4e011fd40.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "unsolved_path::app_requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:1e910cf4e011fd4023b1b854d2286927ee94be7086befeb1194fea96601caee7",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--1e910cf4e011fd40.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "drop_path::app_apt-packages.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:1e910cf4e011fd4023b1b854d2286927ee94be7086befeb1194fea96601caee7",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--1e910cf4e011fd40.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "unsolved_path::app_apt-packages.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:1e910cf4e011fd4023b1b854d2286927ee94be7086befeb1194fea96601caee7",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--1e910cf4e011fd40.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "drop_file::/app/apt-packages.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:52b8353fedf6eb9a4e93c1cf6af5f19efc8aaee16339719d9fc6d8841af34bd9",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--52b8353fedf6eb9a.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "drop_file::/app/requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:54e4f4ddb70ebb6859a80c84e69f116c0daf261432b5ebaa23b0989afdb71f51",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--54e4f4ddb70ebb68.tar"
+  },
+  {
+    "task": "cargo-flight-dispatch",
+    "operator": "ast::/app/aircraft.py::int+1(36089)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:8cbc4e2a22521f48547a98fadec30a3e710a74d1c81a61d0f625dd181cdf0962",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/cargo-flight-dispatch--8cbc4e2a22521f48.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "drop_file::/app/data/.canary",
+    "status": "rebuilt",
+    "bundle": "sha256:d60c8434dafe853abe0d6252edf7ff1c03cc21fec0e7b1f564e499b762d658bd",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--d60c8434dafe853a.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "ast::/app/drift_monitor/calibration.py::int+1(100)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:89c82f7911e2f9878b75cf9f90d2499ff77136454e74fe7ecae19d102d49db0a",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--89c82f7911e2f987.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "ast::/app/drift_monitor/distance.py::bool(Or)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:6bf04b0d57ef0e2e15322591e0d0649d9913bb9408f2b10cd913b2bc9c5f01a0",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--6bf04b0d57ef0e2e.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "ast::/app/drift_monitor/monitor.py::int+1(100)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:493749688d23545a9607f5d53f4162031677846fcf24119fe96f8e0e1420eeaf",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--493749688d23545a.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "ast::/app/drift_monitor/monitor.py::int-1(100)#1",
+    "status": "rebuilt",
+    "bundle": "sha256:e7f7817c227360567c1cd1c1ef45169f0b398bd842307775d4d419247db81b7d",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--e7f7817c22736056.tar"
+  },
+  {
+    "task": "embedding-drift-monitor",
+    "operator": "ast::/app/drift_monitor/statistical_tests.py::int+1(10)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:07c3b60784daaf31159fe0209c1411097bdef2e5ef7ce5352d4989ca9e002918",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/embedding-drift-monitor--07c3b60784daaf31.tar"
+  },
+  {
+    "task": "interleaved-vigenere",
+    "operator": "drop_path::app_requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:f4f58bffc3afb93f32895bef4c5dbbe4e06b39bf1857231fa1b4612f491d135a",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/interleaved-vigenere--f4f58bffc3afb93f.tar"
+  },
+  {
+    "task": "interleaved-vigenere",
+    "operator": "unsolved_path::app_requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:f4f58bffc3afb93f32895bef4c5dbbe4e06b39bf1857231fa1b4612f491d135a",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/interleaved-vigenere--f4f58bffc3afb93f.tar"
+  },
+  {
+    "task": "interleaved-vigenere",
+    "operator": "drop_file::/app/requirements.txt",
+    "status": "rebuilt",
+    "bundle": "sha256:55ddd1404f046fd914f9deb834622c32d5bae97fbd81c4519e0e1098416b9ca5",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/interleaved-vigenere--55ddd1404f046fd9.tar"
+  },
+  {
+    "task": "interleaved-vigenere",
+    "operator": "ast::/app/cracker.py::cmp(Lt)#5",
+    "status": "rebuilt",
+    "bundle": "sha256:2da06f47458a55d93642d698f6cb7c7298b4f871cd7bc792ebaecd6f657fdd10",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/interleaved-vigenere--2da06f47458a55d9.tar"
+  },
+  {
+    "task": "interleaved-vigenere",
+    "operator": "ast::/app/cracker.py::int+1(26)#7",
+    "status": "rebuilt",
+    "bundle": "sha256:a41cd22ba35b412409682fed972f0486643432bce9eea6b5cd1180f2ad2b43d2",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/interleaved-vigenere--a41cd22ba35b4124.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "drop_file::/app/docs/review_ops_digest.md",
+    "status": "rebuilt",
+    "bundle": "sha256:aef22d2116370fdc13d1112341f060ac7bfdb7d6b61bcb05f3708dea1d702cc8",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--aef22d2116370fdc.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "drop_file::/app/output/parity_scores.csv",
+    "status": "rebuilt",
+    "bundle": "sha256:d7b07203e59e05e429f221bfdcfd3ed743d8f76a5c5321aa7b72b2fcfe51a142",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--d7b07203e59e05e4.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "drop_file::/app/output/scorer_audit.sqlite",
+    "status": "rebuilt",
+    "bundle": "sha256:c50be0552c6eeb262886516f5f50318bc6f60297374c827d1d56978d77302f5c",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--c50be0552c6eeb26.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "drop_file::/app/parityctl/__pycache__/__init__.cpython-312.pyc",
+    "status": "rebuilt",
+    "bundle": "sha256:8c24e56d53e0a5a728d525f4610c21fe122b9f9cf6e9bb58fef20063b2eddd9d",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--8c24e56d53e0a5a7.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "drop_file::/app/parityctl/__pycache__/cli.cpython-312.pyc",
+    "status": "rebuilt",
+    "bundle": "sha256:7dc5a32b0284bf6eeaf2bc4a5ea2d26130689c074434ca8ccc437894ed8f681f",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--7dc5a32b0284bf6e.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "ast::/app/parityctl/cli.py::cmp(Eq)#0",
+    "status": "rebuilt",
+    "bundle": "sha256:3eb4f0a6fd755185510c7395985f807d543e4c9b8fc01d599847e2bc497ffff3",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--3eb4f0a6fd755185.tar"
+  },
+  {
+    "task": "risk-scorer-replay",
+    "operator": "ast::/app/parityctl/cli.py::cmp(Gt)#7",
+    "status": "rebuilt",
+    "bundle": "sha256:67a6ff6e5b6c30b5ef5bdf97d91a79382bef0a2b6cb7c3918f7207ba17aa25a4",
+    "tar": "reports/trustdiff/v1-rejudge/bundles/risk-scorer-replay--67a6ff6e5b6c30b5.tar"
+  }
+]

@@ -87,7 +87,7 @@ async def main(out):
         with open(tar, "wb") as f:
             f.write(b.to_tar())
         label = s["operator"].replace(":", "_")
-        args.append(f"--bundle={task}:v1-survivor::{label}:unknown:{tar}")
+        args.append(f"--bundle={task}:v1-survivor--{label}:unknown:{tar}")
         rows.append({"task": task, "operator": s["operator"], "status": "rebuilt",
                      "bundle": b.digest, "tar": tar})
     await pool.close()
