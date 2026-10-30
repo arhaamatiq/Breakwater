@@ -5,3 +5,5 @@ logs/
 uv.lock
 external/
 .claude/
+dist/
+*.egg-info/
