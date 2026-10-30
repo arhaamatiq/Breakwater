@@ -93,7 +93,15 @@ ALTER TABLE results ADD COLUMN IF NOT EXISTS stale_submission BOOLEAN NOT NULL D
 
 -- ---------------------------------------------------------------- indexes
 
-CREATE INDEX IF NOT EXISTS idx_trials_claim   ON trials (state, created_at) WHERE state = 'queued';
+-- v1 FIFO claim index (state, created_at): superseded by idx_trials_fair.
+DROP INDEX IF EXISTS idx_trials_claim;
+-- Fair claim. Serves both halves of db.claim_trial: the skip-scan that lists
+-- (priority, experiment) pairs with queued work, and the per-experiment
+-- "oldest queued trial" pick. Partial, so it only ever holds the queue itself.
+CREATE INDEX IF NOT EXISTS idx_trials_fair    ON trials (priority, experiment_id, created_at, trial_id)
+    WHERE state = 'queued';
+-- Running trials per experiment (fair-share input; bounded by fleet size).
+CREATE INDEX IF NOT EXISTS idx_trials_running ON trials (experiment_id) WHERE state = 'running';
 CREATE INDEX IF NOT EXISTS idx_trials_lease   ON trials (lease_expires_at) WHERE state = 'running';
 CREATE INDEX IF NOT EXISTS idx_trials_exp     ON trials (experiment_id);
 CREATE INDEX IF NOT EXISTS idx_results_exp    ON results (experiment_id);

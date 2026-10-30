@@ -1,7 +1,7 @@
 """All Postgres operations: queue claims, leases, the result ledger, provenance.
 
 Design: at-least-once execution with exactly-once result effect.
-  - claim:  SELECT ... FOR UPDATE SKIP LOCKED  (safe concurrent dequeue)
+  - claim:  fair pick across experiments, row taken with FOR UPDATE SKIP LOCKED
   - lease:  lease_expires_at + heartbeat extension, fenced by (worker_id, lease_epoch)
   - reap:   expired running trials -> requeued (or failed after max_attempts)
   - submit: INSERT ... ON CONFLICT (trial_id) DO NOTHING (one result ever counts)
@@ -59,37 +59,87 @@ async def apply_schema(conn: asyncpg.Connection) -> None:
 # ---------------------------------------------------------------- experiments
 
 async def create_experiment(pool, experiment_id: str, name: str, spec: dict, trials: list[dict],
-                            max_attempts: int | None = None) -> int:
+                            priority: int = 0, max_attempts: int | None = None) -> int:
     """Insert experiment + its trials atomically. trial dicts: {trial_id, task_id, replicate, spec}.
-    max_attempts: claims before a trial is marked failed; defaults to BW_MAX_ATTEMPTS."""
+    priority: higher is served first (strict). max_attempts: claims before a trial is
+    marked failed; defaults to BW_MAX_ATTEMPTS."""
     max_attempts = max_attempts or CFG.max_attempts
     async with pool.acquire() as conn:
         async with conn.transaction():
             await conn.execute(
-                """INSERT INTO experiments (experiment_id, name, spec, max_attempts)
-                   VALUES ($1,$2,$3,$4)""",
-                experiment_id, name, spec, max_attempts)
+                """INSERT INTO experiments (experiment_id, name, spec, priority, max_attempts)
+                   VALUES ($1,$2,$3,$4,$5)""",
+                experiment_id, name, spec, priority, max_attempts)
             await conn.executemany(
                 """INSERT INTO trials (trial_id, experiment_id, task_id, replicate, spec,
-                                       max_attempts)
-                   VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT (trial_id) DO NOTHING""",
+                                       max_attempts, priority)
+                   VALUES ($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (trial_id) DO NOTHING""",
                 [(t["trial_id"], experiment_id, t["task_id"], t["replicate"], t["spec"],
-                  max_attempts)
+                  max_attempts, priority)
                  for t in trials])
             await record_event(conn, "experiment_created", experiment_id=experiment_id,
-                               payload={"n_trials": len(trials), "max_attempts": max_attempts})
+                               payload={"n_trials": len(trials), "priority": priority,
+                                        "max_attempts": max_attempts})
         return len(trials)
 
 
 # ---------------------------------------------------------------- worker side
 
-CLAIM_SQL = """
-WITH next AS (
-    SELECT trial_id FROM trials
-    WHERE state = 'queued'
-    ORDER BY created_at
+# Fair claim, step 1: which experiments to try, best first.
+#   1. strict priority (higher first)
+#   2. fewest trials currently running: fair share of the *fleet*, not of claims.
+#      Round-robin on claim count alone still lets an experiment of slow trials
+#      end up holding every worker (each claim pins a worker for its duration);
+#      ordering by running count hands each freed worker to whoever has least.
+#   3. least recently claimed (round-robin tiebreak; never-claimed first)
+# The recursive CTE is a loose index scan over idx_trials_fair: one index probe
+# per distinct (priority, experiment) with queued work, never a scan of the
+# queue. Everything else is a per-candidate probe: Postgres estimates a
+# recursive CTE blindly (~100 rows), and a plain join then hash-joins against a
+# full scan of `experiments` (tests/test_queue.py::test_claim_path_is_index_driven
+# caught exactly that); LIMIT 1 keeps the lateral from being flattened into one.
+CANDIDATES_SQL = """
+WITH RECURSIVE active(priority, experiment_id) AS (
+    (SELECT priority, experiment_id FROM trials
+     WHERE state = 'queued' ORDER BY priority, experiment_id LIMIT 1)
+    UNION ALL
+    SELECT nxt.priority, nxt.experiment_id FROM active a CROSS JOIN LATERAL (
+        SELECT priority, experiment_id FROM trials
+        WHERE state = 'queued' AND (priority, experiment_id) > (a.priority, a.experiment_id)
+        ORDER BY priority, experiment_id LIMIT 1) nxt
+)
+SELECT a.priority, a.experiment_id, e.last_claimed_at,
+       (SELECT count(*) FROM trials r
+        WHERE r.state = 'running' AND r.experiment_id = a.experiment_id) AS running
+FROM active a CROSS JOIN LATERAL (
+    SELECT last_claimed_at, created_at FROM experiments x
+    WHERE x.experiment_id = a.experiment_id LIMIT 1) e
+ORDER BY a.priority DESC, running, e.last_claimed_at NULLS FIRST, e.created_at, a.experiment_id
+"""
+
+# Fair claim, step 2: take the oldest queued trial of one experiment.
+# Lock order is always experiment row -> trial row, and the trial row is only
+# ever taken with SKIP LOCKED, so a claim never waits while holding a lock:
+# claims cannot deadlock with each other or with heartbeat/submit/reap.
+# {exp_lock} is one of the two variants below. `next` filters on $3 directly and
+# gates on `exp` with an uncorrelated EXISTS (a one-time InitPlan, evaluated
+# first, so the experiment lock is still taken before any trial lock): joining
+# to `exp` instead would cost the index ordering and sort the experiment's
+# whole queue on every claim.
+_CLAIM_TEMPLATE = """
+WITH exp AS (
+    SELECT experiment_id FROM experiments
+    {exp_lock}
+), next AS (
+    SELECT t.trial_id FROM trials t
+    WHERE t.state = 'queued' AND t.priority = $4 AND t.experiment_id = $3
+      AND EXISTS (SELECT 1 FROM exp)
+    ORDER BY t.created_at, t.trial_id
     LIMIT 1
     FOR UPDATE SKIP LOCKED
+), stamp AS (
+    UPDATE experiments e SET last_claimed_at = clock_timestamp()
+    FROM next WHERE e.experiment_id = $3
 )
 UPDATE trials t
 SET state = 'running',
@@ -101,24 +151,41 @@ SET state = 'running',
 FROM next
 WHERE t.trial_id = next.trial_id
 RETURNING t.trial_id, t.experiment_id, t.task_id, t.replicate, t.spec, t.attempts,
-          t.max_attempts, t.lease_epoch
+          t.max_attempts, t.lease_epoch, t.priority
 """
+# Pass 1 (optimistic): only if nobody claimed from this experiment since we
+# ranked it, and skip it if a claim is in flight there right now. Concurrent
+# claimers therefore fan out across experiments instead of all hitting the
+# top-ranked one.
+CLAIM_SQL_FANOUT = _CLAIM_TEMPLATE.format(exp_lock="""WHERE experiment_id = $3
+      AND last_claimed_at IS NOT DISTINCT FROM $5
+    FOR NO KEY UPDATE SKIP LOCKED""")
+# Pass 2 (fallback): wait for the in-flight claim (milliseconds). Without this
+# pass, N workers draining a single experiment would see spurious "queue empty".
+CLAIM_SQL_SHARED = _CLAIM_TEMPLATE.format(exp_lock="""WHERE experiment_id = $3
+    FOR NO KEY UPDATE""")
 
 
 async def claim_trial(pool, worker_id: str, lease_seconds: float | None = None):
-    """Claim the oldest queued trial. Returns the trial row (including the
-    `lease_epoch` fencing token the caller must present later) or None.
-    The claim and its event commit together, so the log can be reconciled."""
+    """Claim the next trial under the fair policy. Returns the trial row (including
+    the `lease_epoch` fencing token the caller must present later) or None."""
     lease = CFG.lease_seconds if lease_seconds is None else lease_seconds
     async with pool.acquire() as conn:
-        async with conn.transaction():
-            row = await conn.fetchrow(CLAIM_SQL, worker_id, lease)
-            if row:
-                await record_event(conn, "claimed", experiment_id=row["experiment_id"],
-                                   trial_id=row["trial_id"], worker_id=worker_id,
-                                   payload={"attempt": row["attempts"],
-                                            "epoch": row["lease_epoch"]})
-            return row
+        candidates = await conn.fetch(CANDIDATES_SQL)
+        for sql in (CLAIM_SQL_FANOUT, CLAIM_SQL_SHARED):
+            for c in candidates:
+                args = [worker_id, lease, c["experiment_id"], c["priority"]]
+                if sql is CLAIM_SQL_FANOUT:
+                    args.append(c["last_claimed_at"])
+                async with conn.transaction():
+                    row = await conn.fetchrow(sql, *args)
+                    if row:
+                        await record_event(conn, "claimed", experiment_id=row["experiment_id"],
+                                           trial_id=row["trial_id"], worker_id=worker_id,
+                                           payload={"attempt": row["attempts"],
+                                                    "epoch": row["lease_epoch"]})
+                        return row
+        return None
 
 
 async def heartbeat_trial(pool, trial_id: str, worker_id: str, lease_epoch: int,

@@ -20,6 +20,8 @@ class ExperimentCreate(BaseModel):
     solution: str = "agent"          # agent | oracle | noop
     tasks: list[str] | None = None   # default: all benchmark tasks
     experiment_id: str | None = None
+    priority: int = 0                # higher is claimed first (strict)
+    max_attempts: int | None = None  # default: BW_MAX_ATTEMPTS
 
 
 async def reaper_loop(app):
@@ -63,6 +65,8 @@ async def create_experiment(req: ExperimentCreate):
         raise HTTPException(400, f"unknown tasks: {unknown}")
     if req.solution not in ("agent", "oracle", "noop"):
         raise HTTPException(400, "solution must be agent|oracle|noop")
+    if req.max_attempts is not None and req.max_attempts < 1:
+        raise HTTPException(400, "max_attempts must be >= 1")
 
     exp_id = req.experiment_id or f"{req.name}-{uuid.uuid4().hex[:8]}"
     trials = [
@@ -75,7 +79,8 @@ async def create_experiment(req: ExperimentCreate):
     try:
         n = await db.create_experiment(app.state.pool, exp_id, req.name,
                                        {"solution": req.solution, "replicates": req.replicates},
-                                       trials)
+                                       trials, priority=req.priority,
+                                       max_attempts=req.max_attempts)
     except Exception as e:
         raise HTTPException(409, f"could not create experiment: {e}")
     return {"experiment_id": exp_id, "n_trials": n}

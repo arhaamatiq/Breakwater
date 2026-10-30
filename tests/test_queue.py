@@ -1,5 +1,5 @@
 """Integration tests for the Postgres work queue: claims, leases, fencing tokens,
-the result ledger, and the invariant checks.
+fair scheduling, the result ledger, invariant checks, and schema migration.
 
 Real Postgres (see conftest.py; skipped if unreachable), real concurrency where
 concurrency is the point (many asyncio tasks over several connection pools),
@@ -8,8 +8,10 @@ waiting, it moves lease_expires_at into the past; the lease-expiry test itself
 uses a real short lease and real sleeping.
 """
 import asyncio
+from collections import Counter
 
 from breakwater import db
+from breakwater.config import CFG
 from breakwater.report import compute_report, verify_invariants
 
 LEASE = 30.0  # nothing expires unless a test makes it
@@ -259,6 +261,141 @@ def test_exhaustion_marks_failed_with_last_error(pg):
             assert inv["ok"] and inv["failed"] == 1 and inv["lost_results"] == 0
         rep = await compute_report(pool, "X")
         assert rep["fault_tolerance"]["failure_reasons"] == {"docker: boom 2": 1}
+    run(pg, body)
+
+
+def test_create_experiment_defaults(pg):
+    async def body(pool):
+        await db.create_experiment(pool, "D", "x", {}, trials("D", 2))
+        e = await pool.fetchrow("SELECT priority, max_attempts FROM experiments")
+        assert (e["priority"], e["max_attempts"]) == (0, CFG.max_attempts)
+        rows = await pool.fetch("SELECT priority, max_attempts, lease_epoch FROM trials")
+        assert {tuple(r) for r in rows} == {(0, CFG.max_attempts, 0)}
+    run(pg, body)
+
+
+# ---------------------------------------------------------------- fair scheduling
+
+def test_newcomer_is_not_starved_by_a_large_experiment(pg):
+    """The bug v1 had: ORDER BY created_at made a small experiment wait behind
+    every queued trial of a big one created earlier."""
+    async def body(pool):
+        await db.create_experiment(pool, "big", "x", {}, trials("big", 200))
+        for _ in range(3):
+            await db.claim_trial(pool, "w1", lease_seconds=LEASE)
+        await db.create_experiment(pool, "small", "x", {}, trials("small", 1))
+        v1_position = await pool.fetchval(
+            """SELECT pos FROM (SELECT trial_id, row_number() OVER (ORDER BY created_at) AS pos
+                                FROM trials WHERE state='queued') q WHERE trial_id='small/0000'""")
+        assert v1_position == 198      # where the v1 FIFO claim would have served it
+
+        nxt = [(await db.claim_trial(pool, "w1", lease_seconds=LEASE))["trial_id"]
+               for _ in range(3)]
+        assert "small/0000" in nxt[:2]
+    run(pg, body)
+
+
+def test_round_robin_across_experiments(pg):
+    async def body(pool):
+        for e in "ABC":
+            await db.create_experiment(pool, e, "x", {}, trials(e, 50))
+        got = [(await db.claim_trial(pool, "w1", lease_seconds=LEASE))["experiment_id"]
+               for _ in range(30)]
+        assert got[:6] == ["A", "B", "C", "A", "B", "C"]
+        assert Counter(got) == {"A": 10, "B": 10, "C": 10}
+    run(pg, body)
+
+
+def test_slow_experiment_cannot_monopolize_the_fleet(pg):
+    """4 worker slots; experiment `slow` never finishes a trial during the test,
+    `fast` finishes instantly. Fair share by *running* trials hands every freed
+    slot to `fast`; FIFO, or round-robin on claim count alone, would end with all
+    4 slots pinned on `slow` and `fast` stuck."""
+    async def body(pool):
+        await db.create_experiment(pool, "slow", "x", {}, trials("slow", 200))
+        await db.create_experiment(pool, "fast", "x", {}, trials("fast", 40))
+        busy = fast_done = 0
+        slots_on_slow_when_fast_finished = None
+        while busy < 4:                       # stop once every slot is pinned
+            row = await db.claim_trial(pool, "w", lease_seconds=LEASE)
+            if row is None:
+                break
+            if row["experiment_id"] == "slow":
+                busy += 1
+            else:
+                assert await submit(pool, row, "w")
+                fast_done += 1
+                if fast_done == 40:
+                    slots_on_slow_when_fast_finished = busy
+        assert fast_done == 40
+        assert slots_on_slow_when_fast_finished == 1
+    run(pg, body)
+
+
+def test_priority_is_strict(pg):
+    async def body(pool):
+        await db.create_experiment(pool, "low", "x", {}, trials("low", 30))
+        await db.create_experiment(pool, "high", "x", {}, trials("high", 10), priority=5)
+        await db.create_experiment(pool, "mid", "x", {}, trials("mid", 10), priority=1)
+        got = [(await db.claim_trial(pool, "w1", lease_seconds=LEASE))["experiment_id"]
+               for _ in range(50)]
+        assert got == ["high"] * 10 + ["mid"] * 10 + ["low"] * 30
+        assert await db.claim_trial(pool, "w1", lease_seconds=LEASE) is None
+        assert await pool.fetchval("SELECT count(DISTINCT priority) FROM trials") == 3
+    run(pg, body)
+
+
+def test_fair_share_under_concurrent_claimers(pg):
+    """With 12 concurrent claimers the split stays close to even (v1 FIFO: 60/0/0)."""
+    async def body(*pools):
+        for e in "ABC":
+            await db.create_experiment(pools[0], e, "x", {}, trials(e, 100))
+        got = []
+
+        async def claimer(i):
+            for _ in range(5):
+                row = await db.claim_trial(pools[i % len(pools)], f"w{i}", lease_seconds=LEASE)
+                got.append(row["experiment_id"])
+
+        await asyncio.gather(*(claimer(i) for i in range(12)))
+        counts = Counter(got)
+        assert sum(counts.values()) == 60
+        assert min(counts[e] for e in "ABC") >= 15, counts
+        await assert_safe(pools[0], "A", "B", "C")
+    run(pg, body, pools=3)
+
+
+def test_claim_path_is_index_driven(pg):
+    """With 20k finished experiments / 40k finished trials and 3 active
+    experiments of 500 queued trials, neither half of the claim scans trials or
+    experiments, and the per-experiment pick reads the index in order (a Sort
+    there would mean reading the experiment's whole queue on every claim)."""
+    async def body(pool):
+        await pool.execute(
+            """INSERT INTO experiments (experiment_id, name, created_at, last_claimed_at)
+               SELECT 'old' || g, 'old', now() - interval '1 day', now() - interval '1 day'
+               FROM generate_series(1, 20000) g""")
+        await pool.execute(
+            """INSERT INTO trials (trial_id, experiment_id, task_id, state, attempts, lease_epoch)
+               SELECT 'old' || g || '/' || r, 'old' || g, 't', 'completed', 1, 1
+               FROM generate_series(1, 20000) g, generate_series(1, 2) r""")
+        for e in "ABC":
+            await db.create_experiment(pool, e, "x", {}, trials(e, 500))
+        for _ in range(10):
+            await db.claim_trial(pool, "w", lease_seconds=LEASE)
+        await pool.execute("ANALYZE")
+
+        plans = {"candidates": await pool.fetch("EXPLAIN " + db.CANDIDATES_SQL)}
+        for name, sql, args in (("fanout", db.CLAIM_SQL_FANOUT, ["w", 5.0, "B", 0, None]),
+                                ("shared", db.CLAIM_SQL_SHARED, ["w", 5.0, "B", 0])):
+            plans[name] = await pool.fetch("EXPLAIN " + sql, *args)
+        for name, rows in plans.items():
+            plan = "\n".join(r[0] for r in rows)
+            assert "Seq Scan" not in plan, f"{name}:\n{plan}"
+            if name != "candidates":       # (sorting the few candidates is fine)
+                assert "Sort" not in plan, f"{name}:\n{plan}"
+        assert "idx_trials_fair" in "\n".join(r[0] for r in plans["candidates"])
+        assert "idx_trials_fair" in "\n".join(r[0] for r in plans["fanout"])
     run(pg, body)
 
 
