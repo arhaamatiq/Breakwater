@@ -21,7 +21,8 @@ def main(tasks_dir):
     dirs = sorted(glob.glob(f"{ROOT}/harbor-jobs/*/*__*") + glob.glob(f"{ROOT}/harbor-regrades/*__*"))
     by_task = {}
     for d in dirs:
-        if os.path.isfile(os.path.join(d, "result.json")):
+        # skip Breakwater's own regrade inputs (`<task>--<mutant>--src`)
+        if os.path.isfile(os.path.join(d, "result.json")) and "--" not in os.path.basename(d):
             by_task.setdefault(os.path.basename(d).split("__")[0], []).append(d)
     rows = []
     for task, ds in sorted(by_task.items()):

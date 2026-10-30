@@ -1,0 +1,43 @@
+glycan-ms2-elucidation__6ZoLUt5          harbor=1.0 breakwater=1.0 checks=12 AGREE
+glycan-ms2-elucidation__6YqQ2Dc          harbor=0.0 breakwater=0.0 checks=12 AGREE
+glycan-ms2-elucidation__J4GjDxP          harbor recorded no reward (RegradeError); not comparable
+glycan-ms2-elucidation__Jvforpq          harbor recorded no reward (RegradeError); not comparable
+glycan-ms2-elucidation__NXtBK4S          harbor recorded no reward (RewardFileNotFoundError); not comparable
+glycan-ms2-elucidation__nUdiNNJ          harbor=0.0 breakwater=0.0 checks=12 AGREE
+glycan-ms2-elucidation__s6se596          harbor recorded no reward (RewardFileNotFoundError); not comparable
+glycan-ms2-elucidation__zPhwqTW          harbor recorded no reward (RegradeError); not comparable
+3/3 verifications agree with Harbor (5 Harbor trials unscored)
+music-harmony__XEYUb9H                   harbor recorded no reward (VerifierTimeoutError); not comparable
+music-harmony__x75wuK6                   harbor=0.0 breakwater=0.0 checks=13 AGREE
+music-harmony__56VPnWS                   harbor=0.0 breakwater=0.0 checks=13 AGREE
+music-harmony__diKSzJ4                   harbor recorded no reward (RegradeError); not comparable
+music-harmony__qVqWVtT                   harbor=0.0 breakwater=0.0 checks=13 AGREE
+3/3 verifications agree with Harbor (2 Harbor trials unscored)
+production-planning__Z5nb9o7             harbor=1.0 breakwater=1.0 checks=20 AGREE
+production-planning__cC4hrGf             harbor=0.0 breakwater=0.0 checks=20 AGREE
+production-planning__NZF6p4e             harbor=0.0 breakwater=0.0 checks=20 AGREE
+production-planning__RQJasdd             harbor recorded no reward (RegradeError); not comparable
+production-planning__aFHmeRL             harbor=0.0 breakwater=0.0 checks=20 AGREE
+production-planning__b5Bk8MX             harbor recorded no reward (RegradeError); not comparable
+production-planning__qToh8du             harbor recorded no reward (RegradeError); not comparable
+production-planning__wcKQiUz             harbor=0.0 breakwater=0.0 checks=20 AGREE
+5/5 verifications agree with Harbor (3 Harbor trials unscored)
+risk-scorer-replay__ZQ4nLFi              harbor=1.0 breakwater=1.0 checks=5 AGREE
+risk-scorer-replay__fuUEiLa              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__C7v9kBT              harbor recorded no reward (RegradeError); not comparable
+risk-scorer-replay__EMBCmrP              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__JastLq3              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__RWW6jkG              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__aB8a7Bv              harbor=0.0 breakwater=0.0 checks=5 AGREE
+risk-scorer-replay__fPVZwd3              harbor=0.0 breakwater=0.0 checks=5 AGREE
+7/7 verifications agree with Harbor (1 Harbor trials unscored)
+sound-change-cascade__F8YrDat            harbor=1.0 breakwater=1.0 checks=7 AGREE
+sound-change-cascade__czo3mZB            harbor=0.0 breakwater=0.0 checks=7 AGREE
+sound-change-cascade__97UQSdR            harbor recorded no reward (RegradeError); not comparable
+sound-change-cascade__AuP6U4m            harbor recorded no reward (RegradeError); not comparable
+sound-change-cascade__DxKaLyV            harbor=0.0 breakwater=0.0 checks=7 AGREE
+sound-change-cascade__JiauxBo            harbor=0.0 breakwater=0.0 checks=7 AGREE
+sound-change-cascade__iHMTnSG            harbor=0.0 breakwater=0.0 checks=7 AGREE
+sound-change-cascade__jz93wML            harbor recorded no reward (RegradeError); not comparable
+5/5 verifications agree with Harbor (3 Harbor trials unscored)
+**23/23 verifications agree** with Harbor 0.25 on identical bytes (reward and every per-check verdict) across 5 tasks; 19 of them are failing verdicts (no-ops and mutants regraded by `harbor trial regrade`). 14 Harbor trials were not comparable (Harbor recorded no reward, e.g. regrade refused a trial with a missing declared artifact).
