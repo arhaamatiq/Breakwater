@@ -1,0 +1,63 @@
+{
+  "experiment_id": "chaos-demo-1a33fca8",
+  "trials": {
+    "total": 136,
+    "completed": 136
+  },
+  "results": {
+    "total": 136,
+    "pass": 117,
+    "fail": 19,
+    "error": 0
+  },
+  "throughput_trials_per_sec": 1.571,
+  "wall_clock_seconds": 86.55,
+  "latency_ms": {
+    "exec_p50": 6876.7,
+    "exec_p99": 11421.8,
+    "e2e_p50_s": 44.97,
+    "e2e_p99_s": 86.96
+  },
+  "fault_tolerance": {
+    "total_executions_started": 142,
+    "retried_trials": 6,
+    "requeues_after_lease_expiry": 6,
+    "releases_after_exec_error": 0,
+    "duplicate_submissions_suppressed": 3,
+    "stale_submissions": 3,
+    "stale_results_accepted": 0,
+    "trials_recovered_by_different_worker": 6,
+    "workers_used": [
+      "w-replacement",
+      "w1",
+      "w2",
+      "w3",
+      "w4"
+    ],
+    "workers_died": [
+      "w1"
+    ],
+    "failure_reasons": {}
+  },
+  "invariants": {
+    "experiment_finished": true,
+    "lost_results": 0,
+    "duplicate_result_rows": 0,
+    "completed_trials_without_result": 0,
+    "infra_failed_trials": 0,
+    "zero_lost": true,
+    "zero_duplicates": true,
+    "completed_without_result": 0,
+    "result_on_unfinished_trial": 0,
+    "results_without_accepted_event": 0,
+    "accepted_events_mismatch": 0,
+    "results_without_claim": 0,
+    "double_claims": 0,
+    "epoch_mismatch": 0,
+    "executions_below_results": 0,
+    "executions_started": 142,
+    "accepted_events": 136,
+    "violations": {},
+    "ok": true
+  }
+}
