@@ -240,6 +240,19 @@ def cmd_diff(args):
     sys.exit(2 if (worst and args.fail_on_high) else 0)
 
 
+def cmd_report(args):
+    """Re-classify and re-render a saved Trust Diff (e.g. after the rules improve)."""
+    from .trustdiff import engine, report
+    path = os.path.join(args.run_dir, "trustdiff.json")
+    result = json.load(open(path))
+    for t in result["tasks"]:
+        for b in t.get("bundles", []):
+            b["class"], b["severity"] = engine._transition(b["expect"], b["base"]["state"],
+                                                           b["head"]["state"])
+    meta = report.export(result, args.run_dir)
+    _p(f"re-rendered {args.run_dir}/REPORT.md ({len(meta['receipts'])} receipts)")
+
+
 def cmd_replay(args):
     rec = json.load(open(args.receipt))
     if rec.get("kind") != "trustdiff":
@@ -401,6 +414,8 @@ def main(argv=None):
                    help="remove each task's images when its diff finishes (saves disk)")
     d.add_argument("--fail-on-high", action="store_true", help="exit 2 on CRITICAL/HIGH (CI)")
     d.add_argument("--out")
+    rp = sub.add_parser("report", help="re-classify and re-render a saved Trust Diff")
+    rp.add_argument("run_dir")
     r = sub.add_parser("replay", help="re-run a receipt")
     r.add_argument("receipt")
     r.add_argument("--repo", help="local clone of the benchmark repo")
@@ -419,7 +434,8 @@ def main(argv=None):
         return {"audit": cmd_audit, "chaos": cmd_chaos}[argv[0]](None, argv[1:])
     args = ap.parse_args(argv)
     return {"up": cmd_up, "doctor": cmd_doctor, "tasks": cmd_tasks, "check": cmd_check,
-            "diff": cmd_diff, "replay": cmd_replay, "conform": cmd_conform}[args.cmd](args)
+            "diff": cmd_diff, "replay": cmd_replay, "conform": cmd_conform,
+            "report": cmd_report}[args.cmd](args)
 
 
 if __name__ == "__main__":

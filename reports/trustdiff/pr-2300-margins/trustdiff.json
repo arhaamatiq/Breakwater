@@ -310,8 +310,8 @@
           "meta": {
             "solve_exit": 0
           },
-          "class": "unchanged",
-          "severity": "NONE",
+          "class": "error_both",
+          "severity": "HIGH",
           "fisher_p": 1.0,
           "deterministic": null,
           "base": {
@@ -398,7 +398,8 @@
               0.6959591996861515,
               1.3471830985915492
             ]
-          }
+          },
+          "receipt": "receipts/ks-solver-cpp--error_both--3bb170b0.json"
         },
         {
           "label": "noop",
@@ -406,8 +407,8 @@
           "expect": "fail",
           "bundle": "sha256:6dfa483531b558d402687c987cce870c9cf6d77abf8ee3d8209b5474f54acdf4",
           "meta": {},
-          "class": "unchanged",
-          "severity": "NONE",
+          "class": "error_both",
+          "severity": "MEDIUM",
           "fisher_p": 1.0,
           "deterministic": null,
           "base": {
@@ -494,7 +495,8 @@
               0.6900505246793627,
               1.1577757685352623
             ]
-          }
+          },
+          "receipt": "receipts/ks-solver-cpp--error_both--6dfa4835.json"
         }
       ]
     }
