@@ -67,6 +67,10 @@ async def _reaper(pool):
 # ------------------------------------------------------------------ commands
 
 def cmd_up(args):
+    from . import setup
+    if args.schema_only:          # Postgres provided elsewhere (CI service, managed DB)
+        setup.main()
+        return
     from importlib import resources
     compose = None
     with contextlib.suppress(Exception):
@@ -76,7 +80,6 @@ def cmd_up(args):
     services = ["postgres"] + (["minio"] if args.s3 else [])
     subprocess.run(["docker", "compose", "-f", compose, "-p", "breakwater", "up", "-d",
                     "--wait", *services], check=True)
-    from . import setup
     setup.main()
 
 
@@ -202,7 +205,8 @@ def cmd_diff(args):
         pool = await db.make_pool(max_size=10)
         reaper = asyncio.create_task(_reaper(pool))
         try:
-            return await engine.run_diff(pool, base, head, tasks, cfg, parallel=args.parallel)
+            return await engine.run_diff(pool, base, head, tasks, cfg, parallel=args.parallel,
+                                         log=_p)
         finally:
             reaper.cancel()
             await pool.close()
@@ -279,6 +283,8 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     u = sub.add_parser("up", help="start Postgres and apply the schema")
     u.add_argument("--s3", action="store_true", help="also start MinIO")
+    u.add_argument("--schema-only", action="store_true",
+                   help="only apply the schema to BW_DSN (no containers)")
     sub.add_parser("doctor", help="check the local environment")
     t = sub.add_parser("tasks", help="list tasks and runtime support")
     t.add_argument("source", help="tasks dir, or REPO@REF")

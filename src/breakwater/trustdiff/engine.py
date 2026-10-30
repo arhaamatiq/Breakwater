@@ -281,7 +281,10 @@ def _vinfo(v: TaskVersion, spec) -> dict:
 
 
 def _inventory(tasks: dict) -> dict:
-    names = {k: [c["input"]["test"] for c in t["cases"]] for k, t in tasks.items()}
+    # compare bare check names: a pytest test that became a RewardKit criterion
+    # of the same name (`test_x.py::test_a` -> `test_a`) is not a removal
+    names = {k: [c["input"]["test"].split("::")[-1] for c in t["cases"]]
+             for k, t in tasks.items()}
     b, h = set(names["base"]), set(names["head"])
     return {"base": len(b), "head": len(h), "removed": sorted(b - h), "added": sorted(h - b)}
 

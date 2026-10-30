@@ -1,0 +1,64 @@
+name: Breakwater verifier diff
+description: >
+  Judge a fixed corpus of outputs (reference, no-op, deterministic mutants)
+  with the base and head versions of every changed Harbor task verifier, and
+  fail the job if a known-good output starts failing or a known-bad output
+  starts passing.
+inputs:
+  base:
+    description: Base git ref (e.g. origin/main)
+    required: true
+  head:
+    description: Head git ref
+    default: HEAD
+  tasks:
+    description: Comma-separated task names (default: every task whose verifier changed)
+    default: ""
+  repeats:
+    description: Runs per bundle per version before adaptive top-up
+    default: "2"
+  corpus:
+    description: Corpus kinds
+    default: reference,noop,degenerate,path,file
+  workers:
+    default: "2"
+  breakwater-ref:
+    description: Breakwater git ref to install
+    default: main
+outputs:
+  report:
+    description: Path to REPORT.md
+    value: ${{ steps.diff.outputs.report }}
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@v6
+      with:
+        python-version: "3.11"
+    - shell: bash
+      run: |
+        uv tool install "git+https://github.com/arhaamatiq/Breakwater@${{ inputs.breakwater-ref }}"
+        docker run -d --name bw-pg -p 55432:5432 -e POSTGRES_USER=breakwater \
+          -e POSTGRES_PASSWORD=breakwater -e POSTGRES_DB=breakwater postgres:16-alpine
+        for i in $(seq 1 30); do docker exec bw-pg pg_isready -U breakwater && break; sleep 1; done
+        breakwater up --schema-only
+        breakwater doctor
+    - id: diff
+      shell: bash
+      run: |
+        set -o pipefail
+        out="$RUNNER_TEMP/breakwater"
+        tasks_arg=""
+        [ -n "${{ inputs.tasks }}" ] && tasks_arg="--tasks ${{ inputs.tasks }}"
+        breakwater diff --repo . --base "${{ inputs.base }}" --head "${{ inputs.head }}" $tasks_arg \
+          --repeats "${{ inputs.repeats }}" --corpus "${{ inputs.corpus }}" \
+          --workers "${{ inputs.workers }}" --prune-images --fail-on-high --out "$out"
+        status=$?
+        cat "$out/REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+        echo "report=$out/REPORT.md" >> "$GITHUB_OUTPUT"
+        exit $status
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: breakwater-trustdiff
+        path: ${{ runner.temp }}/breakwater

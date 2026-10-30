@@ -1,0 +1,22 @@
+# Drop into a Harbor benchmark repo (e.g. terminal-bench) as
+# .github/workflows/verifier-diff.yml. On every PR that touches a verifier,
+# Breakwater solves each changed task's reference once, derives mutants,
+# judges every output with the base AND head verifier, and posts the diff
+# to the job summary. The job fails if the change makes a known-good output
+# fail or a known-bad output pass.
+name: verifier-diff
+on:
+  pull_request:
+    paths: ["tasks/*/tests/**", "tasks/*/task.toml"]
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: arhaamatiq/Breakwater@main
+        with:
+          base: origin/${{ github.base_ref }}
+          head: ${{ github.sha }}
