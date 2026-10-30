@@ -209,7 +209,7 @@ def cmd_diff(args):
         network=args.network, solve_from=args.solve_from,
         max_ast_files=args.max_ast_files, max_ast_per_file=args.max_ast_per_file,
         max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap,
-        prune_images=args.prune_images, fixtures=_fixtures(args.fixture),
+        prune_images=args.prune_images, fixtures=_fixtures(args.fixture), epoch=args.epoch,
         solution_fixtures=_fixtures(args.solution_fixture),
         imports=[tuple(x.split(":", 1)) for x in args.import_trials],
         bundles=[(t, n, None if e in ("", "unknown") else e, p) for t, n, e, p in
@@ -405,6 +405,8 @@ def main(argv=None):
                    help="override the task's network policy for every container")
     d.add_argument("--solve-from", choices=["base", "head"], default="base")
     d.add_argument("--solve-timeout-cap", type=float, default=None)
+    d.add_argument("--epoch", help="namespace for verify cells: re-measure instead of reusing "
+                                   "cached verdicts (timing studies)")
     d.add_argument("--workers", type=int, default=3,
                    help="worker processes to spawn (0 = use an already-running fleet)")
     d.add_argument("--concurrency", type=int, default=1)

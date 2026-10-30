@@ -74,6 +74,9 @@ class DiffConfig:
     imports: list = field(default_factory=list)
     # [(task, label, expect, tar_path)] prebuilt bundles (e.g. exported receipts)
     bundles: list = field(default_factory=list)
+    # namespace for verify cells: a new epoch re-measures instead of reusing
+    # cached verdicts (e.g. timing margins on an idle host)
+    epoch: str | None = None
 
 
 class Matrix:
@@ -245,8 +248,9 @@ class TaskDiff:
     # ------------------------------------------------------------ matrix
     def _trial(self, item: CorpusItem, vlabel: str, k: int) -> dict:
         spec = self.specs[vlabel]
+        ep = f"e-{self.cfg.epoch}/" if self.cfg.epoch else ""
         return {"trial_id": f"td/{harbor.runtime_tag(spec)}/{spec.digests['verifier'][:16]}/"
-                            f"{_hex(item.bundle.digest)}/r{k}",
+                            f"{_hex(item.bundle.digest)}/{ep}r{k}",
                 "task_id": f"hb_{spec.short_id}", "replicate": k,
                 "spec": {"mode": "verify_only", "outputs": [{"bundle": item.bundle.digest}],
                          "metrics": self.cfg.metrics, "network": self.cfg.network,
