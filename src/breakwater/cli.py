@@ -193,7 +193,8 @@ def cmd_diff(args):
         corpus=tuple(args.corpus.split(",")), metrics=dict(m.split("=", 1) for m in args.metric),
         network=args.network, solve_from=args.solve_from,
         max_ast_files=args.max_ast_files, max_ast_per_file=args.max_ast_per_file,
-        max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap)
+        max_files=args.max_files, solve_timeout_cap=args.solve_timeout_cap,
+        prune_images=args.prune_images)
     out = args.out or os.path.join("reports", "trustdiff", time.strftime("%Y%m%d-%H%M%S"))
     os.makedirs(out, exist_ok=True)
 
@@ -308,6 +309,8 @@ def main(argv=None):
     d.add_argument("--concurrency", type=int, default=1)
     d.add_argument("--parallel", type=int, default=3, help="tasks diffed concurrently")
     d.add_argument("--keep-unsupported", action="store_true")
+    d.add_argument("--prune-images", action="store_true",
+                   help="remove each task's images when its diff finishes (saves disk)")
     d.add_argument("--fail-on-high", action="store_true", help="exit 2 on CRITICAL/HIGH (CI)")
     d.add_argument("--out")
     r = sub.add_parser("replay", help="re-run a receipt")

@@ -25,6 +25,7 @@ The verdict is always the task's reward, as Harbor records it.
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import json
 import random
 import time
@@ -59,6 +60,7 @@ class DiffConfig:
     solve_timeout_cap: float | None = None
     trial_timeout: float = 6 * 3600
     priority: int = 0
+    prune_images: bool = False     # remove a task's images once its diff is done
 
 
 class Matrix:
@@ -210,6 +212,27 @@ class TaskDiff:
                             rows.get(t["trial_id"], {}))
 
     async def run(self) -> dict:
+        try:
+            return await self._run()
+        finally:
+            if self.cfg.prune_images:
+                await asyncio.to_thread(self._prune)
+
+    def _prune(self):
+        """Disk is the binding constraint on a laptop sweep: drop this task's
+        content-tagged images (they are rebuilt from the same digest on demand)."""
+        from ..runner import docker_client
+        client = docker_client()
+        for s in self.specs.values():
+            for env in (s.agent_env, s.verifier_env):
+                if env and not env.docker_image:
+                    kind = "env" if env is s.agent_env else "verifier"
+                    with contextlib.suppress(Exception):
+                        client.images.remove(harbor._image_tag(kind, s.name, env.digest))
+        with contextlib.suppress(Exception):
+            client.images.prune(filters={"dangling": True})
+
+    async def _run(self) -> dict:
         b, h = self.specs["base"], self.specs["head"]
         if b.digests["artifact_contract"] != h.digests["artifact_contract"]:
             self.notes.append("artifact contract changed between versions: outputs recorded "
