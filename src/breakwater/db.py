@@ -7,6 +7,8 @@ Design: at-least-once execution with exactly-once result effect.
   - submit: INSERT ... ON CONFLICT (trial_id) DO NOTHING (one result ever counts)
 """
 import json
+from importlib import resources
+
 import asyncpg
 
 from .config import CFG
@@ -25,6 +27,21 @@ async def record_event(conn, kind: str, *, experiment_id=None, trial_id=None, wo
     await conn.execute(
         "INSERT INTO events (experiment_id, trial_id, worker_id, kind, payload) VALUES ($1,$2,$3,$4,$5)",
         experiment_id, trial_id, worker_id, kind, payload or {})
+
+
+# ---------------------------------------------------------------- schema
+
+def schema_sql() -> str:
+    """The schema ships inside the package, so an installed wheel can migrate."""
+    return resources.files("breakwater").joinpath("schema.sql").read_text()
+
+
+async def apply_schema(conn: asyncpg.Connection) -> None:
+    """Idempotent; serialized by an advisory lock because concurrent
+    CREATE ... IF NOT EXISTS can still race on the catalog."""
+    async with conn.transaction():
+        await conn.execute("SELECT pg_advisory_xact_lock(hashtext('breakwater.schema'))")
+        await conn.execute(schema_sql())
 
 
 # ---------------------------------------------------------------- experiments
@@ -124,11 +141,11 @@ async def release_trial(pool, trial_id: str, worker_id: str, reason: str):
             row = await conn.fetchrow(
                 """UPDATE trials
                    SET state = CASE WHEN attempts >= max_attempts THEN 'failed' ELSE 'queued' END,
-                       worker_id = NULL, lease_expires_at = NULL,
+                       worker_id = NULL, lease_expires_at = NULL, last_error = $3,
                        finished_at = CASE WHEN attempts >= max_attempts THEN now() ELSE finished_at END
                    WHERE trial_id = $1 AND worker_id = $2 AND state = 'running'
                    RETURNING experiment_id, state, attempts""",
-                trial_id, worker_id)
+                trial_id, worker_id, reason)
             if row:
                 await record_event(conn, "released", experiment_id=row["experiment_id"],
                                    trial_id=trial_id, worker_id=worker_id,
@@ -154,17 +171,19 @@ async def heartbeat_worker(pool, worker_id: str):
 
 REAP_SQL = """
 WITH expired AS (
-    SELECT trial_id FROM trials
+    SELECT trial_id, worker_id FROM trials
     WHERE state = 'running' AND lease_expires_at < now()
     FOR UPDATE SKIP LOCKED
 )
 UPDATE trials t
 SET state = CASE WHEN t.attempts >= t.max_attempts THEN 'failed' ELSE 'queued' END,
     worker_id = NULL, lease_expires_at = NULL,
+    last_error = format('lease expired: worker %s, attempt %s/%s',
+                        expired.worker_id, t.attempts, t.max_attempts),
     finished_at = CASE WHEN t.attempts >= t.max_attempts THEN now() ELSE t.finished_at END
 FROM expired
 WHERE t.trial_id = expired.trial_id
-RETURNING t.trial_id, t.experiment_id, t.state, t.attempts
+RETURNING t.trial_id, t.experiment_id, t.state, t.attempts, expired.worker_id AS lost_worker
 """
 
 
@@ -175,7 +194,8 @@ async def reap_expired_leases(pool) -> list:
             for r in rows:
                 kind = "requeued" if r["state"] == "queued" else "exhausted"
                 await record_event(conn, kind, experiment_id=r["experiment_id"],
-                                   trial_id=r["trial_id"], payload={"attempts": r["attempts"]})
+                                   trial_id=r["trial_id"], worker_id=r["lost_worker"],
+                                   payload={"attempts": r["attempts"]})
             return rows
 
 
