@@ -1,0 +1,281 @@
+{
+  "generated_at": "2026-09-10T18:54:35-0700",
+  "stamp": "phaseB",
+  "mode": "full (fresh solve + fresh verify per run)",
+  "checks": {
+    "c2_bep_byte_stops_mutant": {
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseB/c2_bep_byte_stops_mutant/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 153930.86345796473,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseB/c2_bep_byte_stops_mutant/run1",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 153641.9945419766,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseB/c2_bep_byte_stops_mutant/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 153366.31337495055,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run2/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseB/c2_bep_byte_stops_mutant/run3",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 130183.13525000121,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run3/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run3/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run3/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run3/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run3/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseB/c2_bep_byte_stops_mutant/run4",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 130773.29412498511,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run4/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run4/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run4/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run4/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_byte_stops_mutant_run4/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c2_bep_reference": {
+      "runs": 1,
+      "pass": 1,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseB/c2_bep_reference/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 130747.48058302794,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_reference_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_reference_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_reference_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_reference_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseB/rep_phaseB_c2_bep_reference_run0/attempt-1/meta.json"
+          ]
+        }
+      ]
+    }
+  }
+}

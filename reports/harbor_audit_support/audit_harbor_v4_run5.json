@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-09-10T04:28:48-0700",
+  "tasks": {
+    "hb_session_window_debug": {
+      "task_id": "hb_session_window_debug",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 112.2
+      }
+    },
+    "hb_risk_scorer_replay": {
+      "task_id": "hb_risk_scorer_replay",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 33,
+        "wall_seconds": 130.3
+      }
+    },
+    "hb_production_planning": {
+      "task_id": "hb_production_planning",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 298.9
+      }
+    },
+    "hb_shadow_relay": {
+      "task_id": "hb_shadow_relay",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 5,
+        "wall_seconds": 212.0
+      }
+    },
+    "hb_interleaved_vigenere": {
+      "task_id": "hb_interleaved_vigenere",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 564.9
+      }
+    },
+    "hb_wal_recovery_ordering": {
+      "task_id": "hb_wal_recovery_ordering",
+      "findings": [],
+      "notes": [
+        "discrimination stage skipped: no local-eval oracle for this runtime"
+      ],
+      "stats": {
+        "trials": 34,
+        "wall_seconds": 3355.6
+      }
+    }
+  },
+  "receipts": []
+}

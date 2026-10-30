@@ -60,10 +60,15 @@ LAST_LOAD_REPORT: dict = {}
 _INFRA_SKIPS = ("build_failed",)
 
 _NET_INSTALL_RE = re.compile(
-    r"\b(?:apt-get|apt)\s+install\b|\bpip3?\s+install\b|\bpip3?\s+download\b|"
+    r"\b(?:apt-get|apt)\s+install\b|\bpip3?\s+install\b|\bpip3?\s+download\b|\bpipx\s+(?:install|run)\b|"
     r"\buv\s+(?:pip\s+install|add|tool\s+install|sync)\b|\bnpm\s+(?:install|ci)\b|"
     r"\bpnpm\s+(?:install|add)\b|\byarn\s+(?:install|add)\b|\bcargo\s+(?:install|add|fetch)\b|"
-    r"\bgo\s+(?:get|install)\b|\bconda\s+install\b|\bcurl\b[^|]*\bhttps?://|\bwget\b")
+    r"\bgo\s+(?:get|install)\b|\b(?:conda|mamba|micromamba)\s+install\b|"
+    r"\bcurl\b[^|]*\bhttps?://|\bwget\b|"
+    # `uv run --with pkg` / `uvx --with pkg` / `... --with-requirements f` pull
+    # from PyPI at solve time exactly like an install (the `--with` flag may sit
+    # on a continued line, so match across newlines).
+    r"\buvx?\b[\s\S]{0,400}?--with(?:-requirements)?[ =\t\n]|--with-requirements[ =\t]")
 _BROWSER_RE = re.compile(r"playwright|selenium|chromium|puppeteer", re.I)
 
 
@@ -180,9 +185,21 @@ def load(root: str, ids: list[str] | None = None) -> dict:
             continue
 
         solve_sh = open(os.path.join(d, "solution", "solve.sh")).read()
-        if _NET_INSTALL_RE.search(solve_sh):
+        # Scan the whole solution tree, not just solve.sh: some tasks put the
+        # package pull in a helper script that solve.sh calls.
+        solve_blob = solve_sh
+        for _sr, _sd, _sf in os.walk(os.path.join(d, "solution")):
+            for _fn in _sf:
+                if _fn == "solve.sh":
+                    continue
+                try:
+                    solve_blob += "\n" + open(os.path.join(_sr, _fn),
+                                              errors="ignore").read()
+                except OSError:
+                    pass
+        if _NET_INSTALL_RE.search(solve_blob):
             skip("solve_network", name,
-                 "solution/solve.sh installs packages at solve time; solve runs "
+                 "solution installs/fetches packages at solve time; solve runs "
                  "with networking disabled so the reference cannot run faithfully")
             continue
         if _BROWSER_RE.search(test_files.get("__dockerfile__", "") +

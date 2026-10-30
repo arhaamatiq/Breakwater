@@ -1,0 +1,4601 @@
+{
+  "generated_at": "2026-09-10T16:33:48-0700",
+  "corpus": {
+    "benchmark": "terminal-bench-v4 (Harbor)",
+    "root": "external/harbor-tb/tasks",
+    "clone_sha": "452bf305c6daa62fc59061d22133a7cbc7c1572e"
+  },
+  "load_report": {
+    "loaded": [
+      "hb_batched_eval_parity",
+      "hb_coq_block_bound",
+      "hb_data_anonymization",
+      "hb_glycan_ms2_elucidation",
+      "hb_interleaved_vigenere",
+      "hb_production_planning",
+      "hb_risk_scorer_replay",
+      "hb_session_window_debug",
+      "hb_shadow_relay",
+      "hb_sound_change_cascade",
+      "hb_wal_recovery_ordering"
+    ],
+    "skipped": {
+      "multi_service": [
+        [
+          "ctr-optimization",
+          "multi-service task (services=2, dict-artifacts=True) \u2014 single-container runtime can't start sidecars"
+        ]
+      ],
+      "solve_network": [
+        [
+          "foodstuff-beta-activity",
+          "solution installs/fetches packages at solve time; solve runs with networking disabled so the reference cannot run faithfully"
+        ],
+        [
+          "roy-polymorph-cn",
+          "solution installs/fetches packages at solve time; solve runs with networking disabled so the reference cannot run faithfully"
+        ]
+      ]
+    }
+  },
+  "tasks": {
+    "hb_batched_eval_parity": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/evalbench/"
+      ],
+      "n_cases": 5,
+      "disposition": "included",
+      "reference_artifact_files": 30,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "36a6efcd3da5bf88f041ea2e1bb18dd3d1f927e7e3b83b62418b78a773ad75d6",
+      "mutants_built": 4,
+      "mutants_run": 4,
+      "survived": 0,
+      "killed": 4,
+      "errored": 0,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_batched_eval_parity",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "36a6efcd3da5bf88f041ea2e1bb18dd3d1f927e7e3b83b62418b78a773ad75d6",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/evalbench/__init__.py",
+            "/app/evalbench/__pycache__/__init__.cpython-311.pyc",
+            "/app/evalbench/__pycache__/byte_stops.cpython-311.pyc",
+            "/app/evalbench/__pycache__/generation.cpython-311.pyc",
+            "/app/evalbench/__pycache__/io_utils.cpython-311.pyc",
+            "/app/evalbench/__pycache__/metrics.cpython-311.pyc",
+            "/app/evalbench/__pycache__/model.cpython-311.pyc",
+            "/app/evalbench/__pycache__/prefix_cache.cpython-311.pyc",
+            "/app/evalbench/__pycache__/rendering.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scheduler.cpython-311.pyc",
+            "/app/evalbench/__pycache__/schema.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scoring.cpython-311.pyc",
+            "/app/evalbench/__pycache__/spans.cpython-311.pyc",
+            "/app/evalbench/__pycache__/tokenizer.cpython-311.pyc",
+            "/app/evalbench/byte_stops.py",
+            "/app/evalbench/evaluate.py",
+            "/app/evalbench/generation.py",
+            "/app/evalbench/io_utils.py",
+            "/app/evalbench/metrics.py",
+            "/app/evalbench/model.py",
+            "/app/evalbench/packing.py",
+            "/app/evalbench/prefix_cache.py",
+            "/app/evalbench/reference.py",
+            "/app/evalbench/rendering.py",
+            "/app/evalbench/scheduler.py",
+            "/app/evalbench/schema.py",
+            "/app/evalbench/scoring.py",
+            "/app/evalbench/spans.py",
+            "/app/evalbench/tokenizer.py",
+            "/app/evalbench/trace.py"
+          ],
+          "declared_missing_after": [
+            "/app/evalbench/"
+          ],
+          "bytes_before": 148791,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_batched_eval_parity/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_batched_eval_parity",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/8f3be9a5",
+          "manifest_sha256": "8f3be9a52cde7c819b690f834712b45efd5c69f50a5d007f73892e8dc434e69a",
+          "reference_manifest_sha256": "36a6efcd3da5bf88f041ea2e1bb18dd3d1f927e7e3b83b62418b78a773ad75d6",
+          "artifact_files_after": [
+            "/app/evalbench/__init__.py",
+            "/app/evalbench/__pycache__/__init__.cpython-311.pyc",
+            "/app/evalbench/__pycache__/byte_stops.cpython-311.pyc",
+            "/app/evalbench/__pycache__/generation.cpython-311.pyc",
+            "/app/evalbench/__pycache__/io_utils.cpython-311.pyc",
+            "/app/evalbench/__pycache__/metrics.cpython-311.pyc",
+            "/app/evalbench/__pycache__/model.cpython-311.pyc",
+            "/app/evalbench/__pycache__/prefix_cache.cpython-311.pyc",
+            "/app/evalbench/__pycache__/rendering.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scheduler.cpython-311.pyc",
+            "/app/evalbench/__pycache__/schema.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scoring.cpython-311.pyc",
+            "/app/evalbench/__pycache__/spans.cpython-311.pyc",
+            "/app/evalbench/__pycache__/tokenizer.cpython-311.pyc",
+            "/app/evalbench/byte_stops.py",
+            "/app/evalbench/evaluate.py",
+            "/app/evalbench/generation.py",
+            "/app/evalbench/io_utils.py",
+            "/app/evalbench/metrics.py",
+            "/app/evalbench/model.py",
+            "/app/evalbench/packing.py",
+            "/app/evalbench/prefix_cache.py",
+            "/app/evalbench/reference.py",
+            "/app/evalbench/rendering.py",
+            "/app/evalbench/scheduler.py",
+            "/app/evalbench/schema.py",
+            "/app/evalbench/scoring.py",
+            "/app/evalbench/spans.py",
+            "/app/evalbench/tokenizer.py",
+            "/app/evalbench/trace.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 148791,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_batched_eval_parity/zero_all/8f3be9a5",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_zero_all_8f3be9a5/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_zero_all_8f3be9a5/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_zero_all_8f3be9a5/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_batched_eval_parity",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/27507e0c",
+          "manifest_sha256": "27507e0c04aa7b45d78f9af4d36614f899378c54821e42f37660e92274abbf47",
+          "reference_manifest_sha256": "36a6efcd3da5bf88f041ea2e1bb18dd3d1f927e7e3b83b62418b78a773ad75d6",
+          "artifact_files_after": [
+            "/app/evalbench/__init__.py",
+            "/app/evalbench/__pycache__/__init__.cpython-311.pyc",
+            "/app/evalbench/__pycache__/byte_stops.cpython-311.pyc",
+            "/app/evalbench/__pycache__/generation.cpython-311.pyc",
+            "/app/evalbench/__pycache__/io_utils.cpython-311.pyc",
+            "/app/evalbench/__pycache__/metrics.cpython-311.pyc",
+            "/app/evalbench/__pycache__/model.cpython-311.pyc",
+            "/app/evalbench/__pycache__/prefix_cache.cpython-311.pyc",
+            "/app/evalbench/__pycache__/rendering.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scheduler.cpython-311.pyc",
+            "/app/evalbench/__pycache__/schema.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scoring.cpython-311.pyc",
+            "/app/evalbench/__pycache__/spans.cpython-311.pyc",
+            "/app/evalbench/__pycache__/tokenizer.cpython-311.pyc",
+            "/app/evalbench/byte_stops.py",
+            "/app/evalbench/evaluate.py",
+            "/app/evalbench/generation.py",
+            "/app/evalbench/io_utils.py",
+            "/app/evalbench/metrics.py",
+            "/app/evalbench/model.py",
+            "/app/evalbench/packing.py",
+            "/app/evalbench/prefix_cache.py",
+            "/app/evalbench/reference.py",
+            "/app/evalbench/rendering.py",
+            "/app/evalbench/scheduler.py",
+            "/app/evalbench/schema.py",
+            "/app/evalbench/scoring.py",
+            "/app/evalbench/spans.py",
+            "/app/evalbench/tokenizer.py",
+            "/app/evalbench/trace.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 148791,
+          "bytes_after": 74387,
+          "trial_id": "mut/hb_batched_eval_parity/halve_all/27507e0c",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_halve_all_27507e0c/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_halve_all_27507e0c/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_halve_all_27507e0c/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_batched_eval_parity",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/ad42853a",
+          "manifest_sha256": "ad42853a63358d6fa98ad1195f1e566cb3e1d4242d0916129f2c3bfff1272746",
+          "reference_manifest_sha256": "36a6efcd3da5bf88f041ea2e1bb18dd3d1f927e7e3b83b62418b78a773ad75d6",
+          "artifact_files_after": [
+            "/app/evalbench/__init__.py",
+            "/app/evalbench/__pycache__/__init__.cpython-311.pyc",
+            "/app/evalbench/__pycache__/byte_stops.cpython-311.pyc",
+            "/app/evalbench/__pycache__/generation.cpython-311.pyc",
+            "/app/evalbench/__pycache__/io_utils.cpython-311.pyc",
+            "/app/evalbench/__pycache__/metrics.cpython-311.pyc",
+            "/app/evalbench/__pycache__/model.cpython-311.pyc",
+            "/app/evalbench/__pycache__/prefix_cache.cpython-311.pyc",
+            "/app/evalbench/__pycache__/rendering.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scheduler.cpython-311.pyc",
+            "/app/evalbench/__pycache__/schema.cpython-311.pyc",
+            "/app/evalbench/__pycache__/scoring.cpython-311.pyc",
+            "/app/evalbench/__pycache__/spans.cpython-311.pyc",
+            "/app/evalbench/__pycache__/tokenizer.cpython-311.pyc",
+            "/app/evalbench/byte_stops.py",
+            "/app/evalbench/evaluate.py",
+            "/app/evalbench/generation.py",
+            "/app/evalbench/io_utils.py",
+            "/app/evalbench/metrics.py",
+            "/app/evalbench/model.py",
+            "/app/evalbench/packing.py",
+            "/app/evalbench/prefix_cache.py",
+            "/app/evalbench/reference.py",
+            "/app/evalbench/rendering.py",
+            "/app/evalbench/scheduler.py",
+            "/app/evalbench/schema.py",
+            "/app/evalbench/scoring.py",
+            "/app/evalbench/spans.py",
+            "/app/evalbench/tokenizer.py",
+            "/app/evalbench/trace.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 148791,
+          "bytes_after": 148791,
+          "trial_id": "mut/hb_batched_eval_parity/digits_all/ad42853a",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_digits_all_ad42853a/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_digits_all_ad42853a/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_batched_eval_parity_digits_all_ad42853a/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_coq_block_bound": {
+      "reference_outcome": null,
+      "noop_outcome": null,
+      "reference_state": "failed",
+      "noop_state": "failed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app"
+      ],
+      "n_cases": 4,
+      "disposition": "skipped",
+      "reason": "reference solution did not pass (outcome=None, state='failed', err='None')"
+    },
+    "hb_data_anonymization": {
+      "reference_outcome": null,
+      "noop_outcome": "fail",
+      "reference_state": "failed",
+      "noop_state": "completed",
+      "reference_error": "verify: timeout/wait failure: UnixHTTPConnectionPool(host='localhost', port=None): Read timed out.",
+      "declared_artifacts": [
+        "/app/anon.py",
+        "/app/policy.yaml"
+      ],
+      "n_cases": 8,
+      "disposition": "skipped",
+      "reason": "reference solution did not pass (outcome=None, state='failed', err=\"verify: timeout/wait failure: UnixHTTPConnectionPool(host='localhost', port=None): Read timed out.\")"
+    },
+    "hb_glycan_ms2_elucidation": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/results/output.json",
+        "/app/data/unknown_spectrum.xlsx",
+        "/app/data/output_format.txt"
+      ],
+      "n_cases": 12,
+      "disposition": "included",
+      "reference_artifact_files": 3,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+      "mutants_built": 8,
+      "mutants_run": 8,
+      "survived": 0,
+      "killed": 8,
+      "errored": 0,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx",
+            "/results/output.json"
+          ],
+          "declared_missing_after": [
+            "/results/output.json",
+            "/app/data/unknown_spectrum.xlsx",
+            "/app/data/output_format.txt"
+          ],
+          "bytes_before": 925118,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/fef7b93f",
+          "manifest_sha256": "fef7b93fa33596072b7632bbe1841b06a9135889d46d70ff2d5ec03f1320f838",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx",
+            "/results/output.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 925118,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/zero_all/fef7b93f",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_zero_all_fef7b93f/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_zero_all_fef7b93f/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_zero_all_fef7b93f/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/fb9fe933",
+          "manifest_sha256": "fb9fe93391d8b9f69921356df2523ada0063dd505ce2ca65fca79e523904dbd6",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx",
+            "/results/output.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 925118,
+          "bytes_after": 462558,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/halve_all/fb9fe933",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_halve_all_fb9fe933/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_halve_all_fb9fe933/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_halve_all_fb9fe933/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/68e96121",
+          "manifest_sha256": "68e96121c1c0fe8d5225d8c364c26d0f77abcd3fca662c008bfa2cb5ff8cf35c",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx",
+            "/results/output.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 925118,
+          "bytes_after": 925118,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/digits_all/68e96121",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_digits_all_68e96121/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_digits_all_68e96121/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_digits_all_68e96121/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "drop_path::results_output.json",
+          "mutant_id": "drop_path::results_output.json/abd51c62",
+          "manifest_sha256": "abd51c62be577043f1c23b96b31058b13405a67d053482e4ec8715e884ef4d1b",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx"
+          ],
+          "artifact_files_removed": [
+            "/results/output.json"
+          ],
+          "declared_missing_after": [
+            "/results/output.json"
+          ],
+          "bytes_before": 925118,
+          "bytes_after": 924879,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/drop_path::results_output.json/abd51c62",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::results_output.json_abd51c62/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::results_output.json_abd51c62/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::results_output.json_abd51c62/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "unsolved_path::results_output.json",
+          "mutant_id": "unsolved_path::results_output.json/abd51c62",
+          "manifest_sha256": "abd51c62be577043f1c23b96b31058b13405a67d053482e4ec8715e884ef4d1b",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/app/data/unknown_spectrum.xlsx"
+          ],
+          "artifact_files_removed": [
+            "/results/output.json"
+          ],
+          "declared_missing_after": [
+            "/results/output.json"
+          ],
+          "bytes_before": 925118,
+          "bytes_after": 924879,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/unsolved_path::results_output.json/abd51c62",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_unsolved_path::results_output.json_abd51c62/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_unsolved_path::results_output.json_abd51c62/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_unsolved_path::results_output.json_abd51c62/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "drop_path::app_data_unknown_spectrum.xlsx",
+          "mutant_id": "drop_path::app_data_unknown_spectrum.xlsx/21ab419e",
+          "manifest_sha256": "21ab419eb20fe44e0936366c07d9e4760176c6120fcb77a1adb9776d2c598d7d",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/output_format.txt",
+            "/results/output.json"
+          ],
+          "artifact_files_removed": [
+            "/app/data/unknown_spectrum.xlsx"
+          ],
+          "declared_missing_after": [
+            "/app/data/unknown_spectrum.xlsx"
+          ],
+          "bytes_before": 925118,
+          "bytes_after": 2564,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/drop_path::app_data_unknown_spectrum.xlsx/21ab419e",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": true,
+              "case": 11,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_unknown_spectrum.xlsx_21ab419e/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_unknown_spectrum.xlsx_21ab419e/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_unknown_spectrum.xlsx_21ab419e/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_glycan_ms2_elucidation",
+          "operator": "drop_path::app_data_output_format.txt",
+          "mutant_id": "drop_path::app_data_output_format.txt/ad4f2691",
+          "manifest_sha256": "ad4f2691106607e178ef7aca9b198fad347309f08a77192435a312650ad9e6ba",
+          "reference_manifest_sha256": "a8051a787d5845f2e860031a1eb6b060cde5917eedf66487cad46619825f0cb0",
+          "artifact_files_after": [
+            "/app/data/unknown_spectrum.xlsx",
+            "/results/output.json"
+          ],
+          "artifact_files_removed": [
+            "/app/data/output_format.txt"
+          ],
+          "declared_missing_after": [
+            "/app/data/output_format.txt"
+          ],
+          "bytes_before": 925118,
+          "bytes_after": 922793,
+          "trial_id": "mut/hb_glycan_ms2_elucidation/drop_path::app_data_output_format.txt/ad4f2691",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 8,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 9,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 11,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_output_format.txt_ad4f2691/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_output_format.txt_ad4f2691/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_glycan_ms2_elucidation_drop_path::app_data_output_format.txt_ad4f2691/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_interleaved_vigenere": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/cracker.py",
+        "/app/requirements.txt"
+      ],
+      "n_cases": 6,
+      "disposition": "included",
+      "reference_artifact_files": 2,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+      "mutants_built": 8,
+      "mutants_run": 8,
+      "survived": 2,
+      "killed": 6,
+      "errored": 0,
+      "survival_rate": 0.25,
+      "mutant_records": [
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/cracker.py",
+            "/app/requirements.txt"
+          ],
+          "declared_missing_after": [
+            "/app/cracker.py",
+            "/app/requirements.txt"
+          ],
+          "bytes_before": 8272,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_interleaved_vigenere/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/23499e48",
+          "manifest_sha256": "23499e4848f7ddfd84a4a739f8fa268c994e8239a86ba505b758c593e7b123db",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/cracker.py",
+            "/app/requirements.txt"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 8272,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_interleaved_vigenere/zero_all/23499e48",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_zero_all_23499e48/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_zero_all_23499e48/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_zero_all_23499e48/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/e9b37026",
+          "manifest_sha256": "e9b37026312778e1bd5f4708ae4ed3f0b030b65643840df910ae3734fe230436",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/cracker.py",
+            "/app/requirements.txt"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 8272,
+          "bytes_after": 4136,
+          "trial_id": "mut/hb_interleaved_vigenere/halve_all/e9b37026",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_halve_all_e9b37026/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_halve_all_e9b37026/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_halve_all_e9b37026/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/38c6c889",
+          "manifest_sha256": "38c6c8898da63dc1366c7966e4bc4a820c9e5fb099e3ee3a5a201b819d22dd3f",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/cracker.py",
+            "/app/requirements.txt"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 8272,
+          "bytes_after": 8272,
+          "trial_id": "mut/hb_interleaved_vigenere/digits_all/38c6c889",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_digits_all_38c6c889/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_digits_all_38c6c889/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_digits_all_38c6c889/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "drop_path::app_cracker.py",
+          "mutant_id": "drop_path::app_cracker.py/828f1620",
+          "manifest_sha256": "828f1620f50c14d1a4fe05e0dba297b2599fc9343668f81c9495f5359696ffad",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/requirements.txt"
+          ],
+          "artifact_files_removed": [
+            "/app/cracker.py"
+          ],
+          "declared_missing_after": [
+            "/app/cracker.py"
+          ],
+          "bytes_before": 8272,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_interleaved_vigenere/drop_path::app_cracker.py/828f1620",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_cracker.py_828f1620/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_cracker.py_828f1620/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_cracker.py_828f1620/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "unsolved_path::app_cracker.py",
+          "mutant_id": "unsolved_path::app_cracker.py/828f1620",
+          "manifest_sha256": "828f1620f50c14d1a4fe05e0dba297b2599fc9343668f81c9495f5359696ffad",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/requirements.txt"
+          ],
+          "artifact_files_removed": [
+            "/app/cracker.py"
+          ],
+          "declared_missing_after": [
+            "/app/cracker.py"
+          ],
+          "bytes_before": 8272,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_interleaved_vigenere/unsolved_path::app_cracker.py/828f1620",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_cracker.py_828f1620/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_cracker.py_828f1620/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_cracker.py_828f1620/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "drop_path::app_requirements.txt",
+          "mutant_id": "drop_path::app_requirements.txt/b365d555",
+          "manifest_sha256": "b365d5550ad39b9f1f5fa4a55aaa8dc11cf9e9ce76b9c3ff58a284d4f7281ac8",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/cracker.py"
+          ],
+          "artifact_files_removed": [
+            "/app/requirements.txt"
+          ],
+          "declared_missing_after": [
+            "/app/requirements.txt"
+          ],
+          "bytes_before": 8272,
+          "bytes_after": 8272,
+          "trial_id": "mut/hb_interleaved_vigenere/drop_path::app_requirements.txt/b365d555",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "1",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/meta.json"
+          ],
+          "disposition": "survived"
+        },
+        {
+          "task": "hb_interleaved_vigenere",
+          "operator": "unsolved_path::app_requirements.txt",
+          "mutant_id": "unsolved_path::app_requirements.txt/b365d555",
+          "manifest_sha256": "b365d5550ad39b9f1f5fa4a55aaa8dc11cf9e9ce76b9c3ff58a284d4f7281ac8",
+          "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+          "artifact_files_after": [
+            "/app/cracker.py"
+          ],
+          "artifact_files_removed": [
+            "/app/requirements.txt"
+          ],
+          "declared_missing_after": [
+            "/app/requirements.txt"
+          ],
+          "bytes_before": 8272,
+          "bytes_after": 8272,
+          "trial_id": "mut/hb_interleaved_vigenere/unsolved_path::app_requirements.txt/b365d555",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "1",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/meta.json"
+          ],
+          "disposition": "survived"
+        }
+      ]
+    },
+    "hb_production_planning": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/output/erp_writeback.sql",
+        "/app/output/mes_writeback.sql",
+        "/app/output/wms_writeback.sql"
+      ],
+      "n_cases": 20,
+      "disposition": "included",
+      "reference_artifact_files": 3,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+      "mutants_built": 10,
+      "mutants_run": 10,
+      "survived": 0,
+      "killed": 10,
+      "errored": 0,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_production_planning",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_production_planning/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 17,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/9f725a1c",
+          "manifest_sha256": "9f725a1ccef1e4331afeb92dde334f099542b9f2c900f6213b33316d51edda5a",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10313,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_production_planning/zero_all/9f725a1c",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 17,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_zero_all_9f725a1c/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_zero_all_9f725a1c/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_zero_all_9f725a1c/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/2a606b61",
+          "manifest_sha256": "2a606b61a2ade798b83da46f0bdfe19f28cc6b49cbdb2a1c1e7e5f7651aff753",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10313,
+          "bytes_after": 5155,
+          "trial_id": "mut/hb_production_planning/halve_all/2a606b61",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 17,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_halve_all_2a606b61/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_halve_all_2a606b61/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_halve_all_2a606b61/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/434672b8",
+          "manifest_sha256": "434672b88f14f1425da910ed0b0acb25177c6b4e83d380218414408711cbbc8e",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10313,
+          "bytes_after": 10313,
+          "trial_id": "mut/hb_production_planning/digits_all/434672b8",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 14,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 16,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 17,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 18,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_digits_all_434672b8/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_digits_all_434672b8/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_digits_all_434672b8/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "drop_path::app_output_erp_writeback.sql",
+          "mutant_id": "drop_path::app_output_erp_writeback.sql/aa48fafb",
+          "manifest_sha256": "aa48fafb8445ba1d3443843849f9bda941bd0f2af58b2b58e61e5729428a906d",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/erp_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/erp_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 6620,
+          "trial_id": "mut/hb_production_planning/drop_path::app_output_erp_writeback.sql/aa48fafb",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 17,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "unsolved_path::app_output_erp_writeback.sql",
+          "mutant_id": "unsolved_path::app_output_erp_writeback.sql/aa48fafb",
+          "manifest_sha256": "aa48fafb8445ba1d3443843849f9bda941bd0f2af58b2b58e61e5729428a906d",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/mes_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/erp_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/erp_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 6620,
+          "trial_id": "mut/hb_production_planning/unsolved_path::app_output_erp_writeback.sql/aa48fafb",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 15,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 17,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "failed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_erp_writeback.sql_aa48fafb/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "drop_path::app_output_mes_writeback.sql",
+          "mutant_id": "drop_path::app_output_mes_writeback.sql/10a10f5c",
+          "manifest_sha256": "10a10f5c4c3bf69eb4a3bbd21b857ecc992d36b20b1f93f972cbfcb448ceb677",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/mes_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/mes_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 7496,
+          "trial_id": "mut/hb_production_planning/drop_path::app_output_mes_writeback.sql/10a10f5c",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 9,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 12,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 13,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 14,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 15,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 17,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 18,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "unsolved_path::app_output_mes_writeback.sql",
+          "mutant_id": "unsolved_path::app_output_mes_writeback.sql/10a10f5c",
+          "manifest_sha256": "10a10f5c4c3bf69eb4a3bbd21b857ecc992d36b20b1f93f972cbfcb448ceb677",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/wms_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/mes_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/mes_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 7496,
+          "trial_id": "mut/hb_production_planning/unsolved_path::app_output_mes_writeback.sql/10a10f5c",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 9,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 12,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 13,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 14,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 15,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 17,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 18,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_mes_writeback.sql_10a10f5c/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "drop_path::app_output_wms_writeback.sql",
+          "mutant_id": "drop_path::app_output_wms_writeback.sql/312eea0a",
+          "manifest_sha256": "312eea0a3be1a1c988727e5dc0214f0c11c6052bc724637f3c720f4610300f53",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/wms_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/wms_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 6510,
+          "trial_id": "mut/hb_production_planning/drop_path::app_output_wms_writeback.sql/312eea0a",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 8,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 9,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 11,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 15,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 17,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_wms_writeback.sql_312eea0a/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_wms_writeback.sql_312eea0a/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_drop_path::app_output_wms_writeback.sql_312eea0a/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_production_planning",
+          "operator": "unsolved_path::app_output_wms_writeback.sql",
+          "mutant_id": "unsolved_path::app_output_wms_writeback.sql/312eea0a",
+          "manifest_sha256": "312eea0a3be1a1c988727e5dc0214f0c11c6052bc724637f3c720f4610300f53",
+          "reference_manifest_sha256": "ee9200458aa802a6bcaf36c51a9e6c417b8d14cfa500144dc071e77f79552a51",
+          "artifact_files_after": [
+            "/app/output/erp_writeback.sql",
+            "/app/output/mes_writeback.sql"
+          ],
+          "artifact_files_removed": [
+            "/app/output/wms_writeback.sql"
+          ],
+          "declared_missing_after": [
+            "/app/output/wms_writeback.sql"
+          ],
+          "bytes_before": 10313,
+          "bytes_after": 6510,
+          "trial_id": "mut/hb_production_planning/unsolved_path::app_output_wms_writeback.sql/312eea0a",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 6,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 8,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 9,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 10,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 11,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 13,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 14,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 15,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 16,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 17,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 18,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 19,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_wms_writeback.sql_312eea0a/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_wms_writeback.sql_312eea0a/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_production_planning_unsolved_path::app_output_wms_writeback.sql_312eea0a/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_risk_scorer_replay": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/"
+      ],
+      "n_cases": 5,
+      "disposition": "included",
+      "reference_artifact_files": 19,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "6054a835b16188308c33f00540f64c9ead7fcb8ead897b3ceac44c51f62adf5b",
+      "mutants_built": 4,
+      "mutants_run": 4,
+      "survived": 0,
+      "killed": 4,
+      "errored": 0,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_risk_scorer_replay",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "6054a835b16188308c33f00540f64c9ead7fcb8ead897b3ceac44c51f62adf5b",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/data/incidents/parity-2026-10/manifest.json",
+            "/app/data/incidents/parity-2026-10/reports/shadow_scores.csv",
+            "/app/data/incidents/parity-2026-10/sources/requests.csv",
+            "/app/data/incidents/parity-2026-10/sources/review_events.csv",
+            "/app/data/incidents/parity-2026-10/sources/thresholds.json",
+            "/app/docs/migration_ticket.md",
+            "/app/docs/probe_examples.md",
+            "/app/docs/review_ops_digest.md",
+            "/app/docs/stale_model_card.md",
+            "/app/output/parity_scores.csv",
+            "/app/output/parity_summary.json",
+            "/app/output/scorer_audit.sqlite",
+            "/app/parityctl/__init__.py",
+            "/app/parityctl/__main__.py",
+            "/app/parityctl/__pycache__/__init__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/__main__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/cli.cpython-312.pyc",
+            "/app/parityctl/cli.py",
+            "/app/rebuild_parity_report.sh"
+          ],
+          "declared_missing_after": [
+            "/app/"
+          ],
+          "bytes_before": 55812,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_risk_scorer_replay/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_risk_scorer_replay",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/ecd79d9a",
+          "manifest_sha256": "ecd79d9aef0e954ff3b7c138f84ea92e6a955ef4caf7f6c303752fe018836edf",
+          "reference_manifest_sha256": "6054a835b16188308c33f00540f64c9ead7fcb8ead897b3ceac44c51f62adf5b",
+          "artifact_files_after": [
+            "/app/data/incidents/parity-2026-10/manifest.json",
+            "/app/data/incidents/parity-2026-10/reports/shadow_scores.csv",
+            "/app/data/incidents/parity-2026-10/sources/requests.csv",
+            "/app/data/incidents/parity-2026-10/sources/review_events.csv",
+            "/app/data/incidents/parity-2026-10/sources/thresholds.json",
+            "/app/docs/migration_ticket.md",
+            "/app/docs/probe_examples.md",
+            "/app/docs/review_ops_digest.md",
+            "/app/docs/stale_model_card.md",
+            "/app/output/parity_scores.csv",
+            "/app/output/parity_summary.json",
+            "/app/output/scorer_audit.sqlite",
+            "/app/parityctl/__init__.py",
+            "/app/parityctl/__main__.py",
+            "/app/parityctl/__pycache__/__init__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/__main__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/cli.cpython-312.pyc",
+            "/app/parityctl/cli.py",
+            "/app/rebuild_parity_report.sh"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 55812,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_risk_scorer_replay/zero_all/ecd79d9a",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_zero_all_ecd79d9a/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_zero_all_ecd79d9a/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_zero_all_ecd79d9a/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_risk_scorer_replay",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/c71b5bea",
+          "manifest_sha256": "c71b5beaf628d507243db05414267abb9e8b7c51873faf1c04daada8572528f9",
+          "reference_manifest_sha256": "6054a835b16188308c33f00540f64c9ead7fcb8ead897b3ceac44c51f62adf5b",
+          "artifact_files_after": [
+            "/app/data/incidents/parity-2026-10/manifest.json",
+            "/app/data/incidents/parity-2026-10/reports/shadow_scores.csv",
+            "/app/data/incidents/parity-2026-10/sources/requests.csv",
+            "/app/data/incidents/parity-2026-10/sources/review_events.csv",
+            "/app/data/incidents/parity-2026-10/sources/thresholds.json",
+            "/app/docs/migration_ticket.md",
+            "/app/docs/probe_examples.md",
+            "/app/docs/review_ops_digest.md",
+            "/app/docs/stale_model_card.md",
+            "/app/output/parity_scores.csv",
+            "/app/output/parity_summary.json",
+            "/app/output/scorer_audit.sqlite",
+            "/app/parityctl/__init__.py",
+            "/app/parityctl/__main__.py",
+            "/app/parityctl/__pycache__/__init__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/__main__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/cli.cpython-312.pyc",
+            "/app/parityctl/cli.py",
+            "/app/rebuild_parity_report.sh"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 55812,
+          "bytes_after": 27902,
+          "trial_id": "mut/hb_risk_scorer_replay/halve_all/c71b5bea",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_halve_all_c71b5bea/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_halve_all_c71b5bea/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_halve_all_c71b5bea/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_risk_scorer_replay",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/516e13f8",
+          "manifest_sha256": "516e13f828c2a722d4041933f86f76aebf3810ce45f17bac30b66fb8d6d00fd0",
+          "reference_manifest_sha256": "6054a835b16188308c33f00540f64c9ead7fcb8ead897b3ceac44c51f62adf5b",
+          "artifact_files_after": [
+            "/app/data/incidents/parity-2026-10/manifest.json",
+            "/app/data/incidents/parity-2026-10/reports/shadow_scores.csv",
+            "/app/data/incidents/parity-2026-10/sources/requests.csv",
+            "/app/data/incidents/parity-2026-10/sources/review_events.csv",
+            "/app/data/incidents/parity-2026-10/sources/thresholds.json",
+            "/app/docs/migration_ticket.md",
+            "/app/docs/probe_examples.md",
+            "/app/docs/review_ops_digest.md",
+            "/app/docs/stale_model_card.md",
+            "/app/output/parity_scores.csv",
+            "/app/output/parity_summary.json",
+            "/app/output/scorer_audit.sqlite",
+            "/app/parityctl/__init__.py",
+            "/app/parityctl/__main__.py",
+            "/app/parityctl/__pycache__/__init__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/__main__.cpython-312.pyc",
+            "/app/parityctl/__pycache__/cli.cpython-312.pyc",
+            "/app/parityctl/cli.py",
+            "/app/rebuild_parity_report.sh"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 55812,
+          "bytes_after": 55812,
+          "trial_id": "mut/hb_risk_scorer_replay/digits_all/516e13f8",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_digits_all_516e13f8/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_digits_all_516e13f8/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_risk_scorer_replay_digits_all_516e13f8/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_session_window_debug": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/app/"
+      ],
+      "n_cases": 7,
+      "disposition": "included",
+      "reference_artifact_files": 8,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "e85df0d786a6a022b71502b96a78514d0ab57e4ddcb3e124d5608c813937471a",
+      "mutants_built": 4,
+      "mutants_run": 2,
+      "survived": 0,
+      "killed": 2,
+      "errored": 2,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_session_window_debug",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "e85df0d786a6a022b71502b96a78514d0ab57e4ddcb3e124d5608c813937471a",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/app/DESIGN.md",
+            "/app/app/__init__.py",
+            "/app/app/emitter.py",
+            "/app/app/events.py",
+            "/app/app/gc.py",
+            "/app/app/merger.py",
+            "/app/app/sessions.py",
+            "/app/app/types.py"
+          ],
+          "declared_missing_after": [
+            "/app/app/"
+          ],
+          "bytes_before": 10974,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_session_window_debug/drop_all/e3b0c442",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_session_window_debug",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/38217951",
+          "manifest_sha256": "382179511da458d26b85d178c14b4174c4f89b6b84bcbfc820cf697a0e3f65c6",
+          "reference_manifest_sha256": "e85df0d786a6a022b71502b96a78514d0ab57e4ddcb3e124d5608c813937471a",
+          "artifact_files_after": [
+            "/app/app/DESIGN.md",
+            "/app/app/__init__.py",
+            "/app/app/emitter.py",
+            "/app/app/events.py",
+            "/app/app/gc.py",
+            "/app/app/merger.py",
+            "/app/app/sessions.py",
+            "/app/app/types.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10974,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_session_window_debug/zero_all/38217951",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_zero_all_38217951/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_zero_all_38217951/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_zero_all_38217951/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_session_window_debug",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/80f7559a",
+          "manifest_sha256": "80f7559ab9b041a40a6cb9e44a6138df3b4776744093b88fd19ed7ca3c792e43",
+          "reference_manifest_sha256": "e85df0d786a6a022b71502b96a78514d0ab57e4ddcb3e124d5608c813937471a",
+          "artifact_files_after": [
+            "/app/app/DESIGN.md",
+            "/app/app/__init__.py",
+            "/app/app/emitter.py",
+            "/app/app/events.py",
+            "/app/app/gc.py",
+            "/app/app/merger.py",
+            "/app/app/sessions.py",
+            "/app/app/types.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10974,
+          "bytes_after": 5485,
+          "trial_id": "mut/hb_session_window_debug/halve_all/80f7559a",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_session_window_debug",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/ebeca5fc",
+          "manifest_sha256": "ebeca5fc3f09cc49981e629a16bbc6f40cdaf042b6e80e430773ed34492ea892",
+          "reference_manifest_sha256": "e85df0d786a6a022b71502b96a78514d0ab57e4ddcb3e124d5608c813937471a",
+          "artifact_files_after": [
+            "/app/app/DESIGN.md",
+            "/app/app/__init__.py",
+            "/app/app/emitter.py",
+            "/app/app/events.py",
+            "/app/app/gc.py",
+            "/app/app/merger.py",
+            "/app/app/sessions.py",
+            "/app/app/types.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 10974,
+          "bytes_after": 10974,
+          "trial_id": "mut/hb_session_window_debug/digits_all/ebeca5fc",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "failed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "failed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_digits_all_ebeca5fc/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_digits_all_ebeca5fc/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_session_window_debug_digits_all_ebeca5fc/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_shadow_relay": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/tmp/agent.patch"
+      ],
+      "n_cases": 8,
+      "disposition": "included",
+      "reference_artifact_files": 1,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "38d9e0f03e99bf6605fa7c7185d5f7169e7669b3c5b87c8c3f71a4f91f1978f5",
+      "mutants_built": 4,
+      "mutants_run": 1,
+      "survived": 0,
+      "killed": 1,
+      "errored": 3,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_shadow_relay",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "38d9e0f03e99bf6605fa7c7185d5f7169e7669b3c5b87c8c3f71a4f91f1978f5",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/tmp/agent.patch"
+          ],
+          "declared_missing_after": [
+            "/tmp/agent.patch"
+          ],
+          "bytes_before": 12308,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_shadow_relay/drop_all/e3b0c442",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_shadow_relay",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/93e87e6e",
+          "manifest_sha256": "93e87e6e96eaec4e88b2df3d43b668623669ca3f7ed1c62fc9d24cf7b927ff43",
+          "reference_manifest_sha256": "38d9e0f03e99bf6605fa7c7185d5f7169e7669b3c5b87c8c3f71a4f91f1978f5",
+          "artifact_files_after": [
+            "/tmp/agent.patch"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 12308,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_shadow_relay/zero_all/93e87e6e",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": true,
+              "case": 7,
+              "detail": "passed"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_shadow_relay_zero_all_93e87e6e/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_shadow_relay_zero_all_93e87e6e/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_shadow_relay_zero_all_93e87e6e/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_shadow_relay",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/86c7b067",
+          "manifest_sha256": "86c7b067f109ba247ec3648fefc4db4b90127b88b18bc47ea72238f898518caa",
+          "reference_manifest_sha256": "38d9e0f03e99bf6605fa7c7185d5f7169e7669b3c5b87c8c3f71a4f91f1978f5",
+          "artifact_files_after": [
+            "/tmp/agent.patch"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 12308,
+          "bytes_after": 6154,
+          "trial_id": "mut/hb_shadow_relay/halve_all/86c7b067",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_shadow_relay",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/9d7d44a1",
+          "manifest_sha256": "9d7d44a164a623f66d54b7e683e67aeeefe5d38847913be388f468de02c03891",
+          "reference_manifest_sha256": "38d9e0f03e99bf6605fa7c7185d5f7169e7669b3c5b87c8c3f71a4f91f1978f5",
+          "artifact_files_after": [
+            "/tmp/agent.patch"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 12308,
+          "bytes_after": 12308,
+          "trial_id": "mut/hb_shadow_relay/digits_all/9d7d44a1",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        }
+      ]
+    },
+    "hb_sound_change_cascade": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/rules.json",
+        "/app/ordering.txt"
+      ],
+      "n_cases": 7,
+      "disposition": "included",
+      "reference_artifact_files": 2,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+      "mutants_built": 8,
+      "mutants_run": 8,
+      "survived": 0,
+      "killed": 8,
+      "errored": 0,
+      "survival_rate": 0.0,
+      "mutant_records": [
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/ordering.txt",
+            "/app/rules.json"
+          ],
+          "declared_missing_after": [
+            "/app/rules.json",
+            "/app/ordering.txt"
+          ],
+          "bytes_before": 6388,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_sound_change_cascade/drop_all/e3b0c442",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_all_e3b0c442/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_all_e3b0c442/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_all_e3b0c442/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/e374d36c",
+          "manifest_sha256": "e374d36c8aef946d8d178e3af2b1b008af32fb71a360501ce7c2d03f3e45a647",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/ordering.txt",
+            "/app/rules.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 6388,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_sound_change_cascade/zero_all/e374d36c",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_zero_all_e374d36c/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_zero_all_e374d36c/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_zero_all_e374d36c/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/65e89960",
+          "manifest_sha256": "65e89960bf320c4172c1c76e61d6853d8babed218e1a3c33877b52c4da15186f",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/ordering.txt",
+            "/app/rules.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 6388,
+          "bytes_after": 3193,
+          "trial_id": "mut/hb_sound_change_cascade/halve_all/65e89960",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_halve_all_65e89960/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_halve_all_65e89960/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_halve_all_65e89960/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/37a6a56e",
+          "manifest_sha256": "37a6a56e269fe9b09b13c0d2035dcd917ba15633f2610566653ebd6688815308",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/ordering.txt",
+            "/app/rules.json"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 6388,
+          "bytes_after": 6388,
+          "trial_id": "mut/hb_sound_change_cascade/digits_all/37a6a56e",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_digits_all_37a6a56e/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_digits_all_37a6a56e/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_digits_all_37a6a56e/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "drop_path::app_rules.json",
+          "mutant_id": "drop_path::app_rules.json/aab38242",
+          "manifest_sha256": "aab38242fe223dfef71db83b39013c375f0fcdfde943bafb50e8b35c22db2758",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/ordering.txt"
+          ],
+          "artifact_files_removed": [
+            "/app/rules.json"
+          ],
+          "declared_missing_after": [
+            "/app/rules.json"
+          ],
+          "bytes_before": 6388,
+          "bytes_after": 497,
+          "trial_id": "mut/hb_sound_change_cascade/drop_path::app_rules.json/aab38242",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_rules.json_aab38242/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_rules.json_aab38242/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_rules.json_aab38242/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "unsolved_path::app_rules.json",
+          "mutant_id": "unsolved_path::app_rules.json/aab38242",
+          "manifest_sha256": "aab38242fe223dfef71db83b39013c375f0fcdfde943bafb50e8b35c22db2758",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/ordering.txt"
+          ],
+          "artifact_files_removed": [
+            "/app/rules.json"
+          ],
+          "declared_missing_after": [
+            "/app/rules.json"
+          ],
+          "bytes_before": 6388,
+          "bytes_after": 497,
+          "trial_id": "mut/hb_sound_change_cascade/unsolved_path::app_rules.json/aab38242",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": false,
+              "case": 0,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_rules.json_aab38242/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_rules.json_aab38242/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_rules.json_aab38242/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "drop_path::app_ordering.txt",
+          "mutant_id": "drop_path::app_ordering.txt/3e5a6153",
+          "manifest_sha256": "3e5a61539eaf97395cd6bcd8fccfb70c60cedc8ae1ecbf065b3ad80b88a804ce",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/rules.json"
+          ],
+          "artifact_files_removed": [
+            "/app/ordering.txt"
+          ],
+          "declared_missing_after": [
+            "/app/ordering.txt"
+          ],
+          "bytes_before": 6388,
+          "bytes_after": 5891,
+          "trial_id": "mut/hb_sound_change_cascade/drop_path::app_ordering.txt/3e5a6153",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_ordering.txt_3e5a6153/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_ordering.txt_3e5a6153/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_drop_path::app_ordering.txt_3e5a6153/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        },
+        {
+          "task": "hb_sound_change_cascade",
+          "operator": "unsolved_path::app_ordering.txt",
+          "mutant_id": "unsolved_path::app_ordering.txt/3e5a6153",
+          "manifest_sha256": "3e5a61539eaf97395cd6bcd8fccfb70c60cedc8ae1ecbf065b3ad80b88a804ce",
+          "reference_manifest_sha256": "bfc2e622c165978394005a0913b098d38b39a436a7abf51c9f43c3cc9ce73faf",
+          "artifact_files_after": [
+            "/app/rules.json"
+          ],
+          "artifact_files_removed": [
+            "/app/ordering.txt"
+          ],
+          "declared_missing_after": [
+            "/app/ordering.txt"
+          ],
+          "bytes_before": 6388,
+          "bytes_after": 5891,
+          "trial_id": "mut/hb_sound_change_cascade/unsolved_path::app_ordering.txt/3e5a6153",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "verifier_cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 1,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 3,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 5,
+              "detail": "The test failed in the call phase"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "reward_txt": "0",
+          "artifacts_differ_from_reference": true,
+          "storage": [
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_ordering.txt_3e5a6153/attempt-1/verify.log",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_ordering.txt_3e5a6153/attempt-1/ctrf.json",
+            "s3://artifacts/ablate-mut-20260910-162621/mut_hb_sound_change_cascade_unsolved_path::app_ordering.txt_3e5a6153/attempt-1/meta.json"
+          ],
+          "disposition": "killed"
+        }
+      ]
+    },
+    "hb_wal_recovery_ordering": {
+      "reference_outcome": "pass",
+      "noop_outcome": "fail",
+      "reference_state": "completed",
+      "noop_state": "completed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app/"
+      ],
+      "n_cases": 25,
+      "disposition": "included",
+      "reference_artifact_files": 15,
+      "reference_artifacts_missing": [],
+      "reference_manifest_sha256": "8bf5d8529cb7a2d56ce374a5805175fe237c041d3476fbd699d75a66ab7530b2",
+      "mutants_built": 4,
+      "mutants_run": 0,
+      "survived": 0,
+      "killed": 0,
+      "errored": 4,
+      "survival_rate": null,
+      "mutant_records": [
+        {
+          "task": "hb_wal_recovery_ordering",
+          "operator": "drop_all",
+          "mutant_id": "drop_all/e3b0c442",
+          "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "reference_manifest_sha256": "8bf5d8529cb7a2d56ce374a5805175fe237c041d3476fbd699d75a66ab7530b2",
+          "artifact_files_after": [],
+          "artifact_files_removed": [
+            "/app/_stage_a.py",
+            "/app/_stage_b.py",
+            "/app/_stage_c.py",
+            "/app/_stage_d.py",
+            "/app/_stage_e.py",
+            "/app/app.py",
+            "/app/checkpoint.py",
+            "/app/config.py",
+            "/app/log_writer.py",
+            "/app/metrics.py",
+            "/app/recovery.py",
+            "/app/segment_manager.py",
+            "/app/serializer.py",
+            "/app/wal.py",
+            "/app/wal_index.py"
+          ],
+          "declared_missing_after": [
+            "/app/"
+          ],
+          "bytes_before": 23552,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_wal_recovery_ordering/drop_all/e3b0c442",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_wal_recovery_ordering",
+          "operator": "zero_all",
+          "mutant_id": "zero_all/a61ebe3c",
+          "manifest_sha256": "a61ebe3c171192538296d764192e88501a71f02ba16074e3e79a5ac64c6888be",
+          "reference_manifest_sha256": "8bf5d8529cb7a2d56ce374a5805175fe237c041d3476fbd699d75a66ab7530b2",
+          "artifact_files_after": [
+            "/app/_stage_a.py",
+            "/app/_stage_b.py",
+            "/app/_stage_c.py",
+            "/app/_stage_d.py",
+            "/app/_stage_e.py",
+            "/app/app.py",
+            "/app/checkpoint.py",
+            "/app/config.py",
+            "/app/log_writer.py",
+            "/app/metrics.py",
+            "/app/recovery.py",
+            "/app/segment_manager.py",
+            "/app/serializer.py",
+            "/app/wal.py",
+            "/app/wal_index.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 23552,
+          "bytes_after": 0,
+          "trial_id": "mut/hb_wal_recovery_ordering/zero_all/a61ebe3c",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_wal_recovery_ordering",
+          "operator": "halve_all",
+          "mutant_id": "halve_all/d9a40d08",
+          "manifest_sha256": "d9a40d086475fb38c0dd3ac3b10f613a0b468741845043e1fe7cb760602b4d8c",
+          "reference_manifest_sha256": "8bf5d8529cb7a2d56ce374a5805175fe237c041d3476fbd699d75a66ab7530b2",
+          "artifact_files_after": [
+            "/app/_stage_a.py",
+            "/app/_stage_b.py",
+            "/app/_stage_c.py",
+            "/app/_stage_d.py",
+            "/app/_stage_e.py",
+            "/app/app.py",
+            "/app/checkpoint.py",
+            "/app/config.py",
+            "/app/log_writer.py",
+            "/app/metrics.py",
+            "/app/recovery.py",
+            "/app/segment_manager.py",
+            "/app/serializer.py",
+            "/app/wal.py",
+            "/app/wal_index.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 23552,
+          "bytes_after": 11772,
+          "trial_id": "mut/hb_wal_recovery_ordering/halve_all/d9a40d08",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        },
+        {
+          "task": "hb_wal_recovery_ordering",
+          "operator": "digits_all",
+          "mutant_id": "digits_all/c2b42dd7",
+          "manifest_sha256": "c2b42dd77772f00e6cefef878c1b7d20a6992555811593780ac9c1b7ab993951",
+          "reference_manifest_sha256": "8bf5d8529cb7a2d56ce374a5805175fe237c041d3476fbd699d75a66ab7530b2",
+          "artifact_files_after": [
+            "/app/_stage_a.py",
+            "/app/_stage_b.py",
+            "/app/_stage_c.py",
+            "/app/_stage_d.py",
+            "/app/_stage_e.py",
+            "/app/app.py",
+            "/app/checkpoint.py",
+            "/app/config.py",
+            "/app/log_writer.py",
+            "/app/metrics.py",
+            "/app/recovery.py",
+            "/app/segment_manager.py",
+            "/app/serializer.py",
+            "/app/wal.py",
+            "/app/wal_index.py"
+          ],
+          "artifact_files_removed": [],
+          "declared_missing_after": [],
+          "bytes_before": 23552,
+          "bytes_after": 23552,
+          "trial_id": "mut/hb_wal_recovery_ordering/digits_all/c2b42dd7",
+          "outcome": null,
+          "trial_state": "failed",
+          "verifier_cases": null,
+          "reward_txt": null,
+          "artifacts_differ_from_reference": true,
+          "storage": null,
+          "disposition": "errored"
+        }
+      ]
+    }
+  },
+  "surviving": [
+    {
+      "task": "hb_interleaved_vigenere",
+      "operator": "drop_path::app_requirements.txt",
+      "mutant_id": "drop_path::app_requirements.txt/b365d555",
+      "manifest_sha256": "b365d5550ad39b9f1f5fa4a55aaa8dc11cf9e9ce76b9c3ff58a284d4f7281ac8",
+      "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+      "artifact_files_after": [
+        "/app/cracker.py"
+      ],
+      "artifact_files_removed": [
+        "/app/requirements.txt"
+      ],
+      "declared_missing_after": [
+        "/app/requirements.txt"
+      ],
+      "bytes_before": 8272,
+      "bytes_after": 8272,
+      "trial_id": "mut/hb_interleaved_vigenere/drop_path::app_requirements.txt/b365d555",
+      "outcome": "pass",
+      "trial_state": "completed",
+      "verifier_cases": [
+        {
+          "ok": true,
+          "case": 0,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 1,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 2,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 3,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 4,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 5,
+          "detail": "passed"
+        }
+      ],
+      "reward_txt": "1",
+      "artifacts_differ_from_reference": true,
+      "storage": [
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/verify.log",
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/ctrf.json",
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_drop_path::app_requirements.txt_b365d555/attempt-1/meta.json"
+      ],
+      "disposition": "survived"
+    },
+    {
+      "task": "hb_interleaved_vigenere",
+      "operator": "unsolved_path::app_requirements.txt",
+      "mutant_id": "unsolved_path::app_requirements.txt/b365d555",
+      "manifest_sha256": "b365d5550ad39b9f1f5fa4a55aaa8dc11cf9e9ce76b9c3ff58a284d4f7281ac8",
+      "reference_manifest_sha256": "40f434f33360f7be67ecfee388222ae583432c9373aada6f1af9e0655e6e6f69",
+      "artifact_files_after": [
+        "/app/cracker.py"
+      ],
+      "artifact_files_removed": [
+        "/app/requirements.txt"
+      ],
+      "declared_missing_after": [
+        "/app/requirements.txt"
+      ],
+      "bytes_before": 8272,
+      "bytes_after": 8272,
+      "trial_id": "mut/hb_interleaved_vigenere/unsolved_path::app_requirements.txt/b365d555",
+      "outcome": "pass",
+      "trial_state": "completed",
+      "verifier_cases": [
+        {
+          "ok": true,
+          "case": 0,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 1,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 2,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 3,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 4,
+          "detail": "passed"
+        },
+        {
+          "ok": true,
+          "case": 5,
+          "detail": "passed"
+        }
+      ],
+      "reward_txt": "1",
+      "artifacts_differ_from_reference": true,
+      "storage": [
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/verify.log",
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/ctrf.json",
+        "s3://artifacts/ablate-mut-20260910-162621/mut_hb_interleaved_vigenere_unsolved_path::app_requirements.txt_b365d555/attempt-1/meta.json"
+      ],
+      "disposition": "survived"
+    }
+  ],
+  "quarantine": [],
+  "skipped_tasks": [
+    {
+      "task": "hb_coq_block_bound",
+      "reference_outcome": null,
+      "noop_outcome": null,
+      "reference_state": "failed",
+      "noop_state": "failed",
+      "reference_error": null,
+      "declared_artifacts": [
+        "/app"
+      ],
+      "n_cases": 4,
+      "disposition": "skipped",
+      "reason": "reference solution did not pass (outcome=None, state='failed', err='None')"
+    },
+    {
+      "task": "hb_data_anonymization",
+      "reference_outcome": null,
+      "noop_outcome": "fail",
+      "reference_state": "failed",
+      "noop_state": "completed",
+      "reference_error": "verify: timeout/wait failure: UnixHTTPConnectionPool(host='localhost', port=None): Read timed out.",
+      "declared_artifacts": [
+        "/app/anon.py",
+        "/app/policy.yaml"
+      ],
+      "n_cases": 8,
+      "disposition": "skipped",
+      "reason": "reference solution did not pass (outcome=None, state='failed', err=\"verify: timeout/wait failure: UnixHTTPConnectionPool(host='localhost', port=None): Read timed out.\")"
+    }
+  ],
+  "summary": {
+    "tasks_loaded": 11,
+    "tasks_included": 9,
+    "tasks_skipped_reference_failed": 2,
+    "tasks_quarantined_noop_passed": 0,
+    "mutants_run": 45,
+    "mutants_survived": 2,
+    "mutants_killed": 43,
+    "mutants_errored": 9,
+    "overall_survival_rate": 0.0444
+  },
+  "log": [
+    "[ablate] loaded 11 task(s)",
+    "[ablate] phase 1: 22 control trials (11 tasks x reference,noop)",
+    "  OK hb_batched_eval_parity: ref=pass noop=fail (30 artifact files, 5 cases)",
+    "  SKIP hb_coq_block_bound: reference outcome=None",
+    "  SKIP hb_data_anonymization: reference outcome=None",
+    "  OK hb_glycan_ms2_elucidation: ref=pass noop=fail (3 artifact files, 12 cases)",
+    "  OK hb_interleaved_vigenere: ref=pass noop=fail (2 artifact files, 6 cases)",
+    "  OK hb_production_planning: ref=pass noop=fail (3 artifact files, 20 cases)",
+    "  OK hb_risk_scorer_replay: ref=pass noop=fail (19 artifact files, 5 cases)",
+    "  OK hb_session_window_debug: ref=pass noop=fail (8 artifact files, 7 cases)",
+    "  OK hb_shadow_relay: ref=pass noop=fail (1 artifact files, 8 cases)",
+    "  OK hb_sound_change_cascade: ref=pass noop=fail (2 artifact files, 7 cases)",
+    "  OK hb_wal_recovery_ordering: ref=pass noop=fail (15 artifact files, 25 cases)",
+    "[ablate] phase 2: 9 task(s) eligible for mutation",
+    "  hb_batched_eval_parity: 4 mutant(s)",
+    "  hb_glycan_ms2_elucidation: 8 mutant(s)",
+    "  hb_interleaved_vigenere: 8 mutant(s)",
+    "  hb_production_planning: 10 mutant(s)",
+    "  hb_risk_scorer_replay: 4 mutant(s)",
+    "  hb_session_window_debug: 4 mutant(s)",
+    "  hb_shadow_relay: 4 mutant(s)",
+    "  hb_sound_change_cascade: 8 mutant(s)",
+    "  hb_wal_recovery_ordering: 4 mutant(s)",
+    "[ablate] phase 3: 54 mutant trials (verify_only)"
+  ]
+}

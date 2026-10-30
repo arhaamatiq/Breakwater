@@ -1,0 +1,6640 @@
+[
+ {
+  "tid": "1012",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1018",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1025",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1026",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1029",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1035",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1039",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "104",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1044",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1056",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1057",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1063",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1074",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1086",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1101",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1104",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1107",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1109",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1115",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1131",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1134",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1139",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1144",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1152",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1154",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1168",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1169",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "117",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1173",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1176",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1178",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1183",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1185",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1186",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1190",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1192",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1199",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1217",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1219",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1220",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1223",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1225",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1229",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1234",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1235",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "125",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1250",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1251",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1254",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1255",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1256",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1260",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1261",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1270",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1285",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1296",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1301",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1321",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1326",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1327",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1329",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "134",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1348",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1350",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1351",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1355",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1362",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1366",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "1374",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "147",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "154",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "156",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "158",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "161",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "164",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "165",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "178",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "199",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "201",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "213",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "218",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "22",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "221",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "222",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "228",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "230",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "233",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "234",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "236",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "247",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "248",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "254",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "263",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "265",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "268",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "274",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "283",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "294",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "307",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "31",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "316",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "328",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "346",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "352",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "354",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "355",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "36",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "361",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "364",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "374",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "376",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "380",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "381",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "392",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "3d-model-format-legacy",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_cmake.py",
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "404",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "408",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "426",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "427",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "429",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "438",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "44",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "445",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "448",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "457",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "458",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "462",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "464",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "474",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "475",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "478",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "481",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "482",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "486",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "489",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "49",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "494",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "495",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "497",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "498",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "5",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "500",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "505",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "515",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "517",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "530",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "532",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "535",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "538",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "540",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "542",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "547",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "548",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "550",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "573",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "575",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "576",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "582",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "585",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "596",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "606",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "61",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "614",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "615",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "618",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "625",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "627",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "63",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "630",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "637",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "647",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "648",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "65",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "652",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "655",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "656",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "657",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "666",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "667",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "672",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "691",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "700",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "710",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "713",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "715",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "716",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "726",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "727",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "735",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "739",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "745",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "749",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "753",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "765",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "770",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "775",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "778",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "781",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "783",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "795",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "799",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "8",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "802",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "824",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "826",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "837",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "838",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "842",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "849",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "850",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "855",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "864",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "867",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "868",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "871",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "880",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "886",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "891",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "900",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "901",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "906",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "913",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "917",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "929",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "930",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "935",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "94",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "945",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "948",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "952",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "956",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "958",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "963",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "964",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "969",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "972",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "976",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "981",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "983",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "984",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "99",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "995",
+  "src": [
+   "seta_2026_01_29"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "adaptive-rejection-sampler",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "amuse-install",
+  "src": [
+   "OpenThoughts-TB-dev",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "analyze-arm-shellcode-network-connections",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "analyze-fen-with-stockfish",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "analyze-pgn-best-chess-move",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "blind-maze-explorer-5x5",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "blind-maze-explorer-algorithm",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "bn-fit-modify",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "buffer-overflow-exploit",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "build-uci-chess-engine-to-beat-multiple-bots",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "cartpole-rl-training",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "cobol-modernization",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "compare-lasso-ridge-elasticnet",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "compute-best-chess-move-san",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "configure-git-webserver",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "constrained-portfolio-variance-minimization",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "cross-entropy-method",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "custom-memory-heap-crash",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "decommissioning-service-with-sensitive-data",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "detect-c-feature-flags",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "enemy-grid-escape",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "enumerate-polytope-extreme-points",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "find-invalid-blockchain-transactions",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "fix-django-command-injection",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "fix-multihead-attention-weights-shape",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "fix-sentiment-cli-text-processing",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "flood-escape-path-planner",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "fmri-encoding-r",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "get-bitcoin-nodes",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "git-multibranch",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "implement-2d-convolution",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "implement-connect-four-mcts",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "implement-nonogram-solver",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "implement-tensor-parallel-matmul",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "improve-predictive-maintenance-model",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "iot-device-registration-server",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "iris-data-loading-script",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "largest-eigenval",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "learn-gaussian-mrf-and-infer",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "logistic-regression-divergence",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "mnist-learning-fix",
+  "src": [
+   "OpenThoughts-TB-dev",
+   "TerminalBench-original"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "mongodb-sales-aggregation-engine",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "multi-source-data-merger",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "optimal-2x2x2-cube-solver",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "optimize-postgresql-analytics-query",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "optimize-urdf-robot-for-pybullet",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "parallelize-graph",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "play-lord",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "polyglot-prime-generator",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "polyglot-text-stats-script",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "port-fortran-climate-model-to-python",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "port-fortran-rk4-lorenz-to-python",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "portfolio-optimization",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "present-known-plaintext-key-recovery",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "pypi-server",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "recover-and-sanitize-postgres-wal-secret",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "recover-corrupted-sqlite-data",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "recover-encrypted-db-credentials",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "recover-prod-db-password-from-git-history",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "regex-chess",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "resolve-react-peer-deps",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "rush-hour-bfs-solver",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "sakila-sql-optimization",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "sanitize-jinja2-ssti-templates",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "schedule-vacation",
+  "src": [
+   "OpenThoughts-TB-dev",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "schemelike-metacircular-eval",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "setup-mlflow-sqlite-server",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "setup-ubuntu-vm-ssh-key-auth",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "simple-web-scraper",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": true,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solana-data",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solve-chess-mate-in-two",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solve-colossal-cave-350-score",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solve-escape-room-puzzle-server",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 1,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solve-ode-with-sympy",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "solve-train-shunting-puzzle",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "sqlite-with-gcov",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "stabilize-neural-network-training",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "sympy-matrix-fix",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "synthesize-harmonic-wav-in-c",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "titanic-female-survival-prediction",
+  "src": [
+   "OpenThoughts-TB-dev"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "tmux-advanced-workflow",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "train-fasttext-style-subword-embeddings",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "train-fraud-detection-model",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "train-loan-default-logreg-model",
+  "src": [
+   "terminal-bench-pro"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "tree-directory-parser",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "triton-interpret",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "vul-flask",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "wasm-pipeline",
+  "src": [
+   "TerminalBench-original"
+  ],
+  "n_models": 2,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ },
+ {
+  "tid": "winning-avg-corewars",
+  "src": [
+   "terminal-bench__2.0",
+   "TerminalBench-original"
+  ],
+  "n_models": 3,
+  "identical": true,
+  "mode": "shared",
+  "gpus": 0,
+  "n_artifacts": 0,
+  "dict_artifacts": false,
+  "environment/Dockerfile": true,
+  "solution/solve.sh": true,
+  "tests/Dockerfile": false,
+  "tests/test.sh": true,
+  "compose": false,
+  "test_py": [
+   "test_outputs.py"
+  ]
+ }
+]

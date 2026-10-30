@@ -1,0 +1,43 @@
+[harbor] built batched-eval-parity in 2s (5 tests, 1 artifacts)
+[harbor] built coq-block-bound in 434s (4 tests, 1 artifacts)
+[harbor] skip ctr-optimization: multi-service task (services=2, dict-artifacts=True) — single-container runtime can't start sidecars
+[harbor] built data-anonymization in 2s (8 tests, 2 artifacts)
+[harbor] skip foodstuff-beta-activity: solution installs/fetches packages at solve time; solve runs with networking disabled so the reference cannot run faithfully
+[harbor] built glycan-ms2-elucidation in 1s (12 tests, 3 artifacts)
+[harbor] built interleaved-vigenere in 1s (6 tests, 2 artifacts)
+[harbor] built production-planning in 1s (20 tests, 3 artifacts)
+[harbor] built risk-scorer-replay in 1s (5 tests, 1 artifacts)
+[harbor] skip roy-polymorph-cn: solution installs/fetches packages at solve time; solve runs with networking disabled so the reference cannot run faithfully
+[harbor] built session-window-debug in 1s (7 tests, 1 artifacts)
+[harbor] built shadow-relay in 1s (8 tests, 1 artifacts)
+[harbor] built sound-change-cascade in 1s (7 tests, 2 artifacts)
+[harbor] built wal-recovery-ordering in 1s (25 tests, 1 artifacts)
+[harbor] loaded 11; skipped 3 — multi_service:1 solve_network:2
+[ablate] loaded 11 task(s)
+[ablate] phase 1: 22 control trials (11 tasks x reference,noop)
+  OK hb_batched_eval_parity: ref=pass noop=fail (30 artifact files, 5 cases)
+  SKIP hb_coq_block_bound: reference outcome=None
+  SKIP hb_data_anonymization: reference outcome=None
+  OK hb_glycan_ms2_elucidation: ref=pass noop=fail (3 artifact files, 12 cases)
+  OK hb_interleaved_vigenere: ref=pass noop=fail (2 artifact files, 6 cases)
+  OK hb_production_planning: ref=pass noop=fail (3 artifact files, 20 cases)
+  OK hb_risk_scorer_replay: ref=pass noop=fail (19 artifact files, 5 cases)
+  OK hb_session_window_debug: ref=pass noop=fail (8 artifact files, 7 cases)
+  OK hb_shadow_relay: ref=pass noop=fail (1 artifact files, 8 cases)
+  OK hb_sound_change_cascade: ref=pass noop=fail (2 artifact files, 7 cases)
+  OK hb_wal_recovery_ordering: ref=pass noop=fail (15 artifact files, 25 cases)
+[ablate] phase 2: 9 task(s) eligible for mutation
+  hb_batched_eval_parity: 4 mutant(s)
+  hb_glycan_ms2_elucidation: 8 mutant(s)
+  hb_interleaved_vigenere: 8 mutant(s)
+  hb_production_planning: 10 mutant(s)
+  hb_risk_scorer_replay: 4 mutant(s)
+  hb_session_window_debug: 4 mutant(s)
+  hb_shadow_relay: 4 mutant(s)
+  hb_sound_change_cascade: 8 mutant(s)
+  hb_wal_recovery_ordering: 4 mutant(s)
+[ablate] phase 3: 54 mutant trials (verify_only)
+[ablate] wrote reports/mut_run_20260910/smoke_14.json
+[ablate] 9 tasks | 45 mutants run | 2 survived | 43 killed | 9 errored
+
+[exited with code 0]

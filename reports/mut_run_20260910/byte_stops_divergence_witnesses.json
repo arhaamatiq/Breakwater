@@ -1,0 +1,89 @@
+{
+ "cmp(Eq)#0": {
+  "edit": "cmp(Eq)",
+  "divergence_witness": {
+   "stop_strings": [
+    "AB",
+    "ABC"
+   ],
+   "generated_bytes": "ABCD tail",
+   "stop_priority": "earliest",
+   "include_stop": true,
+   "reference": {
+    "stopped": true,
+    "text": "AB"
+   },
+   "mutant": {
+    "stopped": true,
+    "text": "ABC"
+   }
+  }
+ },
+ "int+1(0)#1": {
+  "edit": "int+1(0)",
+  "divergence_witness": {
+   "stop_strings": [
+    "STOP"
+   ],
+   "generated_bytes": "STOP now",
+   "stop_priority": "earliest",
+   "include_stop": true,
+   "reference": {
+    "stopped": true,
+    "text": "STOP"
+   },
+   "mutant": {
+    "stopped": false,
+    "text": "STOP now"
+   }
+  }
+ },
+ "bin(Sub)#3": {
+  "edit": "bin(Sub)",
+  "divergence_witness": null
+ },
+ "int-1(0)#5": {
+  "edit": "int-1(0)",
+  "divergence_witness": null
+ },
+ "int-1(1)#6": {
+  "edit": "int-1(1)",
+  "divergence_witness": {
+   "stop_strings": [
+    "ABC",
+    "AB"
+   ],
+   "generated_bytes": "ABCD tail",
+   "stop_priority": "earliest",
+   "include_stop": true,
+   "reference": {
+    "stopped": true,
+    "text": "AB"
+   },
+   "mutant": {
+    "stopped": true,
+    "text": "ABC"
+   }
+  }
+ },
+ "int-1(1)#7": {
+  "edit": "int-1(1)",
+  "divergence_witness": {
+   "stop_strings": [
+    "AB",
+    "ABC"
+   ],
+   "generated_bytes": "ABCD tail",
+   "stop_priority": "longest",
+   "include_stop": true,
+   "reference": {
+    "stopped": true,
+    "text": "ABC"
+   },
+   "mutant": {
+    "stopped": true,
+    "text": "AB"
+   }
+  }
+ }
+}

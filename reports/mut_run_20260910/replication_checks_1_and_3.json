@@ -1,0 +1,783 @@
+{
+  "generated_at": "2026-09-10T18:49:06-0700",
+  "stamp": "phaseA",
+  "mode": "full (fresh solve + fresh verify per run)",
+  "checks": {
+    "c1_dd_reference": {
+      "runs": 1,
+      "pass": 0,
+      "fail": 1,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c1_dd_reference/run0",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "solution_exit_code": 1,
+          "reward_txt": "0",
+          "artifacts_missing": [],
+          "exec_ms": 370645.9289579652,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 2,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 5,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 6,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 7,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 8,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 9,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 10,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 11,
+              "detail": "The test failed in the call phase due to an assertion error"
+            },
+            {
+              "ok": false,
+              "case": 12,
+              "detail": "The test failed in the call phase due to an assertion error"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c1_dd_reference_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c1_dd_reference_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c1_dd_reference_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c1_dd_reference_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c1_dd_reference_run0/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c3_rsr_drop_both": {
+      "runs": 3,
+      "pass": 3,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_both/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 21513.970584026538,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_both/run1",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 12846.50824998971,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_both/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 15524.603916099295,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_both_run2/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c3_rsr_drop_parity_scores_csv": {
+      "runs": 3,
+      "pass": 3,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_parity_scores_csv/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 34714.876290992834,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_parity_scores_csv/run1",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 25674.627166008577,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_parity_scores_csv/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 24565.50304207485,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_parity_scores_csv_run2/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c3_rsr_drop_scorer_audit_sqlite": {
+      "runs": 3,
+      "pass": 3,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_scorer_audit_sqlite/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 23583.08237500023,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_scorer_audit_sqlite/run1",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 28125.56900002528,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_scorer_audit_sqlite/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 21425.150875002146,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_scorer_audit_sqlite_run2/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c3_rsr_drop_whole_output_dir": {
+      "runs": 3,
+      "pass": 3,
+      "fail": 0,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_whole_output_dir/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 1,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 14013.105541933328,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_whole_output_dir/run1",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 1,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 13190.396249992773,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_drop_whole_output_dir/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 1,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 16290.358208003454,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_drop_whole_output_dir_run2/attempt-1/meta.json"
+          ]
+        }
+      ]
+    },
+    "c3_rsr_reference": {
+      "runs": 3,
+      "pass": 2,
+      "fail": 1,
+      "no_verdict": 0,
+      "records": [
+        {
+          "trial_id": "rep/phaseA/c3_rsr_reference/run0",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 19657.89129200857,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run0/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run0/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run0/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run0/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run0/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_reference/run1",
+          "outcome": "fail",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "0",
+          "artifacts_missing": [],
+          "exec_ms": 20586.584917036816,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": false,
+              "case": 4,
+              "detail": "The test failed in the call phase"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run1/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run1/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run1/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run1/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run1/attempt-1/meta.json"
+          ]
+        },
+        {
+          "trial_id": "rep/phaseA/c3_rsr_reference/run2",
+          "outcome": "pass",
+          "trial_state": "completed",
+          "solution_exit_code": 0,
+          "reward_txt": "1",
+          "artifacts_missing": [],
+          "exec_ms": 18863.21629199665,
+          "cases": [
+            {
+              "ok": true,
+              "case": 0,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 1,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 2,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 3,
+              "detail": "passed"
+            },
+            {
+              "ok": true,
+              "case": 4,
+              "detail": "passed"
+            }
+          ],
+          "storage": [
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run2/attempt-1/solve.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run2/attempt-1/artifact_manifest.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run2/attempt-1/verify.log",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run2/attempt-1/ctrf.json",
+            "s3://artifacts/rep-phaseA/rep_phaseA_c3_rsr_reference_run2/attempt-1/meta.json"
+          ]
+        }
+      ]
+    }
+  }
+}
