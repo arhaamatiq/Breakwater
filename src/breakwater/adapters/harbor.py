@@ -1,257 +1,183 @@
-"""Harbor / Terminal-Bench v4.x adapter: `separate`-mode tasks.
+"""Harbor / Terminal-Bench runtime: run tasks the way Harbor does, on Docker.
 
-The v4 format is a different shape from classic terminal-bench:
+Fidelity contract (mirrors harbor 0.25, single-step `separate`-mode tasks):
 
-  task.toml            metadata + declared `artifacts` (files the agent must
-                       produce) + [verifier] environment_mode
-  instruction.md       the task prompt
-  environment/         Dockerfile + data -> the agent's container
-  solution/            solve.sh (+ helper files) -> the reference solution,
-                       mounted at /solution during solve
-  tests/               Dockerfile (deps baked in) + test.sh (entrypoint,
-                       writes /logs/verifier/{ctrf.json,reward.txt}) + test*.py
+  solve   the agent environment image (built from environment/, or the task's
+          prebuilt image) runs `sh -c "sleep infinity"`; /logs/{agent,verifier,
+          artifacts} exist chmod 777; the oracle uploads solution/ to
+          /solution, `chmod +x` as root, then runs
+          `(/solution/solve.sh) > /logs/agent/oracle.txt 2>&1` via `bash -c`
+          as the agent user with [solution.env] + DEBIAN_FRONTEND. Then the
+          [[verifier.collect]] hooks run. Network, CPU and memory follow the
+          task's own [environment] (Harbor's default network is PUBLIC).
+  collect every declared artifact path, plus the /logs/artifacts convention
+          dir, is archived out of the live container into a content-addressed
+          Bundle (breakwater.bundle) with Harbor's upload normalization.
+  verify  the verifier image (tests/ build context, tests bundled at /tests)
+          starts fresh; /logs/verifier is emptied; each artifact directory is
+          EMPTIED and re-uploaded, each artifact file gets its parent created;
+          stale reward files are removed; `(/tests/test.sh) >
+          /logs/verifier/test-stdout.txt 2>&1` runs as the verifier user with
+          [verifier.env]. The verdict is /logs/verifier/reward.json if it
+          exists, else reward.txt — test.sh's exit code is ignored, and a
+          missing reward is an error, exactly as in Harbor.
 
-`environment_mode = "separate"` (all 66 v4.0.0 tasks): the verifier runs in a
-FRESH container built from tests/Dockerfile, and ONLY the declared artifacts
-cross from the solved environment into it. That maps cleanly onto Breakwater's
-split solve/verify model — cleaner than the classic docker-commit path, since
-the artifact set is an explicit, deterministic byte manifest.
+Per-test/criterion verdicts (CTRF, RewardKit reward-details.json) are
+recorded as diagnostics; they never override the reward.
 
-This runtime:
-  solve   build environment image, run solve.sh with /solution populated,
-          commit, then tar out exactly the declared artifact paths
-  verify  build tests image, drop the artifacts back at their declared paths,
-          run the task's OWN tests/test.sh verbatim (maximally faithful — no
-          re-derived pytest invocation), read CTRF for per-test verdicts
+Known, documented deltas from Harbor: no allowlist egress emulation (such
+tasks are skipped), memory requests are clamped to what the Docker VM has
+(recorded per trial in `fidelity`), and logs are copied out of the
+container instead of bind-mounted (bind mounts are what make RewardKit's
+Worker fail closed on macOS hosts).
 
-Capabilities: none (no local-eval oracle, outputs are container state), so the
-tester runs the determinism / isolation / environment / degenerate-probe
-stages and skips mutation/equivalence, same as classic terminal-bench.
-
-Deliberately skipped (reported under LAST_LOAD_REPORT["skipped"]):
-  gpu             task.toml requests gpus > 0
-  no_tests        no tests/test*.py -> no per-case verdicts to reason about
-  solve_network   solve.sh installs packages at solve time; solve runs with
-                  networking disabled, so the reference can't run faithfully
-  browser         tests image is Playwright/Selenium based; headless browser
-                  does not come up under this runtime's container defaults
-                  (a known, previously-characterised limitation)
-  build_failed    an image failed to build (infrastructure, not a defect)
+Trial spec (all optional): mode full|solve|snapshot|verify_only;
+solution "oracle"|"noop" or solution_source (replaces solve.sh); outputs
+[{bundle: "sha256:..."}] for verify_only; env {..} extra env for the
+verify (and solve) exec; network "task"|"on"|"off" override; metrics
+{name: regex} pulled from test-stdout.
 """
+from __future__ import annotations
+
+import ast
 import base64
+import contextlib
+import fcntl
 import io
 import json
 import os
 import re
 import tarfile
+import threading
 import time
-import tomllib
 
-import yaml
-
-from .. import storage
-from ..runner import docker_client, TrialExecutionError, _tar_bytes
+from .. import cas, storage
+from ..bundle import Bundle, add_archive, under, upload_tar
+from ..runner import TrialExecutionError, docker_client
 from . import base
+from .harbor_task import (HarborTaskSpec, artifact_excludes, artifact_paths,
+                          parse_task, unsupported_reason)
 
 NOOP_SHELL = "#!/bin/bash\ntrue\n"
 RAISE_SHELL = "#!/bin/bash\nexit 1\n"
+ORACLE = "__harbor_oracle__"        # sentinel: run the task's own solution/ tree
 
 LAST_LOAD_REPORT: dict = {}
 _INFRA_SKIPS = ("build_failed",)
-
-_NET_INSTALL_RE = re.compile(
-    r"\b(?:apt-get|apt)\s+install\b|\bpip3?\s+install\b|\bpip3?\s+download\b|\bpipx\s+(?:install|run)\b|"
-    r"\buv\s+(?:pip\s+install|add|tool\s+install|sync)\b|\bnpm\s+(?:install|ci)\b|"
-    r"\bpnpm\s+(?:install|add)\b|\byarn\s+(?:install|add)\b|\bcargo\s+(?:install|add|fetch)\b|"
-    r"\bgo\s+(?:get|install)\b|\b(?:conda|mamba|micromamba)\s+install\b|"
-    r"\bcurl\b[^|]*\bhttps?://|\bwget\b|"
-    # `uv run --with pkg` / `uvx --with pkg` / `... --with-requirements f` pull
-    # from PyPI at solve time exactly like an install (the `--with` flag may sit
-    # on a continued line, so match across newlines).
-    r"\buvx?\b[\s\S]{0,400}?--with(?:-requirements)?[ =\t\n]|--with-requirements[ =\t]")
-_BROWSER_RE = re.compile(r"playwright|selenium|chromium|puppeteer", re.I)
+_LOCK_DIR = os.path.join(cas.BW_HOME, "locks")
 
 
-def _parse_test_names(test_src: str) -> list[str]:
-    """pytest ids for every test in the file: bare `test_*` functions and
-    `test_*` methods inside `Test*`/`*Test` classes (reported by pytest/CTRF as
-    `Class::method`)."""
-    import ast
+# ======================================================================
+# loading
+
+
+def _pytest_ids(src: str) -> list[str]:
     try:
-        tree = ast.parse(test_src)
+        tree = ast.parse(src)
     except SyntaxError:
         return []
     out = []
     for n in tree.body:
-        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) \
-                and n.name.startswith("test"):
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name.startswith("test"):
             out.append(n.name)
-        elif isinstance(n, ast.ClassDef) and (
-                n.name.startswith("Test") or n.name.endswith("Test")):
-            for m in n.body:
-                if isinstance(m, (ast.FunctionDef, ast.AsyncFunctionDef)) \
-                        and m.name.startswith("test"):
-                    out.append(f"{n.name}::{m.name}")
+        elif isinstance(n, ast.ClassDef) and (n.name.startswith("Test") or n.name.endswith("Test")):
+            out += [f"{n.name}::{m.name}" for m in n.body
+                    if isinstance(m, (ast.FunctionDef, ast.AsyncFunctionDef))
+                    and m.name.startswith("test")]
     return out
 
 
-def _service_count(env_dir: str) -> int:
-    """Services declared in environment/docker-compose.yaml (0 if none)."""
-    for fn in ("docker-compose.yaml", "docker-compose.yml", "compose.yaml"):
-        p = os.path.join(env_dir, fn)
-        if os.path.exists(p):
-            try:
-                c = yaml.safe_load(open(p)) or {}
-                return len(c.get("services") or {})
-            except Exception:
-                return 2  # unparseable compose -> assume multi-service, skip
-    return 0
+def _criteria(src: str) -> list[str]:
+    """RewardKit @criterion functions (the per-check names it reports)."""
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    out = []
+    for n in ast.walk(tree):
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for d in n.decorator_list:
+                fn = d.func if isinstance(d, ast.Call) else d
+                if getattr(fn, "id", getattr(fn, "attr", None)) == "criterion":
+                    out.append(n.name)
+    return out
 
 
-def _build(context_dir: str, tag: str) -> str:
-    image, _ = docker_client().images.build(path=context_dir, tag=tag, rm=True,
-                                            forcerm=True)
-    return image.id
+def discover_cases(tests_dir: str) -> list[str]:
+    """Static per-check names, best effort: pytest ids from test*.py and
+    RewardKit criteria from any tests/*.py. Runtime reports may add names;
+    the reward is authoritative either way."""
+    names = []
+    if not os.path.isdir(tests_dir):
+        return names
+    for fn in sorted(os.listdir(tests_dir)):
+        p = os.path.join(tests_dir, fn)
+        if not (fn.endswith(".py") and os.path.isfile(p)):
+            continue
+        src = open(p, errors="ignore").read()
+        if fn.startswith("test"):
+            names += [f"{fn}::{t}" for t in _pytest_ids(src)]
+        names += _criteria(src)
+    return names
 
 
-def _read_solution_tree(sol_dir: str) -> dict:
-    """Every file under solution/ keyed by path relative to that dir, base64'd
-    (the task dict is persisted as JSONB, so no raw bytes). Staged at
-    /solution/<rel> during solve — solve.sh references e.g. /solution/solve.py,
-    /solution/assets/bin/...."""
-    out = {}
+def task_dict(spec: HarborTaskSpec) -> dict:
+    """Breakwater task representation for one Harbor task version."""
+    cases = discover_cases(os.path.join(spec.path, "tests")) or ["reward"]
+    sol_dir = os.path.join(spec.path, "solution")
+    tree = {}
     for root, _, files in os.walk(sol_dir):
         for fn in files:
             p = os.path.join(root, fn)
-            rel = os.path.relpath(p, sol_dir)
             with open(p, "rb") as f:
-                out[rel] = base64.b64encode(f.read()).decode("ascii")
-    return out
+                tree[os.path.relpath(p, sol_dir)] = [
+                    base64.b64encode(f.read()).decode("ascii"),
+                    0o755 if os.access(p, os.X_OK) else 0o644]
+    return {
+        "runtime": "harbor",
+        "capabilities": [],
+        "cases": [{"input": {"test": c}, "expected": "pass"} for c in cases],
+        "oracle": ORACLE, "agent": ORACLE, "noop": NOOP_SHELL,
+        "probe_solutions": {"noop_none": NOOP_SHELL, "raise_probe": RAISE_SHELL},
+        "verifier": f"harbor:{spec.name}@{spec.digests['verifier'][:12]}",
+        "hb": {**spec.to_dict(), "solution_tree": tree},
+        "source": {"benchmark": "harbor", "task_id": spec.name, "path": spec.path,
+                   "task_name": spec.task_name, "version": spec.version,
+                   "verifier_digest": spec.digests["verifier"]},
+    }
 
 
-def load(root: str, ids: list[str] | None = None) -> dict:
-    tasks = {}
-    skipped: dict[str, list[tuple[str, str]]] = {}
+def load(root: str, ids: list[str] | None = None, *, build: bool = True,
+         offline_solve: bool = False) -> dict:
+    """Load Harbor tasks under `root` (a tasks/ dir). Unsupported tasks are
+    skipped with a reason (LAST_LOAD_REPORT); nothing is skipped silently."""
+    tasks, skipped = {}, {}
 
-    def skip(cat: str, name: str, detail: str) -> None:
+    def skip(cat, name, detail):
         skipped.setdefault(cat, []).append((name, detail))
         print(f"[harbor] skip {name}: {detail}", flush=True)
 
     names = sorted(ids or [d for d in os.listdir(root)
-                           if os.path.isdir(os.path.join(root, d))
-                           and os.path.exists(os.path.join(root, d, "task.toml"))])
+                           if os.path.isfile(os.path.join(root, d, "task.toml"))])
     for name in names:
         d = os.path.join(root, name)
-        need = ["task.toml", "environment/Dockerfile", "solution/solve.sh",
-                "tests/Dockerfile", "tests/test.sh"]
-        if any(not os.path.exists(os.path.join(d, p)) for p in need):
-            skip("format", name, "missing a required v4 file "
-                 f"({[p for p in need if not os.path.exists(os.path.join(d, p))]})")
+        need = ["task.toml", "solution/solve.sh", "tests/test.sh"]
+        lacking = [p for p in need if not os.path.exists(os.path.join(d, p))]
+        if lacking:
+            skip("format", name, f"missing {lacking}")
             continue
-        with open(os.path.join(d, "task.toml"), "rb") as f:
-            cfg = tomllib.load(f)
-
-        mode = cfg.get("verifier", {}).get("environment_mode", "shared")
-        if mode != "separate":
-            skip("unsupported_mode", name, f"environment_mode={mode!r} (only separate)")
+        spec = parse_task(d)
+        why = unsupported_reason(spec, offline_solve=offline_solve)
+        if why:
+            skip(why[0], name, why[1])
             continue
-        if int(cfg.get("environment", {}).get("gpus", 0) or 0) > 0:
-            skip("gpu", name, "task requests a GPU")
-            continue
-
-        raw_artifacts = list(cfg.get("artifacts", []))
-        # dict artifacts ({source, service}) come from a compose sidecar; a
-        # multi-service environment/docker-compose.yaml means the same. This
-        # runtime runs one container, so the reference can't run faithfully.
-        n_services = _service_count(os.path.join(d, "environment"))
-        if any(not isinstance(a, str) for a in raw_artifacts) or n_services > 1:
-            skip("multi_service", name,
-                 f"multi-service task (services={n_services}, "
-                 f"dict-artifacts={any(not isinstance(a, str) for a in raw_artifacts)}) "
-                 "— single-container runtime can't start sidecars")
-            continue
-
-        tests_dir = os.path.join(d, "tests")
-        test_files = {fn: open(os.path.join(tests_dir, fn)).read()
-                      for fn in os.listdir(tests_dir)
-                      if fn.startswith("test") and fn.endswith(".py")
-                      and os.path.isfile(os.path.join(tests_dir, fn))}
-        cases = []
-        for fn, src in sorted(test_files.items()):
-            for tn in _parse_test_names(src):
-                cases.append(f"{fn}::{tn}")
-        if not cases:
-            skip("no_tests", name, "no tests/test*.py with test functions")
-            continue
-
-        solve_sh = open(os.path.join(d, "solution", "solve.sh")).read()
-        # Scan the whole solution tree, not just solve.sh: some tasks put the
-        # package pull in a helper script that solve.sh calls.
-        solve_blob = solve_sh
-        for _sr, _sd, _sf in os.walk(os.path.join(d, "solution")):
-            for _fn in _sf:
-                if _fn == "solve.sh":
-                    continue
-                try:
-                    solve_blob += "\n" + open(os.path.join(_sr, _fn),
-                                              errors="ignore").read()
-                except OSError:
-                    pass
-        if _NET_INSTALL_RE.search(solve_blob):
-            skip("solve_network", name,
-                 "solution installs/fetches packages at solve time; solve runs "
-                 "with networking disabled so the reference cannot run faithfully")
-            continue
-        if _BROWSER_RE.search(test_files.get("__dockerfile__", "") +
-                              open(os.path.join(tests_dir, "Dockerfile")).read()):
-            skip("browser", name, "Playwright/Selenium verifier — headless browser "
-                 "does not start under this runtime's container defaults")
-            continue
-
-        env_tag = f"breakwater-hb-env-{name}"
-        test_tag = f"breakwater-hb-test-{name}"
-        t0 = time.time()
-        try:
-            _build(os.path.join(d, "environment"), env_tag)
-            _build(tests_dir, test_tag)
-        except Exception as e:
-            skip("build_failed", name, f"image build failed: {str(e)[:200]}")
-            continue
-        client = docker_client()
-        env_workdir = client.images.get(env_tag).attrs["Config"].get("WorkingDir") or "/app"
-        print(f"[harbor] built {name} in {time.time()-t0:.0f}s "
-              f"({len(cases)} tests, {len(cfg.get('artifacts', []))} artifacts)", flush=True)
-
-        tid = f"hb_{name.replace('-', '_')}"
-        tasks[tid] = {
-            "runtime": "harbor",
-            "capabilities": [],
-            "cases": [{"input": {"test": c}, "expected": "pass"} for c in cases],
-            "oracle": solve_sh,
-            "agent": solve_sh,
-            "noop": NOOP_SHELL,
-            "probe_solutions": {"noop_none": NOOP_SHELL, "raise_probe": RAISE_SHELL},
-            "verifier": "\n\n".join(f"# {fn}\n{src}" for fn, src in test_files.items()),
-            "hb": {
-                "env_image": env_tag, "test_image": test_tag,
-                "env_workdir": env_workdir,
-                "artifacts": list(cfg.get("artifacts", [])),
-                # [[verifier.collect]]: commands Harbor runs in the agent
-                # container after the agent, before artifact collection — e.g.
-                # shadow-relay diffs /app into /tmp/agent.patch. Run them at the
-                # end of solve so the committed state has the collected files.
-                "collect": [c["command"] for c in
-                            (cfg.get("verifier", {}).get("collect") or [])
-                            if isinstance(c, dict) and c.get("command")],
-                "solution_tree": _read_solution_tree(os.path.join(d, "solution")),
-                "solve_timeout": min(float(cfg.get("agent", {}).get("timeout_sec") or 300), 300),
-                "verify_timeout": min(float(cfg.get("verifier", {}).get("timeout_sec") or 300), 300),
-                "env_env": dict(cfg.get("environment", {}).get("env", {}) or {}),
-                "verifier_env": dict(cfg.get("verifier", {}).get("env", {}) or {}),
-            },
-            "source": {"benchmark": "terminal-bench-v4", "task_id": name, "path": d,
-                       "task_name": cfg.get("task", {}).get("name", name)},
-        }
+        if build:
+            try:
+                RUNTIME.ensure_images(spec)
+            except Exception as e:
+                skip("build_failed", name, f"image build failed: {str(e)[:300]}")
+                continue
+        tasks[f"hb_{spec.short_id}"] = task_dict(spec)
 
     LAST_LOAD_REPORT.clear()
     LAST_LOAD_REPORT.update({"loaded": sorted(tasks), "skipped": skipped})
@@ -261,245 +187,458 @@ def load(root: str, ids: list[str] | None = None) -> dict:
         print(f"[harbor] loaded {len(tasks)}; skipped {n_sk} — {tally}", flush=True)
         for cat in _INFRA_SKIPS:
             for nm, det in skipped.get(cat, []):
-                print(f"[harbor] WARNING scope reduced by infrastructure "
-                      f"({cat}): {nm}: {det}", flush=True)
+                print(f"[harbor] WARNING scope reduced by infrastructure ({cat}): {nm}: {det}",
+                      flush=True)
     return tasks
 
 
-class HarborRuntime:
-    def _wait(self, container, timeout, label):
-        try:
-            return container.wait(timeout=timeout)
-        except Exception as e:
-            try:
-                container.kill()
-            except Exception:
-                pass
-            raise TrialExecutionError(f"{label}: timeout/wait failure: {e}") from e
+# ======================================================================
+# docker helpers
 
-    def _mkparents(self, paths: list[str]) -> str:
-        dirs = sorted({os.path.dirname(p) for p in paths if os.path.dirname(p)})
-        return " && ".join(f"mkdir -p {d}" for d in dirs) or "true"
 
-    def _solve(self, task, solution_src: str, env: dict):
-        hb = task["hb"]
-        client = docker_client()
-        payload = {f"solution/{rel}": base64.b64decode(b64)
-                   for rel, b64 in hb["solution_tree"].items()}
-        payload["solution/solve.sh"] = (
-            solution_src.encode() if isinstance(solution_src, str) else solution_src)
-        # solve.sh, then the [[verifier.collect]] hooks (Harbor runs them in the
-        # agent container before collecting artifacts); solve.sh's exit code is
-        # what gets reported.
-        script = "bash /solution/solve.sh; __bw_rc=$?\n"
-        for cmd in hb.get("collect", []):
-            script += f"( {cmd} ) || true\n"
-        script += "exit $__bw_rc\n"
-        c = client.containers.create(
-            hb["env_image"], command=["bash", "-c", script],
-            working_dir=hb["env_workdir"], network_disabled=True,
-            mem_limit="4g", nano_cpus=2_000_000_000,
-            environment={**{k: str(v) for k, v in hb["env_env"].items()},
-                         **{k: str(v) for k, v in env.items()}})
+@contextlib.contextmanager
+def _file_lock(name: str):
+    os.makedirs(_LOCK_DIR, exist_ok=True)
+    with open(os.path.join(_LOCK_DIR, re.sub(r"[^\w.-]", "_", name)), "w") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
         try:
-            c.put_archive("/", _tar_bytes_bin(payload))
-            c.start()
-            info = self._wait(c, hb["solve_timeout"], "solve")
-            logs = c.logs(stdout=True, stderr=True)
-            state = c.commit()
-            return state.id, logs, info.get("StatusCode", -1)
+            yield
         finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+
+
+def _image_tag(kind: str, spec_name: str, digest: str) -> str:
+    return f"breakwater/{kind}-{spec_name}:{digest[:12]}"
+
+
+def _ensure_image(context: str, tag: str, prebuilt: str | None) -> str:
+    client = docker_client()
+    if prebuilt:
+        with _file_lock(prebuilt):
             try:
-                c.remove(force=True)
+                client.images.get(prebuilt)
             except Exception:
-                pass
-
-    def _extract_artifacts(self, state_ref: str, paths: list[str]) -> tuple[dict, list]:
-        """Tar out each declared artifact path from the solved container.
-        `docker get_archive(p)` names members relative to p's PARENT, so an
-        absolute destination is join(dirname(p without trailing /), member).
-        Handles a single file, a directory (`/app/`), and a nested directory
-        (`/app/app/`) identically."""
-        client = docker_client()
-        c = client.containers.create(state_ref, command=["true"])
-        got, missing = {}, []
+                client.images.pull(prebuilt)
+        return prebuilt
+    with _file_lock(tag):
         try:
-            for p in paths:
-                parent = os.path.dirname(p.rstrip("/")) or "/"
-                try:
-                    stream, _ = c.get_archive(p)
-                    raw = b"".join(stream)
-                    with tarfile.open(fileobj=io.BytesIO(raw)) as tar:
-                        n_files = 0
-                        for m in tar.getmembers():
-                            if m.isfile() or m.issym() or m.islnk():
-                                dest = os.path.normpath(os.path.join(parent, m.name))
-                                got[dest] = tar.extractfile(m).read() if m.isfile() else b""
-                                n_files += 1
-                        if n_files == 0:
-                            missing.append(p)  # path existed but held nothing usable
-                except Exception:
-                    missing.append(p)
-        finally:
-            try:
-                c.remove(force=True)
-            except Exception:
-                pass
-        return got, missing
-
-    def _verify(self, task, artifacts: dict, env: dict):
-        hb = task["hb"]
-        client = docker_client()
-        mkparents = self._mkparents(hb["artifacts"])
-        cmd = (f"mkdir -p /logs/verifier && {mkparents} && "
-               f"cd / && bash /tests/test.sh; "
-               f"echo __BW_TESTSH_EXIT=$? ")
-        c = client.containers.create(
-            hb["test_image"], command=["bash", "-c", cmd],
-            network_disabled=True, mem_limit="4g", nano_cpus=2_000_000_000,
-            environment={**{k: str(v) for k, v in hb["verifier_env"].items()},
-                         **{k: str(v) for k, v in env.items()}})
-        try:
-            payload = {}
-            for path, data in artifacts.items():
-                payload[path.lstrip("/")] = data if isinstance(data, (bytes, bytearray)) \
-                    else data.encode()
-            if payload:
-                c.put_archive("/", _tar_bytes_bin(payload))
-            c.start()
-            self._wait(c, hb["verify_timeout"], "verify")
-            logs = c.logs(stdout=True, stderr=True)
-            ctrf = self._read_file(c, "/logs/verifier/ctrf.json")
-            reward = self._read_file(c, "/logs/verifier/reward.txt")
-        finally:
-            try:
-                c.remove(force=True)
-            except Exception:
-                pass
-
-        verdicts = self._parse_ctrf(ctrf, task["cases"], logs, reward)
-        return verdicts, logs, ctrf
-
-    @staticmethod
-    def _read_file(container, path):
-        try:
-            stream, _ = container.get_archive(path)
-            raw = b"".join(stream)
-            with tarfile.open(fileobj=io.BytesIO(raw)) as tar:
-                return tar.extractfile(tar.getmembers()[0]).read()
+            client.images.get(tag)
         except Exception:
-            return None
+            client.images.build(path=context, tag=tag, rm=True, forcerm=True)
+    return tag
 
-    @staticmethod
-    def _parse_ctrf(ctrf_raw, cases, logs, reward_raw):
-        want = [c["input"]["test"] for c in cases]
-        if ctrf_raw is None:
-            # No CTRF at all -> infrastructure failure, not a benchmark verdict.
-            raise TrialExecutionError(
-                f"verify: no CTRF report produced; logs tail={logs[-500:]!r}")
+
+def _vm_memory_mb() -> int:
+    try:
+        return int(docker_client().info()["MemTotal"] / (1 << 20))
+    except Exception:
+        return 0
+
+
+def _resources(env, fidelity: dict, phase: str) -> dict:
+    kw = {}
+    if env.cpus:
+        kw["nano_cpus"] = int(float(env.cpus) * 1e9)
+    if env.memory_mb:
+        mem = int(env.memory_mb)
+        cap = _vm_memory_mb() - 512
+        if cap > 0 and mem > cap:
+            fidelity.setdefault("clamped", []).append(
+                f"{phase} memory_mb {mem} -> {cap} (Docker VM limit)")
+            mem = cap
+        kw["mem_limit"] = f"{mem}m"
+    return kw
+
+
+def _network_disabled(task_policy: str, override: str | None) -> bool:
+    if override == "off":
+        return True
+    if override == "on":
+        return False
+    return task_policy == "no_network"
+
+
+def _exec(container, cmd: str, *, user=None, env=None, timeout=None) -> tuple[int | None, bytes, float]:
+    """`bash -c cmd` in a running container with a wall-clock deadline.
+    Returns (exit_code or None on timeout, output, seconds). On timeout the
+    container is killed — the exec cannot be cancelled otherwise."""
+    api = docker_client().api
+    eid = api.exec_create(container.id, ["bash", "-c", cmd], user=str(user or ""),
+                          environment=env or None)["Id"]
+    box = {}
+    t0 = time.monotonic()
+
+    def run():
         try:
-            doc = json.loads(ctrf_raw)
-            tests = doc["results"]["tests"]
-        except Exception as e:
-            raise TrialExecutionError(f"verify: unparseable CTRF ({e})")
+            box["out"] = api.exec_start(eid, stream=False)
+        except Exception as e:     # killed container, daemon hiccup
+            box["err"] = e
 
-        by_name = {}
-        for t in tests:
-            nm = t.get("name", "")
-            by_name[nm] = t
-            if "::" in nm:
-                by_name.setdefault(nm.split("::", 1)[1], t)  # bare test name too
+    th = threading.Thread(target=run, daemon=True)
+    th.start()
+    th.join(timeout)
+    dt = time.monotonic() - t0
+    if th.is_alive():
+        with contextlib.suppress(Exception):
+            container.kill()
+        th.join(10)
+        return None, b"", dt
+    if "err" in box:
+        raise TrialExecutionError(f"exec failed: {box['err']}")
+    return api.exec_inspect(eid)["ExitCode"], box.get("out") or b"", dt
 
-        verdicts, any_err = [], False
-        for i, w in enumerate(want):
-            t = by_name.get(w) or by_name.get(w.split("::", 1)[1] if "::" in w else w)
-            if t is None:
-                any_err = True
-                verdicts.append({"case": i, "ok": False,
-                                 "verifier_error": "test not in CTRF report"})
-                continue
-            st = t.get("status")
-            ok = st == "passed"
-            v = {"case": i, "ok": ok, "detail": (t.get("message") or st or "")[:400]}
-            if st not in ("passed", "failed"):
-                any_err = True
-                v["verifier_error"] = f"status={st}"
-            verdicts.append(v)
 
-        reward = None
-        if reward_raw is not None:
-            reward = reward_raw.decode(errors="replace").strip()
-        outcome = ("error" if any_err
-                   else "pass" if all(v["ok"] for v in verdicts) else "fail")
-        return {"outcome": outcome, "cases": verdicts, "reward_txt": reward}
+def _root(container, cmd: str):
+    code, out, _ = _exec(container, cmd, user="root", timeout=120)
+    if code != 0:
+        raise TrialExecutionError(f"setup command failed ({code}): {cmd[:120]}: {out[-300:]!r}")
 
+
+def _q(p: str) -> str:
+    return "'" + p.replace("'", "'\"'\"'") + "'"
+
+
+def _empty_dirs_cmd(paths) -> str:
+    """Harbor's BaseEnvironment._empty_dirs_command (posix), chmod=True."""
+    parts = []
+    for p in paths:
+        q = _q(p)
+        parts += [f"if [ -L {q} ] || {{ [ -e {q} ] && [ ! -d {q} ]; }}; then rm -rf {q}; fi",
+                  f"mkdir -p {q}", f"find {q} -mindepth 1 -maxdepth 1 -exec rm -rf -- {{}} +",
+                  f"chmod 777 {q}"]
+    return " && ".join(parts)
+
+
+def _read(container, path: str) -> bytes | None:
+    try:
+        stream, _ = container.get_archive(path)
+        with tarfile.open(fileobj=io.BytesIO(b"".join(stream))) as tar:
+            m = tar.getmembers()[0]
+            return tar.extractfile(m).read() if m.isfile() else None
+    except Exception:
+        return None
+
+
+def _expand(env: dict) -> dict:
+    """${VAR} / ${VAR:-default} from the host, like harbor's resolve_env_vars."""
+    def sub(v):
+        return re.sub(r"\$\{(\w+)(?::-([^}]*))?\}",
+                      lambda m: os.environ.get(m.group(1), m.group(2) or ""), str(v))
+    return {k: sub(v) for k, v in env.items()}
+
+
+def _start(image: str, env_spec, fidelity: dict, phase: str, network_override=None):
+    c = docker_client().containers.run(
+        image, command=["sh", "-c", "sleep infinity"], detach=True,
+        network_disabled=_network_disabled(env_spec.network, network_override),
+        labels={"breakwater.phase": phase},
+        **_resources(env_spec, fidelity, phase))
+    return c
+
+
+# ======================================================================
+# runtime
+
+
+class HarborRuntime:
+    def ensure_images(self, spec: HarborTaskSpec) -> tuple[str, str]:
+        env_img = _ensure_image(spec.agent_env.context,
+                                _image_tag("env", spec.name, spec.agent_env.digest),
+                                spec.agent_env.docker_image)
+        v = spec.verifier_env
+        ver_img = _ensure_image(v.context, _image_tag("verifier", spec.name, v.digest),
+                                v.docker_image)
+        return env_img, ver_img
+
+    # ---------------------------------------------------------------- solve
+    def solve(self, spec: HarborTaskSpec, task: dict, solution: str, env: dict,
+              fidelity: dict, network_override=None, timeout_cap: float | None = None):
+        """Run a solution in the agent env; return (Bundle, exit_code, log, secs)."""
+        env_img, _ = self.ensure_images(spec)
+        c = _start(env_img, spec.agent_env, fidelity, "solve", network_override)
+        try:
+            _root(c, "mkdir -p /logs/agent /logs/verifier /logs/artifacts && "
+                     "chmod 777 /logs/agent /logs/verifier /logs/artifacts")
+            if solution == ORACLE:
+                tree = task["hb"]["solution_tree"]
+                files = {f"/solution/{rel}": (base64.b64decode(b64), mode)
+                         for rel, (b64, mode) in tree.items()}
+            else:
+                files = {"/solution/solve.sh": (solution.encode(), 0o755)}
+            from ..bundle import Entry
+            c.put_archive("/", upload_tar({p: Entry("f", m, d) for p, (d, m) in files.items()}))
+            _root(c, "chmod +x /solution/solve.sh")
+            run_env = {**_expand(spec.solution_env_vars), **env,
+                       "DEBIAN_FRONTEND": "noninteractive"}
+            timeout = spec.agent_timeout_sec or 3600
+            if timeout_cap:
+                if timeout > timeout_cap:
+                    fidelity.setdefault("clamped", []).append(
+                        f"solve timeout {timeout:.0f}s -> {timeout_cap:.0f}s")
+                timeout = min(timeout, timeout_cap)
+            code, _, secs = _exec(c, "(/solution/solve.sh) > /logs/agent/oracle.txt 2>&1",
+                                  user=spec.agent_user, env=run_env, timeout=timeout)
+            log = _read(c, "/logs/agent/oracle.txt") or b""
+            if code is None:
+                raise TrialExecutionError(f"solve timed out after {timeout:.0f}s")
+            for cmd in spec.collect:      # Harbor runs these in the agent env
+                _exec(c, cmd, user="root", timeout=600)
+            bundle = self._collect(c, spec)
+            return bundle, code, log, secs
+        finally:
+            with contextlib.suppress(Exception):
+                c.remove(force=True)
+
+    def snapshot(self, spec: HarborTaskSpec, fidelity: dict) -> Bundle:
+        """Declared artifact paths as the environment image ships them
+        (pre-solve). Used by the `unsolved_path` ablation."""
+        env_img, _ = self.ensure_images(spec)
+        c = _start(env_img, spec.agent_env, fidelity, "snapshot", "off")
+        try:
+            return self._collect(c, spec)
+        finally:
+            with contextlib.suppress(Exception):
+                c.remove(force=True)
+
+    def _collect(self, container, spec: HarborTaskSpec) -> Bundle:
+        paths = artifact_paths(spec)
+        excl = artifact_excludes(spec)
+        b = Bundle(declared=paths)
+        for p in paths:
+            try:
+                stream, _ = container.get_archive(p)
+            except Exception:
+                continue          # absent artifact: Harbor skips it too
+            add_archive(b, b"".join(stream), p, excl.get(p))
+        return b
+
+    # ---------------------------------------------------------------- verify
+    def verify(self, spec: HarborTaskSpec, bundle: Bundle, env: dict, fidelity: dict,
+               network_override=None, metrics: dict | None = None) -> dict:
+        _, ver_img = self.ensure_images(spec)
+        c = _start(ver_img, spec.verifier_env, fidelity, "verify", network_override)
+        try:
+            _root(c, _empty_dirs_cmd(["/logs/verifier"]))
+            for p in artifact_paths(spec):
+                sub = bundle.subtree(p)
+                if not sub:
+                    continue                      # missing artifact: not uploaded
+                root = p.rstrip("/") or "/"
+                if root in sub and sub[root].kind == "f":
+                    parent = os.path.dirname(root) or "/"
+                    _root(c, f"mkdir -p {_q(parent)} && chmod 777 {_q(parent)}")
+                    c.put_archive("/", upload_tar({root: sub[root]}))
+                else:
+                    _root(c, _empty_dirs_cmd([root]))
+                    c.put_archive("/", upload_tar({k: v for k, v in sub.items() if k != root}))
+            _root(c, "rm -f -- /logs/verifier/reward.txt /logs/verifier/reward.json")
+            _root(c, f"chmod +x {spec.test_script}")
+            run_env = {**_expand(spec.verifier_env_vars), **env}
+            timeout = spec.verifier_timeout_sec or 600
+            code, _, secs = _exec(
+                c, f"({spec.test_script}) > /logs/verifier/test-stdout.txt 2>&1",
+                user=spec.verifier_user, env=run_env, timeout=timeout)
+            files = {}
+            if code is not None:
+                for n in ("reward.json", "reward.txt", "ctrf.json", "reward-details.json",
+                          "test-stdout.txt"):
+                    data = _read(c, f"/logs/verifier/{n}")
+                    if data is not None:
+                        files[n] = data
+            return _verdict(code, secs, timeout, files, metrics or {})
+        finally:
+            with contextlib.suppress(Exception):
+                c.remove(force=True)
+
+    # ---------------------------------------------------------------- trial
     def run_trial(self, trial: dict, task: dict) -> dict:
-        spec = trial.get("spec") or {}
-        env = spec.get("env") or {}
-        mode = spec.get("mode", "full")
-        hb = task["hb"]
+        spec_d = trial.get("spec") or {}
+        hb = HarborTaskSpec.from_dict({k: v for k, v in task["hb"].items()
+                                       if k != "solution_tree"})
+        mode = spec_d.get("mode", "full")
+        env = {k: str(v) for k, v in (spec_d.get("env") or {}).items()}
+        net = spec_d.get("network")
+        fidelity = {"runtime": "breakwater-native", "harbor_semantics": "0.25"}
         t0 = time.monotonic()
-        uploads = {}
+        uploads, detail = {}, {}
 
-        if mode == "full":
-            src = spec.get("solution_source") or base.solution_from(
-                task, spec.get("solution", "agent"))
-            state_ref, solve_logs, exit_code = self._solve(task, src, env)
-            uploads["solve.log"] = solve_logs
-            artifacts, missing = self._extract_artifacts(state_ref, hb["artifacts"])
-            uploads["artifact_manifest.json"] = json.dumps(
-                {"present": sorted(artifacts), "missing": missing}).encode()
+        if mode in ("full", "solve"):
+            sol = spec_d.get("solution_source") or {
+                "oracle": ORACLE, "agent": ORACLE, "noop": NOOP_SHELL,
+            }.get(spec_d.get("solution", "oracle"), ORACLE)
+            bundle, exit_code, log, secs = self.solve(
+                hb, task, sol, env, fidelity, net, spec_d.get("solve_timeout_cap"))
+            uploads["solve.log"] = log
+            detail.update(solution_exit_code=exit_code, solve_s=round(secs, 3))
+        elif mode == "snapshot":
+            bundle = self.snapshot(hb, fidelity)
         else:
-            artifacts = {k: base64.b64decode(v)
-                         for k, v in spec["outputs"][0]["artifacts"].items()}
-            missing = spec["outputs"][0].get("missing", [])
-            exit_code = None
+            out0 = spec_d["outputs"][0]
+            if out0.get("bundle"):
+                bundle = Bundle.from_tar(cas.get(out0["bundle"]), artifact_paths(hb))
+            else:   # legacy receipts: base64 {path: bytes}
+                from ..bundle import Entry
+                bundle = Bundle({k: Entry("f", 0o644, base64.b64decode(v))
+                                 for k, v in out0["artifacts"].items()}, artifact_paths(hb))
+            detail["solution_exit_code"] = None
 
-        verdicts, verify_logs, ctrf = self._verify(task, artifacts, env)
-        uploads["verify.log"] = verify_logs
-        if ctrf is not None:
-            uploads["ctrf.json"] = ctrf
+        digest = cas.put(bundle.to_tar())
+        detail.update(bundle=digest, artifacts_missing=bundle.missing())
+
+        if mode in ("solve", "snapshot"):
+            outcome = "pass" if mode == "snapshot" or detail["solution_exit_code"] == 0 else "fail"
+            detail["cases"] = []
+        else:
+            v = self.verify(hb, bundle, env, fidelity, net, spec_d.get("metrics"))
+            v.pop("_files", None)
+            raw = v.pop("_raw", {})
+            for n in ("test-stdout.txt", "ctrf.json", "reward-details.json", "reward.json",
+                      "reward.txt"):
+                if n in raw:
+                    uploads[n] = raw[n]
+            v["cases"] = _align(task["cases"], v.pop("checks"))
+            outcome = v.pop("outcome")
+            detail.update(v)
 
         exec_ms = (time.monotonic() - t0) * 1000.0
-        # artifacts travel in `outputs` (base64) so verify_only replays re-judge
-        # the exact bytes the solve produced
-        art_out = {k: base64.b64encode(
-                       v if isinstance(v, (bytes, bytearray)) else v.encode()
-                   ).decode("ascii")
-                   for k, v in artifacts.items()}
-        outputs = [{"output": None, "artifacts": art_out, "missing": missing}
-                   for _ in task["cases"]]
+        detail["outputs"] = [{"output": None, "bundle": digest} for _ in task["cases"]]
+        detail["fidelity"] = fidelity
         prefix = (f"{trial['experiment_id']}/{trial['trial_id'].replace('/', '_')}"
                   f"/attempt-{trial.get('attempts', 0)}")
         uploads["meta.json"] = json.dumps({
-            "trial_id": trial["trial_id"], "task_id": trial["task_id"],
-            "runtime": "harbor", "mode": mode, "env": env,
-            "artifacts_present": sorted(artifacts), "artifacts_missing": missing,
-            "solution_exit_code": exit_code, "reward_txt": verdicts.get("reward_txt"),
-            "exec_ms": exec_ms}).encode()
-        stored = [storage.put_bytes(f"{prefix}/{n}",
-                                    v if isinstance(v, (bytes, bytearray)) else v.encode())
-                  for n, v in uploads.items()]
-
-        detail = {"cases": verdicts["cases"], "outputs": outputs,
-                  "solution_exit_code": exit_code,
-                  "artifacts_missing": missing,
-                  "reward_txt": verdicts.get("reward_txt")}
-        return {"outcome": verdicts["outcome"], "detail": detail,
-                "exec_ms": exec_ms, "artifacts": stored}
+            "trial_id": trial["trial_id"], "task_id": trial["task_id"], "runtime": "harbor",
+            "mode": mode, "env": env, "network": net, "bundle": digest,
+            "verifier_digest": hb.digests["verifier"], "exec_ms": exec_ms,
+            "fidelity": fidelity}).encode()
+        stored = [storage.put_bytes(f"{prefix}/{n}", d if isinstance(d, bytes) else d.encode())
+                  for n, d in uploads.items()]
+        return {"outcome": outcome, "detail": detail, "exec_ms": exec_ms, "artifacts": stored}
 
 
-def _tar_bytes_bin(files: dict) -> bytes:
-    """Like runner._tar_bytes but values are already bytes."""
-    buf = io.BytesIO()
-    with tarfile.open(fileobj=buf, mode="w") as tar:
-        for name, data in files.items():
-            info = tarfile.TarInfo(name=name)
-            info.size = len(data)
-            info.mtime = int(time.time())
-            info.mode = 0o755 if name.endswith(".sh") else 0o644
-            tar.addfile(info, io.BytesIO(data))
-    return buf.getvalue()
+# ======================================================================
+# verdicts
 
 
-base.register_runtime("harbor", HarborRuntime())
+def primary_reward(rewards: dict) -> float | None:
+    """Same rule as Terminal-Bench's regrade tooling: the "reward" key, or the
+    only key."""
+    if not isinstance(rewards, dict) or not rewards:
+        return None
+    v = rewards.get("reward")
+    if v is None and len(rewards) == 1:
+        v = next(iter(rewards.values()))
+    if isinstance(v, bool) or not isinstance(v, (int, float)):
+        return None
+    return float(v)
+
+
+def _numeric_leaves(obj, prefix="", out=None, limit=64):
+    out = {} if out is None else out
+    if len(out) >= limit:
+        return out
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            _numeric_leaves(v, f"{prefix}.{k}" if prefix else str(k), out, limit)
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj[:16]):
+            _numeric_leaves(v, f"{prefix}[{i}]", out, limit)
+    elif isinstance(obj, (int, float)) and not isinstance(obj, bool):
+        out[prefix] = obj
+    return out
+
+
+def _verdict(code, secs, timeout, files: dict, metric_res: dict) -> dict:
+    v = {"verifier_wall_s": round(secs, 3), "verifier_exit_code": code,
+         "reward": None, "primary_reward": None, "reward_source": None,
+         "error_kind": None, "checks": [], "metrics": {}, "_files": set(files),
+         "_raw": files}
+    if code is None:
+        v.update(outcome="error", error_kind="verifier_timeout",
+                 error=f"verifier exceeded {timeout:.0f}s")
+        return v
+    try:
+        if "reward.json" in files:
+            v["reward_source"] = "reward.json"
+            rewards = json.loads(files["reward.json"])
+            if not isinstance(rewards, dict):
+                rewards = {"reward": rewards}
+        elif "reward.txt" in files:
+            v["reward_source"] = "reward.txt"
+            rewards = {"reward": float(files["reward.txt"].decode().strip())}
+        else:
+            raise FileNotFoundError("no reward.json or reward.txt written")
+        pr = primary_reward(rewards)
+        if pr is None:
+            raise ValueError(f"no primary reward in {rewards!r}")
+        v.update(reward=rewards, primary_reward=pr,
+                 outcome="pass" if pr >= 1.0 else "fail")
+    except FileNotFoundError as e:
+        v.update(outcome="error", error_kind="no_reward", error=str(e))
+    except (ValueError, json.JSONDecodeError) as e:
+        v.update(outcome="error", error_kind="bad_reward", error=str(e)[:300])
+
+    if "ctrf.json" in files:
+        try:
+            doc = json.loads(files["ctrf.json"])
+            v["ctrf_summary"] = doc.get("results", {}).get("summary")
+            v["checks"] = [{"name": t.get("name", ""), "status": t.get("status"),
+                            "message": (t.get("message") or "")[:300]}
+                           for t in doc.get("results", {}).get("tests", [])]
+        except Exception:
+            v["ctrf_summary"] = {"unparseable": True}
+    if not v["checks"] and "reward-details.json" in files:
+        with contextlib.suppress(Exception):
+            det = json.loads(files["reward-details.json"])
+
+            def walk(node):
+                if isinstance(node, dict):
+                    for c in node.get("criteria", []) or []:
+                        v["checks"].append({"name": c.get("name", ""),
+                                            "status": "passed" if c.get("value") == 1 else "failed",
+                                            "message": str(c.get("error") or c.get("reasoning") or "")[:300]})
+                    for comp in node.get("components", []) or []:
+                        walk(comp.get("detail"))
+            for node in (det.values() if isinstance(det, dict) else []):
+                walk(node)
+    if "reward-details.json" in files:
+        with contextlib.suppress(Exception):
+            v["metrics"].update({f"details.{k}": x for k, x in _numeric_leaves(
+                json.loads(files["reward-details.json"])).items()})
+    stdout = files.get("test-stdout.txt", b"").decode(errors="replace")
+    for name, rx in metric_res.items():
+        hits = re.findall(rx, stdout)
+        if hits:
+            with contextlib.suppress(ValueError):
+                v["metrics"][name] = float(hits[-1] if isinstance(hits[-1], str) else hits[-1][0])
+    v["stdout_tail"] = stdout[-2000:]
+    return v
+
+
+def _align(cases: list[dict], checks: list[dict]) -> list[dict]:
+    """Per-case verdict vector aligned to the static case list; report-only
+    names are appended. Each entry: {case, name, ok, detail}."""
+    by = {}
+    for ch in checks:
+        nm = ch["name"]
+        by[nm] = ch
+        if "::" in nm:
+            by.setdefault(nm.split("::")[-1], ch)
+    out, used = [], set()
+    for i, c in enumerate(cases):
+        want = c["input"]["test"]
+        ch = by.get(want) or by.get(want.split("::")[-1])
+        if ch is None:
+            out.append({"case": i, "name": want, "ok": None, "detail": "not reported"})
+            continue
+        used.add(ch["name"])
+        out.append({"case": i, "name": want, "ok": ch["status"] == "passed",
+                    "detail": ch["message"] or ch["status"]})
+    for ch in checks:
+        if ch["name"] not in used and ch["name"] not in {c["input"]["test"] for c in cases}:
+            out.append({"case": len(out), "name": ch["name"], "ok": ch["status"] == "passed",
+                        "detail": ch["message"] or ch["status"], "unlisted": True})
+    return out
+
+
+RUNTIME = HarborRuntime()
+base.register_runtime("harbor", RUNTIME)

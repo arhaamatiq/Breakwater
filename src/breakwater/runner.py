@@ -150,9 +150,24 @@ main()
 _client = None
 
 
+def _isolated_docker_config() -> str:
+    """Breakwater's own (empty) Docker client config. Public benchmark images
+    need no credentials, and the user's credential helper can block on a
+    keychain prompt with no terminal attached — which hangs every pull and
+    build silently. Point BW_DOCKER_CONFIG at a real config dir to opt in."""
+    d = os.path.expanduser(os.environ.get("BW_DOCKER_CONFIG", "~/.breakwater/docker-config"))
+    os.makedirs(d, exist_ok=True)
+    cfg = os.path.join(d, "config.json")
+    if not os.path.exists(cfg):
+        with open(cfg, "w") as f:
+            f.write("{}\n")
+    return d
+
+
 def docker_client():
     global _client
     if _client is None:
+        os.environ["DOCKER_CONFIG"] = _isolated_docker_config()
         try:
             _client = docker.from_env()
             _client.ping()
