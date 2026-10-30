@@ -12,18 +12,9 @@ Every bundle is a fixed set of artifact bytes. Both verifier versions judge the 
 | task | bundles | reference | changes | notes |
 |---|---:|---|---|---|
 | vf2-speedup-networkx | 2 | PASS→FAIL | false_fail_introduced×1 |  |
-| ks-solver-cpp | 2 | ERROR→ERROR | error_both×2 |  |
+| ks-solver-cpp | 0 | — | none | superseded: on this arm64 host the task needs linux/amd64 (x86-64-only binaries); re-measured in ../pr-2300-ks/ |
 
 ## Changes
-
-### [HIGH] ks-solver-cpp: `reference` — error_both
-
-no reward under either version — check the harness and platform before reading anything else about this task. Bundle kind `reference`, expected `pass`.
-
-- base: 0/6 pass, 6 err (no_reward) · head: 0/6 pass, 6 err (no_reward) · Fisher p = 1.0000
-- verifier wall time head/base = 0.99 (95% CI 0.70–1.35)
-
-Replay: `breakwater replay receipts/ks-solver-cpp--error_both--3bb170b0.json`
 
 ### [HIGH] vf2-speedup-networkx: `reference` — false_fail_introduced
 
@@ -35,13 +26,4 @@ a known-good output (reference / control) now FAILS. Bundle kind `reference`, ex
 - verifier wall time head/base = 1.61 (95% CI 1.05–2.07)
 
 Replay: `breakwater replay receipts/vf2-speedup-networkx--false_fail_introduced--3876e667.json`
-
-### [MEDIUM] ks-solver-cpp: `noop` — error_both
-
-no reward under either version — check the harness and platform before reading anything else about this task. Bundle kind `noop`, expected `fail`.
-
-- base: 0/6 pass, 6 err (no_reward) · head: 0/6 pass, 6 err (no_reward) · Fisher p = 1.0000
-- verifier wall time head/base = 0.86 (95% CI 0.69–1.16)
-
-Replay: `breakwater replay receipts/ks-solver-cpp--error_both--6dfa4835.json`
 
