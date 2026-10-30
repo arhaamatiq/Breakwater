@@ -319,9 +319,9 @@ def fetch_verifier_stdout(storage_refs, max_chars=8000):
     for ref in storage_refs:
         if not isinstance(ref, str) or not ref.endswith("/verify.log"):
             continue
-        key = ref.split("/", 3)[-1] if ref.startswith("s3://") else ref
         try:
-            return storage.get_bytes(key).decode(errors="replace")[-max_chars:]
+            data = storage.get_uri(ref) if "://" in ref else storage.get_bytes(ref)
+            return data.decode(errors="replace")[-max_chars:]
         except Exception as e:
             return f"(could not fetch {ref}: {e})"
     return None

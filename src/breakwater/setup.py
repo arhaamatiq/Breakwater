@@ -1,5 +1,8 @@
-"""One-shot infra setup: apply schema, create the artifact bucket, pull the trial image.
+"""One-shot infra setup: apply schema, prepare the artifact store, pull the trial image.
 Run after `docker compose up -d`:  python -m breakwater.setup
+
+The artifact step creates a local directory by default; it only talks to
+S3/MinIO when BW_ARTIFACTS is an s3:// location.
 """
 import asyncio
 import pathlib
@@ -31,8 +34,7 @@ async def apply_schema():
 
 def main():
     asyncio.run(apply_schema())
-    storage.ensure_bucket()
-    print(f"bucket '{CFG.s3_bucket}' ready")
+    print(f"artifact store ready: {storage.ensure_store()}")
     ensure_image()
     print(f"image '{CFG.docker_image}' ready")
 
