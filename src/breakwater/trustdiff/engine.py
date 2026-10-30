@@ -80,6 +80,7 @@ class DiffConfig:
     # "legacy": trial ids without the runtime tag (reports from pre-hb2 runs
     # can be rebuilt from their cached cells)
     id_scheme: str = "v2"
+    platform: str | None = None   # force e.g. linux/amd64 for every task in the run
 
 
 class Matrix:
@@ -143,6 +144,9 @@ class TaskDiff:
         self.base, self.head = base, head
         self.versions = {"base": base, "head": head}
         self.specs = {k: v.spec for k, v in self.versions.items()}
+        if cfg.platform:
+            for sp in self.specs.values():
+                sp.platform = cfg.platform
         self.tasks = {k: harbor.task_dict(s) for k, s in self.specs.items()}
         self.corpus: list[CorpusItem] = []
         self.matrix = Matrix()
@@ -221,6 +225,9 @@ class TaskDiff:
             return []
         if ref_d.get("solution_exit_code") not in (0, None):
             self.notes.append(f"reference solve.sh exited {ref_d.get('solution_exit_code')}")
+        if ref_d.get("foreign_arch"):
+            self.notes.append("reference solve ran a foreign-architecture binary on this host; "
+                              "re-run with --platform linux/amd64")
         if other_ref is None:
             self.corpus.append(CorpusItem("reference", "reference", ref,
                                           {"solve_exit": ref_d.get("solution_exit_code")}))

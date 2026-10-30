@@ -514,6 +514,8 @@ class HarborRuntime:
                 hb, task, sol, env, fidelity, net, spec_d.get("solve_timeout_cap"))
             uploads["solve.log"] = log
             detail.update(solution_exit_code=exit_code, solve_s=round(secs, 3))
+            if _FOREIGN_ARCH.search(log):
+                detail["foreign_arch"] = True
         elif mode == "snapshot":
             bundle = self.snapshot(hb, fidelity)
         else:
@@ -561,6 +563,11 @@ class HarborRuntime:
 
 # ======================================================================
 # verdicts
+
+
+# an x86-64 binary executed in an arm64 container (or vice versa): a host
+# limitation, never a verdict
+_FOREIGN_ARCH = re.compile(rb"failed to open elf at /lib64/ld-linux-x86-64|exec format error")
 
 
 def primary_reward(rewards: dict) -> float | None:
@@ -651,6 +658,8 @@ def _verdict(code, secs, timeout, files: dict, metric_res: dict) -> dict:
         with contextlib.suppress(Exception):
             v["metrics"].update({f"details.{k}": x for k, x in _numeric_leaves(
                 json.loads(files["reward-details.json"])).items()})
+    if _FOREIGN_ARCH.search(files.get("test-stdout.txt", b"")):
+        v["foreign_arch"] = True
     stdout = files.get("test-stdout.txt", b"").decode(errors="replace")
     for name, rx in metric_res.items():
         hits = re.findall(rx, stdout)
