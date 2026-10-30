@@ -69,6 +69,9 @@ class DiffConfig:
     # [(task, name, expect, patch_text)] applied to solution/ before solving:
     # a constructed candidate solution, solved once, judged by both versions
     solution_fixtures: list = field(default_factory=list)
+    # [(task, dir)] recorded Harbor trials (harbor run / harbor trial download);
+    # each becomes a bundle expected to keep the reward Harbor recorded
+    imports: list = field(default_factory=list)
 
 
 class Matrix:
@@ -204,6 +207,9 @@ class TaskDiff:
             self.corpus.append(CorpusItem(f"solution_fixture::{fname}", "fixture", fb,
                                           {"expect": expect, "diff": text[:4000],
                                            "solve_exit": fd.get("solution_exit_code")}))
+        for task_name, root in self.cfg.imports:
+            if task_name == spec.name:
+                self.corpus += imported_trials(root, spec)
         # one entry per distinct bundle (a no-op can equal drop_all, etc.)
         seen, uniq = set(), []
         for it in self.corpus:
@@ -311,6 +317,27 @@ class TaskDiff:
             "notes": self.notes,
             "bundles": items,
         }
+
+
+def imported_trials(root: str, spec) -> list[CorpusItem]:
+    """Recorded Harbor trial dirs under `root` (or `root` itself) as corpus items.
+    The expected verdict is the one Harbor recorded, so a version change that
+    flips it is reported as a regression or a fix like any other."""
+    from ..bundle import from_harbor_trial
+    dirs = [root] if os.path.isfile(os.path.join(root, "result.json")) else sorted(
+        os.path.join(root, d) for d in os.listdir(root)
+        if os.path.isfile(os.path.join(root, d, "result.json")))
+    out = []
+    for d in dirs:
+        res = json.load(open(os.path.join(d, "result.json")))
+        pr = harbor.primary_reward((res.get("verifier_result") or {}).get("rewards") or {})
+        b = from_harbor_trial(d, artifact_paths(spec))
+        if not b.entries:
+            continue
+        out.append(CorpusItem(f"imported::{os.path.basename(d.rstrip('/'))}", "imported", b,
+                              {"expect": None if pr is None else ("pass" if pr >= 1 else "fail"),
+                               "recorded_reward": pr, "source": d}))
+    return out
 
 
 def patch_solution(task: dict, patch_text: str) -> dict:
