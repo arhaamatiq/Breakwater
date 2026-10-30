@@ -46,6 +46,14 @@ def _fmt_arm(a: dict) -> str:
 def export(result: dict, out_dir: str, cli: str = "breakwater") -> dict:
     os.makedirs(os.path.join(out_dir, "bundles"), exist_ok=True)
     os.makedirs(os.path.join(out_dir, "receipts"), exist_ok=True)
+    # a re-run into the same directory replaces the evidence, it never mixes runs
+    for name in os.listdir(os.path.join(out_dir, "receipts")):
+        os.remove(os.path.join(out_dir, "receipts", name))
+    keep = {b["bundle"].split(":")[1][:16] + ".tar" for t in result["tasks"]
+            for b in t.get("bundles", []) if b["class"] in REPORTABLE}
+    for name in os.listdir(os.path.join(out_dir, "bundles")):
+        if name not in keep:
+            os.remove(os.path.join(out_dir, "bundles", name))
     receipts = []
     for t in result["tasks"]:
         for b in t.get("bundles", []):
