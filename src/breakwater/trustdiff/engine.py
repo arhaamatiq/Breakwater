@@ -162,6 +162,25 @@ class TaskDiff:
                                        f"{spec.digests['environment'][:12]}",
                            "task_id": f"hb_{spec.short_id}", "replicate": 0,
                            "spec": {"mode": "snapshot", "task_blob": task}})
+        # When the reference solution (or instruction) itself changed between
+        # versions, the base reference is not a known-good input for the head:
+        # solve the other version's reference too and judge both.
+        other = "head" if src == "base" else "base"
+        o_spec = self.specs[other]
+        other_tid = None
+        if (o_spec.digests["solution"] != spec.digests["solution"]
+                or o_spec.digests.get("instruction") != spec.digests.get("instruction")):
+            otag = (f"{harbor.runtime_tag(o_spec)}/{o_spec.name}/"
+                    f"{o_spec.digests['environment'][:12]}-{o_spec.digests['solution'][:12]}")
+            other_tid = f"solve/{otag}/oracle"
+            trials.append({"trial_id": other_tid, "task_id": f"hb_{o_spec.short_id}",
+                           "replicate": 0, "spec": {"mode": "solve", "solution": "oracle",
+                                                    "network": self.cfg.network,
+                                                    "solve_timeout_cap": self.cfg.solve_timeout_cap,
+                                                    "task_blob": self.tasks[other]}})
+            self.notes.append(f"reference solution/instruction changed between versions: both "
+                              f"references are judged; reference@{src} has no expected verdict "
+                              f"under {other}")
         sol_fx = {}
         for task_name, fname, expect, text in self.cfg.solution_fixtures:
             if task_name != spec.name:
@@ -190,13 +209,22 @@ class TaskDiff:
             return Bundle.from_tar(cas.get(d["bundle"]), artifact_paths(spec)), d
 
         ref, ref_d = bundle_of(f"solve/{tag}/oracle")
+        other_ref = bundle_of(other_tid)[0] if other_tid else None
         if ref is None:
             self.notes.append("reference solve produced no bundle; corpus is empty")
             return []
         if ref_d.get("solution_exit_code") not in (0, None):
             self.notes.append(f"reference solve.sh exited {ref_d.get('solution_exit_code')}")
-        self.corpus.append(CorpusItem("reference", "reference", ref,
-                                      {"solve_exit": ref_d.get("solution_exit_code")}))
+        if other_ref is None:
+            self.corpus.append(CorpusItem("reference", "reference", ref,
+                                          {"solve_exit": ref_d.get("solution_exit_code")}))
+        else:
+            # each reference is only known-good for its own version
+            self.corpus.append(CorpusItem(f"reference@{src}", "reference", ref,
+                                          {"solve_exit": ref_d.get("solution_exit_code"),
+                                           "expect": None, "version": src}))
+            self.corpus.append(CorpusItem(f"reference@{other}", "reference", other_ref,
+                                          {"expect": None, "version": other}))
         if "noop" in self.cfg.corpus:
             nb, _ = bundle_of(f"solve/{tag}/noop")
             if nb is not None:
@@ -474,6 +502,12 @@ def _transition(expect: str | None, bs: str, hs: str) -> tuple[str, str]:
 def classify(item: CorpusItem, base_rows: list[dict], head_rows: list[dict]) -> dict:
     b, h = _arm(base_rows), _arm(head_rows)
     klass, sev = _transition(item.expect, b["state"], h["state"])
+    own = item.meta.get("version")
+    if own in ("base", "head"):
+        # a version-specific reference is only known-good for its own version
+        own_state = (b if own == "base" else h)["state"]
+        klass, sev = (("reference_changed", "INFO") if own_state == "PASS"
+                      else ("reference_rejected", "HIGH"))
     p = stats.fisher_exact(b["pass"], b["n"] - b["pass"], h["pass"], h["n"] - h["pass"])
     moved = []
     for name in sorted(set(b["checks"]) | set(h["checks"])):

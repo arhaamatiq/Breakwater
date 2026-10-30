@@ -255,6 +255,9 @@ def parse_task(task_dir: str) -> HarborTaskSpec:
         # is replayable against another iff these match
         "artifact_contract": _json_digest(sorted(map(json.dumps, artifacts))),
         "task": tree_digest(task_dir),
+        "instruction": hashlib.sha256(open(os.path.join(task_dir, "instruction.md"), "rb").read()
+                                      ).hexdigest() if os.path.exists(
+                                          os.path.join(task_dir, "instruction.md")) else None,
     }
     return spec
 

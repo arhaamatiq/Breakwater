@@ -182,3 +182,13 @@ def test_export_writes_bundle_receipt_and_report(tmp_path):
         assert render(result).startswith("# Verifier Trust Diff")
     finally:
         storage.configure(None)
+
+
+def test_version_specific_reference_is_judged_on_its_own_version():
+    ref_head = CorpusItem("reference@head", "reference", Bundle({}, ["/a"]),
+                          {"expect": None, "version": "head"})
+    r = classify(ref_head, _rows(["fail"] * 3), _rows(["pass"] * 3))
+    assert r["class"] == "reference_changed" and r["severity"] == "INFO"
+    ref_base = CorpusItem("reference@base", "reference", Bundle({}, ["/a"]),
+                          {"expect": None, "version": "base"})
+    assert classify(ref_base, _rows(["error"] * 3), _rows(["pass"] * 3))["class"] == "reference_rejected"
