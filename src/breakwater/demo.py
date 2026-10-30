@@ -6,7 +6,10 @@ injected failures mid-run:
      trials get re-executed elsewhere; when it resumes and submits, the result
      ledger suppresses the duplicates.
 
-Then verifies the invariants: 0 lost results, 0 duplicate result rows.
+Then verifies the invariants (report.verify_invariants, all by SQL): 0 lost
+results, 0 duplicate result rows, and the trials table, result ledger and event
+log reconcile (every result traces to the claim that produced it, results ==
+accepted events, no (trial, epoch) claimed twice).
 
 Run: python -m breakwater.demo [--replicates 8] [--workers 4]
 """
@@ -137,7 +140,7 @@ def main():
         print("=========================================")
         inv = report["invariants"]
         ft = report["fault_tolerance"]
-        ok = inv["zero_lost"] and inv["zero_duplicates"] and inv["experiment_finished"]
+        ok = inv["ok"]
         print()
         print(f"trials={report['trials']['total']}  results={report['results']['total']}  "
               f"throughput={report['throughput_trials_per_sec']}/s  wall={report['wall_clock_seconds']}s")
@@ -146,8 +149,14 @@ def main():
         print(f"executions started={ft['total_executions_started']}  requeues={ft['requeues_after_lease_expiry']}  "
               f"duplicates suppressed={ft['duplicate_submissions_suppressed']}  "
               f"recovered by different worker={ft['trials_recovered_by_different_worker']}")
+        print(f"stale submissions (superseded/revoked lease)={ft['stale_submissions']}  "
+              f"of which won the race={ft['stale_results_accepted']}")
         print(f"workers died: {ft['workers_died']}")
         print()
+        print(f"RECONCILIATION: results={report['results']['total']}  "
+              f"result_accepted events={inv['accepted_events']}  "
+              f"executions started={inv['executions_started']}  "
+              f"double claims={inv['double_claims']}  safety violations={inv['violations'] or 0}")
         print(f"INVARIANTS: lost_results={inv['lost_results']}  "
               f"duplicate_result_rows={inv['duplicate_result_rows']}  -> "
               f"{'ALL GOOD ✓' if ok else 'VIOLATION ✗'}")

@@ -4,13 +4,17 @@ submits results through the exactly-once ledger.
 Run: python -m breakwater.worker --id w1 [--concurrency 3]
 
 Crash-safety model:
-  - Every claim carries a lease; a heartbeat task extends it while executing.
+  - Every claim carries a lease and a fencing epoch; a heartbeat task extends
+    the lease while executing, presenting that epoch.
   - If this process dies (SIGKILL), heartbeats stop, the lease expires, the
     reaper requeues the trial, another worker re-executes it.
   - If this process stalls (SIGSTOP / GC pause / partition) and later resumes,
     it may finish an execution that was already re-run elsewhere. Submission
     goes through INSERT ... ON CONFLICT DO NOTHING: the ledger arbitrates, the
     duplicate is suppressed and counted, never double-counted.
+  - If it restarts under the same --id and re-claims a trial its old incarnation
+    held, the new claim has a newer epoch, so nothing the old incarnation still
+    does (heartbeat, release) can touch the new lease.
 """
 import argparse
 import asyncio
@@ -27,11 +31,12 @@ def log(worker_id: str, msg: str):
     print(f"[{time.strftime('%H:%M:%S')}] {worker_id}: {msg}", flush=True)
 
 
-async def trial_heartbeat_loop(pool, trial_id: str, worker_id: str, lost: asyncio.Event):
+async def trial_heartbeat_loop(pool, trial_id: str, worker_id: str, epoch: int,
+                               lost: asyncio.Event):
     while True:
         await asyncio.sleep(CFG.heartbeat_seconds)
         try:
-            ok = await db.heartbeat_trial(pool, trial_id, worker_id)
+            ok = await db.heartbeat_trial(pool, trial_id, worker_id, epoch)
         except Exception as e:
             log(worker_id, f"heartbeat error on {trial_id}: {e}")
             continue
@@ -40,28 +45,38 @@ async def trial_heartbeat_loop(pool, trial_id: str, worker_id: str, lost: asynci
             # in-flight execution anyway; the result ledger arbitrates and any
             # duplicate is suppressed. Aborting here would just be an optimization.
             lost.set()
-            log(worker_id, f"lease LOST on {trial_id} (will rely on ledger arbitration)")
+            log(worker_id, f"lease LOST on {trial_id} epoch {epoch} "
+                           f"(will rely on ledger arbitration)")
             return
 
 
 async def execute_one(pool, worker_id: str, trial) -> None:
     trial = dict(trial)
-    trial_id = trial["trial_id"]
+    trial_id, epoch = trial["trial_id"], trial["lease_epoch"]
     lost = asyncio.Event()
-    hb = asyncio.create_task(trial_heartbeat_loop(pool, trial_id, worker_id, lost))
+    hb = asyncio.create_task(trial_heartbeat_loop(pool, trial_id, worker_id, epoch, lost))
     try:
-        log(worker_id, f"claimed {trial_id} (attempt {trial['attempts']})")
+        log(worker_id, f"claimed {trial_id} (attempt {trial['attempts']}, epoch {epoch})")
         result = await asyncio.to_thread(run_trial, trial)
         won = await db.submit_result(
             pool, trial_id=trial_id, experiment_id=trial["experiment_id"],
             task_id=trial["task_id"], outcome=result["outcome"], detail=result["detail"],
             exec_ms=result["exec_ms"], worker_id=worker_id, attempt=trial["attempts"],
-            artifacts=result["artifacts"])
+            lease_epoch=epoch, artifacts=result["artifacts"])
         log(worker_id, f"{'result accepted' if won else 'DUPLICATE suppressed'} "
                        f"for {trial_id}: {result['outcome']}")
-    except TrialExecutionError as e:
-        log(worker_id, f"execution error on {trial_id}: {e}")
-        await db.release_trial(pool, trial_id, worker_id, reason=str(e)[:300])
+    except Exception as e:
+        # Anything, not just TrialExecutionError: an unexpected exception (bad
+        # task spec, artifact store down) used to escape and silently kill this
+        # claim loop. Hand the trial back; max_attempts bounds the retries and
+        # last_error keeps the reason.
+        kind = "execution error" if isinstance(e, TrialExecutionError) else "unexpected error"
+        log(worker_id, f"{kind} on {trial_id}: {e!r}")
+        try:
+            await db.release_trial(pool, trial_id, worker_id, epoch,
+                                   reason=f"{kind}: {e}"[:300])
+        except Exception as e2:  # lease expiry + reaper is the backstop
+            log(worker_id, f"release failed on {trial_id}: {e2!r}")
     finally:
         hb.cancel()
 

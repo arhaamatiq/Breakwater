@@ -7,11 +7,14 @@ from dataclasses import dataclass, field
 class Config:
     dsn: str = field(default_factory=lambda: os.environ.get(
         "BW_DSN", "postgresql://breakwater:breakwater@127.0.0.1:55432/breakwater"))
+    # Artifact store: file://<dir> (default, no services needed) or s3://<bucket>,
+    # which uses the BW_S3_* endpoint/credentials below (MinIO in docker-compose).
+    artifacts: str = field(default_factory=lambda: os.environ.get(
+        "BW_ARTIFACTS", "file://~/.breakwater/artifacts"))
     s3_endpoint: str = field(default_factory=lambda: os.environ.get(
         "BW_S3_ENDPOINT", "http://127.0.0.1:59000"))
     s3_key: str = field(default_factory=lambda: os.environ.get("BW_S3_KEY", "breakwater"))
     s3_secret: str = field(default_factory=lambda: os.environ.get("BW_S3_SECRET", "breakwater123"))
-    s3_bucket: str = field(default_factory=lambda: os.environ.get("BW_S3_BUCKET", "artifacts"))
 
     lease_seconds: float = field(default_factory=lambda: float(os.environ.get("BW_LEASE_SECONDS", "6")))
     heartbeat_seconds: float = field(default_factory=lambda: float(os.environ.get("BW_HEARTBEAT_SECONDS", "2")))

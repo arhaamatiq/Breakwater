@@ -23,6 +23,13 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/breakwater"]
 
+# Non-Python package data, listed explicitly so an installed wheel can migrate a
+# database (breakwater.setup reads schema.sql via importlib.resources) and bring
+# up its services (compose.yml) without a repo checkout.
+[tool.hatch.build.targets.wheel.force-include]
+"src/breakwater/schema.sql" = "breakwater/schema.sql"
+"src/breakwater/compose.yml" = "breakwater/compose.yml"
+
 [dependency-groups]
 dev = [
     "pytest>=9.1.1",
