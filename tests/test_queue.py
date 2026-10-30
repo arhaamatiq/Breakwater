@@ -274,6 +274,19 @@ def test_create_experiment_defaults(pg):
     run(pg, body)
 
 
+def test_claims_follow_insertion_order_within_an_experiment(pg):
+    """Clients rely on insertion order (the Trust Diff interleaves base/head
+    arms); a batch shares one transaction, so created_at must not be now()."""
+    async def body(pool):
+        ids = [f"I/{tag}{i}" for i in range(4) for tag in ("z", "a")]   # z0 a0 z1 a1 ...
+        await db.create_experiment(pool, "I", "x", {}, [
+            {"trial_id": t, "task_id": "t", "replicate": 0, "spec": {}} for t in ids])
+        got = [(await db.claim_trial(pool, "w1", lease_seconds=LEASE))["trial_id"]
+               for _ in ids]
+        assert got == ids
+    run(pg, body)
+
+
 # ---------------------------------------------------------------- fair scheduling
 
 def test_newcomer_is_not_starved_by_a_large_experiment(pg):
