@@ -40,7 +40,13 @@ def worker_pool(n: int, concurrency: int = 1, prefix: str = "bw"):
     their leased trials are reaped and re-run elsewhere."""
     log_dir = os.path.join(cas.BW_HOME, "logs")
     os.makedirs(log_dir, exist_ok=True)
-    env = {**os.environ, "BW_WORKER_CONCURRENCY": str(concurrency)}
+    # Benchmark trials hold a worker for minutes (image builds, verifiers), and a
+    # Python thread streaming a large build log can starve the worker's event
+    # loop past a 6 s lease; the ledger keeps that safe, but every missed
+    # heartbeat re-runs a trial. Long leases for long work; the chaos demo
+    # keeps the 6 s default to show fast recovery.
+    env = {"BW_LEASE_SECONDS": "60", "BW_HEARTBEAT_SECONDS": "5", **os.environ,
+           "BW_WORKER_CONCURRENCY": str(concurrency)}
     stamp = time.strftime("%H%M%S")
     procs = [subprocess.Popen([sys.executable, "-m", "breakwater.worker", "--id",
                                f"{prefix}-{stamp}-w{i}", "--concurrency", str(concurrency)],
