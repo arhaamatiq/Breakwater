@@ -2,7 +2,7 @@
 
 **Regression tests for AI-benchmark verifiers.** When a benchmark changes how
 it grades, Breakwater tells you which verdicts changed, whether the change is
-deterministic or noise, and which check caused it — with replayable evidence.
+deterministic or noise, and which check caused it, with replayable evidence.
 
 [![ci](https://github.com/arhaamatiq/Breakwater/actions/workflows/ci.yml/badge.svg)](https://github.com/arhaamatiq/Breakwater/actions/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
